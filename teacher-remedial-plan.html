@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Remedial & Enrichment Plan Generator · Smart Students Hub</title><link rel="icon" href="data:image/png;base64,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"><meta name="description" content="Formal remedial and enrichment plans with a weekly programme, Word export and parent message.">
+<style>
+:root{--ink:#14244a;--blue:#1e6fd9;--soft:#f3f7fc;--line:#dce4f0;--gold:#e8a317;--ok:#1a7f4b;--oks:#e3f4ec;--bad:#b3261e;--bads:#fbe8e6;--mute:#46536e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--soft);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.55;font-size:16px}
+main{max-width:1060px;margin:0 auto;padding:20px 16px 30px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 6px 20px rgba(20,36,74,.05)}
+h1{font-size:clamp(1.5rem,4vw,2.1rem);margin:4px 0}
+h2{font-size:1.3rem;margin:0 0 6px}
+h3{font-size:1.05rem;margin:0 0 4px}
+.eyebrow{color:var(--blue);font-weight:700;font-size:.85rem}
+.ar{direction:rtl;text-align:right}
+.mute{color:var(--mute);font-size:.92rem}
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px}
+.picker a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 12px}
+.picker a b{display:block;color:var(--blue)}
+.picker a.on{border-color:var(--blue);background:#e6effb}
+.parthead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;border-bottom:2px solid var(--line);padding-bottom:6px;margin-bottom:10px}
+.marks{color:var(--mute);font-weight:600;font-size:.9rem}
+.reading{display:grid;gap:16px}
+@media(min-width:900px){.reading{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}.passage{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto}}
+.passage{font-family:Georgia,"Times New Roman",serif;font-size:1.04rem;line-height:1.7}
+.passage p{margin:0 0 10px}
+.pn{font-family:system-ui,sans-serif;font-weight:700;color:var(--blue);margin-right:6px}
+.q{border-top:1px dashed var(--line);padding:10px 0}
+.q:first-of-type{border-top:0}
+.qs{font-weight:600;margin:0 0 6px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px}
+.opt{display:flex;gap:8px;align-items:flex-start;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer;background:#fff}
+.opt input{margin-top:4px}
+.opt:has(input:checked){border-color:var(--blue);background:#e6effb}
+.opt.right{border-color:var(--ok);background:var(--oks)}
+.opt.wrong{border-color:var(--bad);background:var(--bads)}
+input[type=text],textarea{font:inherit;color:var(--ink);border:1.5px solid #b8c9d9;border-radius:8px;padding:8px 10px;width:100%;background:#fff}
+input.right,textarea.right{border-color:var(--ok);background:var(--oks)}
+input.wrong{border-color:var(--bad);background:var(--bads)}
+input[type=text].inl{display:inline-block;width:8.5em;max-width:100%;padding:4px 8px}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;margin-top:4px}
+.seg label{cursor:pointer}.seg input{position:absolute;opacity:0}
+.seg span{display:block;padding:5px 14px;font-weight:700;border-left:1px solid var(--line)}
+.seg label:first-child span{border-left:0}
+.seg input:checked+span{background:var(--blue);color:#fff}
+.seg input:focus-visible+span{outline:3px solid #9cc2f5}
+.fb{font-size:.9rem;border-radius:8px;padding:6px 10px;margin-top:6px}
+.fb.ok{background:var(--oks);color:var(--ok)}
+.fb.no{background:var(--bads);color:var(--bad)}
+.fb.model{background:#fcf1dc;color:#6b4a06}
+.fb b{color:var(--ink)}
+.self{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center;font-size:.88rem}
+.self button{font:inherit;font-size:.85rem;font-weight:700;border-radius:8px;padding:5px 10px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.self button.on.y{background:var(--ok);border-color:var(--ok);color:#fff}
+.self button.on.n{background:var(--bad);border-color:var(--bad);color:#fff}
+.plan{background:#e6effb;border-radius:10px;padding:10px 14px;margin:8px 0}
+.plan ol{margin:4px 0;padding-left:20px}
+.wc{color:var(--mute);font-size:.88rem;margin-top:4px}
+textarea{min-height:240px;line-height:1.6;resize:vertical}
+.btn{font:inherit;font-weight:700;border:0;border-radius:10px;padding:12px 22px;background:var(--blue);color:#fff;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.actions{position:sticky;bottom:0;background:linear-gradient(transparent,var(--soft) 35%);padding:18px 0 12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.confirm{background:#fff;border:2px solid var(--blue);border-radius:12px;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center}
+.big{font-size:2.4rem;font-weight:800;color:var(--blue);line-height:1.1}
+.bars{display:grid;gap:8px;margin-top:10px}
+.bar{display:grid;grid-template-columns:minmax(120px,200px) 1fr 4.5rem;gap:10px;align-items:center;font-size:.92rem}
+.track{height:10px;background:var(--line);border-radius:6px;overflow:hidden}.track i{display:block;height:100%;background:var(--blue)}
+.bar b{text-align:right}
+@media(max-width:520px){.bar{grid-template-columns:1fr 3.5rem}.bar .track{grid-column:1/-1;grid-row:2}}
+.hidden{display:none}
+</style><style id="ssh-brand">
+.ssh-bar,.ssh-foot{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;box-sizing:border-box}
+.ssh-bar *,.ssh-foot *{box-sizing:border-box}
+.ssh-bar{background:#ffffff;border-bottom:3px solid #1e6fd9;color:#14244a}
+.ssh-bar .in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ssh-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#14244a}
+.ssh-brand img{width:40px;height:40px;display:block}
+.ssh-brand b{font-size:1.05rem;line-height:1.1;display:block}
+.ssh-brand small{color:#1e6fd9;font-weight:600;font-size:.78rem}
+.ssh-links{display:flex;gap:8px;flex-wrap:wrap}
+.ssh-links a{font-weight:700;font-size:.85rem;text-decoration:none;border-radius:10px;padding:7px 12px;border:1.5px solid #1e6fd9;color:#1e6fd9;background:#fff}
+.ssh-links a.solid{background:#1e6fd9;color:#fff}
+.ssh-note{background:#fcf1dc;color:#6b4a06;font-size:.85rem;text-align:center;padding:6px 16px;border-bottom:1px solid #f3dcae}
+.ssh-note span{display:block;direction:rtl}
+.ssh-foot{background:#14244a;color:#dfe6f3;margin-top:30px}
+.ssh-foot .in{max-width:1080px;margin:0 auto;padding:22px 16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.ssh-foot .b{display:flex;gap:12px;align-items:center}
+.ssh-foot img{width:48px;height:48px;background:#fff;border-radius:10px;padding:4px}
+.ssh-foot b{color:#fff;font-size:1.05rem}
+.ssh-foot a{color:#e8a317;text-decoration:none;font-weight:600}
+.ssh-foot .c{font-size:.88rem;line-height:1.7}
+.ssh-foot .ar{direction:rtl;color:#e8a317;font-size:.88rem}
+@media print{.ssh-links{display:none}.ssh-foot{background:#fff;color:#14244a;border-top:2px solid #14244a}.ssh-foot b{color:#14244a}.ssh-foot a{color:#14244a}}
+</style><style>
+.steps li{margin:0 0 10px}.ar-in{font-family:inherit;direction:rtl;unicode-bidi:isolate}
+.tbl{width:100%;border-collapse:collapse;font-size:.93rem;margin:6px 0}.tbl th,.tbl td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+.tbl th{background:#eef3fa;width:auto}
+@media(max-width:560px){.tbl{table-layout:fixed;font-size:.82rem}.tbl th,.tbl td{padding:5px;overflow-wrap:anywhere}}
+.plan label{display:block;font-weight:600;margin:0 0 12px}.plan textarea{display:block;width:100%;min-height:90px;margin-top:4px;font:inherit;font-weight:400;border:1.5px solid #b8c9d9;border-radius:10px;padding:8px}
+.plan textarea.short{min-height:48px}
+pre.ai{white-space:pre-wrap;background:#f3f7fc;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:.88rem;font-family:ui-monospace,Consolas,monospace}
+.dom{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0}.dom h3{margin:0 0 6px}
+.st{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding:6px 0}
+.st .r{display:flex;gap:4px}.st .r label{cursor:pointer}.st .r input{position:absolute;opacity:0}.st .r span{display:inline-block;width:34px;height:34px;line-height:32px;text-align:center;border:1.5px solid #b8c9d9;border-radius:8px;font-weight:700}
+.st .r input:checked+span{background:var(--blue);color:#fff;border-color:var(--blue)}.st .r input:focus-visible+span{outline:3px solid var(--gold)}
+#ev td{height:44px}#ev td[contenteditable]{background:#fff}
+@media print{.noprint,.ssh-bar{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ccd;break-inside:auto}
+.plan textarea{min-height:120px;border:1px solid #889}.plan textarea.short{min-height:60px}.dom,.plan label,.tbl tr{break-inside:avoid}}
+</style><style>
+.note{background:#fcf1dc;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#6b4a06}
+.stepnav{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:8px 0 0;list-style:none;counter-reset:s}.stepnav li{counter-increment:s;background:#e6effb;color:#1e6fd9;border-radius:20px;padding:3px 10px;font-size:.8rem;font-weight:700}.stepnav li::before{content:counter(s) ". "}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;margin-bottom:10px}@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.drop{display:flex;align-items:center;justify-content:center;text-align:center;min-height:120px;border:2px dashed #9fb3cc;border-radius:14px;background:#f7faff;cursor:pointer;padding:12px}.drop input{position:absolute;opacity:0;width:1px;height:1px}.drop:focus-within{outline:3px solid var(--gold)}
+.lab{display:block;font-weight:600;font-size:.92rem;margin:0 0 10px}.lab input,.lab select,.lab textarea{display:block;width:100%;margin-top:4px;font:inherit;font-weight:400;border:1.5px solid #b8c9d9;border-radius:10px;padding:8px;background:#fff;color:var(--ink)}
+.lab textarea{min-height:130px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}.chip{cursor:pointer}.chip input{position:absolute;opacity:0}.chip span{display:block;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff}.chip small{display:block;color:var(--mute)}
+.chip input:checked+span{border-color:var(--blue);background:#e6effb}.chip input:focus-visible+span{outline:3px solid var(--gold)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 12px;margin:6px 0}.checks label{display:flex;gap:6px;align-items:flex-start}
+.plan-doc h3{margin:16px 0 6px;color:var(--blue)}
+.lp{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:.88rem}.lp th,.lp td{border:1px solid #9fb3cc;padding:6px 8px;vertical-align:top;text-align:left}.lp th{background:#eef3fa;width:18%}.lp th.t{background:#14244a;color:#fff;text-align:center;font-size:1.05rem}.lp th.s{background:#dbe6f6}
+.lp ul,.lp ol{margin:2px 0 2px 16px;padding:0}.lp p{margin:3px 0}.lp mark{background:#fff3a3;padding:0 2px}
+@media(max-width:600px){.lp{font-size:.78rem}.lp th,.lp td{padding:4px;overflow-wrap:anywhere}}
+.objbox{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fbfdff}.objbox h3{margin:0 0 8px}
+.lab textarea.short{min-height:60px}
+@media print{.plan-doc .tbl{font-size:9.5pt}#out .card{border:0;padding:0}}
+</style><style>
+.note{background:#e3f4ec;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#14532d;margin-top:8px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}.kpis div{background:#f3f7fc;border-radius:12px;padding:10px;text-align:center}.kpis b{display:block;font-size:1.35rem;color:#14244a}.kpis span{font-size:.8rem;color:#46536e}
+.bar i.lo{background:#b3261e}.bar i.hi{background:#1a7f4b}
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.grp{border-radius:12px;padding:10px 12px;border:2px solid}.grp h4{margin:0;display:flex;justify-content:space-between}.grp h4 span{background:#fff;border-radius:999px;padding:0 10px}
+.grp.r{border-color:#b3261e;background:#fbe8e6}.grp.s{border-color:#e8a317;background:#fcf1dc}.grp.c{border-color:#1e6fd9;background:#e6effb}.grp.e{border-color:#1a7f4b;background:#e3f4ec}
+.fbrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding:8px 0}
+.lvls{display:flex;gap:6px;flex-wrap:wrap}.lv{font:inherit;font-size:.82rem;font-weight:700;border:1.5px solid #b8c9d9;background:#fff;border-radius:10px;padding:5px 9px;cursor:pointer;line-height:1.2;color:#14244a}.lv small{display:block;font-weight:600;color:#46536e}
+.lv.on.lvE{background:#1a7f4b;border-color:#1a7f4b}.lv.on.lvG{background:#1e6fd9;border-color:#1e6fd9}.lv.on.lvD{background:#e8a317;border-color:#e8a317}.lv.on.lvN{background:#b3261e;border-color:#b3261e}.lv.on,.lv.on small{color:#fff}
+textarea.box{display:block;width:100%;min-height:150px;font:inherit;border:1.5px solid #b8c9d9;border-radius:10px;padding:10px;margin:6px 0}
+@media print{.groups{grid-template-columns:repeat(4,1fr)}}
+</style><style>
+.gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#f7d774 0%,#e8a317 55%,#c98a0b 100%);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.gate[hidden]{display:none}.gbox{background:#14244a;border:3px solid #14244a;border-radius:18px;max-width:460px;width:100%;padding:0;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);color:#14244a}
+.gbox h2{margin:0 0 2px;font-size:1.3rem}.gbox .ar{direction:rtl;text-align:right}.gbox p{margin:4px 0}
+.gbox label.l{display:block;font-weight:600;font-size:.92rem}.gbox input[type=text]{display:block;width:100%;margin-top:4px;font:inherit;border:1.5px solid #b8c9d9;border-radius:10px;padding:10px;background:#fff}
+.groles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}.groles label{cursor:pointer}.groles input{position:absolute;opacity:0}
+.groles span{display:block;text-align:center;background:#fff;border:1.5px solid #b8c9d9;border-radius:12px;padding:10px 4px;font-weight:700;font-size:.9rem;line-height:1.3}.groles span i{display:block;font-style:normal;font-size:1.4rem}
+.groles input:checked+span{background:#1e6fd9;border-color:#1e6fd9;color:#fff}.groles input:focus-visible+span{outline:3px solid #e8a317}
+.gbox .ok{display:flex;gap:8px;align-items:flex-start;font-size:.8rem;margin-top:12px;color:#46536e}.gbox .ok input{margin-top:3px}
+.gbox button{width:100%;margin-top:14px;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#14244a;color:#f7d774;cursor:pointer;font-size:1rem}.gbox button[disabled]{opacity:.6}
+.gmsg{min-height:1.2em;margin-top:8px;font-weight:600;color:#b3261e;font-size:.9rem}.gbox .hp{position:absolute;left:-9999px}
+body.gated{overflow:hidden}
+.gb{padding:12px 16px;color:#fff}.gb .l,.gb label.l{display:block;font-weight:700;font-size:.92rem;margin:0 0 2px;color:#fff}.gb h2{color:#f7d774}
+.gb1{background:#14244a}.gb2{background:#0f5f73}.gb3{background:#5b2a86}.gb4{background:#1a6b3c}.gb5{background:#7a1f3d}
+.gbox .gb .ok{color:#fde7ef;margin-top:0}.gb5 button{background:#e8a317;color:#14244a}.gb5 .gmsg{color:#ffd5d5}
+.groles span{color:#14244a}@media print{.gate{display:none!important}}
+</style></head><body><div class="ssh-bar" role="banner"><div class="in"><a class="ssh-brand" href="https://smartstudentshub.wordpress.com"><img src="data:image/png;base64,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" alt="Smart Students Hub logo"><span><b>Smart Students Hub</b><small>For Teachers · Professional Growth</small></span></a>
+<nav class="ssh-links" aria-label="Smart Students Hub links"><a href="https://smartstudentshub.wordpress.com/teachers/#professional-growth">All teacher tools · كل الأدوات</a><a class="solid" href="https://smartstudentshub.wordpress.com/teachers/">Teachers page · صفحة المعلمين</a></nav></div></div>
+<main><section class="card noprint">
+<div class="eyebrow">For teachers · Remedial &amp; enrichment · الخطط العلاجية والإثرائية</div>
+<h1>Remedial &amp; Enrichment Plan Generator</h1>
+<p class="ar" style="margin:0;font-weight:600">مولّد الخطة العلاجية والإثرائية</p>
+<p>Build a complete, formal plan in minutes: diagnosis, objectives, a week-by-week programme, strategies, resources, assessment, parent communication and follow-up. Open it from the Results Analysis tool and the data is filled in for you.</p>
+<p class="ar">أنشئ خطة رسمية كاملة في دقائق: التشخيص، والأهداف، والبرنامج الأسبوعي، والاستراتيجيات، والمصادر، والتقييم، والتواصل مع أولياء الأمور، والمتابعة. وإذا فتحتها من أداة تحليل النتائج تُعبأ البيانات تلقائيًا.</p>
+<p class="mute">🔒 Everything stays in your browser. · كل شيء يبقى في متصفحك. &nbsp; <a href="teacher-results-analysis.html">↩ Results Analysis tool · أداة تحليل النتائج</a></p>
+<div id="fromA" class="note" hidden></div>
+</section>
+
+<section class="card noprint"><div class="parthead"><h2>1 · Plan details · بيانات الخطة</h2></div>
+<div class="seg"><label><input type="radio" name="ptype" value="r" checked><span>Remedial · علاجية</span></label><label><input type="radio" name="ptype" value="e"><span>Enrichment · إثرائية</span></label></div>
+<div class="grid" style="margin-top:10px">
+<label class="lab">School · المدرسة<input type="text" id="school" data-k="school"></label>
+<label class="lab">Teacher · المعلم<input type="text" id="teacher" data-k="teacher"></label>
+<label class="lab">Subject<input type="text" id="subj" data-k="subj" value="English"></label>
+<label class="lab">Grade / class · الصف والشعبة<input type="text" id="cls" data-k="cls" placeholder="Grade 11 · 11-3"></label>
+<label class="lab">Academic year / term<input type="text" id="term" data-k="term" value="2026/2027 · Term 1"></label>
+<label class="lab">Start date · تاريخ البدء<input type="date" id="start" data-k="start"></label>
+<label class="lab">Duration · المدة<select id="weeks" data-k="weeks"><option value="2">2 weeks</option><option value="3">3 weeks</option><option value="4" selected>4 weeks</option><option value="6">6 weeks</option></select></label>
+<label class="lab">Sessions per week<select id="spw" data-k="spw"><option>1</option><option selected>2</option><option>3</option></select></label>
+<label class="lab">Session length<select id="slen" data-k="slen"><option>15 min</option><option selected>20 min</option><option>30 min</option><option>45 min</option></select></label>
+<label class="lab">Target skill · المهارة المستهدفة<select id="skill" data-k="skill"></select></label>
+</div></section>
+
+<section class="card noprint"><div class="parthead"><h2>2 · Students and diagnosis · الطلاب والتشخيص</h2></div>
+<label class="lab">Students (codes or names, separated by commas) · الطلاب<textarea id="studs" data-k="studs" class="short" placeholder="S03, S07, S12"></textarea></label>
+<label class="lab">Evidence / diagnosis · التشخيص والأدلة<textarea id="diag" data-k="diag" class="short" placeholder="e.g. Module Test 3: class average 58%; Grammar 41%; Q4 and Q7 below 40%."></textarea></label>
+<label class="lab">Specific difficulties or strengths observed · صعوبات أو نقاط قوة محددة<input type="text" id="spec" data-k="spec" placeholder="e.g. confusing past simple and present perfect"></label>
+</section>
+
+<section class="card noprint"><div class="parthead"><h2>3 · Objectives and strategies · الأهداف والاستراتيجيات</h2></div>
+<label class="lab">Objective 1<input type="text" id="o1" data-k="o1"></label><label class="lab">Objective 2<input type="text" id="o2" data-k="o2"></label><label class="lab">Objective 3<input type="text" id="o3" data-k="o3"></label>
+<button type="button" class="btn ghost" id="sug">✨ Suggest objectives for this skill</button>
+<h3>Strategies · الاستراتيجيات</h3><div class="checks" id="strs"></div>
+<div class="grid"><label class="lab">Success target · مؤشر النجاح<input type="text" id="target" data-k="target"></label>
+<label class="lab">Resources (extra) · مصادر إضافية<input type="text" id="res" data-k="res" placeholder="Textbook pages, worksheets, LiveWorksheets"></label></div>
+<div class="checks"><label><input type="checkbox" id="parent" data-k="parent" checked> Include a parent message · رسالة لولي الأمر</label></div>
+<div class="actions" style="position:static;margin-top:12px"><button type="button" class="btn" id="gen">Build the plan · أنشئ الخطة</button> <button type="button" class="btn ghost" id="clr">Start again</button></div>
+</section>
+<section id="out"></section>
+</main><footer class="ssh-foot"><div class="in"><div class="b"><img src="data:image/png;base64,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" alt=""><div><b>Smart Students Hub</b><div class="ar">منصة تعليمية لدعم الطلاب والمعلمين</div></div></div>
+<div class="c">🌐 <a href="https://smartstudentshub.wordpress.com">www.smartstudentshub.com</a><br>✉️ <a href="mailto:s_soleman2002@yahoo.com">s_soleman2002@yahoo.com</a> · 📞 +974 5040 6473<br>© 2026 Smart Students Hub · Prepared by Sameh Soliman</div></div></footer><script>const RP_SKILLS={
+ Reading:{ar:'القراءة',
+  obj:{r:['Identify the main idea and key details of a short text','Answer literal and simple inference questions accurately','Work out the meaning of key words from context'],
+       e:['Analyse a writer\'s purpose, attitude and use of evidence','Compare ideas across two texts','Summarise a text in their own words for a real audience']},
+  act:{r:['Re-teach skimming and scanning with a short text; model how to underline key words in questions','Guided practice with a graded text, questions in text order and a word bank','Paired reading with question cards; Ss explain answers using the text','Short re-test text (5–8 questions) and individual feedback'],
+       e:['Read an authentic article on the module topic and identify the writer\'s view and evidence','Compare two short texts in a Venn diagram and write a comparison paragraph','Ss write their own comprehension questions for classmates (peer tutoring)','Present a summary or poster to the class; self-assess with criteria']}},
+ Listening:{ar:'الاستماع',
+  obj:{r:['Identify the topic and main points of a short recording','Note key details (numbers, names, places) while listening','Recognise key topic words when spoken'],
+       e:['Identify speakers\' opinions and attitudes','Take structured notes from a longer talk','Retell a recording in their own words']},
+  act:{r:['Pre-teach key words; listen to a short recording twice with a gapped transcript','Guided note-taking with a table and sentence starters','Pair dictation and listening games for key words','Short listening check and feedback'],
+       e:['Listen to an authentic podcast extract and note opinions and evidence','Note-taking from a TED-style talk using a graphic organiser','Ss prepare a 1-minute audio summary for classmates','Share and peer-assess the summaries']}},
+ Speaking:{ar:'التحدث',
+  obj:{r:['Answer simple questions on familiar topics in full sentences','Use key phrases to give and justify an opinion','Speak with clearer pronunciation of key words'],
+       e:['Present an organised 2-minute talk with signposting','Lead a group discussion and respond to counter-arguments','Use a wider range of vocabulary and structures fluently']},
+  act:{r:['Model short answers with phrase cards; choral and pair drilling','Information-gap pairs with sentence frames','Role plays from everyday situations with support cards','Short speaking check with a simple rubric and feedback'],
+       e:['Plan a short talk with a mind map and signposting language','Debate or Four Corners discussion on the module topic','Ss record a short presentation or interview','Showcase and peer feedback using the speaking rubric']}},
+ Writing:{ar:'الكتابة',
+  obj:{r:['Write a paragraph with a clear topic sentence and supporting sentences','Use basic linking words (and, but, because, so) correctly','Check spelling, capitals and full stops with a checklist'],
+       e:['Write an organised essay with a clear thesis and well-developed paragraphs','Use a range of linking devices and advanced vocabulary','Edit and improve a draft using criteria and peer feedback']},
+  act:{r:['Analyse a model paragraph; colour-code topic and supporting sentences','Guided writing with a paragraph frame and sentence starters','Write a paragraph in pairs, then individually; checklist editing','Timed paragraph re-check and written feedback (one strength, one target)'],
+       e:['Analyse a high-scoring model essay against the marking criteria','Plan and draft an essay on an authentic topic for a real audience','Peer review with the rubric; redraft','Publish the best essays (Padlet or class display); self-assessment']}},
+ Vocabulary:{ar:'المفردات',
+  obj:{r:['Recognise and understand the key words of the module','Use key words correctly in simple sentences','Choose the correct word form in a sentence'],
+       e:['Use collocations and less common words accurately','Explain differences between near-synonyms','Use module vocabulary in extended speaking or writing']},
+  act:{r:['Picture–word matching and bilingual glossary of key words','Gap-fill and word-form practice with a word bank','Vocabulary games (quiz, flashcards, running dictation) in pairs','Short vocabulary re-check and feedback'],
+       e:['Find collocations of key words in authentic texts','Create a word map (synonyms, word forms, collocations) for each key word','Ss design a vocabulary quiz for the class','Use the words in a short story or speech; peer check']}},
+ Grammar:{ar:'القواعد',
+  obj:{r:['Understand the form and meaning of the target structure','Use the structure correctly in controlled exercises','Correct common errors with the structure'],
+       e:['Explain the rule and its exceptions in their own words','Use the structure accurately in free writing or speaking','Compare the structure with related structures']},
+  act:{r:['Re-teach with a timeline or table; concept-checking questions','Controlled practice: choose, complete, transform (with examples)','Error-correction cards in pairs; mini-whiteboard checks','Short grammar re-check and feedback'],
+       e:['Discover the rule from authentic examples (guided discovery)','Contrast the structure with a related one in a challenge worksheet','Ss teach a 5-minute mini-lesson to a group (peer tutoring)','Use the structure in a short creative piece; self-correct']}},
+};
+const RP_STRATS=['Modelling (I do – we do – you do)','Graphic organisers','Peer tutoring','Small-group instruction','Educational games','Think-Pair-Share','Differentiated worksheets','Retrieval practice','Project-based learning','Self-assessment'];
+
+(function(){
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='ssh_rp_v1';let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+$('#skill').innerHTML=Object.keys(RP_SKILLS).map(k=>`<option value="${k}">${k} · ${RP_SKILLS[k].ar}</option>`).join('');
+$('#strs').innerHTML=RP_STRATS.map((s,i)=>`<label><input type="checkbox" data-k="st${i}"${[0,2,6,7].includes(i)?' data-def="1"':''}> ${esc(s)}</label>`).join('');
+$$('[data-k]').forEach(el=>{const k=el.dataset.k;if(k in S){if(el.type==='checkbox')el.checked=!!S[k];else el.value=S[k]}else if(el.dataset.def)el.checked=true;
+ el.addEventListener(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',()=>{S[k]=el.type==='checkbox'?el.checked:el.value;save()})});
+if(S.ptype)$$('input[name=ptype]').forEach(r=>r.checked=r.value===S.ptype);
+const type=()=>(($$('input[name=ptype]').find(r=>r.checked))||{}).value||'r';
+const sug=()=>{const o=RP_SKILLS[$('#skill').value].obj[type()];['o1','o2','o3'].forEach((id,i)=>{$('#'+id).value=o[i];S[id]=o[i]});
+ $('#target').value=type()==='r'?'At least 80% of the students reach the pass mark in the re-test.':'Every student completes and presents one extended product that meets the criteria.';S.target=$('#target').value;save()};
+$('#sug').onclick=sug;$$('input[name=ptype]').forEach(r=>r.onchange=()=>{S.ptype=r.value;save();if(S.autoObj!==false)sug();fillStuds()});
+$('#skill').addEventListener('change',()=>{if(S.autoObj!==false)sug()});['o1','o2','o3'].forEach(id=>$('#'+id).addEventListener('input',()=>{S.autoObj=false;save()}));
+// from analysis
+let A=null;try{const h=location.hash.match(/^#a=(.*)$/);A=h?JSON.parse(decodeURIComponent(h[1])):JSON.parse(localStorage.getItem('ssh_analysis')||'null')}catch(e){}
+function fillStuds(){if(!A)return;const list=type()==='r'?A.remedial.concat(A.support||[]):A.enrich;$('#studs').value=list.join(', ');S.studs=$('#studs').value;save()}
+if(A&&/from=analysis/.test(location.search)){const w=A.weak[0];
+ if(w&&RP_SKILLS[w[0]]){$('#skill').value=w[0];S.skill=w[0]}
+ $('#cls').value=$('#cls').value||A.cls||'';fillStuds();
+ $('#diag').value=`${A.test}${A.cls?' ('+A.cls+')':''}: class average ${A.mean}%. `+(A.weak.length?'Skills: '+A.weak.map(x=>x[0]+' '+x[1]+'%').join(', ')+'. ':'')+(A.hard.length?'Questions below 40%: '+A.hard.map(h=>h[0]+(h[2]?' ('+h[2]+')':'')+' '+h[1]+'%').join(', ')+'.':'');
+ $('#fromA').hidden=false;$('#fromA').innerHTML=`✓ Filled in from your results analysis: <b>${esc(A.test)}</b> · ${A.remedial.length} remedial, ${(A.support||[]).length} support, ${A.enrich.length} enrichment students. Check and edit as needed. · تمت التعبئة من تحليل النتائج، راجعها وعدّل ما تريد.`;
+ ['cls','diag','studs'].forEach(k=>S[k]=$('#'+k).value);S.autoObj=true;sug();save()}
+else if(!S.o1)sug();
+$('#clr').onclick=()=>{if(confirm('Clear the form on this device?')){try{localStorage.removeItem(KEY)}catch(e){};location.href='teacher-remedial-plan.html'}};
+// build
+const PH={2:[[0,1],[2,3]],3:[[0],[1,2],[3]],4:[[0],[1],[2],[3]],6:[[0],[1],[1],[2],[2],[3]]};
+const PHN={r:['Re-teach and model','Guided practice','Independent practice and peer support','Re-assess and feedback'],e:['Extend','Create','Share and lead','Showcase and reflect']};
+function gradeLinks(cls,skill){const g=(String(cls).match(/1[0-2]/)||[''])[0],B='https://mrsameh2024.github.io/tests/';const L=[];
+ if(g==='12'){if(skill==='Vocabulary')L.push(['Grade 12 Vocabulary Tests',B+'g12-vocabulary.html']);if(skill==='Grammar')L.push(['Grade 12 Grammar Tests',B+'g12-grammar.html']);L.push(['Grade 12 Advanced Practice Tests',B+'g12-advanced.html'])}
+ if(g==='11')L.push(['Grade 11 Advanced Practice Tests',B+'g11-advanced.html']);if(g==='10')L.push(['Grade 10 Advanced Practice Tests',B+'g10-advanced.html']);
+ L.push(['All interactive tests',B]);return L}
+let LAST=null;
+function build(){const t=type(),sk=$('#skill').value,K=RP_SKILLS[sk],w=+$('#weeks').value,v=id=>$('#'+id).value.trim();
+ const studs=v('studs').split(/[,\n،]+/).map(x=>x.trim()).filter(Boolean);
+ const start=v('start')?new Date(v('start')):null;const wk=i=>{if(!start)return 'Week '+(i+1);const d=new Date(start);d.setDate(d.getDate()+7*i);return 'Week '+(i+1)+'<br><small>'+d.toLocaleDateString('en-GB')+'</small>'};
+ const rows=PH[w].map((ph,i)=>({wk:wk(i),focus:ph.map(p=>PHN[t][p]).join(' + '),act:ph.map(p=>K.act[t][p]),assess:ph.includes(3)?(t==='r'?'Re-test (same format as the diagnostic) and individual feedback':'Product assessed with criteria; self- and peer assessment'):(i===0?'Diagnostic check / exit ticket':'Exit ticket or mini-whiteboard check')}));
+ LAST={t,sk,K,w,studs,rows,school:v('school'),teacher:v('teacher'),subj:v('subj'),cls:v('cls'),term:v('term'),spw:v('spw'),slen:v('slen'),diag:v('diag'),spec:v('spec'),
+  obj:[v('o1'),v('o2'),v('o3')].filter(Boolean),strs:RP_STRATS.filter((s,i)=>$(`[data-k=st${i}]`).checked),target:v('target'),res:v('res'),links:gradeLinks(v('cls'),sk),parent:$('#parent').checked,date:start?start.toLocaleDateString('en-GB'):''};
+ render(LAST)}
+const title=P=>P.t==='r'?'Remedial Plan · خطة علاجية':'Enrichment Plan · خطة إثرائية';
+function parentMsg(P){const n=P.w;return P.t==='r'?
+`Dear parent,
+Your child will join a short English support programme in ${P.sk} for ${n} weeks (${P.spw} short sessions a week). The aim is to strengthen this skill before the next assessment. Please encourage your child to attend every session and to practise for 10 minutes at home using the free resources: https://mrsameh2024.github.io/tests/
+Thank you for your support.
+
+ولي الأمر الكريم،
+سيشارك ابنكم/ابنتكم في برنامج دعم قصير في مهارة ${RP_SKILLS[P.sk].ar} في اللغة الإنجليزية لمدة ${n} أسابيع (${P.spw} حصص قصيرة أسبوعيًا)، بهدف تقوية هذه المهارة قبل التقييم القادم. نرجو تشجيعه على الحضور والتدرب 10 دقائق يوميًا في المنزل باستخدام الموارد المجانية على الرابط أعلاه.
+شكرًا لتعاونكم.`:
+`Dear parent,
+We are pleased to tell you that your child has been selected for an English enrichment programme in ${P.sk} for ${n} weeks, because of excellent results. Your child will work on challenging tasks and help classmates as a peer tutor. Well done, and thank you for your support.
+
+ولي الأمر الكريم،
+يسعدنا إبلاغكم باختيار ابنكم/ابنتكم في برنامج إثرائي في مهارة ${RP_SKILLS[P.sk].ar} في اللغة الإنجليزية لمدة ${n} أسابيع بسبب تميزه في النتائج، حيث سيعمل على مهام متقدمة ويساعد زملاءه. نهنئكم ونشكر تعاونكم.`}
+function planHTML(P){const row=(a,b)=>`<tr><th>${a}</th><td colspan="3">${b}</td></tr>`;
+ return `<div class="plan-doc"><table class="lp"><tr><th colspan="4" class="t">${title(P)}<br>${esc(P.subj)} · ${esc(P.term)}</th></tr>
+ <tr><th>School</th><td>${esc(P.school)}</td><th>Teacher</th><td>${esc(P.teacher)}</td></tr>
+ <tr><th>Grade / class</th><td>${esc(P.cls)}</td><th>Target skill</th><td>${esc(P.sk)} · <span dir="rtl">${RP_SKILLS[P.sk].ar}</span></td></tr>
+ <tr><th>Duration</th><td>${P.w} weeks${P.date?' from '+P.date:''}</td><th>Sessions</th><td>${esc(P.spw)} per week × ${esc(P.slen)}</td></tr>
+ ${row('Students ('+P.studs.length+') · الطلاب',esc(P.studs.join(', '))||'—')}
+ ${row('Diagnosis / evidence · التشخيص',esc(P.diag||'—')+(P.spec?'<br><b>Observed:</b> '+esc(P.spec):''))}
+ ${row('Objectives · الأهداف',`<ol>${P.obj.map(o=>`<li>${esc(o)}.</li>`).join('')}</ol>`)}
+ ${row('Strategies · الاستراتيجيات',esc(P.strs.join(' · '))||'—')}
+ ${row('Success target · مؤشر النجاح',esc(P.target))}</table>
+ <table class="lp"><tr><th colspan="4" class="s">Programme · البرنامج الزمني</th></tr><tr><th style="width:14%">Week</th><th style="width:18%">Focus</th><th>Activities</th><th style="width:24%">Assessment</th></tr>
+ ${P.rows.map(r=>`<tr><td>${r.wk}</td><td><b>${esc(r.focus)}</b></td><td><ul>${r.act.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></td><td>${esc(r.assess)}</td></tr>`).join('')}</table>
+ <table class="lp">${row('Resources · المصادر',`${P.res?esc(P.res)+'<br>':''}${P.links.map(l=>`${esc(l[0])}: <a href="${l[1]}">${l[1].replace('https://','')}</a>`).join('<br>')}`)}
+ ${row('Follow-up · المتابعة',P.t==='r'?'Track attendance and each session\'s exit ticket; share progress with the coordinator after the re-test; move students who reach the target back to regular support.':'Record products and peer-tutoring roles; share outstanding work with the coordinator and parents.')}
+ ${row('Roles · الأدوار','<b>Teacher:</b> plans, teaches and records progress. <b>Coordinator:</b> reviews the plan and results. <b>Parent:</b> encourages home practice. <b>Student:</b> attends, practises and self-assesses.')}</table>
+ <table class="lp"><tr><th colspan="4" class="s">Results after the plan · النتائج بعد التنفيذ</th></tr><tr><th>Students who met the target</th><td style="height:40px"></td><th>Next step</th><td></td></tr></table>
+ <table class="lp"><tr><th>Teacher's signature</th><td style="height:40px"></td><th>Coordinator's signature</th><td></td></tr><tr><th>Academic deputy</th><td style="height:40px"></td><th>Date</th><td></td></tr></table>
+ <p class="mute" style="font-size:.8rem">Prepared with the Smart Students Hub Remedial &amp; Enrichment Plan Generator. Review and adapt it for your students.</p></div>`}
+const WORD_CSS='body{font-family:Calibri,Arial,sans-serif;font-size:10.5pt}table{border-collapse:collapse;width:100%;margin:0 0 8pt}th,td{border:1px solid #555;padding:4pt;vertical-align:top;text-align:left}th{background:#dfe8f5}th.t{background:#14244a;color:#fff;text-align:center;font-size:13pt}th.s{background:#c9d7ec}ul,ol{margin:2pt 0 2pt 14pt;padding:0}.mute{color:#666}';
+function render(P){$('#out').innerHTML=`<section class="card">${planHTML(P)}</section>
+ <section class="card noprint"><h2>Next steps · الخطوات التالية</h2><div class="actions" style="position:static;flex-wrap:wrap"><button type="button" class="btn" id="word">⬇️ Download Word (.doc)</button> <button type="button" class="btn" onclick="window.print()">🖨️ Print / PDF</button></div>
+ ${P.parent?`<h3>Message to parents · رسالة لأولياء الأمور</h3>${(()=>{const m=parentMsg(P),i=m.indexOf("ولي الأمر");return `<pre class="ai">${esc(m.slice(0,i).trim())}</pre><pre class="ai" dir="rtl" style="text-align:right">${esc(m.slice(i))}</pre>`})()}<button type="button" class="btn" id="cpm">Copy message · انسخ الرسالة</button> <a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(parentMsg(P))}">Share on WhatsApp · واتساب</a>`:''}</section>`;
+ $('#word').onclick=()=>{const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>@page{size:A4;margin:1.5cm}${WORD_CSS}</style><style>
+.note{background:#fcf1dc;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#6b4a06}
+.stepnav{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:8px 0 0;list-style:none;counter-reset:s}.stepnav li{counter-increment:s;background:#e6effb;color:#1e6fd9;border-radius:20px;padding:3px 10px;font-size:.8rem;font-weight:700}.stepnav li::before{content:counter(s) ". "}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;margin-bottom:10px}@media(max-width:600px){.row2{grid-template-columns:1fr}}
+.drop{display:flex;align-items:center;justify-content:center;text-align:center;min-height:120px;border:2px dashed #9fb3cc;border-radius:14px;background:#f7faff;cursor:pointer;padding:12px}.drop input{position:absolute;opacity:0;width:1px;height:1px}.drop:focus-within{outline:3px solid var(--gold)}
+.lab{display:block;font-weight:600;font-size:.92rem;margin:0 0 10px}.lab input,.lab select,.lab textarea{display:block;width:100%;margin-top:4px;font:inherit;font-weight:400;border:1.5px solid #b8c9d9;border-radius:10px;padding:8px;background:#fff;color:var(--ink)}
+.lab textarea{min-height:130px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}.chip{cursor:pointer}.chip input{position:absolute;opacity:0}.chip span{display:block;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff}.chip small{display:block;color:var(--mute)}
+.chip input:checked+span{border-color:var(--blue);background:#e6effb}.chip input:focus-visible+span{outline:3px solid var(--gold)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 12px;margin:6px 0}.checks label{display:flex;gap:6px;align-items:flex-start}
+.plan-doc h3{margin:16px 0 6px;color:var(--blue)}
+.lp{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:.88rem}.lp th,.lp td{border:1px solid #9fb3cc;padding:6px 8px;vertical-align:top;text-align:left}.lp th{background:#eef3fa;width:18%}.lp th.t{background:#14244a;color:#fff;text-align:center;font-size:1.05rem}.lp th.s{background:#dbe6f6}
+.lp ul,.lp ol{margin:2px 0 2px 16px;padding:0}.lp p{margin:3px 0}.lp mark{background:#fff3a3;padding:0 2px}
+@media(max-width:600px){.lp{font-size:.78rem}.lp th,.lp td{padding:4px;overflow-wrap:anywhere}}
+.objbox{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fbfdff}.objbox h3{margin:0 0 8px}
+.lab textarea.short{min-height:60px}
+@media print{.plan-doc .tbl{font-size:9.5pt}#out .card{border:0;padding:0}}
+</style><style>
+.note{background:#e3f4ec;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#14532d;margin-top:8px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}.kpis div{background:#f3f7fc;border-radius:12px;padding:10px;text-align:center}.kpis b{display:block;font-size:1.35rem;color:#14244a}.kpis span{font-size:.8rem;color:#46536e}
+.bar i.lo{background:#b3261e}.bar i.hi{background:#1a7f4b}
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.grp{border-radius:12px;padding:10px 12px;border:2px solid}.grp h4{margin:0;display:flex;justify-content:space-between}.grp h4 span{background:#fff;border-radius:999px;padding:0 10px}
+.grp.r{border-color:#b3261e;background:#fbe8e6}.grp.s{border-color:#e8a317;background:#fcf1dc}.grp.c{border-color:#1e6fd9;background:#e6effb}.grp.e{border-color:#1a7f4b;background:#e3f4ec}
+.fbrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding:8px 0}
+.lvls{display:flex;gap:6px;flex-wrap:wrap}.lv{font:inherit;font-size:.82rem;font-weight:700;border:1.5px solid #b8c9d9;background:#fff;border-radius:10px;padding:5px 9px;cursor:pointer;line-height:1.2;color:#14244a}.lv small{display:block;font-weight:600;color:#46536e}
+.lv.on.lvE{background:#1a7f4b;border-color:#1a7f4b}.lv.on.lvG{background:#1e6fd9;border-color:#1e6fd9}.lv.on.lvD{background:#e8a317;border-color:#e8a317}.lv.on.lvN{background:#b3261e;border-color:#b3261e}.lv.on,.lv.on small{color:#fff}
+textarea.box{display:block;width:100%;min-height:150px;font:inherit;border:1.5px solid #b8c9d9;border-radius:10px;padding:10px;margin:6px 0}
+@media print{.groups{grid-template-columns:repeat(4,1fr)}}
+</style></head><body>${planHTML(P)}</body></html>`;
+  const b=new Blob(['﻿'+html],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(P.t==='r'?'Remedial':'Enrichment')+'_Plan_'+(P.cls||P.sk).replace(/[^\w؀-ۿ-]+/g,'_')+'.doc';document.body.appendChild(a);a.click();a.remove()};
+ const c=$('#cpm');if(c)c.onclick=()=>navigator.clipboard.writeText(parentMsg(P)).then(()=>c.textContent='Copied ✓ · تم النسخ').catch(()=>{});
+ $('#out').scrollIntoView({behavior:'smooth'})}
+$('#gen').onclick=build;
+})();
+</script><div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">
+<div class="gb gb1"><h2 id="gTitle">Welcome to Smart Students Hub 👋</h2><p class="ar"><b>مرحبًا بك في منصة Smart Students Hub</b></p>
+<p style="font-size:.88rem">Please register once to open the free resources. It takes 20 seconds. · سجّل مرة واحدة لفتح الموارد المجانية، يستغرق ذلك 20 ثانية.</p></div>
+<div class="gb gb2"><label class="l" for="gName">Your name · اسمك</label><input type="text" id="gName" autocomplete="name" maxlength="80"></div>
+<div class="gb gb3"><span class="l">I am a… · أنا</span>
+<div class="groles" role="radiogroup" aria-label="I am a"><label><input type="radio" name="gRole" value="Teacher"><span><i>👩‍🏫</i>Teacher<br>معلم</span></label><label><input type="radio" name="gRole" value="Student"><span><i>🎓</i>Student<br>طالب</span></label><label><input type="radio" name="gRole" value="Parent"><span><i>👨‍👩‍👧</i>Parent<br>ولي أمر</span></label></div></div>
+<div class="gb gb4"><label class="l" for="gContact">Mobile or email · الجوال أو البريد الإلكتروني</label><input type="text" id="gContact" autocomplete="tel" placeholder="+974 5xxx xxxx  /  name@example.com"></div>
+<input type="text" class="hp" id="gWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="gb gb5"><label class="ok"><input type="checkbox" id="gOk"><span><b>I agree to receive updates about new resources.</b><b dir="rtl" style="display:block;text-align:right">أوافق على إرسال تحديثات الموارد لي.</b><small style="display:block;margin-top:4px">Your details stay private. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></label>
+<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='teacher-remedial-pla',$=s=>document.getElementById(s);let reg=false;
+try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
+const pre=()=>{let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')}catch(e){}
+ [['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
+const after=()=>{pre();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
+if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}const g=$('gate');g.hidden=false;document.body.classList.add('gated');setTimeout(()=>$('gName').focus(),50);
+let det={};const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(det))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
+const msg=t=>{$('gMsg').textContent=t};
+$('gSend').onclick=()=>{const name=$('gName').value.trim(),role=(document.querySelector('input[name=gRole]:checked')||{}).value,c=$('gContact').value.trim();
+ const email=/@/.test(c)?c:'',phone=/@/.test(c)?'':c.replace(/[^0-9+ ]/g,'').trim();
+ const eOk=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email),pOk=/^\+?[0-9 ]{8,16}$/.test(phone);
+ if(name.length<2)return msg('Please write your name. · اكتب اسمك.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
+ if(!eOk&&!pOk)return msg('Write a valid mobile number or email. · اكتب رقم جوال أو بريدًا إلكترونيًا صحيحًا.');if(!$('gOk').checked)return msg('Please tick the agreement box. · ضع علامة الموافقة.');
+ det={name,role,email:eOk?email:'',phone:pOk?phone:''};$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
+ const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);
+ fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email:eOk?email:'',phone:pOk?phone:'',consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
+  .then(r=>r.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
+  .catch(()=>open()); // never lock visitors out if the connection fails
+};})();</script></body></html>
