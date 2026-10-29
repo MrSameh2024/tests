@@ -136,6 +136,8 @@ pre.ai{white-space:pre-wrap;background:#f3f7fc;border:1px solid var(--line);bord
 <label class="drop" id="drop"><input type="file" id="img" accept="image/*" capture="environment"><span>📷 <b>Upload or take a photo</b><br><small>صوّر النشاط أو ارفع صورته</small></span></label>
 <div><img id="prev" alt="" style="display:none;max-width:100%;border-radius:10px;border:1px solid var(--line)"><div id="ocr" class="mute"></div></div>
 </div>
+<label class="lab" style="max-width:340px">Language in the photo · لغة الصورة<select id="olang" data-k="olang"><option value="eng">English only (best for English textbooks)</option><option value="eng+ara">English + Arabic</option></select></label>
+<p class="mute">Tips: photograph only the activity, hold the phone straight above the page, in good light, without shadows.</p>
 <label class="lab">Activity text · نص النشاط <span class="mute">(check and correct after reading from a photo)</span><textarea id="act" data-k="act" placeholder="Paste the activity, instructions and questions here…"></textarea></label>
 </section>
 
@@ -299,6 +301,7 @@ const SUBJECTS=[['Science','العلوم'],['Social Studies','الدراسات �
 const VALUES=[['Respect','الاحترام'],['Responsibility','المسؤولية'],['Honesty','الصدق والأمانة'],['Cooperation','التعاون'],['Perseverance','المثابرة'],['Tolerance','التسامح'],['Gratitude','الشكر والامتنان'],['Care for the environment','المحافظة على البيئة'],['Citizenship and belonging','المواطنة والانتماء'],['Kindness','الرحمة واللطف']];
 const INTEG={Reading:['Speaking: discuss the text in pairs','Writing: write a short response to the text'],Listening:['Speaking: retell what they heard','Writing: complete notes and a summary'],Speaking:['Listening: listen to peers and give feedback','Writing: note ideas before speaking'],Writing:['Reading: analyse a model text','Speaking: peer-discuss drafts'],Vocabulary:['Reading: meet the words in context','Speaking/Writing: use the words in sentences'],Grammar:['Reading: notice the structure in a text','Speaking/Writing: use it in a personal task'],Pronunciation:['Listening: discriminate sounds','Speaking: read a dialogue aloud']};
 const COMP_HINT={'Think-Pair-Share':[3,4],'Jigsaw':[4,5],'Gallery Walk':[0,4],'Numbered Heads Together':[4],'Graphic Organisers':[0,1],'KWL Chart':[5],'Information Gap':[3],'Role Play':[3,0],'Station Rotation':[4],'Inside–Outside Circle':[3],'Four Corners':[0,3],'Socratic Questioning':[0],'Peer Tutoring':[4,3],'Problem-Based Learning':[6,5,0],'Task-Based Learning':[6,3],'Retrieval Practice':[1],'Running Dictation':[1,4],'Hot Seat':[3,0],'Brainstorming & Mind Mapping':[0],'I Do – We Do – You Do':[1]};
+const VAL_HOW=['students listen to each other and disagree politely during pair and group work','students take responsibility for their own learning and complete their part of the task','students give honest answers and do their own work in the assessment','students help each other and share ideas in their groups','students keep trying with difficult questions and learn from mistakes','students accept different opinions about the text with an open mind','students thank partners for their feedback and help','students discuss how the topic affects the environment in Qatar','students link the topic to life in Qatar and their role in the community','students give kind, useful feedback to their classmates'];
 
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
@@ -321,7 +324,7 @@ fields.forEach(el=>{const k=el.dataset.k;if(!(k in S))return;if(el.type==='check
 if(S.sub)$('#sub').value=S.sub;if(S.lv)$$('input[name=lv]').forEach(r=>r.checked=r.value==S.lv);
 const store=el=>{S[el.dataset.k]=el.type==='checkbox'?el.checked:el.value;save()};
 $$('[data-k]').forEach(el=>el.addEventListener(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',()=>store(el)));
-$('#skill').addEventListener('change',()=>{fillSub();store($('#sub'));autoComps()});
+$('#skill').addEventListener('change',()=>{fillSub();store($('#sub'));autoComps();if(S.objAuto!==false)$('#sugObj').click()});
 $$('input[name=lv]').forEach(r=>r.onchange=()=>{S.lv=r.value;save();showLv()});
 const lv=()=>+(($$('input[name=lv]').find(r=>r.checked)||{}).value||3);
 const showLv=()=>{$('#lvlNames').innerHTML='Levels: '+LEVELS[lv()].map(n=>`<b>${n}</b> <span dir="rtl">(${LV_AR[n]})</span>`).join(' · ')};showLv();
@@ -335,13 +338,17 @@ $('#stc').textContent=chosen().length+' selected';
 const descs=()=>{const a1=ASSESS[$('#a1').value],a2=ASSESS[$('#a2').value];$('#aDesc').innerHTML=`<b>${esc(a1[0])}:</b> ${esc(a1[2])}<br><b>${esc(a2[0])}:</b> ${esc(a2[2])}`;
  const s=STARTERS[$('#st').value],c=CLOSURES[$('#cl').value];$('#scDesc').innerHTML=`<b>${esc(s[0])}:</b> ${esc(s[2])}<br><b>${esc(c[0])}:</b> ${esc(c[2])}`};
 ['#a1','#a2','#st','#cl'].forEach(id=>$(id).addEventListener('change',descs));if(!('a2' in S)){$('#a2').value=0;$('#a1').value=1}descs();
-$('#sugObj').onclick=()=>{const o=SKILLS[$('#skill').value].sub[$('#sub').value];$('#o1').value='Students will be able to '+o[0]+'.';$('#o2').value='Students will be able to '+o[1]+'.';store($('#o1'));store($('#o2'))};
+$('#sugObj').onclick=()=>{const o=SKILLS[$('#skill').value].sub[$('#sub').value];$('#o1').value='Students will be able to '+o[0]+'.';$('#o2').value='Students will be able to '+o[1]+'.';store($('#o1'));store($('#o2'));S.objAuto=true;save()};
+['#o1','#o2'].forEach(id=>$(id).addEventListener('input',()=>{S.objAuto=false;save()}));
+$('#sub').addEventListener('change',()=>{if(S.objAuto!==false)$('#sugObj').click()});
 if(!S.o1)$('#sugObj').click();
 // OCR
+async function prep(f){const bm=await createImageBitmap(f);const sc=Math.min(2.5,Math.max(1,2000/bm.width));const c=document.createElement('canvas');c.width=Math.round(bm.width*sc);c.height=Math.round(bm.height*sc);const x=c.getContext('2d');x.drawImage(bm,0,0,c.width,c.height);
+ const d=x.getImageData(0,0,c.width,c.height),p=d.data;let mn=255,mx=0;for(let i=0;i<p.length;i+=4){const g=.299*p[i]+.587*p[i+1]+.114*p[i+2];p[i]=g;if(g<mn)mn=g;if(g>mx)mx=g}const r=Math.max(1,mx-mn);for(let i=0;i<p.length;i+=4){const v=Math.min(255,Math.max(0,(p[i]-mn)*255/r));p[i]=p[i+1]=p[i+2]=v}x.putImageData(d,0,0);return c}
 $('#img').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;const p=$('#prev');p.src=URL.createObjectURL(f);p.style.display='block';
  const o=$('#ocr');o.textContent='Loading the text reader… (first time may take 20–30 seconds)';
  try{if(!window.Tesseract)await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';s.onload=res;s.onerror=()=>rej(new Error('Could not load the text reader. Check your internet connection, or paste the text instead.'));document.head.appendChild(s)});
-  const r=await Tesseract.recognize(f,'eng+ara',{logger:m=>{if(m.status==='recognizing text')o.textContent='Reading the photo… '+Math.round(m.progress*100)+'%'}});
+  const img=await prep(f);const r=await Tesseract.recognize(img,$('#olang').value,{logger:m=>{if(m.status==='recognizing text')o.textContent='Reading the photo… '+Math.round(m.progress*100)+'%'}});
   const t=(r.data.text||'').trim();if(!t){o.textContent='No text found. Try a clearer, straight photo, or paste the text.';return}
   const a=$('#act');a.value=(a.value?a.value+'\n\n':'')+t;store(a);o.innerHTML='✓ Text added below. <b>Please check it</b>: photo reading can make mistakes.';
  }catch(err){o.textContent='⚠️ '+err.message}});
@@ -354,19 +361,24 @@ function build(){
  const g=$('#grade').value,title=$('#title').value.trim()||'Untitled lesson',o1=$('#o1').value.trim(),o2=$('#o2').value.trim();
  const A1=ASSESS[$('#a1').value],A2=ASSESS[$('#a2').value],ST=STARTERS[$('#st').value],CL=CLOSURES[$('#cl').value];
  const t={st:d>=90?8:5,pr:Math.round(d*.15),gu:Math.round(d*.2),ind:Math.round(d*.3),fb:Math.round(d*.1)};t.cl=Math.max(5,d-t.st-t.pr-t.gu-t.ind-t.fb);
- const pool=strs.filter(s=>!s[0].startsWith('I Do')),sG=pool[0]||STRATS[0],sI=pool[1]||null,sX=pool.slice(2);
  const act=$('#act').value.trim();const actShort=act?act.replace(/\s+/g,' ').slice(0,240)+(act.length>240?'…':''):'the textbook activity';
  const comps=COMPS.filter((c,i)=>$(`[data-k=c${i}]`).checked);
- const xs=$('#xs').value!==''?SUBJECTS[$('#xs').value]:null,VAL=VALUES[$('#val').value];
  const sd=SKILL_DIFF[sk]||{};
  const diff=lvls.map(n=>({n,ar:LV_AR[n],task:TIER[n].task,scaf:TIER[n].scaffold+(sd[n]?' '+sd[n]:''),prod:TIER[n].product}));
+ const xs=$('#xs').value!==''?SUBJECTS[$('#xs').value]:null,VAL=VALUES[$('#val').value];
+ const START_S=['KWL Chart','Four Corners','Retrieval Practice','Brainstorming & Mind Mapping','Running Dictation'];
+ const sStart=strs.filter(s=>START_S.includes(s[0])),main=strs.filter(s=>!START_S.includes(s[0])&&!s[0].startsWith('I Do'));
+ const sG=main[0]||STRATS[0],sI=main[1]||null,sX=main.slice(2);
+ const END_A=['Exit ticket','3-2-1','Self-assessment'],a1End=END_A.includes(A1[0]),a2End=END_A.includes(A2[0]);
+ const afl=(n,A)=>`AfL for objective ${n} — ${A[0]}: ${A[2]}`;
+ const kwl=strs.some(s=>s[0]==='KWL Chart');
  const stages=[
-  ['Starter','التمهيد',t.st,`${ST[0]}: ${ST[2]} Link it to “${title}”.`,'Respond individually or in pairs.','Every student participates; quick check of prior knowledge.'],
-  ['Objectives & modelling','الأهداف والنمذجة',t.pr,`Share the objectives and success criteria. Model the sub-skill (${sub}) with the first item of the activity, thinking aloud.${strs.some(s=>s[0].startsWith('I Do'))?' (I do → we do)':''}`,'Listen, note the steps, answer concept-checking questions.','Check understanding with 2–3 targeted questions before moving on.'],
-  ['Guided practice','التطبيق الموجّه',t.gu,`${sG[0]}: ${sG[2]} Apply it to the activity.`,'Work on the first part of the activity together.',`AfL for objective 1 — ${A1[0]}: ${A1[2]}`],
-  ['Differentiated practice','التطبيق المتمايز',t.ind,`Give out the ${lvls.length} worksheet levels (${lvls.join(', ')}). ${sI?sI[0]+': '+sI[2]:'Monitor, support the Support group first, then extend.'}`,'Complete the worksheet for their level; fast finishers do the extension.','See the differentiation table below.'],
-  ['Feedback & assessment','التغذية الراجعة والتقييم',t.fb,`Check answers and address common errors. ${sX.length?sX.map(s=>s[0]+': '+s[2]).join(' '):''}`,'Correct and improve their work.',`AfL for objective 2 — ${A2[0]}: ${A2[2]}`],
-  ['Closure','الختام',t.cl,`${CL[0]}: ${CL[2]} Return to the two objectives.`,'Reflect on their learning against the success criteria.','Use the responses to plan the next lesson.'],
+  ['Starter','التمهيد',t.st,`${ST[0]}: ${ST[2]} Link it to “${title}”.${sStart.length?' Then '+sStart.map(s=>s[0]+': '+s[2]).join(' '):''}`,'Respond individually or in pairs.','Every student participates; quick check of prior knowledge.'],
+  ['Objectives & modelling','الأهداف والنمذجة',t.pr,`Share the objectives and success criteria. Model the sub-skill (${sub}) with the first item of the activity, thinking aloud.${strs.some(s=>s[0].startsWith('I Do'))?' I do: the teacher models → We do: the class tries the next item together.':''}`,'Listen, note the steps, answer concept-checking questions.','Check understanding with 2–3 targeted questions before moving on.'],
+  ['Guided practice','التطبيق الموجّه',t.gu,`${sG[0]}: ${sG[2]} Apply it to the activity.`,'Work on the first part of the activity together.',a1End?'Targeted questioning: check objective 1 before independent work.':afl(1,A1)],
+  ['Differentiated practice','التطبيق المتمايز',t.ind,`Give out the ${lvls.length} worksheet levels (${lvls.join(', ')}). ${sI?sI[0]+': '+sI[2]:'Monitor, support the Support group first, then extend.'}`,'Complete the worksheet for their level; fast finishers do the extension.','Monitor with the success criteria; see the differentiation table below.'],
+  ['Feedback & assessment','التغذية الراجعة والتقييم',t.fb,`Check answers and address common errors.${sX.length?' '+sX.map(s=>s[0]+': '+s[2]).join(' '):''}`,'Correct and improve their work.',a2End?'Whole-class feedback on the most common errors.':afl(2,A2)],
+  ['Closure','الختام',t.cl,`${CL[0]}: ${CL[2]}${kwl?' Students complete the L column of the KWL chart.':''} Return to the two objectives.${VAL?' Link briefly to the value: '+VAL[0]+'.':''}`,'Reflect on their learning against the success criteria.',[a1End?afl(1,A1):'',a2End?afl(2,A2):''].filter(Boolean).join(' ')||'Use the responses to plan the next lesson.'],
  ];
  LAST={d,sk,sub,lvls,strs,g,title,o1,o2,A1,A2,ST,CL,t,act,comps,xs,VAL,diff,stages,
   subj:$('#subj').value,teacher:$('#teacher').value,nst:$('#nst').value,res:$('#res').value,hw:$('#hw').value,xl:$('#xl').value,vl:$('#vl').value,
@@ -396,7 +408,7 @@ function planHTML(P){
  <h3>Integration and values · التكامل والقيم</h3>
  <table class="tbl">${row('Within English skills',(INTEG[P.sk]||[]).map(esc).join('<br>'))}
  ${row('With other subjects',P.xs?`<b>${esc(P.xs[0])}</b> <span dir="rtl">(${esc(P.xs[1])})</span>${P.xl?': '+esc(P.xl):''}`:'—')}
- ${row('Value · القيمة',`<b>${esc(P.VAL[0])}</b> <span dir="rtl">(${esc(P.VAL[1])})</span>${P.vl?': '+esc(P.vl):': discussed briefly in the closure, linked to the lesson topic.'}`)}</table>
+ ${row('Value · القيمة',`<b>${esc(P.VAL[0])}</b> <span dir="rtl">(${esc(P.VAL[1])})</span>${': '+esc(P.vl||VAL_HOW[VALUES.indexOf(P.VAL)])}`)}</table>
  ${P.hw?`<p><b>Homework · الواجب:</b> ${esc(P.hw)}</p>`:''}
  <p><b>Activity · النشاط:</b> ${esc(P.actShort)}</p>
  <p class="mute" style="font-size:.8rem">Prepared with the Smart Students Hub Lesson Planner Toolkit. Review and adapt it for your class: the teacher's professional judgement comes first.</p></div>`;
