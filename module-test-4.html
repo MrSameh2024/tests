@@ -542,29 +542,37 @@ window.sshSend=function(holder,payload){
 </script>
 </html><div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">
 <div class="gb gb1"><h2 id="gTitle">Welcome to Smart Students Hub 👋</h2><p class="ar"><b>مرحبًا بك في منصة Smart Students Hub</b></p>
-<p style="font-size:.88rem">Please register once to open the free resources. It takes 20 seconds. · سجّل مرة واحدة لفتح الموارد المجانية، يستغرق ذلك 20 ثانية.</p></div>
-<div class="gb gb2"><label class="l" for="gName">Your name · اسمك</label><input type="text" id="gName" autocomplete="name" maxlength="80"></div>
+<p style="font-size:.88rem">Please register once to open the free resources. It takes 20 seconds. · <bdi dir="rtl">سجّل مرة واحدة لفتح الموارد المجانية، يستغرق ذلك 20 ثانية.</bdi></p></div>
+<div class="gb gb2"><label class="l" for="gName">Your full name · اسمك الكامل</label><input type="text" id="gName" autocomplete="name" maxlength="80"></div>
 <div class="gb gb3"><span class="l">I am a… · أنا</span>
 <div class="groles" role="radiogroup" aria-label="I am a"><label><input type="radio" name="gRole" value="Teacher"><span><i>👩‍🏫</i>Teacher<br>معلم</span></label><label><input type="radio" name="gRole" value="Student"><span><i>🎓</i>Student<br>طالب</span></label><label><input type="radio" name="gRole" value="Parent"><span><i>👨‍👩‍👧</i>Parent<br>ولي أمر</span></label></div></div>
-<div class="gb gb4"><label class="l" for="gContact">Mobile or email · الجوال أو البريد الإلكتروني</label><input type="text" id="gContact" autocomplete="tel" placeholder="+974 5xxx xxxx  /  name@example.com"></div>
+<div class="gb gb4"><label class="l" for="gEmail">Email · البريد الإلكتروني <small>(required · إلزامي)</small></label><input type="email" id="gEmail" autocomplete="email" inputmode="email" maxlength="120" placeholder="name@example.com">
+<label class="l" for="gPhone" style="margin-top:8px">Mobile · الجوال <small>(optional · اختياري)</small></label><input type="tel" id="gPhone" autocomplete="tel" inputmode="tel" maxlength="25" placeholder="+974 5xxx xxxx"></div>
 <input type="text" class="hp" id="gWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
-<div class="gb gb5"><label class="ok"><input type="checkbox" id="gOk"><span><b>I agree to receive updates about new resources.</b><b dir="rtl" style="display:block;text-align:right">أوافق على إرسال تحديثات الموارد لي.</b><small style="display:block;margin-top:4px">Your details stay private. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></label>
-<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='module-test-4',$=s=>document.getElementById(s);let reg=false;
-try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
-const pre=()=>{let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')}catch(e){}
- [['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
-const after=()=>{pre();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
-if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}const g=$('gate');g.hidden=false;document.body.classList.add('gated');setTimeout(()=>$('gName').focus(),50);
-let det={};const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(det))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
+<div class="gb gb5"><label class="ok"><input type="checkbox" id="gOk"><span><b>I agree to receive updates about new resources, and to Smart Students Hub recording which tools I use.</b><b dir="rtl" style="display:block;text-align:right">أوافق على إرسال تحديثات الموارد لي، وعلى تسجيل المنصة للأدوات التي أستخدمها.</b><small style="display:block;margin-top:4px">Your details stay private and are used only to document how our free resources are used. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، وتُستخدم فقط لتوثيق الاستفادة من مواردنا المجانية. ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></label>
+<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='module-test-4',$=s=>document.getElementById(s);
+const EOK=e=>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e||'');
+let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
+let reg=false;try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
+if(reg&&!EOK(r.email))reg=false; // email is now required: ask older registrations once more
+const pre=()=>{[['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
+const logUse=()=>{try{const d=new Date().toISOString().slice(0,10),k='ssh_use_'+PAGE;if(localStorage.getItem(k)===d)return;localStorage.setItem(k,d)}catch(e){}
+ try{fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'use',name:r.name||'',role:r.role||'',email:r.email||'',page:PAGE,ref:location.pathname.split('/').pop()}),keepalive:true}).catch(()=>{})}catch(e){}};
+const after=()=>{pre();logUse();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
+if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}
+const g=$('gate');g.hidden=false;document.body.classList.add('gated');
+if(r.name)$('gName').value=r.name;if(r.phone)$('gPhone').value=r.phone;if(r.role){const x=document.querySelector('input[name=gRole][value="'+r.role+'"]');if(x)x.checked=true}
+setTimeout(()=>(r.name?$('gEmail'):$('gName')).focus(),50);
+const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(r))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
 const msg=t=>{$('gMsg').textContent=t};
-$('gSend').onclick=()=>{const name=$('gName').value.trim(),role=(document.querySelector('input[name=gRole]:checked')||{}).value,c=$('gContact').value.trim();
- const email=/@/.test(c)?c:'',phone=/@/.test(c)?'':c.replace(/[^0-9+ ]/g,'').trim();
- const eOk=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email),pOk=/^\+?[0-9 ]{8,16}$/.test(phone);
- if(name.length<2)return msg('Please write your name. · اكتب اسمك.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
- if(!eOk&&!pOk)return msg('Write a valid mobile number or email. · اكتب رقم جوال أو بريدًا إلكترونيًا صحيحًا.');if(!$('gOk').checked)return msg('Please tick the agreement box. · ضع علامة الموافقة.');
- det={name,role,email:eOk?email:'',phone:pOk?phone:''};$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
+$('gSend').onclick=()=>{const name=$('gName').value.trim().replace(/\s+/g,' '),role=(document.querySelector('input[name=gRole]:checked')||{}).value,email=$('gEmail').value.trim().toLowerCase(),phone=$('gPhone').value.replace(/[^0-9+ ]/g,'').trim();
+ if(name.length<3)return msg('Please write your full name. · اكتب اسمك الكامل.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
+ if(!EOK(email))return msg('Please write a valid email. · اكتب بريدًا إلكترونيًا صحيحًا.');
+ if(phone&&!/^\+?[0-9 ]{8,16}$/.test(phone))return msg('Check the mobile number or leave it empty. · راجع رقم الجوال أو اتركه فارغًا.');
+ if(!$('gOk').checked)return msg('Please tick the agreement box. · ضع علامة الموافقة.');
+ r={name,role,email,phone};$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
  const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);
- fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email:eOk?email:'',phone:pOk?phone:'',consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
-  .then(r=>r.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
+ fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email,phone,consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
+  .then(x=>x.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
   .catch(()=>open()); // never lock visitors out if the connection fails
 };})();</script>
