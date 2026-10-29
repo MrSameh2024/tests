@@ -156,15 +156,18 @@ $('rSend').onclick=()=>{const name=$('rName').value.trim(),role=(document.queryS
   .catch(()=>{$('rSend').disabled=false;msg('No connection. Please try again later. · لا يوجد اتصال، حاول لاحقًا.')})};
 })();</script><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='hub',$=s=>document.getElementById(s);let reg=false;
 try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
-if(reg)return;const g=$('gate');g.hidden=false;document.body.classList.add('gated');setTimeout(()=>$('gName').focus(),50);
-const open=()=>{try{localStorage.setItem('ssh_registered','1')}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated')};
+const pre=()=>{let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')}catch(e){}
+ [['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
+const after=()=>{pre();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
+if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}const g=$('gate');g.hidden=false;document.body.classList.add('gated');setTimeout(()=>$('gName').focus(),50);
+let det={};const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(det))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
 const msg=t=>{$('gMsg').textContent=t};
 $('gSend').onclick=()=>{const name=$('gName').value.trim(),role=(document.querySelector('input[name=gRole]:checked')||{}).value,c=$('gContact').value.trim();
  const email=/@/.test(c)?c:'',phone=/@/.test(c)?'':c.replace(/[^0-9+ ]/g,'').trim();
  const eOk=/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email),pOk=/^\+?[0-9 ]{8,16}$/.test(phone);
  if(name.length<2)return msg('Please write your name. · اكتب اسمك.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
  if(!eOk&&!pOk)return msg('Write a valid mobile number or email. · اكتب رقم جوال أو بريدًا إلكترونيًا صحيحًا.');if(!$('gOk').checked)return msg('Please tick the agreement box. · ضع علامة الموافقة.');
- $('gSend').disabled=true;msg('');$('gSend').textContent='… ';
+ det={name,role,email:eOk?email:'',phone:pOk?phone:''};$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
  const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);
  fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email:eOk?email:'',phone:pOk?phone:'',consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
   .then(r=>r.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
