@@ -193,7 +193,7 @@ essay.addEventListener('input',()=>{const n=words();$('#wc').textContent=n+' wor
 
 /* ---------- marking ---------- */
 function norm(s){s=(s||'').toLowerCase().replace(/[’‘`]/g,"'").replace(/won't/g,'will not').replace(/can't|cannot/g,'can not').replace(/n't/g,' not').replace(/'ll/g,' will').replace(/'re/g,' are').replace(/'ve/g,' have').replace(/'m/g,' am').replace(/'d/g,' had');return s.replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
-function variants(a){let out=[];const parts=/\.\s+\/\s+/.test(a)?a.split(/\s+\/\s+/):[a];
+function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a))?a.split(/\s+\/\s+/):[a];
   parts.forEach(p=>{let alts=[p];const m=p.match(/(\S+) \/ (\S+)/);if(m)alts=[p.replace(m[0],m[1]),p.replace(m[0],m[2])];
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
