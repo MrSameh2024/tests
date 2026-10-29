@@ -305,36 +305,7 @@ const WORD_CSS='body{font-family:Calibri,Arial,sans-serif;font-size:10.5pt}table
 function render(P){$('#out').innerHTML=`<section class="card">${planHTML(P)}</section>
  <section class="card noprint"><h2>Next steps · الخطوات التالية</h2><div class="actions" style="position:static;flex-wrap:wrap"><button type="button" class="btn" id="word">⬇️ Download Word (.doc)</button> <button type="button" class="btn" onclick="window.print()">🖨️ Print / PDF</button></div>
  ${P.parent?`<h3>Message to parents · رسالة لأولياء الأمور</h3>${(()=>{const m=parentMsg(P),i=m.indexOf("ولي الأمر");return `<pre class="ai">${esc(m.slice(0,i).trim())}</pre><pre class="ai" dir="rtl" style="text-align:right">${esc(m.slice(i))}</pre>`})()}<button type="button" class="btn" id="cpm">Copy message · انسخ الرسالة</button> <a class="btn ghost" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(parentMsg(P))}">Share on WhatsApp · واتساب</a>`:''}</section>`;
- $('#word').onclick=()=>{const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>@page{size:A4;margin:1.5cm}${WORD_CSS}</style><style>
-.note{background:#fcf1dc;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#6b4a06}
-.stepnav{display:flex;flex-wrap:wrap;gap:6px;padding:0;margin:8px 0 0;list-style:none;counter-reset:s}.stepnav li{counter-increment:s;background:#e6effb;color:#1e6fd9;border-radius:20px;padding:3px 10px;font-size:.8rem;font-weight:700}.stepnav li::before{content:counter(s) ". "}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start;margin-bottom:10px}@media(max-width:600px){.row2{grid-template-columns:1fr}}
-.drop{display:flex;align-items:center;justify-content:center;text-align:center;min-height:120px;border:2px dashed #9fb3cc;border-radius:14px;background:#f7faff;cursor:pointer;padding:12px}.drop input{position:absolute;opacity:0;width:1px;height:1px}.drop:focus-within{outline:3px solid var(--gold)}
-.lab{display:block;font-weight:600;font-size:.92rem;margin:0 0 10px}.lab input,.lab select,.lab textarea{display:block;width:100%;margin-top:4px;font:inherit;font-weight:400;border:1.5px solid #b8c9d9;border-radius:10px;padding:8px;background:#fff;color:var(--ink)}
-.lab textarea{min-height:130px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 12px}
-.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}.chip{cursor:pointer}.chip input{position:absolute;opacity:0}.chip span{display:block;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff}.chip small{display:block;color:var(--mute)}
-.chip input:checked+span{border-color:var(--blue);background:#e6effb}.chip input:focus-visible+span{outline:3px solid var(--gold)}
-.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 12px;margin:6px 0}.checks label{display:flex;gap:6px;align-items:flex-start}
-.plan-doc h3{margin:16px 0 6px;color:var(--blue)}
-.lp{width:100%;border-collapse:collapse;margin:0 0 12px;font-size:.88rem}.lp th,.lp td{border:1px solid #9fb3cc;padding:6px 8px;vertical-align:top;text-align:left}.lp th{background:#eef3fa;width:18%}.lp th.t{background:#14244a;color:#fff;text-align:center;font-size:1.05rem}.lp th.s{background:#dbe6f6}
-.lp ul,.lp ol{margin:2px 0 2px 16px;padding:0}.lp p{margin:3px 0}.lp mark{background:#fff3a3;padding:0 2px}
-@media(max-width:600px){.lp{font-size:.78rem}.lp th,.lp td{padding:4px;overflow-wrap:anywhere}}
-.objbox{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fbfdff}.objbox h3{margin:0 0 8px}
-.lab textarea.short{min-height:60px}
-@media print{.plan-doc .tbl{font-size:9.5pt}#out .card{border:0;padding:0}}
-</style><style>
-.note{background:#e3f4ec;border-radius:10px;padding:10px 14px;font-size:.9rem;color:#14532d;margin-top:8px}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}.kpis div{background:#f3f7fc;border-radius:12px;padding:10px;text-align:center}.kpis b{display:block;font-size:1.35rem;color:#14244a}.kpis span{font-size:.8rem;color:#46536e}
-.bar i.lo{background:#b3261e}.bar i.hi{background:#1a7f4b}
-.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}.grp{border-radius:12px;padding:10px 12px;border:2px solid}.grp h4{margin:0;display:flex;justify-content:space-between}.grp h4 span{background:#fff;border-radius:999px;padding:0 10px}
-.grp.r{border-color:#b3261e;background:#fbe8e6}.grp.s{border-color:#e8a317;background:#fcf1dc}.grp.c{border-color:#1e6fd9;background:#e6effb}.grp.e{border-color:#1a7f4b;background:#e3f4ec}
-.fbrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding:8px 0}
-.lvls{display:flex;gap:6px;flex-wrap:wrap}.lv{font:inherit;font-size:.82rem;font-weight:700;border:1.5px solid #b8c9d9;background:#fff;border-radius:10px;padding:5px 9px;cursor:pointer;line-height:1.2;color:#14244a}.lv small{display:block;font-weight:600;color:#46536e}
-.lv.on.lvE{background:#1a7f4b;border-color:#1a7f4b}.lv.on.lvG{background:#1e6fd9;border-color:#1e6fd9}.lv.on.lvD{background:#e8a317;border-color:#e8a317}.lv.on.lvN{background:#b3261e;border-color:#b3261e}.lv.on,.lv.on small{color:#fff}
-textarea.box{display:block;width:100%;min-height:150px;font:inherit;border:1.5px solid #b8c9d9;border-radius:10px;padding:10px;margin:6px 0}
-@media print{.groups{grid-template-columns:repeat(4,1fr)}}
-</style></head><body>${planHTML(P)}</body></html>`;
+ $('#word').onclick=()=>{const html=`<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>@page{size:A4;margin:1.5cm}${WORD_CSS}</style></head><body>${planHTML(P)}</body></html>`;
   const b=new Blob(['﻿'+html],{type:'application/msword'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=(P.t==='r'?'Remedial':'Enrichment')+'_Plan_'+(P.cls||P.sk).replace(/[^\w؀-ۿ-]+/g,'_')+'.doc';document.body.appendChild(a);a.click();a.remove()};
  const c=$('#cpm');if(c)c.onclick=()=>navigator.clipboard.writeText(parentMsg(P)).then(()=>c.textContent='Copied ✓ · تم النسخ').catch(()=>{});
  $('#out').scrollIntoView({behavior:'smooth'})}
