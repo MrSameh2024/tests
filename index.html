@@ -13,6 +13,10 @@ h1{margin:6px 0 4px;font-size:clamp(1.6rem,4vw,2.3rem)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:22px}
 .card{background:#fff;border:2px solid #1e6fd9;border-radius:16px;box-shadow:0 6px 20px rgba(20,36,74,.07);padding:22px;display:flex;flex-direction:column;gap:8px}
 .tag{color:#1a7f4b;font-weight:700;font-size:.8rem}
+.gsec{border:2px solid var(--gc);border-radius:18px;padding:0 16px 18px;margin:28px 0 0;background:#fff}.gsec .grid{margin-top:16px}
+.ghead{display:flex;align-items:center;gap:12px;margin:0 -16px;padding:12px 16px;background:var(--gc);color:#fff;border-radius:15px 15px 0 0;font-size:1.25rem}
+.ghead small{display:block;font-size:.85rem;font-weight:600;opacity:.9}.gnum{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;color:var(--gc);font-weight:800;font-size:1.2rem;flex:none}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.jump a{background:#e6effb;color:#14244a;border-radius:20px;padding:6px 14px;font-weight:700;text-decoration:none}
 .card h2{margin:0;font-size:1.3rem}
 .card .sub{color:#1e6fd9;font-weight:600;margin:0}
 .card ul{margin:4px 0 6px;padding-left:20px}
@@ -51,11 +55,11 @@ h1{margin:6px 0 4px;font-size:clamp(1.6rem,4vw,2.3rem)}
 <nav class="ssh-links" aria-label="Smart Students Hub links"><a href="https://smartstudentshub.wordpress.com">Home · الرئيسية</a><a class="solid" href="https://smartstudentshub.wordpress.com/students/">Students · الطلاب</a></nav></div></div>
 <div class="ssh-note">Practice test for revision — not an official Ministry examination.<span>اختبار تدريبي للمراجعة، وليس اختبارًا رسميًا.</span></div>
 <main>
-<section class="hero"><div class="eyebrow">English · Grades 11 and 12 · Term 1</div>
+<section class="hero"><div class="eyebrow">English · Grades 10, 11 and 12 · Term 1</div>
 <h1>Interactive Practice Tests</h1><p class="ar">اختبارات تفاعلية في اللغة الإنجليزية</p>
 <p>Answer online, get your score instantly, and see the correct answers with explanations. Free and no login. Your results and writing go only to your teacher, for feedback.</p>
-<p class="ar">أجب على الإنترنت، واعرف درجتك فورًا، وشاهد الإجابات الصحيحة مع الشرح. مجاني وبدون تسجيل. تُرسل نتيجتك وكتابتك إلى معلمك فقط ليعطيك ملاحظاته.</p></section>
-<h2 style="margin:26px 0 0">Grade 12 · الصف الثاني عشر</h2>
+<p class="ar">أجب على الإنترنت، واعرف درجتك فورًا، وشاهد الإجابات الصحيحة مع الشرح. مجاني وبدون تسجيل. تُرسل نتيجتك وكتابتك إلى معلمك فقط ليعطيك ملاحظاته.</p><nav class="jump" aria-label="Jump to grade"><a href="#g12">Grade 12 · الصف 12</a><a href="#g11">Grade 11 · الصف 11</a><a href="#g10">Grade 10 · الصف 10</a></nav></section>
+<section class="gsec" id="g12" style="--gc:#14244a"><h2 class="ghead"><span class="gnum">12</span><span>Grade 12 tests<small>اختبارات الصف الثاني عشر</small></span></h2>
 <div class="grid">
 <article class="card"><span class="tag">● Available · متاح</span><h2>Full Mock Exam 2</h2><p class="sub">الاختبار التجريبي الشامل 2</p>
 <ul><li>Use of Language, Reading and Writing</li><li>Bilingual explanations after you submit</li><li>Writing sent to your teacher for feedback</li></ul>
@@ -77,21 +81,21 @@ h1{margin:6px 0 4px;font-size:clamp(1.6rem,4vw,2.3rem)}
 <ul><li>50 questions per test · all 10 Term 1 grammar topics</li><li>Verb forms, reported speech and rewriting</li><li>Instant marking + your weakest topics</li></ul>
 <p class="ar t">50 سؤالًا في كل اختبار تغطي موضوعات القواعد العشرة، مع تصحيح فوري وتحديد أضعف الموضوعات.</p>
 <a class="btn" href="g12-grammar.html">Choose a test · اختر اختبارًا</a></article>
-</div>
-<h2 style="margin:26px 0 0">Grade 11 · الصف الحادي عشر</h2>
+</div></section>
+<section class="gsec" id="g11" style="--gc:#1e6fd9"><h2 class="ghead"><span class="gnum">11</span><span>Grade 11 tests<small>اختبارات الصف الحادي عشر</small></span></h2>
 <div class="grid">
 <article class="card"><span class="tag">● 10 tests · 10 اختبارات</span><h2>Advanced Practice Tests 1–10</h2><p class="sub">الاختبارات المتقدمة 1–10</p>
 <ul><li>Modules 3–5 · Reading, Vocabulary, Grammar, Writing</li><li>23 marks checked instantly + self-check with model answers</li><li>Writing sent to your teacher for feedback</li></ul>
 <p class="ar t">قراءة ومفردات وقواعد وكتابة: تصحيح فوري، ومراجعة ذاتية بالإجابات النموذجية، والكتابة يصححها المعلم.</p>
 <a class="btn" href="g11-advanced.html">Choose a test · اختر اختبارًا</a></article>
-</div>
-<h2 style="margin:26px 0 0">Grade 10 · الصف العاشر</h2>
+</div></section>
+<section class="gsec" id="g10" style="--gc:#1a7f4b"><h2 class="ghead"><span class="gnum">10</span><span>Grade 10 tests<small>اختبارات الصف العاشر</small></span></h2>
 <div class="grid">
 <article class="card"><span class="tag">● 10 tests · 10 اختبارات</span><h2>Advanced Practice Tests 1–10</h2><p class="sub">الاختبارات المتقدمة 1–10</p>
 <ul><li>Modules 3–5 · Reading, Vocabulary, Grammar, Writing</li><li>23 marks checked instantly + self-check with model answers</li><li>Writing sent to your teacher for feedback</li></ul>
 <p class="ar t">قراءة ومفردات وقواعد وكتابة: تصحيح فوري، ومراجعة ذاتية بالإجابات النموذجية، والكتابة يصححها المعلم.</p>
 <a class="btn" href="g10-advanced.html">Choose a test · اختر اختبارًا</a></article>
-</div>
+</div></section>
 <section class="tips"><h2>How to get the most from a practice test</h2>
 <ol><li>Do the test in one sitting, without your book or AI.</li><li>Submit, then read every explanation — especially the ones you got right by guessing.</li><li>Write down the topics you missed and revise them before trying again.</li></ol>
 <div class="ar"><h2>كيف تستفيد من الاختبار التدريبي؟</h2><ol><li>حل الاختبار مرة واحدة دون كتاب أو ذكاء اصطناعي.</li><li>بعد التسليم اقرأ كل تفسير، خاصة الأسئلة التي خمّنت إجابتها.</li><li>دوّن الموضوعات التي أخطأت فيها وراجعها قبل إعادة المحاولة.</li></ol></div></section>
