@@ -36,7 +36,7 @@ h3{font-size:1.05rem;margin:0 0 4px}
 input[type=text],textarea{font:inherit;color:var(--ink);border:1.5px solid #b8c9d9;border-radius:8px;padding:8px 10px;width:100%;background:#fff}
 input.right,textarea.right{border-color:var(--ok);background:var(--oks)}
 input.wrong{border-color:var(--bad);background:var(--bads)}
-.inl{display:inline-block;width:auto;min-width:9em;max-width:100%}
+input[type=text].inl{display:inline-block;width:8.5em;max-width:100%;padding:4px 8px}
 .seg{display:inline-flex;border:1.5px solid var(--line);border-radius:8px;overflow:hidden;margin-top:4px}
 .seg label{cursor:pointer}.seg input{position:absolute;opacity:0}
 .seg span{display:block;padding:5px 14px;font-weight:700;border-left:1px solid var(--line)}
@@ -171,7 +171,7 @@ ${two('q5',T.q5,5)}${two('q6',T.q6,6)}
 
 <section class="card"><div class="parthead"><h2>Part B · Vocabulary</h2><span class="marks">10 marks</span></div>
 <h3>7. Choose the correct answer. <span class="marks">5 marks</span></h3>${mcq('v',T.q7,1)}
-<h3 style="margin-top:12px">8. Write the correct form of the word in brackets. <span class="marks">5 marks</span></h3>
+<h3 style="margin-top:12px">8. ${esc(T.q8h||"Write the correct form of the word in brackets.")} <span class="marks">5 marks</span></h3>${T.q8box?`<div class="plan" style="text-align:center;font-weight:700;letter-spacing:.02em">${esc(T.q8box)}</div>`:""}
 ${T.q8.map((q,i)=>{const m=q.s.match(/\(([^)]+)\)\s*\.?\s*$/)||q.s.match(/\(([^)]+)\)/);const s=esc(q.s).replace(/_{3,}/,`<input type="text" id="wf${i}" class="inl" aria-label="Word form ${i+1}">`);return `<div class="q"><p class="qs" style="font-weight:400">${i+1}. ${s}</p><div id="wf${i}fb"></div></div>`}).join('')}
 </section>
 
@@ -183,7 +183,7 @@ ${T.q10.map((q,i)=>`<div class="q"><p class="qs" style="font-weight:400">${i+1}.
 
 <section class="card"><div class="parthead"><h2>Part D · Writing</h2><span class="marks">10 marks · marked by your teacher</span></div>
 <h3>11. ${esc(T.w.title)}</h3><p>${esc(T.w.prompt)}</p>
-<div class="plan"><b>Plan your writing</b><ol>${T.w.plan.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></div>
+${T.w.plan.length?`<div class="plan"><b>Plan your writing</b><ol>${T.w.plan.map(p=>`<li>${esc(p)}</li>`).join('')}</ol></div>`:""}
 <label for="essay" class="mute">Your answer (140–160 words) · اكتب إجابتك</label>
 <textarea id="essay"></textarea><div class="wc" id="wc">0 words</div>
 <div id="modelbox"></div>
@@ -193,6 +193,11 @@ essay.addEventListener('input',()=>{const n=words();$('#wc').textContent=n+' wor
 
 /* ---------- marking ---------- */
 function norm(s){s=(s||'').toLowerCase().replace(/[’‘`]/g,"'").replace(/won't/g,'will not').replace(/can't|cannot/g,'can not').replace(/n't/g,' not').replace(/'ll/g,' will').replace(/'re/g,' are').replace(/'ve/g,' have').replace(/'m/g,' am').replace(/'d/g,' had');return s.replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim()}
+function variants(a){let out=[];const parts=/\.\s+\/\s+/.test(a)?a.split(/\s+\/\s+/):[a];
+  parts.forEach(p=>{let alts=[p];const m=p.match(/(\S+) \/ (\S+)/);if(m)alts=[p.replace(m[0],m[1]),p.replace(m[0],m[2])];
+    alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
+  return out.map(norm)}
+const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 const S={};  // section scores
 const SELF={}; // self-marked items: id -> {pts, got:null|number}
@@ -209,9 +214,9 @@ let locked=false,checked=false;
 function mark(){
   radios('a',T.q1,'q1');radios('v',T.q7,'q7');radios('g',T.q9,'q9');
   let g=0;T.q2.forEach((q,i)=>{const c=document.querySelector(`input[name="tf${i}"]:checked`);const ok=c&&c.value===q.a;if(ok)g++;fb('tf'+i,ok,q.a)});S.q2=[g,3];
-  g=0;T.q8.forEach((q,i)=>{const el=$('#wf'+i);const ok=norm(el.value)===norm(q.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('wf'+i,ok,esc(q.a))});S.q8=[g,5];
+  g=0;T.q8.forEach((q,i)=>{const el=$('#wf'+i);const ok=okAns(el.value,q.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('wf'+i,ok,esc(q.a))});S.q8=[g,5];
   // rewrite: auto if exact match, else self
-  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(norm(el.value)&&norm(el.value)===norm(q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
+  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(okAns(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
   const ans=id=>$('#'+id).value.trim();
   ans('q3')?selfItem('q3',1,esc(T.q3.a),'Q3'):fb('q3',false,esc(T.q3.a));
   T.q4.forEach((r,i)=>ans('q4_'+i)?selfItem('q4_'+i,1,esc(r.a),'Q4.'+(i+1)):fb('q4_'+i,false,esc(r.a)));
@@ -259,9 +264,9 @@ document.addEventListener('click',e=>{
      T.q4.forEach((r,i)=>ans.push('Q4 '+r.t+': '+($('#q4_'+i).value.trim()||'-')+sm('q4_'+i)));
      ['q5','q6'].forEach(k=>ans.push(k.toUpperCase()+': 1) '+($('#'+k+'_0').value.trim()||'-')+' 2) '+($('#'+k+'_1').value.trim()||'-')+sm(k)));
      ans.push('Q7: '+rad('v',T.q7));
-     ans.push('Q8: '+T.q8.map((q,i)=>(i+1)+') '+($('#wf'+i).value.trim()||'-')+(norm($('#wf'+i).value)===norm(q.a)?' ✓':' ✗ (key '+q.a+')')).join(' | '));
+     ans.push('Q8: '+T.q8.map((q,i)=>(i+1)+') '+($('#wf'+i).value.trim()||'-')+(okAns($('#wf'+i).value,q.a)?' ✓':' ✗ (key '+q.a+')')).join(' | '));
      ans.push('Q9: '+rad('g',T.q9));
-     T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(norm(v)&&norm(v)===norm(q.a)?' ✓ auto':sm('rw'+i)))});
+     T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(okAns(v,q.a)?' ✓ auto':sm('rw'+i)))});
      e.target.disabled=true;sent=true;
      sshSend($('#result'),{test:'Grade 11 Advanced Test '+t,name:$('#sshName').value.trim(),cls:$('#sshClass').value.trim(),score:x.total,max:34,percent:Math.round(x.total/34*100),
        breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10; self-marked items '+x.selfGot+' pts; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)',
