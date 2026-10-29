@@ -225,13 +225,12 @@ function cert(){
  <h3>Look-fors · مؤشرات الملاحظة</h3><ol>${C.look.map(l=>`<li>${esc(l[0])} <bdi dir="rtl" class="mute">${esc(l[1])}</bdi></li>`).join('')}</ol>
  <h3>Read more · مراجع</h3><ul class="refs">${C.refs.map(r=>`<li>${r}</li>`).join('')}</ul></section>
  <section class="cert" id="cert"><div class="cframe"><div class="cin">
- <div class="chead"><img class="clogo" src="${LOGO}" alt=""><div><p class="cbrand">SMART STUDENTS HUB ACADEMY</p><p class="csub">Teacher Professional Development · التطوير المهني للمعلمين</p></div></div>
- <p class="ctitle">Certificate of Completion</p><p class="ctitle-ar">شهادة إتمام</p>
- <p class="cline">This is to certify that</p>
+ <div class="chead"><img class="clogo" src="${LOGO}" alt=""><div><p class="cbrand">SMART STUDENTS HUB ACADEMY</p><p class="csub">Teacher Professional Development</p></div></div>
+ <p class="ctitle">Certificate of Completion</p> <p class="cline">This is to certify that</p>
  <p class="cname">${esc(e.name)}</p>
  <p class="cline">${esc(e.subject)} Teacher · ${esc(e.school)}${e.country?' · '+esc(e.country):''}</p>
  <p class="cline">has successfully completed the professional development workshop</p>
- <p class="ccourse">${esc(C.title)}</p><p class="ccourse-ar">${esc(C.ar)}</p>
+ <p class="ccourse">${esc(C.title)}</p>
  <div class="cgrid"><div class="cout"><p class="clab">Learning outcomes achieved</p><ul>${C.skills.map(s=>`<li>${esc(s[0])}</li>`).join('')}</ul></div>
  <div class="cfacts"><p><span class="clab">Duration</span>1 hour (CPD)</p><p><span class="clab">Format</span>Online, self-paced, assessed</p><p><span class="clab">Result</span>Passed · ${sc}/${N*5}</p><p><span class="clab">Date of issue</span>${esc(d)}</p></div></div>
  <div class="cfoot"><div class="csign"><span class="cscript">Sameh Soliman</span><span class="crule"></span><b>Sameh Soliman</b><small>Founder &amp; Educational Lead<br>Smart Students Hub Academy</small></div>
