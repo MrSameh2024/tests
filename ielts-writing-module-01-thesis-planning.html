@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Writing Module 1 | Smart Students Hub</title>
+<meta name="description" content="IELTS Writing Module 1 on Task 2 position, thesis and paragraph planning with guided practice and mastery check.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:var(--navy);color:#fff;padding:28px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1050px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.badge{display:inline-block;background:#eef4fb;color:var(--navy);font-weight:800;border-radius:999px;padding:5px 10px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+.tip{background:#fff8e8;border-left:4px solid var(--gold);padding:14px;border-radius:10px}.example{background:#eef8f2;border-left:4px solid var(--green);padding:14px;border-radius:10px}
+textarea,input[type=text],select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit;background:#fff}
+textarea{min-height:100px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}
+.question{padding:14px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0}.options input{margin-right:8px}
+.feedback{display:none;background:#f8fbff;padding:9px;border-radius:8px;margin-top:8px}.result{display:none;border:2px solid var(--gold);background:#fffaf0;border-radius:14px;padding:16px}
+.timer{font-weight:900;color:var(--navy);font-size:1.25rem;text-align:center}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS WRITING LAB</div>
+<h1>Module 1: Position, Thesis & Paragraph Planning</h1>
+<p>Plan before you write. Make your position visible from the start.</p>
+<p class="rtl">خطط قبل أن تكتب، واجعل موقفك واضحًا منذ البداية.</p>
+</header>
+
+<div class="wrap">
+<section class="card">
+<span class="badge">Strategy Lesson</span>
+<h2 style="color:#142b5f">1. The Three Decisions Before Writing</h2>
+<ol>
+<li><strong>What exactly is the question asking?</strong></li>
+<li><strong>What is my position?</strong></li>
+<li><strong>What two main ideas will support that position?</strong></li>
+</ol>
+<div class="tip"><strong>Common problem:</strong> students start writing before deciding their position, then the essay becomes inconsistent.</div>
+</section>
+
+<section class="card">
+<span class="badge">Worked Example</span>
+<h2 style="color:#142b5f">2. Worked Example</h2>
+<p><strong>Prompt:</strong> Some people think university students should study only subjects related to their future careers. Others believe they should be free to study any subject they choose. Discuss both views and give your own opinion.</p>
+<div class="example">
+<strong>Position:</strong> Students should have freedom to choose, but career relevance should still be considered.<br><br>
+<strong>Thesis:</strong> Although career-focused courses can improve employability, I believe students should retain substantial freedom to study subjects that match their interests and strengths.<br><br>
+<strong>Paragraph 1:</strong> Benefits of career-focused study.<br>
+<strong>Paragraph 2:</strong> Why broader choice remains valuable.
+</div>
+</section>
+
+<section class="card">
+<span class="badge">Guided Practice</span>
+<h2 style="color:#142b5f">3. Identify the Best Thesis</h2>
+<p><strong>Prompt:</strong> Some people believe public transport should be free in cities. To what extent do you agree or disagree?</p>
+<div class="question" data-answer="I largely agree that public transport should be free because it can reduce congestion and improve access, although the cost must be managed carefully.">
+<div class="options">
+<label><input type="radio" name="q1" value="Public transport is an important topic in many cities.">Public transport is an important topic in many cities.</label>
+<label><input type="radio" name="q1" value="I largely agree that public transport should be free because it can reduce congestion and improve access, although the cost must be managed carefully.">I largely agree that public transport should be free because it can reduce congestion and improve access, although the cost must be managed carefully.</label>
+<label><input type="radio" name="q1" value="There are advantages and disadvantages to transport.">There are advantages and disadvantages to transport.</label>
+</div><div class="feedback"></div></div>
+<button class="btn primary" id="checkThesis">Check Thesis</button>
+</section>
+
+<section class="card">
+<span class="badge">Planning Practice</span>
+<h2 style="color:#142b5f">4. Build a Paragraph Map</h2>
+<p><strong>Prompt:</strong> Many people now work from home. Is this a positive or negative development?</p>
+<div class="grid">
+<div><label><strong>Your position</strong></label><input type="text" id="position" placeholder="Positive / negative / mixed, with your view"></div>
+<div><label><strong>Your thesis</strong></label><input type="text" id="thesis" placeholder="Write one clear thesis sentence"></div>
+<div><label><strong>Body Paragraph 1</strong></label><textarea id="bp1" placeholder="Main idea + support"></textarea></div>
+<div><label><strong>Body Paragraph 2</strong></label><textarea id="bp2" placeholder="Main idea + support"></textarea></div>
+</div>
+</section>
+
+<section class="card">
+<span class="badge">Timed Mini-Task</span>
+<h2 style="color:#142b5f">5. Five-Minute Planning Challenge</h2>
+<p><strong>Prompt:</strong> Some people think schools should teach financial skills such as budgeting and saving. Others think school time should focus on academic subjects. Discuss both views and give your opinion.</p>
+<div class="timer" id="timer">05:00</div>
+<button class="btn primary" id="startTimer">Start 5-Minute Timer</button>
+<div style="margin-top:12px"><textarea id="miniPlan" placeholder="Write your position, thesis, and two paragraph ideas..."></textarea></div>
+</section>
+
+<section class="card">
+<span class="badge">Mastery Check</span>
+<h2 style="color:#142b5f">6. Mastery Check</h2>
+<div class="question exam" data-answer="It clearly states the writer's position and main direction.">
+<p><strong>1.</strong> What is the main purpose of a strong thesis in Task 2?</p>
+<div class="options">
+<label><input type="radio" name="m1" value="It adds more examples.">It adds more examples.</label>
+<label><input type="radio" name="m1" value="It clearly states the writer's position and main direction.">It clearly states the writer's position and main direction.</label>
+<label><input type="radio" name="m1" value="It repeats the question exactly.">It repeats the question exactly.</label>
+</div></div>
+
+<div class="question exam" data-answer="Two clear main ideas that directly support the position">
+<p><strong>2.</strong> What should a paragraph plan contain?</p>
+<div class="options">
+<label><input type="radio" name="m2" value="As many ideas as possible">As many ideas as possible</label>
+<label><input type="radio" name="m2" value="Two clear main ideas that directly support the position">Two clear main ideas that directly support the position</label>
+<label><input type="radio" name="m2" value="Only vocabulary lists">Only vocabulary lists</label>
+</div></div>
+
+<div class="question exam" data-answer="Before writing the full essay">
+<p><strong>3.</strong> When should the writer decide the position?</p>
+<div class="options">
+<label><input type="radio" name="m3" value="After writing the conclusion">After writing the conclusion</label>
+<label><input type="radio" name="m3" value="Before writing the full essay">Before writing the full essay</label>
+<label><input type="radio" name="m3" value="Only if there is extra time">Only if there is extra time</label>
+</div></div>
+
+<button class="btn gold" id="submit">Submit Mastery Check</button>
+<div class="result" id="result"></div>
+</section>
+</div>
+
+<script>
+function norm(s){return(s||'').trim().toLowerCase()}
+document.getElementById('checkThesis').onclick=()=>{
+ const q=document.querySelector('.question:not(.exam)'),r=q.querySelector('input:checked'),fb=q.querySelector('.feedback');fb.style.display='block';
+ fb.innerHTML=r&&norm(r.value)===norm(q.dataset.answer)?'<strong>Correct.</strong> This thesis gives both the position and the main direction.':'<strong>Review:</strong> A strong thesis must show a clear position and direction, not just introduce the topic.';
+};
+let left=300,tid;document.getElementById('startTimer').onclick=()=>{
+ clearInterval(tid);left=300;const el=document.getElementById('timer');
+ tid=setInterval(()=>{left--;const m=Math.floor(left/60),s=left%60;el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(left<=0){clearInterval(tid);el.textContent='Time up'}},1000);
+};
+document.getElementById('submit').onclick=()=>{
+ const qs=[...document.querySelectorAll('.exam')];let score=0;
+ qs.forEach(q=>{const r=q.querySelector('input:checked');if(r&&norm(r.value)===norm(q.dataset.answer))score++});
+ const planComplete=[position,thesis,bp1,bp2].every(x=>x.value.trim().length>5);
+ const mastered=score===3&&planComplete;
+ const r=document.getElementById('result');r.style.display='block';
+ r.innerHTML='<h3 style="color:#142b5f">Mastery Result</h3><p><strong>Knowledge check: '+score+'/3</strong></p><p><strong>Planning task:</strong> '+(planComplete?'Complete':'Incomplete')+'</p><p>'+(mastered?'Mastery achieved. Move to the next Writing module.':'Complete the paragraph map and review the strategy before retesting.')+'</p>';
+ localStorage.setItem('ssh_ielts_writing_module1',JSON.stringify({score,total:3,planComplete,mastered,saved:new Date().toISOString()}));
+ r.scrollIntoView({behavior:'smooth',block:'start'});
+};
+</script>
+</body>
+</html>
