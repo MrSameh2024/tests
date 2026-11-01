@@ -3,230 +3,170 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IELTS Diagnostic 01 | Smart Students Hub</title>
-<meta name="description" content="Original IELTS preparation diagnostic for academic English foundations and reading skills.">
+<title>Full Academic Reading Diagnostic | Smart Students Hub</title>
+<meta name="description" content="Full 60-minute, 40-question IELTS-style Academic Reading diagnostic with three passages and detailed skill analysis.">
 <style>
 :root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-header{background:var(--navy);color:white;padding:26px 18px;text-align:center}
-header h1{margin:6px 0;font-size:clamp(1.7rem,4vw,2.5rem)}header p{max-width:860px;margin:6px auto;color:#dbe7ff}
-.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-.progress{height:10px;background:#e6edf8;border-radius:999px;overflow:hidden;min-width:180px}.bar{height:100%;background:var(--blue);width:0}
-.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.light{background:#eef4fb;color:var(--navy)}
-.section-title{color:var(--navy);margin-top:0}.question{padding:16px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}
-.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 11px;margin:7px 0;background:#fff;cursor:pointer}.options input{margin-right:8px}
-input[type=text]{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px}
-.result{display:none;background:#fff;border:2px solid var(--gold);border-radius:18px;padding:20px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.metric{border:1px solid var(--border);border-radius:14px;padding:14px;background:#f8fbff}.metric strong{display:block;color:var(--navy);font-size:1.05rem}
-.rec{background:#eef8f2;border-left:4px solid var(--green);padding:14px;border-radius:10px;margin-top:14px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
-.timer{font-weight:800;color:var(--navy)}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.62}
+header{background:var(--navy);color:#fff;padding:26px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1200px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.toolbar{position:sticky;top:0;z-index:20;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}.timer{font-size:1.15rem;font-weight:900;color:var(--navy)}.progress{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden;min-width:220px}.bar{height:100%;background:var(--blue);width:0}
+.grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:18px}.passage h2,.questions h2{color:var(--navy)}.passage p{margin:0 0 14px}.para{font-weight:800;color:var(--blue)}
+.question{padding:15px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 10px;margin:7px 0;background:#fff;cursor:pointer}.options input{margin-right:8px}
+input[type=text],select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px;background:#fff}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.gold{background:var(--gold);color:var(--navy)}.light{background:#eef4fb;color:var(--navy)}.result{display:none;border:2px solid var(--gold);border-radius:16px;background:#fffaf0;padding:18px}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}.metric strong{display:block;color:var(--navy)}
+.badge{display:inline-block;background:#eef4fb;color:var(--navy);font-weight:800;border-radius:999px;padding:5px 10px}.warn{background:#fff8e8;border-left:4px solid var(--gold);padding:12px;border-radius:8px;margin-bottom:14px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.toolbar{position:static}.metrics{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
 <div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS PREPARATION HUB</div>
-<h1>Diagnostic 01: Academic English & Reading</h1>
-<p>This diagnostic identifies your current strengths and priority areas. It is not an official IELTS band score.</p>
-<p class="rtl">هذا الاختبار التشخيصي يحدد نقاط القوة والأولوية في التطوير، ولا يمثل درجة IELTS رسمية.</p>
+<h1>Full Academic Reading Diagnostic</h1>
+<p>3 passages · 40 questions · 60 minutes · automatic scoring · question-type and skill analysis</p>
+<p class="rtl">3 نصوص · 40 سؤالًا · 60 دقيقة · تصحيح آلي · تحليل حسب نوع السؤال والمهارة</p>
 </header>
 
 <div class="wrap">
 <div class="card toolbar">
-<div>
-<strong>Estimated time: 25 minutes</strong>
-<div class="small">Complete without dictionaries or AI assistance.</div>
+<div><strong>Academic Reading Diagnostic</strong><div class="small">Complete without dictionaries, translation tools or AI assistance.</div></div>
+<div><div class="timer" id="timer">60:00</div><div class="small">Time remaining</div></div>
+<div><div class="small" id="progressText">0 of 40 answered</div><div class="progress"><div class="bar" id="bar"></div></div></div>
+<div><button class="btn light" id="resetBtn">Reset</button></div>
 </div>
-<div>
-<div class="timer" id="timer">25:00</div>
-<div class="small">Practice timer</div>
-</div>
-<div>
-<div class="small" id="progressText">0 of 16 answered</div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-</div>
-</div>
+
+<div class="warn"><strong>Diagnostic principle:</strong> This is a full-length original IELTS-style practice diagnostic. It is not an official IELTS test and does not issue an official band score.</div>
+
+<div id="sections"></div>
 
 <div class="card">
-<h2 class="section-title">Part A — Academic Language Foundations</h2>
-<p class="small">Grammar, vocabulary and paraphrasing · القواعد والمفردات وإعادة الصياغة</p>
-
-<div class="question" data-skill="grammar" data-answer="has increased">
-<p><strong>1.</strong> Choose the best option: The number of students applying to the programme ______ significantly since 2024.</p>
-<div class="options">
-<label><input type="radio" name="q1" value="increased">increased</label>
-<label><input type="radio" name="q1" value="has increased">has increased</label>
-<label><input type="radio" name="q1" value="increase">increase</label>
-<label><input type="radio" name="q1" value="is increase">is increase</label>
-</div></div>
-
-<div class="question" data-skill="grammar" data-answer="although">
-<p><strong>2.</strong> The project was expensive, ______ it produced long-term savings.</p>
-<div class="options">
-<label><input type="radio" name="q2" value="because">because</label>
-<label><input type="radio" name="q2" value="although">although</label>
-<label><input type="radio" name="q2" value="therefore">therefore</label>
-<label><input type="radio" name="q2" value="unless">unless</label>
-</div></div>
-
-<div class="question" data-skill="vocabulary" data-answer="decline">
-<p><strong>3.</strong> Which word is closest in meaning to <em>decrease</em>?</p>
-<div class="options">
-<label><input type="radio" name="q3" value="decline">decline</label>
-<label><input type="radio" name="q3" value="expand">expand</label>
-<label><input type="radio" name="q3" value="maintain">maintain</label>
-<label><input type="radio" name="q3" value="recover">recover</label>
-</div></div>
-
-<div class="question" data-skill="vocabulary" data-answer="significant">
-<p><strong>4.</strong> Choose the most academic word: There was a ______ improvement in attendance.</p>
-<div class="options">
-<label><input type="radio" name="q4" value="big">big</label>
-<label><input type="radio" name="q4" value="nice">nice</label>
-<label><input type="radio" name="q4" value="significant">significant</label>
-<label><input type="radio" name="q4" value="good">good</label>
-</div></div>
-
-<div class="question" data-skill="paraphrase" data-answer="The policy led to a reduction in waste.">
-<p><strong>5.</strong> Choose the best paraphrase: <em>The policy reduced the amount of waste produced.</em></p>
-<div class="options">
-<label><input type="radio" name="q5" value="The policy led to a reduction in waste.">The policy led to a reduction in waste.</label>
-<label><input type="radio" name="q5" value="The policy caused waste to become more expensive.">The policy caused waste to become more expensive.</label>
-<label><input type="radio" name="q5" value="Waste policies are difficult to produce.">Waste policies are difficult to produce.</label>
-<label><input type="radio" name="q5" value="The amount of waste was not affected.">The amount of waste was not affected.</label>
-</div></div>
-
-<div class="question" data-skill="paraphrase" data-answer="a gradual rise">
-<p><strong>6.</strong> Which phrase best paraphrases <em>increased slowly over time</em>?</p>
-<div class="options">
-<label><input type="radio" name="q6" value="a sudden fall">a sudden fall</label>
-<label><input type="radio" name="q6" value="a gradual rise">a gradual rise</label>
-<label><input type="radio" name="q6" value="a stable pattern">a stable pattern</label>
-<label><input type="radio" name="q6" value="a sharp fluctuation">a sharp fluctuation</label>
-</div></div>
-
-<div class="question" data-skill="grammar" data-answer="were">
-<p><strong>7.</strong> Complete the sentence: If more public spaces ______ available, residents might walk more often.</p>
-<div class="options">
-<label><input type="radio" name="q7" value="are">are</label>
-<label><input type="radio" name="q7" value="were">were</label>
-<label><input type="radio" name="q7" value="will be">will be</label>
-<label><input type="radio" name="q7" value="have">have</label>
-</div></div>
-
-<div class="question" data-skill="vocabulary" data-answer="consequence">
-<p><strong>8.</strong> Which word means <em>a result or effect of an action</em>?</p>
-<div class="options">
-<label><input type="radio" name="q8" value="consequence">consequence</label>
-<label><input type="radio" name="q8" value="assumption">assumption</label>
-<label><input type="radio" name="q8" value="contrast">contrast</label>
-<label><input type="radio" name="q8" value="estimate">estimate</label>
-</div></div>
-</div>
-
-<div class="card">
-<h2 class="section-title">Part B — Reading Diagnostic</h2>
-<p><strong>Passage: Shared Workspaces and Productivity</strong></p>
-<p>In recent years, shared workspaces have become common in many cities. Originally associated mainly with freelancers and small start-up companies, they are now also used by larger organisations seeking flexible office arrangements. Supporters argue that shared spaces can reduce costs and encourage interaction between people from different professional backgrounds.</p>
-<p>However, research into productivity presents a mixed picture. Some workers report that informal conversations lead to useful ideas and new collaborations. Others find the same environment distracting, particularly when they need to complete tasks that require sustained concentration. Noise levels, seating design and access to private rooms can therefore influence whether a shared workspace supports or reduces productivity.</p>
-<p>Another factor is individual preference. Employees who enjoy frequent social contact may adapt quickly, while those who prefer quiet and predictable surroundings may need more control over where and when they work. For this reason, some organisations now combine shared areas with bookable quiet rooms and remote-working options rather than adopting a single office model for everyone.</p>
-<p>Overall, shared workspaces are neither universally beneficial nor universally harmful. Their success depends on how well the physical environment, job requirements and individual needs are matched. Organisations that simply copy fashionable office designs without considering these factors may gain flexibility but fail to improve actual performance.</p>
-
-<div class="question" data-skill="reading-detail" data-answer="True">
-<p><strong>9.</strong> Shared workspaces were first mainly connected with freelancers and start-ups.</p>
-<div class="options"><label><input type="radio" name="q9" value="True">True</label><label><input type="radio" name="q9" value="False">False</label><label><input type="radio" name="q9" value="Not Given">Not Given</label></div></div>
-
-<div class="question" data-skill="reading-detail" data-answer="False">
-<p><strong>10.</strong> Research shows that shared workspaces always improve productivity.</p>
-<div class="options"><label><input type="radio" name="q10" value="True">True</label><label><input type="radio" name="q10" value="False">False</label><label><input type="radio" name="q10" value="Not Given">Not Given</label></div></div>
-
-<div class="question" data-skill="reading-detail" data-answer="Not Given">
-<p><strong>11.</strong> Most workers in shared offices are under the age of 35.</p>
-<div class="options"><label><input type="radio" name="q11" value="True">True</label><label><input type="radio" name="q11" value="False">False</label><label><input type="radio" name="q11" value="Not Given">Not Given</label></div></div>
-
-<div class="question" data-skill="reading-inference" data-answer="Noise, design and private-room access can affect productivity.">
-<p><strong>12.</strong> What is the main point of paragraph 2?</p>
-<div class="options">
-<label><input type="radio" name="q12" value="All shared offices are noisy.">All shared offices are noisy.</label>
-<label><input type="radio" name="q12" value="Noise, design and private-room access can affect productivity.">Noise, design and private-room access can affect productivity.</label>
-<label><input type="radio" name="q12" value="Private rooms are unnecessary.">Private rooms are unnecessary.</label>
-<label><input type="radio" name="q12" value="Collaboration always causes distraction.">Collaboration always causes distraction.</label>
-</div></div>
-
-<div class="question" data-skill="reading-inference" data-answer="different workers have different environmental preferences">
-<p><strong>13.</strong> Why do some organisations offer both shared areas and quiet rooms?</p>
-<div class="options">
-<label><input type="radio" name="q13" value="different workers have different environmental preferences">different workers have different environmental preferences</label>
-<label><input type="radio" name="q13" value="quiet rooms are cheaper to build">quiet rooms are cheaper to build</label>
-<label><input type="radio" name="q13" value="employees refuse to work remotely">employees refuse to work remotely</label>
-<label><input type="radio" name="q13" value="shared areas are always unproductive">shared areas are always unproductive</label>
-</div></div>
-
-<div class="question" data-skill="reading-vocab" data-answer="combined">
-<p><strong>14.</strong> In paragraph 4, the word <em>matched</em> is closest in meaning to:</p>
-<div class="options">
-<label><input type="radio" name="q14" value="ignored">ignored</label>
-<label><input type="radio" name="q14" value="combined">combined</label>
-<label><input type="radio" name="q14" value="measured">measured</label>
-<label><input type="radio" name="q14" value="replaced">replaced</label>
-</div></div>
-
-<div class="question" data-skill="reading-summary" data-answer="individual needs">
-<p><strong>15.</strong> Complete the sentence using words from the passage:<br>Successful office design should consider the physical environment, job requirements and ______.</p>
-<input type="text" name="q15" placeholder="Type your answer"></div>
-
-<div class="question" data-skill="reading-inference" data-answer="Fashionable design alone does not guarantee better performance.">
-<p><strong>16.</strong> Which statement best summarises the final paragraph?</p>
-<div class="options">
-<label><input type="radio" name="q16" value="Fashionable design alone does not guarantee better performance.">Fashionable design alone does not guarantee better performance.</label>
-<label><input type="radio" name="q16" value="Shared workspaces should replace traditional offices.">Shared workspaces should replace traditional offices.</label>
-<label><input type="radio" name="q16" value="Office flexibility is more important than productivity.">Office flexibility is more important than productivity.</label>
-<label><input type="radio" name="q16" value="All organisations need the same office design.">All organisations need the same office design.</label>
-</div></div>
-</div>
-
-<div class="card">
-<button class="btn gold" id="submitBtn" style="width:100%">Generate My Diagnostic Profile</button>
-<div class="result" id="resultBox"></div>
+<button class="btn gold" id="submitBtn" style="width:100%">Submit Reading Diagnostic & Generate Profile</button>
+<div class="result" id="result"></div>
 </div>
 </div>
 
 <script>
-(function(){
-const qs=[...document.querySelectorAll('.question')],bar=document.getElementById('bar'),pt=document.getElementById('progressText'),rb=document.getElementById('resultBox'),timer=document.getElementById('timer');
-let left=25*60;
-function norm(s){return (s||'').trim().toLowerCase().replace(/[.]+$/,'').replace(/\s+/g,' ')}
-function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text]');return t?t.value:''}
-function prog(){const n=qs.filter(q=>norm(val(q))).length;pt.textContent=n+' of '+qs.length+' answered';bar.style.width=(n/qs.length*100)+'%'}
-document.addEventListener('change',prog);document.addEventListener('input',prog);
-setInterval(()=>{if(left>0){left--;const m=Math.floor(left/60),s=left%60;timer.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}else timer.textContent='Time up';},1000);
-document.getElementById('submitBtn').addEventListener('click',()=>{
- const groups={grammar:[0,0],vocabulary:[0,0],paraphrase:[0,0],readingDetail:[0,0],readingInference:[0,0],readingVocab:[0,0],readingSummary:[0,0]};
- let total=0;
- qs.forEach(q=>{const skill=q.dataset.skill,ok=norm(val(q))===norm(q.dataset.answer);if(ok)total++;
- const map={'grammar':'grammar','vocabulary':'vocabulary','paraphrase':'paraphrase','reading-detail':'readingDetail','reading-inference':'readingInference','reading-vocab':'readingVocab','reading-summary':'readingSummary'};
- const k=map[skill];groups[k][1]++;if(ok)groups[k][0]++;});
- const pct=Math.round(total/qs.length*100);
- function p(k){return Math.round(groups[k][0]/groups[k][1]*100)}
- const language=Math.round((p('grammar')+p('vocabulary')+p('paraphrase'))/3);
- const reading=Math.round((p('readingDetail')+p('readingInference')+p('readingVocab')+p('readingSummary'))/4);
- let route,priority=[];
- if(language<60)route='Foundation Route'; else if(reading<70)route='Skills Route'; else route='Performance Route';
- const scores={Grammar:p('grammar'),Vocabulary:p('vocabulary'),Paraphrasing:p('paraphrase'),'Reading detail':p('readingDetail'),'Reading inference':p('readingInference'),'Reading vocabulary':p('readingVocab'),'Reading completion':p('readingSummary')};
- Object.entries(scores).sort((a,b)=>a[1]-b[1]).slice(0,3).forEach(x=>priority.push(x[0]));
- rb.style.display='block';
- rb.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Diagnostic Profile</h2>'+
- '<div class="grid"><div class="metric"><strong>Overall diagnostic</strong>'+total+'/'+qs.length+' · '+pct+'%</div>'+
- '<div class="metric"><strong>Academic language foundation</strong>'+language+'%</div>'+
- '<div class="metric"><strong>Reading profile</strong>'+reading+'%</div>'+
- '<div class="metric"><strong>Recommended starting route</strong>'+route+'</div></div>'+
- '<div class="rec"><strong>Priority areas:</strong> '+priority.join(' · ')+'<br><span class="small">Use these as your first targets inside IELTS Preparation Hub.</span></div>'+
- '<p class="small">This diagnostic is an internal learning profile, not an official IELTS band prediction. A complete profile will later combine Listening, Writing and Speaking diagnostics as well.</p>';
- rb.scrollIntoView({behavior:'smooth',block:'start'});
+const passages=[
+{
+title:"Passage 1 — The New Life of Old Buildings",
+text:[
+["A","For much of the twentieth century, urban development often followed a simple pattern: buildings that no longer served their original purpose were demolished and replaced. Factories became shopping centres, warehouses disappeared beneath apartment blocks, and railway structures were cleared once routes changed. In recent decades, however, architects and city planners have increasingly explored a different approach: adaptive reuse. Rather than treating an old structure as an obstacle, adaptive reuse asks whether the existing building can be converted to a new purpose while retaining some or most of its physical fabric."],
+["B","The environmental argument for reuse is significant. Constructing a new building requires large quantities of concrete, steel, glass and other materials, all of which require energy to produce and transport. Demolition itself also creates waste. Reusing a structure can therefore avoid part of the carbon cost associated with both destruction and new construction. This does not mean that every old building is automatically environmentally superior to a new one. Poor insulation, inefficient heating systems or structural problems may require substantial upgrading before a building becomes suitable for long-term use."],
+["C","Economic considerations are equally complex. Developers sometimes assume that reuse is cheaper because the basic shell already exists. In reality, old buildings can contain hidden difficulties: damaged foundations, contaminated materials, outdated electrical systems or unusual floor plans. These can make conversion expensive and unpredictable. Yet reuse may also create forms of value that are difficult to measure in construction costs alone. Historic buildings can give a neighbourhood a distinctive identity, and businesses may be attracted to spaces that offer character rather than standardised design."],
+["D","A further challenge concerns regulation. Buildings designed decades ago were not created to meet modern standards for fire safety, accessibility or energy performance. Authorities must decide how strictly current rules should apply to older structures. If regulations are relaxed too far, users may face unacceptable risks. If they are applied without flexibility, valuable buildings may become impossible to reuse. Successful projects therefore often depend on negotiation between designers, engineers, conservation specialists and local officials."],
+["E","Community attitudes can also influence outcomes. Residents may support reuse when a familiar landmark is preserved, particularly if the building has historical or cultural meaning. However, they may oppose a project if conversion leads to higher rents or changes the social character of an area. For this reason, adaptive reuse is increasingly discussed not only as an architectural strategy but also as part of a wider debate about who benefits from urban change."],
+["F","The strongest projects tend to avoid treating reuse as a fashionable label. They begin with careful assessment: what is worth preserving, what must be replaced, and what new function genuinely suits the building? In some cases, the answer may still be demolition. Adaptive reuse is most effective when it is selected because it is appropriate, not because preservation is automatically assumed to be better."]
+],
+questions:[
+{n:1,skill:"tfng",type:"mc",prompt:"Adaptive reuse always preserves every part of an old building.",opts:["True","False","Not Given"],answer:"False"},
+{n:2,skill:"tfng",type:"mc",prompt:"Demolition can contribute to environmental waste.",opts:["True","False","Not Given"],answer:"True"},
+{n:3,skill:"tfng",type:"mc",prompt:"All reused buildings are cheaper to develop than new buildings.",opts:["True","False","Not Given"],answer:"False"},
+{n:4,skill:"tfng",type:"mc",prompt:"The passage gives an exact percentage reduction in carbon emissions from reuse.",opts:["True","False","Not Given"],answer:"Not Given"},
+{n:5,skill:"matching",type:"select",prompt:"Which paragraph discusses hidden technical problems that can increase conversion costs?",opts:["A","B","C","D","E","F"],answer:"C"},
+{n:6,skill:"matching",type:"select",prompt:"Which paragraph focuses on balancing modern rules with preservation?",opts:["A","B","C","D","E","F"],answer:"D"},
+{n:7,skill:"matching",type:"select",prompt:"Which paragraph discusses social consequences such as rent increases?",opts:["A","B","C","D","E","F"],answer:"E"},
+{n:8,skill:"completion",type:"text",prompt:"Old buildings may need better insulation and more efficient ______ systems.",answer:"heating"},
+{n:9,skill:"completion",type:"text",prompt:"Historic buildings can give a neighbourhood a distinctive ______.",answer:"identity"},
+{n:10,skill:"mcq",type:"mc",prompt:"What is the writer's main view of adaptive reuse?",opts:["It is always better than demolition.","It is valuable when chosen after careful assessment.","It is mainly useful for historic monuments.","It should replace all new construction."],answer:"It is valuable when chosen after careful assessment."},
+{n:11,skill:"mcq",type:"mc",prompt:"Why can regulation make reuse difficult?",opts:["Older buildings were designed for different standards.","Local officials usually oppose preservation.","Fire regulations no longer exist.","Energy rules apply only to new buildings."],answer:"Older buildings were designed for different standards."},
+{n:12,skill:"inference",type:"mc",prompt:"What can be inferred about successful reuse projects?",opts:["They usually involve several professional groups.","They avoid all structural changes.","They depend only on architects.","They always reduce rents."],answer:"They usually involve several professional groups."},
+{n:13,skill:"heading",type:"select",prompt:"Best heading for Paragraph F:",opts:["Preservation at any cost","Choosing reuse for the right reasons","Why communities resist change","The cheapest form of construction"],answer:"Choosing reuse for the right reasons"}
+]},
+{
+title:"Passage 2 — Why People Misjudge Risk",
+text:[
+["A","Human beings regularly make decisions under uncertainty: whether to travel, invest, change jobs, accept medical treatment or prepare for extreme weather. Yet people do not evaluate risk in a purely mathematical way. Psychologists have shown that our judgments are influenced by how information is presented, how easily examples come to mind and whether a threat feels familiar or controllable."],
+["B","One well-known influence is the availability heuristic. People tend to estimate the likelihood of an event partly by how easily examples can be recalled. A dramatic event that receives extensive media coverage may therefore seem more common than it really is. By contrast, a more frequent but less memorable risk may receive less attention. The mechanism is efficient because memory often provides useful clues, but it can also distort judgment when memorable examples are not representative."],
+["C","Control also matters. Many people feel safer when driving themselves than when travelling as passengers, even when objective statistics do not support that preference. The feeling of control changes the emotional experience of risk. Similarly, people may tolerate familiar dangers that they encounter regularly while reacting strongly to unfamiliar technologies or rare events."],
+["D","Another difficulty is probability itself. Small probabilities are hard to interpret intuitively. A risk described as 'one chance in ten thousand' may feel abstract, whereas the same information framed as 'ten people in every hundred thousand' may feel more concrete. Researchers have found that different numerical formats can alter perception even when the underlying probability is identical."],
+["E","Experts are not completely immune to these effects, but training can reduce them. Professionals who repeatedly work with probabilities often learn to separate emotional reactions from numerical evidence. Decision aids can also help. For example, visual displays showing both the number of people affected and the number unaffected can make risks easier to compare."],
+["F","However, better communication does not mean presenting numbers alone. Risk decisions often involve values as well as probabilities. Two people may understand the same evidence yet choose differently because one prioritises safety while the other prioritises convenience, cost or independence. Effective communication should therefore make the evidence clear without pretending that a single decision is correct for everyone."],
+["G","The broader lesson is that risk perception is neither completely irrational nor completely objective. Human judgment evolved to make fast decisions in complex environments, and many mental shortcuts are useful. Problems arise when those shortcuts are applied to situations for which they are poorly suited. Recognising the pattern can help individuals and institutions make more deliberate choices."]
+],
+questions:[
+{n:14,skill:"heading",type:"select",prompt:"Best heading for Paragraph B:",opts:["The effect of memorable examples","The value of expert opinion","Why control reduces all danger","Problems with visual evidence"],answer:"The effect of memorable examples"},
+{n:15,skill:"heading",type:"select",prompt:"Best heading for Paragraph C:",opts:["The influence of perceived control","Why statistics are unreliable","The dangers of driving","The role of memory"],answer:"The influence of perceived control"},
+{n:16,skill:"heading",type:"select",prompt:"Best heading for Paragraph D:",opts:["Why small probabilities are difficult to interpret","Why experts avoid numbers","Why risks should be hidden","The limits of media reporting"],answer:"Why small probabilities are difficult to interpret"},
+{n:17,skill:"heading",type:"select",prompt:"Best heading for Paragraph F:",opts:["Values can affect decisions even when evidence is understood","All risk decisions have one correct answer","Numbers should replace discussion","Convenience is always more important than safety"],answer:"Values can affect decisions even when evidence is understood"},
+{n:18,skill:"tfng",type:"mc",prompt:"Memorable events may appear more common than they actually are.",opts:["True","False","Not Given"],answer:"True"},
+{n:19,skill:"tfng",type:"mc",prompt:"People always feel safer when they are passengers rather than drivers.",opts:["True","False","Not Given"],answer:"False"},
+{n:20,skill:"tfng",type:"mc",prompt:"The passage states that all experts completely avoid psychological bias.",opts:["True","False","Not Given"],answer:"False"},
+{n:21,skill:"tfng",type:"mc",prompt:"The passage reports that visual displays are used in every hospital.",opts:["True","False","Not Given"],answer:"Not Given"},
+{n:22,skill:"completion",type:"text",prompt:"People may react strongly to unfamiliar ______ or rare events.",answer:"technologies"},
+{n:23,skill:"completion",type:"text",prompt:"Decision aids can help people compare ______ more easily.",answer:"risks"},
+{n:24,skill:"mcq",type:"mc",prompt:"What does the writer say about probability formats?",opts:["They can change how the same risk is perceived.","They make all risks appear smaller.","They are understood equally by everyone.","They eliminate emotional responses."],answer:"They can change how the same risk is perceived."},
+{n:25,skill:"mcq",type:"mc",prompt:"Why may two people make different choices from the same evidence?",opts:["They may value different outcomes.","One of them must misunderstand the data.","Experts always disagree.","Probabilities have no meaning."],answer:"They may value different outcomes."},
+{n:26,skill:"inference",type:"mc",prompt:"What is the author's attitude toward mental shortcuts?",opts:["They are useful in some situations but can mislead in others.","They should be eliminated completely.","They only affect uneducated people.","They are always more reliable than statistics."],answer:"They are useful in some situations but can mislead in others."}
+]},
+{
+title:"Passage 3 — The Science of Deliberate Practice",
+text:[
+["A","When people observe exceptional performance in music, sport, mathematics or other fields, they often explain it in terms of talent. Talent may matter, but research on expertise has drawn attention to the role of structured practice. Not all practice produces the same results. Simply repeating a familiar task can preserve existing ability without creating substantial improvement. The concept of deliberate practice was developed to describe training that is specifically designed to stretch performance beyond its current level."],
+["B","Deliberate practice usually contains several features. The learner works on a clearly defined component of performance, receives feedback, notices errors and attempts the task again with adjustment. The activity is often demanding rather than enjoyable because it requires concentration on weaknesses. A violinist, for example, may spend time on a difficult transition between two phrases rather than repeatedly playing an entire piece from beginning to end."],
+["C","Feedback is central because learners cannot always identify their own errors. In some activities, immediate external feedback is easy to obtain: a tennis ball lands inside or outside the court. In others, expert judgment may be required. Writers, for instance, may need guidance on argument structure or clarity. However, feedback alone is not sufficient. It must be specific enough to guide the next attempt."],
+["D","Another important feature is difficulty. Tasks that are far below the learner's level provide little stimulus for growth, while tasks that are far beyond it may create confusion rather than learning. Effective practice therefore operates near the edge of current ability. As performance improves, the task must change. This makes deliberate practice a moving target rather than a fixed routine."],
+["E","The role of motivation is more complicated than it first appears. Because deliberate practice is mentally demanding, learners need reasons to persist. Enjoyment can help, but progress may also depend on habits, goals and social support. Some studies of high performers suggest that long-term commitment is supported by a combination of personal interest and environments that make sustained training possible."],
+["F","There are also limits to what deliberate practice can explain. Opportunities for training are not equally distributed, and access to teachers, facilities, time and financial support can shape development. Physical characteristics may matter in some sports, and prior knowledge can influence how quickly new material is learned. For these reasons, researchers increasingly avoid treating deliberate practice as a complete explanation of expertise."],
+["G","Even with these qualifications, the concept has practical value. It shifts attention from the amount of time spent practising to the quality of practice. Two learners may study for the same number of hours but improve at very different rates if one repeatedly works on weaknesses with feedback while the other simply repeats comfortable tasks. The key question becomes not 'How long did you practise?' but 'What exactly changed because of the practice?'"]
+],
+questions:[
+{n:27,skill:"tfng",type:"mc",prompt:"Repeating a familiar task always leads to major improvement.",opts:["True","False","Not Given"],answer:"False"},
+{n:28,skill:"tfng",type:"mc",prompt:"Deliberate practice often focuses on weak components of performance.",opts:["True","False","Not Given"],answer:"True"},
+{n:29,skill:"tfng",type:"mc",prompt:"The passage gives the exact number of hours needed to become an expert.",opts:["True","False","Not Given"],answer:"Not Given"},
+{n:30,skill:"matching",type:"select",prompt:"Which paragraph explains why practice difficulty must change over time?",opts:["A","B","C","D","E","F","G"],answer:"D"},
+{n:31,skill:"matching",type:"select",prompt:"Which paragraph discusses unequal access to training resources?",opts:["A","B","C","D","E","F","G"],answer:"F"},
+{n:32,skill:"matching",type:"select",prompt:"Which paragraph contrasts time spent with quality of practice?",opts:["A","B","C","D","E","F","G"],answer:"G"},
+{n:33,skill:"completion",type:"text",prompt:"Feedback must be specific enough to guide the next ______.",answer:"attempt"},
+{n:34,skill:"completion",type:"text",prompt:"Effective practice should operate near the edge of current ______.",answer:"ability"},
+{n:35,skill:"completion",type:"text",prompt:"Long-term commitment may depend partly on social ______.",answer:"support"},
+{n:36,skill:"mcq",type:"mc",prompt:"Why is deliberate practice often not enjoyable?",opts:["It requires concentration on weaknesses.","It never produces progress.","It avoids feedback.","It is always done alone."],answer:"It requires concentration on weaknesses."},
+{n:37,skill:"mcq",type:"mc",prompt:"What does the writer say about feedback?",opts:["It is useful only in sport.","It must be specific enough to guide improvement.","It should always be immediate.","Learners can always generate it themselves."],answer:"It must be specific enough to guide improvement."},
+{n:38,skill:"inference",type:"mc",prompt:"What can be inferred about task difficulty?",opts:["The best level changes as the learner improves.","The hardest task is always best.","Easy tasks create the fastest progress.","Difficulty has little effect on learning."],answer:"The best level changes as the learner improves."},
+{n:39,skill:"inference",type:"mc",prompt:"Why does the writer mention access to teachers, facilities, time and money?",opts:["To show that practice opportunities are not equal.","To argue that practice is unimportant.","To show that talent never matters.","To prove that all experts are wealthy."],answer:"To show that practice opportunities are not equal."},
+{n:40,skill:"mainidea",type:"mc",prompt:"Which statement best summarises the passage?",opts:["High-quality, targeted practice supports improvement but does not explain expertise completely.","Talent is irrelevant in every field.","Long hours are the only cause of expertise.","Deliberate practice should always be enjoyable."],answer:"High-quality, targeted practice supports improvement but does not explain expertise completely."}
+]}
+];
+
+const container=document.getElementById('sections');
+function qHTML(q){
+ let control='';
+ if(q.type==='text') control='<input type="text" name="q'+q.n+'" placeholder="Type your answer">';
+ else if(q.type==='select') control='<select name="q'+q.n+'"><option value="">Choose...</option>'+q.opts.map(o=>'<option>'+o+'</option>').join('')+'</select>';
+ else control='<div class="options">'+q.opts.map(o=>'<label><input type="radio" name="q'+q.n+'" value="'+o.replace(/"/g,'&quot;')+'">'+o+'</label>').join('')+'</div>';
+ return '<div class="question" data-skill="'+q.skill+'" data-answer="'+q.answer.replace(/"/g,'&quot;')+'"><p><strong>'+q.n+'.</strong> '+q.prompt+'</p>'+control+'</div>';
+}
+passages.forEach((p,i)=>{
+ const passageHTML=p.text.map(([l,t])=>'<p><span class="para">'+l+'</span> '+t+'</p>').join('');
+ container.insertAdjacentHTML('beforeend','<section class="card"><span class="badge">Reading Passage '+(i+1)+'</span><div class="grid"><article class="passage"><h2>'+p.title+'</h2>'+passageHTML+'</article><aside class="questions"><h2>Questions '+p.questions[0].n+'–'+p.questions[p.questions.length-1].n+'</h2>'+p.questions.map(qHTML).join('')+'</aside></div></section>');
 });
-prog();
-})();
+
+const qs=[...document.querySelectorAll('.question')],bar=document.getElementById('bar'),pt=document.getElementById('progressText'),timer=document.getElementById('timer');
+let remaining=60*60,tid=setInterval(()=>{if(remaining>0){remaining--;const m=Math.floor(remaining/60),s=remaining%60;timer.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}else{clearInterval(tid);timer.textContent='Time up';}},1000);
+function norm(s){return(s||'').trim().toLowerCase().replace(/[.]+$/,'').replace(/\s+/g,' ')}
+function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text],select');return t?t.value:''}
+function progress(){const n=qs.filter(q=>norm(val(q))).length;pt.textContent=n+' of 40 answered';bar.style.width=(n/40*100)+'%'}
+document.addEventListener('change',progress);document.addEventListener('input',progress);
+document.getElementById('submitBtn').addEventListener('click',()=>{
+ const groups={tfng:[0,0],matching:[0,0],completion:[0,0],mcq:[0,0],inference:[0,0],heading:[0,0],mainidea:[0,0]};let total=0;
+ qs.forEach(q=>{const k=q.dataset.skill,ok=norm(val(q))===norm(q.dataset.answer);groups[k][1]++;if(ok){groups[k][0]++;total++;}});
+ const pct=k=>groups[k][1]?Math.round(groups[k][0]/groups[k][1]*100):0;
+ const scores={"T/F/NG":pct('tfng'),"Matching information":pct('matching'),"Completion":pct('completion'),"Multiple choice":pct('mcq'),"Inference":pct('inference'),"Headings":pct('heading'),"Main idea":pct('mainidea')};
+ const priorities=Object.entries(scores).filter(x=>!isNaN(x[1])).sort((a,b)=>a[1]-b[1]).slice(0,3);
+ const overall=Math.round(total/40*100);
+ let rec= total<23 ? 'Strengthen reading foundations, vocabulary and paraphrase recognition before intensive full-test practice.' :
+          total<30 ? 'Continue targeted question-type training and timed passage work.' :
+          'Move into repeated full-length timed practice while repairing the weakest question types.';
+ const result=document.getElementById('result');result.style.display='block';
+ result.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Academic Reading Diagnostic Profile</h2>'+
+ '<div class="metrics"><div class="metric"><strong>Raw score</strong>'+total+'/40 · '+overall+'%</div><div class="metric"><strong>Recommended direction</strong>'+rec+'</div>'+
+ Object.entries(scores).map(x=>'<div class="metric"><strong>'+x[0]+'</strong>'+x[1]+'%</div>').join('')+'</div>'+
+ '<p><strong>Top priority areas:</strong> '+priorities.map(x=>x[0]+' ('+x[1]+'%)').join(' · ')+'</p>'+
+ '<p class="small">This score is an internal diagnostic raw score using original IELTS-style content. It is not an official IELTS band score.</p>';
+ result.scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('resetBtn').addEventListener('click',()=>location.reload());
+progress();
 </script>
 </body>
 </html>
