@@ -170,7 +170,7 @@ document.getElementById('submitBtn').addEventListener('click',()=>{
  '<div class="grid"><div class="metric"><strong>Overall raw score</strong>'+total+'/40 · '+overall+'%</div><div class="metric"><strong>Recommended direction</strong>'+rec+'</div>'+rows+'</div>'+
  '<p><strong>Top priority areas:</strong> '+priorities.map(x=>x[0]+' ('+x[1]+'%)').join(' · ')+'</p>'+
  '<p class="small">This is an internal Smart Students Hub diagnostic using original IELTS-style content. It is not an official IELTS band score or official IELTS test.</p>';
- r.scrollIntoView({behavior:'smooth',block:'start'});
+ localStorage.setItem('ssh_ielts_diag_listening',JSON.stringify({raw:total,percent:overall,priorities:priorities.map(x=>x[0]),saved:new Date().toISOString()})); r.scrollIntoView({behavior:'smooth',block:'start'});
 });
 document.getElementById('resetBtn').addEventListener('click',()=>{
  speechSynthesis.cancel();location.reload();
