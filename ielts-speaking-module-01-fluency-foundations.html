@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Speaking Module 1 | Smart Students Hub</title>
+<meta name="description" content="IELTS Speaking Module 1 on fluency foundations, answer extension, linking and hesitation control with recording and mastery check.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:var(--navy);color:#fff;padding:28px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1050px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.badge{display:inline-block;background:#eef4fb;color:var(--navy);font-weight:800;border-radius:999px;padding:5px 10px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+.tip{background:#fff8e8;border-left:4px solid var(--gold);padding:14px;border-radius:10px}.example{background:#eef8f2;border-left:4px solid var(--green);padding:14px;border-radius:10px}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.danger{background:#b42318;color:#fff}
+.rec{background:#eef4fb;border-radius:12px;padding:12px;margin-top:12px}.status{font-weight:700;color:var(--muted)}audio{width:100%;margin-top:10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.rubric{border:1px solid var(--border);border-radius:12px;padding:14px;background:#f8fbff}
+select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff}.result{display:none;border:2px solid var(--gold);background:#fffaf0;border-radius:14px;padding:16px}
+.timer{font-weight:900;color:var(--navy);font-size:1.4rem;text-align:center}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS SPEAKING LAB</div>
+<h1>Module 1: Fluency Foundations</h1>
+<p>Extend. Link. Keep moving.</p>
+<p class="rtl">وسّع الإجابة، واربط الأفكار، واستمر في الحديث.</p>
+</header>
+
+<div class="wrap">
+<section class="card">
+<span class="badge">Strategy Lesson</span>
+<h2 style="color:#142b5f">1. The 3-Step Expansion Pattern</h2>
+<p>For many Part 1 questions, avoid one-line answers. Use:</p>
+<ol>
+<li><strong>Answer</strong> — respond directly.</li>
+<li><strong>Reason</strong> — explain why.</li>
+<li><strong>Example / Detail</strong> — add one natural detail.</li>
+</ol>
+<div class="example">
+<strong>Question:</strong> Do you enjoy reading?<br><br>
+<strong>Weak:</strong> Yes, I do.<br><br>
+<strong>Stronger:</strong> Yes, especially non-fiction. I enjoy it because I can learn something practical, and I usually read for about twenty minutes before bed.
+</div>
+</section>
+
+<section class="card">
+<h2 style="color:#142b5f">2. Reduce Hesitation</h2>
+<ul>
+<li>Do not search for a perfect word; paraphrase and continue.</li>
+<li>Use natural linking phrases such as <em>because, for example, especially, although, so</em>.</li>
+<li>A short pause is better than repeated fillers.</li>
+<li>Keep the answer moving even if the grammar is not perfect.</li>
+</ul>
+<div class="tip"><strong>Goal:</strong> clear, connected speech—not memorised perfection.</div>
+</section>
+
+<section class="card">
+<span class="badge">Guided Practice</span>
+<h2 style="color:#142b5f">3. Build Your Answer</h2>
+<p><strong>Question:</strong> What do you like about your hometown?</p>
+<div class="grid">
+<div class="rubric"><strong>Answer</strong><p class="small">Give the direct response.</p></div>
+<div class="rubric"><strong>Reason</strong><p class="small">Explain why you feel that way.</p></div>
+<div class="rubric"><strong>Example / Detail</strong><p class="small">Add one real example or detail.</p></div>
+<div class="rubric"><strong>Link</strong><p class="small">Connect naturally with because / so / although / especially.</p></div>
+</div>
+</section>
+
+<section class="card">
+<span class="badge">Timed Speaking Practice</span>
+<h2 style="color:#142b5f">4. 45-Second Response</h2>
+<p><strong>Prompt:</strong> What kind of place do you prefer for studying or working?</p>
+<div class="timer" id="timer">00:45</div>
+<button class="btn primary" id="timerBtn">Start Timer</button>
+<div class="rec">
+<button class="btn primary" id="recordBtn">Start Recording</button>
+<button class="btn danger" id="stopBtn" disabled>Stop</button>
+<span class="status" id="status">Not recorded</span>
+<audio id="audio" controls style="display:none"></audio>
+</div>
+</section>
+
+<section class="card">
+<span class="badge">Self-Review</span>
+<h2 style="color:#142b5f">5. Listen Back and Review</h2>
+<div class="grid">
+<div class="rubric"><label><strong>Did I answer directly?</strong></label><select data-check="Direct answer"><option value="">Choose...</option><option value="1">No</option><option value="2">Partly</option><option value="3">Yes</option></select></div>
+<div class="rubric"><label><strong>Did I give a reason?</strong></label><select data-check="Reason"><option value="">Choose...</option><option value="1">No</option><option value="2">Partly</option><option value="3">Yes</option></select></div>
+<div class="rubric"><label><strong>Did I add detail/example?</strong></label><select data-check="Detail"><option value="">Choose...</option><option value="1">No</option><option value="2">Partly</option><option value="3">Yes</option></select></div>
+<div class="rubric"><label><strong>Was hesitation controlled?</strong></label><select data-check="Hesitation control"><option value="">Choose...</option><option value="1">No</option><option value="2">Partly</option><option value="3">Yes</option></select></div>
+</div>
+</section>
+
+<section class="card">
+<span class="badge">Mastery Check</span>
+<h2 style="color:#142b5f">6. Mastery Check</h2>
+<p>Mastery requires a recording plus an average self-review of at least 2.5/3.</p>
+<button class="btn gold" id="submit">Generate Mastery Result</button>
+<div class="result" id="result"></div>
+</section>
+</div>
+
+<script>
+let left=45,tid;document.getElementById('timerBtn').onclick=()=>{
+ clearInterval(tid);left=45;const el=document.getElementById('timer');el.textContent='00:45';
+ tid=setInterval(()=>{left--;el.textContent='00:'+String(left).padStart(2,'0');if(left<=0){clearInterval(tid);el.textContent='Stop'}},1000);
+};
+let mr=null,stream=null,recorded=false;
+document.getElementById('recordBtn').onclick=async()=>{
+ try{
+  stream=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];mr=new MediaRecorder(stream);
+  mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  mr.onstop=()=>{const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}),url=URL.createObjectURL(blob);audio.src=url;audio.style.display='block';status.textContent='Recorded — listen back';recorded=true;stream.getTracks().forEach(t=>t.stop())};
+  mr.start();recordBtn.disabled=true;stopBtn.disabled=false;status.textContent='Recording…';
+ }catch(e){alert('Microphone permission was not granted.');}
+};
+document.getElementById('stopBtn').onclick=()=>{if(mr&&mr.state!=='inactive')mr.stop();recordBtn.disabled=false;stopBtn.disabled=true};
+document.getElementById('submit').onclick=()=>{
+ const checks=[...document.querySelectorAll('[data-check]')].map(s=>+s.value||0),done=checks.every(v=>v>0),avg=done?(checks.reduce((a,b)=>a+b,0)/checks.length):0,mastered=recorded&&avg>=2.5;
+ const weak=[...document.querySelectorAll('[data-check]')].map(s=>({name:s.dataset.check,val:+s.value||0})).sort((a,b)=>a.val-b.val)[0];
+ const r=document.getElementById('result');r.style.display='block';
+ r.innerHTML='<h3 style="color:#142b5f">Mastery Result</h3><p><strong>Recording:</strong> '+(recorded?'Complete':'Missing')+'</p><p><strong>Self-review average:</strong> '+(done?avg.toFixed(1)+'/3':'Incomplete')+'</p><p><strong>Priority:</strong> '+(done?weak.name:'Complete the self-review')+'</p><p>'+(mastered?'Mastery achieved. Move to the next Speaking module.':'Repeat the 45-second response after improving the priority area.')+'</p>';
+ localStorage.setItem('ssh_ielts_speaking_module1',JSON.stringify({recorded,average:avg,mastered,priority:weak?weak.name:null,saved:new Date().toISOString()}));
+ r.scrollIntoView({behavior:'smooth',block:'start'});
+};
+</script>
+</body>
+</html>
