@@ -3,160 +3,179 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IELTS Diagnostic 02 Listening | Smart Students Hub</title>
-<meta name="description" content="Original IELTS listening diagnostic with playback, automatic scoring and skill analysis.">
+<title>IELTS Listening Diagnostic | Smart Students Hub</title>
+<meta name="description" content="Full 40-question IELTS-style listening diagnostic with four parts, one-play audio, automatic scoring and skill analysis.">
 <style>
 :root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-header{background:var(--navy);color:#fff;padding:26px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.7rem,4vw,2.5rem)}header p{max-width:850px;margin:5px auto;color:#dbe7ff}
-.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
-.audio{background:#eef4fb;border-radius:14px;padding:14px;margin:14px 0}.audio button{margin-right:8px}
-.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.light{background:#fff;color:var(--navy);border:1px solid var(--border)}
-.question{padding:15px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 10px;margin:7px 0;cursor:pointer;background:white}.options input{margin-right:8px}
-input[type=text]{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+header{background:var(--navy);color:#fff;padding:26px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1120px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.toolbar{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:space-between}.progress{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden;min-width:220px}.bar{height:100%;background:var(--blue);width:0}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.light{background:#eef4fb;color:var(--navy)}
+.audio{background:#eef4fb;border-radius:14px;padding:14px;margin:14px 0}.audio button[disabled]{opacity:.55;cursor:not-allowed}
+.question{padding:15px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 10px;margin:7px 0;background:#fff;cursor:pointer}.options input{margin-right:8px}
+input[type=text],select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px;background:#fff}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
 .result{display:none;border:2px solid var(--gold);border-radius:16px;background:#fffaf0;padding:18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}.metric strong{display:block;color:var(--navy)}
-.progress{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden}.bar{height:100%;background:var(--blue);width:0}
+.part-head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.badge{display:inline-block;background:#eef4fb;color:var(--navy);font-weight:800;border-radius:999px;padding:5px 10px}
+.note{background:#fff8e8;border-left:4px solid var(--gold);padding:12px;border-radius:8px}.warn{background:#fff1f0;border-left:4px solid var(--danger);padding:12px;border-radius:8px}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
-<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS DIAGNOSTIC CENTRE</div>
-<h1>Diagnostic 02: Listening</h1>
-<p>Three short listening sections · 12 questions · one playback per section</p>
-<p class="rtl">ثلاثة مقاطع استماع قصيرة · 12 سؤالًا · تشغيل واحد لكل مقطع</p>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS PREPARATION HUB</div>
+<h1>Full Listening Diagnostic</h1>
+<p>4 parts · 40 questions · one playback per part · automatic scoring · detailed skill profile</p>
+<p class="rtl">4 أجزاء · 40 سؤالًا · تشغيل واحد لكل جزء · تصحيح آلي · ملف تشخيصي تفصيلي</p>
 </header>
 
 <div class="wrap">
-<div class="card">
-<div class="small">Progress</div><div class="progress"><div class="bar" id="bar"></div></div>
-<div class="small" id="progressText">0 of 12 answered</div>
+<div class="card toolbar">
+<div><strong>Suggested diagnostic time: ~30 minutes</strong><div class="small">Complete without dictionaries, translation tools or AI assistance.</div></div>
+<div><div class="small">Progress</div><div class="progress"><div class="bar" id="bar"></div></div><div class="small" id="progressText">0 of 40 answered</div></div>
+<div><button class="btn light" id="resetBtn">Reset</button></div>
 </div>
 
-<div class="card">
-<h2 style="color:#142b5f">Section 1 — Booking a Study Room</h2>
-<p class="small">Listen once, then answer Questions 1–4.</p>
-<div class="audio">
-<button class="btn primary playBtn" data-audio="a1">▶ Play Section 1</button>
-<span class="small" id="s1status">Not played</span>
-</div>
+<div class="card note"><strong>Important:</strong> Each recording can be played only once. Read the questions first, then start the audio when ready. Browser-generated speech is used for this prototype, so pronunciation may vary slightly by device.</div>
 
-<div class="question" data-skill="detail" data-answer="Thursday">
-<p><strong>1.</strong> Which day does the student book the room for?</p>
-<div class="options"><label><input type="radio" name="q1" value="Wednesday">Wednesday</label><label><input type="radio" name="q1" value="Thursday">Thursday</label><label><input type="radio" name="q1" value="Friday">Friday</label></div></div>
-
-<div class="question" data-skill="detail" data-answer="3:30">
-<p><strong>2.</strong> What time does the booking begin?</p>
-<div class="options"><label><input type="radio" name="q2" value="3:00">3:00</label><label><input type="radio" name="q2" value="3:30">3:30</label><label><input type="radio" name="q2" value="4:00">4:00</label></div></div>
-
-<div class="question" data-skill="spelling" data-answer="projector">
-<p><strong>3.</strong> Complete the note: The student also requests a ______.</p>
-<input type="text" name="q3" placeholder="Type one word"></div>
-
-<div class="question" data-skill="distractor" data-answer="six">
-<p><strong>4.</strong> How many students will use the room?</p>
-<div class="options"><label><input type="radio" name="q4" value="four">four</label><label><input type="radio" name="q4" value="five">five</label><label><input type="radio" name="q4" value="six">six</label></div></div>
-</div>
+<div id="parts"></div>
 
 <div class="card">
-<h2 style="color:#142b5f">Section 2 — Campus Orientation</h2>
-<p class="small">Listen once, then answer Questions 5–8.</p>
-<div class="audio">
-<button class="btn primary playBtn" data-audio="a2">▶ Play Section 2</button>
-<span class="small" id="s2status">Not played</span>
-</div>
-
-<div class="question" data-skill="detail" data-answer="library">
-<p><strong>5.</strong> The tour begins beside the ______.</p>
-<input type="text" name="q5" placeholder="Type one word"></div>
-
-<div class="question" data-skill="distractor" data-answer="east">
-<p><strong>6.</strong> Which side of the campus is the science building on?</p>
-<div class="options"><label><input type="radio" name="q6" value="north">north</label><label><input type="radio" name="q6" value="east">east</label><label><input type="radio" name="q6" value="west">west</label></div></div>
-
-<div class="question" data-skill="detail" data-answer="student centre">
-<p><strong>7.</strong> Where can students collect their ID cards?</p>
-<div class="options"><label><input type="radio" name="q7" value="library">library</label><label><input type="radio" name="q7" value="student centre">student centre</label><label><input type="radio" name="q7" value="science building">science building</label></div></div>
-
-<div class="question" data-skill="inference" data-answer="because it is quieter in the morning">
-<p><strong>8.</strong> Why does the guide recommend visiting the careers office before noon?</p>
-<div class="options"><label><input type="radio" name="q8" value="because it is quieter in the morning">because it is quieter in the morning</label><label><input type="radio" name="q8" value="because it closes at noon">because it closes at noon</label><label><input type="radio" name="q8" value="because staff leave for lunch">because staff leave for lunch</label></div></div>
-</div>
-
-<div class="card">
-<h2 style="color:#142b5f">Section 3 — Short Academic Talk</h2>
-<p class="small">Listen once, then answer Questions 9–12.</p>
-<div class="audio">
-<button class="btn primary playBtn" data-audio="a3">▶ Play Section 3</button>
-<span class="small" id="s3status">Not played</span>
-</div>
-
-<div class="question" data-skill="mainidea" data-answer="urban trees can reduce heat but need careful planning">
-<p><strong>9.</strong> What is the main idea of the talk?</p>
-<div class="options"><label><input type="radio" name="q9" value="urban trees can reduce heat but need careful planning">urban trees can reduce heat but need careful planning</label><label><input type="radio" name="q9" value="all cities should plant the same trees">all cities should plant the same trees</label><label><input type="radio" name="q9" value="urban trees are too expensive to maintain">urban trees are too expensive to maintain</label></div></div>
-
-<div class="question" data-skill="detail" data-answer="shade">
-<p><strong>10.</strong> One direct benefit of urban trees is providing ______.</p>
-<input type="text" name="q10" placeholder="Type one word"></div>
-
-<div class="question" data-skill="detail" data-answer="water availability">
-<p><strong>11.</strong> Which factor must planners consider when choosing tree species?</p>
-<div class="options"><label><input type="radio" name="q11" value="water availability">water availability</label><label><input type="radio" name="q11" value="road colour">road colour</label><label><input type="radio" name="q11" value="office size">office size</label></div></div>
-
-<div class="question" data-skill="inference" data-answer="poorly chosen trees may create new problems">
-<p><strong>12.</strong> What can be inferred from the final sentence?</p>
-<div class="options"><label><input type="radio" name="q12" value="poorly chosen trees may create new problems">poorly chosen trees may create new problems</label><label><input type="radio" name="q12" value="tree planting always succeeds">tree planting always succeeds</label><label><input type="radio" name="q12" value="cities should avoid planting trees">cities should avoid planting trees</label></div></div>
-</div>
-
-<div class="card">
-<button class="btn gold" id="submitBtn" style="width:100%">Generate Listening Profile</button>
+<button class="btn gold" id="submitBtn" style="width:100%">Generate Full Listening Diagnostic Profile</button>
 <div class="result" id="result"></div>
 </div>
 </div>
 
 <script>
-(function(){
-const texts={
-a1:"Hello, I'd like to book a study room for Thursday afternoon. I first thought about three o'clock, but three thirty would be better. There will be six of us altogether. I was going to ask for room 4 because it seats five, but that is too small, so any room for six is fine. We will also need a projector for a short presentation.",
-a2:"Welcome to the campus tour. We are starting beside the library. From here, walk past the main courtyard and you will see the science building on the east side of the campus. Some maps still show the old west entrance, but that entrance is now closed. Student ID cards can be collected from the student centre. If you need career advice, the careers office is open all day, but I recommend going before noon because it is usually much quieter in the morning.",
-a3:"Urban trees can help reduce city temperatures by providing shade and through the cooling effect of water released from leaves. However, successful planting requires careful planning. Tree species should be chosen according to local conditions such as soil depth and water availability. A species that grows well in one region may perform poorly in another. Therefore, planting more trees is useful, but poorly chosen trees can create maintenance problems rather than solve them."
-};
-const played={a1:false,a2:false,a3:false};
-function speak(id,btn){
- if(played[id]){alert('This section has already been played once.');return;}
- if(!('speechSynthesis' in window)){alert('Speech playback is not supported in this browser.');return;}
- played[id]=true;btn.disabled=true;
- const u=new SpeechSynthesisUtterance(texts[id]);u.rate=0.94;u.pitch=1;
- const voices=speechSynthesis.getVoices();const en=voices.find(v=>/^en/i.test(v.lang));if(en)u.voice=en;
- const status=document.getElementById(id==='a1'?'s1status':id==='a2'?'s2status':'s3status');status.textContent='Playing…';
- u.onend=()=>status.textContent='Played once';speechSynthesis.cancel();speechSynthesis.speak(u);
+const partsData = [
+{
+title:"Part 1 — Social Conversation: Community Course Registration",
+statusId:"s1", audioId:"a1",
+audio:"Good morning. I'd like to register for the weekend photography course. My name is Daniel Mercer, that's M E R C E R. I originally wanted the Saturday morning class, but it is full, so I'll take Sunday afternoon instead. The course starts at two thirty and finishes at five. The fee is seventy-five dollars, including materials. I thought it was eighty-five, but the receptionist confirmed seventy-five. Please bring a notebook and your own camera. Tripods are provided. The course is held in Room 204 on the second floor. There are twelve people in the group. Parking is free after one o'clock on Sundays. If you need to cancel, contact the centre at least forty-eight hours in advance.",
+questions:[
+{n:1,skill:"detail",type:"text",prompt:"Surname:",answer:"Mercer"},
+{n:2,skill:"spelling",type:"mc",prompt:"How is the surname spelled?",opts:["M-E-R-S-E-R","M-E-R-C-E-R","M-A-R-C-E-R"],answer:"M-E-R-C-E-R"},
+{n:3,skill:"distractor",type:"mc",prompt:"Which class will Daniel attend?",opts:["Saturday morning","Sunday afternoon","Sunday morning"],answer:"Sunday afternoon"},
+{n:4,skill:"detail",type:"mc",prompt:"What time does the class start?",opts:["2:00","2:30","3:00"],answer:"2:30"},
+{n:5,skill:"distractor",type:"mc",prompt:"What is the course fee?",opts:["$70","$75","$85"],answer:"$75"},
+{n:6,skill:"detail",type:"text",prompt:"Daniel must bring a notebook and his own ______.",answer:"camera"},
+{n:7,skill:"detail",type:"mc",prompt:"Which item is provided by the centre?",opts:["Camera","Notebook","Tripod"],answer:"Tripod"},
+{n:8,skill:"detail",type:"text",prompt:"Room number:",answer:"204"},
+{n:9,skill:"detail",type:"mc",prompt:"How many people are in the group?",opts:["10","12","14"],answer:"12"},
+{n:10,skill:"detail",type:"mc",prompt:"How much notice is needed to cancel?",opts:["24 hours","36 hours","48 hours"],answer:"48 hours"}
+]},
+{
+title:"Part 2 — Social Monologue: Museum Visitor Information",
+statusId:"s2", audioId:"a2",
+audio:"Welcome to the Riverside Museum. The main entrance is on King Street, opposite the public library. The museum opens at nine thirty and closes at five, except on Thursdays when it remains open until eight. Admission to the permanent collection is free, but the special exhibition costs six dollars for adults. Children under sixteen enter the exhibition free. Bags larger than a small backpack must be left in the lockers beside the information desk. The café is on the ground floor next to the garden entrance. The education room is upstairs, directly above the café. Guided tours begin at eleven and two. Today, the eleven o'clock tour is cancelled because the guide is ill, so the first tour will be at two. Photography is allowed in most galleries, but flash is prohibited. The quietest time to visit is usually between three and four on weekday afternoons.",
+questions:[
+{n:11,skill:"detail",type:"mc",prompt:"Where is the main entrance?",opts:["King Street","River Road","Garden Lane"],answer:"King Street"},
+{n:12,skill:"detail",type:"mc",prompt:"What time does the museum normally close?",opts:["4:30","5:00","5:30"],answer:"5:00"},
+{n:13,skill:"distractor",type:"mc",prompt:"On which day does it stay open until 8?",opts:["Tuesday","Thursday","Friday"],answer:"Thursday"},
+{n:14,skill:"detail",type:"mc",prompt:"What costs six dollars?",opts:["Permanent collection","Special exhibition","Guided tour"],answer:"Special exhibition"},
+{n:15,skill:"detail",type:"mc",prompt:"Who enters the special exhibition free?",opts:["Children under 16","All students","Visitors over 60"],answer:"Children under 16"},
+{n:16,skill:"detail",type:"text",prompt:"Large bags must be left in the ______.",answer:"lockers"},
+{n:17,skill:"spatial",type:"mc",prompt:"Where is the café?",opts:["Ground floor near garden entrance","First floor above education room","Beside King Street entrance"],answer:"Ground floor near garden entrance"},
+{n:18,skill:"spatial",type:"mc",prompt:"Where is the education room?",opts:["Below the café","Above the café","Beside the lockers"],answer:"Above the café"},
+{n:19,skill:"distractor",type:"mc",prompt:"What time is today's first guided tour?",opts:["11:00","1:00","2:00"],answer:"2:00"},
+{n:20,skill:"detail",type:"mc",prompt:"What is prohibited in the galleries?",opts:["All photography","Flash photography","Sketching"],answer:"Flash photography"}
+]},
+{
+title:"Part 3 — Educational Conversation: Research Project Meeting",
+statusId:"s3", audioId:"a3",
+audio:"Tutor: So, how is the group project on student transport progressing? Maya: We finished the online survey. We expected about a hundred responses, but we received one hundred and forty-two. Leon: The problem is that most responses came from first-year students. Tutor: Then you should mention that limitation in the report. Maya: We also planned to interview bus drivers, but the transport company has not replied. Leon: Instead, we interviewed twelve students who cycle to campus. Tutor: Good. What did you learn? Leon: Cost was important, but reliability mattered more. Maya: And safety was the main concern for cyclists, especially after dark. Tutor: What about your presentation? Maya: I can explain the survey results. Leon: I'll cover the interviews. Tutor: And who will introduce the project? Maya: We asked Sam, but he is absent next week, so I'll do the introduction too. Tutor: Fine. Keep the presentation to twelve minutes. Leave at least three minutes for questions. Leon: Should we include every chart? Tutor: No. Choose two charts that best support your conclusions. Put the extra data in an appendix.",
+questions:[
+{n:21,skill:"detail",type:"mc",prompt:"How many survey responses did the group receive?",opts:["100","122","142"],answer:"142"},
+{n:22,skill:"inference",type:"mc",prompt:"What is a limitation of the survey?",opts:["Too few questions","Too many first-year respondents","No online access"],answer:"Too many first-year respondents"},
+{n:23,skill:"distractor",type:"mc",prompt:"Who did they plan to interview originally?",opts:["Bus drivers","Cyclists","Tutors"],answer:"Bus drivers"},
+{n:24,skill:"detail",type:"mc",prompt:"How many cyclists were interviewed?",opts:["10","12","14"],answer:"12"},
+{n:25,skill:"inference",type:"mc",prompt:"What mattered most to transport users?",opts:["Cost","Reliability","Comfort"],answer:"Reliability"},
+{n:26,skill:"detail",type:"mc",prompt:"What was cyclists' main concern?",opts:["Weather","Safety","Storage"],answer:"Safety"},
+{n:27,skill:"matching",type:"select",prompt:"Who will present the survey results?",opts:["Maya","Leon","Sam"],answer:"Maya"},
+{n:28,skill:"matching",type:"select",prompt:"Who will present the interviews?",opts:["Maya","Leon","Sam"],answer:"Leon"},
+{n:29,skill:"distractor",type:"mc",prompt:"Who will introduce the project?",opts:["Sam","Leon","Maya"],answer:"Maya"},
+{n:30,skill:"detail",type:"mc",prompt:"How many charts should appear in the presentation?",opts:["2","3","All charts"],answer:"2"}
+]},
+{
+title:"Part 4 — Academic Monologue: Urban Heat and Tree Canopies",
+statusId:"s4", audioId:"a4",
+audio:"Today we'll examine how urban tree canopies influence heat in cities. Dense building materials such as concrete and asphalt absorb solar energy during the day and release it slowly at night. This contributes to what is known as the urban heat island effect. Trees can reduce local temperatures in two main ways: by providing shade and through evapotranspiration, a process in which water moves from leaves into the atmosphere. However, simply planting more trees does not guarantee equal cooling everywhere. The size of the canopy, the species selected, soil volume and water availability all matter. Recent studies suggest that neighbourhoods with very low canopy cover may experience the greatest benefit from new planting. Yet maintenance is crucial. Young trees need regular watering, and poorly selected species may damage pavements or struggle in dry conditions. Planners also need to consider equity. In many cities, wealthier districts have more mature trees than lower-income areas. Therefore, urban forestry programmes increasingly prioritise neighbourhoods with high heat exposure and limited existing canopy. The aim is not only to plant trees, but to create a healthy, long-term urban forest.",
+questions:[
+{n:31,skill:"mainidea",type:"mc",prompt:"What is the lecture mainly about?",opts:["How trees affect urban heat","How to build city roads","Why asphalt is inexpensive"],answer:"How trees affect urban heat"},
+{n:32,skill:"detail",type:"mc",prompt:"Which materials absorb solar energy?",opts:["Concrete and asphalt","Glass and wood","Soil and grass"],answer:"Concrete and asphalt"},
+{n:33,skill:"vocabulary",type:"text",prompt:"The process of water moving from leaves into the atmosphere is called ______.",answer:"evapotranspiration"},
+{n:34,skill:"detail",type:"mc",prompt:"Which factor affects how much cooling trees provide?",opts:["Canopy size","Building colour only","Street name"],answer:"Canopy size"},
+{n:35,skill:"inference",type:"mc",prompt:"Which areas may benefit most from new planting?",opts:["Areas with very low canopy cover","Areas with many mature trees","Industrial zones only"],answer:"Areas with very low canopy cover"},
+{n:36,skill:"detail",type:"mc",prompt:"What do young trees need regularly?",opts:["Pruning every day","Watering","Artificial light"],answer:"Watering"},
+{n:37,skill:"inference",type:"mc",prompt:"What problem can poorly selected species cause?",opts:["They may damage pavements","They always grow too quickly","They reduce rainfall"],answer:"They may damage pavements"},
+{n:38,skill:"detail",type:"mc",prompt:"Which districts often have more mature trees?",opts:["Wealthier districts","New industrial districts","Coastal districts"],answer:"Wealthier districts"},
+{n:39,skill:"mainidea",type:"mc",prompt:"What does current planning increasingly prioritise?",opts:["High-heat areas with limited canopy","Only city centres","Neighbourhoods with the most parks"],answer:"High-heat areas with limited canopy"},
+{n:40,skill:"inference",type:"mc",prompt:"What is the final goal of urban forestry programmes?",opts:["To create a healthy long-term urban forest","To plant the largest possible number of trees quickly","To remove mature trees"],answer:"To create a healthy long-term urban forest"}
+]}
+];
+
+const partsEl=document.getElementById('parts');
+function qHTML(q){
+ let input='';
+ if(q.type==='text') input='<input type="text" name="q'+q.n+'" placeholder="Type your answer">';
+ else if(q.type==='select') input='<select name="q'+q.n+'"><option value="">Choose...</option>'+q.opts.map(o=>'<option>'+o+'</option>').join('')+'</select>';
+ else input='<div class="options">'+q.opts.map(o=>'<label><input type="radio" name="q'+q.n+'" value="'+o.replace(/"/g,'&quot;')+'">'+o+'</label>').join('')+'</div>';
+ return '<div class="question" data-n="'+q.n+'" data-skill="'+q.skill+'" data-answer="'+q.answer.replace(/"/g,'&quot;')+'"><p><strong>'+q.n+'.</strong> '+q.prompt+'</p>'+input+'</div>';
 }
-document.querySelectorAll('.playBtn').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.audio,b)));
+partsData.forEach((p,i)=>{
+ partsEl.insertAdjacentHTML('beforeend','<section class="card"><div class="part-head"><div><span class="badge">Part '+(i+1)+'</span><h2 style="color:#142b5f">'+p.title+'</h2></div><div class="small">Questions '+(i*10+1)+'–'+(i*10+10)+'</div></div><div class="audio"><button class="btn primary playBtn" data-id="'+p.audioId+'">▶ Play once</button> <span class="small" id="'+p.statusId+'">Not played</span></div>'+p.questions.map(qHTML).join('')+'</section>');
+});
+
+const played={};
+function speakPart(id,btn){
+ const p=partsData.find(x=>x.audioId===id); if(played[id]){alert('This part has already been played once.');return;}
+ if(!('speechSynthesis'in window)){alert('Speech playback is not supported in this browser.');return;}
+ played[id]=true;btn.disabled=true;
+ const u=new SpeechSynthesisUtterance(p.audio);u.rate=.92;u.pitch=1;
+ const voices=speechSynthesis.getVoices();const en=voices.find(v=>/^en/i.test(v.lang));if(en)u.voice=en;
+ const st=document.getElementById(p.statusId);st.textContent='Playing…';u.onend=()=>st.textContent='Played once';
+ speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+document.querySelectorAll('.playBtn').forEach(b=>b.addEventListener('click',()=>speakPart(b.dataset.id,b)));
+
 const qs=[...document.querySelectorAll('.question')],bar=document.getElementById('bar'),pt=document.getElementById('progressText');
 function norm(s){return(s||'').trim().toLowerCase().replace(/[.]+$/,'').replace(/\s+/g,' ')}
-function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text]');return t?t.value:''}
-function progress(){const n=qs.filter(q=>norm(val(q))).length;pt.textContent=n+' of '+qs.length+' answered';bar.style.width=(n/qs.length*100)+'%'}
+function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text],select');return t?t.value:''}
+function progress(){const n=qs.filter(q=>norm(val(q))).length;pt.textContent=n+' of 40 answered';bar.style.width=(n/40*100)+'%'}
 document.addEventListener('change',progress);document.addEventListener('input',progress);
+
 document.getElementById('submitBtn').addEventListener('click',()=>{
- const g={detail:[0,0],spelling:[0,0],distractor:[0,0],inference:[0,0],mainidea:[0,0]};let total=0;
- qs.forEach(q=>{const ok=norm(val(q))===norm(q.dataset.answer),k=q.dataset.skill;g[k][1]++;if(ok){g[k][0]++;total++;}});
- const pct=k=>g[k][1]?Math.round(g[k][0]/g[k][1]*100):0;
- const scores={Detail:pct('detail'),Spelling:pct('spelling'),Distractors:pct('distractor'),Inference:pct('inference'),'Main idea':pct('mainidea')};
- const priority=Object.entries(scores).sort((a,b)=>a[1]-b[1]).slice(0,2).map(x=>x[0]);
- const overall=Math.round(total/qs.length*100);
- let level=overall<55?'Foundation listening work recommended':overall<75?'Targeted listening skills work recommended':'Move toward timed IELTS-style listening practice';
+ const groups={detail:[0,0],spelling:[0,0],distractor:[0,0],spatial:[0,0],inference:[0,0],matching:[0,0],mainidea:[0,0],vocabulary:[0,0]};
+ let total=0;
+ qs.forEach(q=>{const ok=norm(val(q))===norm(q.dataset.answer),k=q.dataset.skill;groups[k][1]++;if(ok){groups[k][0]++;total++;}});
+ const pct=k=>groups[k][1]?Math.round(groups[k][0]/groups[k][1]*100):0;
+ const overall=Math.round(total/40*100);
+ const scores={
+  "Detail recognition":pct('detail'),
+  "Distractor control":pct('distractor'),
+  "Spelling":pct('spelling'),
+  "Spatial understanding":pct('spatial'),
+  "Inference":pct('inference'),
+  "Matching":pct('matching'),
+  "Main idea":pct('mainidea'),
+  "Academic vocabulary":pct('vocabulary')
+ };
+ const priorities=Object.entries(scores).filter(x=>!isNaN(x[1])).sort((a,b)=>a[1]-b[1]).slice(0,3);
+ let rec= overall<55 ? 'Strengthen core listening foundations before full timed practice.' :
+          overall<75 ? 'Continue targeted question-type training before full mock tests.' :
+          'Move into timed full-test listening practice while repairing the weakest skill areas.';
+ let rows=Object.entries(scores).map(x=>'<div class="metric"><strong>'+x[0]+'</strong>'+x[1]+'%</div>').join('');
  const r=document.getElementById('result');r.style.display='block';
- r.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Listening Diagnostic Profile</h2>'+
- '<div class="grid"><div class="metric"><strong>Overall</strong>'+total+'/'+qs.length+' · '+overall+'%</div>'+
- '<div class="metric"><strong>Detail</strong>'+scores.Detail+'%</div>'+
- '<div class="metric"><strong>Distractor control</strong>'+scores.Distractors+'%</div>'+
- '<div class="metric"><strong>Inference</strong>'+scores.Inference+'%</div></div>'+
- '<p><strong>Priority areas:</strong> '+priority.join(' · ')+'</p><p><strong>Recommended next step:</strong> '+level+'</p>'+
- '<p class="small">Internal learning diagnostic only. This is not an official IELTS band score. Speech is generated by your browser and may vary by device and voice.</p>';
+ r.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Full Listening Diagnostic Profile</h2>'+
+ '<div class="grid"><div class="metric"><strong>Overall raw score</strong>'+total+'/40 · '+overall+'%</div><div class="metric"><strong>Recommended direction</strong>'+rec+'</div>'+rows+'</div>'+
+ '<p><strong>Top priority areas:</strong> '+priorities.map(x=>x[0]+' ('+x[1]+'%)').join(' · ')+'</p>'+
+ '<p class="small">This is an internal Smart Students Hub diagnostic using original IELTS-style content. It is not an official IELTS band score or official IELTS test.</p>';
  r.scrollIntoView({behavior:'smooth',block:'start'});
 });
+document.getElementById('resetBtn').addEventListener('click',()=>{
+ speechSynthesis.cancel();location.reload();
+});
 progress();
-})();
 </script>
 </body>
 </html>
