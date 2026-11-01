@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Reading Practice 01 | Smart Students Hub</title>
+<meta name="description" content="Original IELTS-style reading practice with Learning Mode, Exam Mode, scoring, evidence and strategy feedback.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:var(--navy);color:#fff;padding:22px 18px;text-align:center}
+header h1{margin:4px 0;font-size:clamp(1.6rem,4vw,2.4rem)}
+header p{margin:4px auto;max-width:850px;color:#dbe7ff}
+.wrap{max-width:1180px;margin:auto;padding:22px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-bottom:18px;position:sticky;top:0;z-index:10}
+.mode{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+.btn.primary{background:var(--blue);color:#fff}.btn.dark{background:var(--navy);color:#fff}.btn.light{background:#eef4fb;color:var(--navy)}.btn.gold{background:var(--gold);color:var(--navy)}
+.timer{font-weight:800;color:var(--navy);font-size:1.05rem}
+.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px}
+.passage h2,.questions h2{color:var(--navy);margin-top:0}.passage p{margin:0 0 14px}
+.question{border-top:1px solid var(--border);padding:16px 0}.question:first-of-type{border-top:0}
+.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 10px;margin:7px 0;cursor:pointer;background:#fff}
+.options input{margin-right:8px}
+.feedback{display:none;margin-top:10px;padding:12px;border-radius:10px;background:#f8fbff;border-left:4px solid var(--blue)}
+.feedback.correct{border-left-color:var(--green)}.feedback.incorrect{border-left-color:var(--danger)}
+.feedback strong{color:var(--navy)}.evidence{background:#fff8e8;padding:2px 4px;border-radius:4px}
+.score{display:none;margin-top:18px;background:#eef8f2;border:1px solid #b9dfc8;border-radius:14px;padding:16px}
+.progress{height:10px;background:#e8eef7;border-radius:999px;overflow:hidden;min-width:150px}.bar{height:100%;background:var(--blue);width:0}
+.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+footer{max-width:1180px;margin:0 auto 30px;padding:0 22px;color:var(--muted);font-size:.9rem;text-align:center}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.toolbar{position:static}.passage{order:1}.questions{order:2}}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS READING LAB</div>
+<h1>Interactive Reading Practice 01</h1>
+<p>Original IELTS-style practice · Learning Mode + Exam Mode</p>
+<p class="rtl">تدريب أصلي يحاكي نمط IELTS · وضع التعلم + وضع الاختبار</p>
+</header>
+
+<div class="wrap">
+<div class="toolbar">
+  <div class="mode">
+    <button class="btn primary" id="learningBtn">Learning Mode</button>
+    <button class="btn light" id="examBtn">Exam Mode</button>
+    <button class="btn light" id="resetBtn">Reset</button>
+  </div>
+  <div>
+    <div class="timer" id="timer">20:00</div>
+    <div class="small">Suggested practice time</div>
+  </div>
+  <div style="min-width:180px">
+    <div class="small" id="progressText">0 of 8 answered</div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+</div>
+
+<div class="grid">
+<section class="panel passage">
+<h2>Passage: The Return of Urban Wetlands</h2>
+<p><strong>A</strong> For much of the twentieth century, wetlands within cities were often viewed as wasted land. Marshes and shallow ponds were drained to make space for roads, housing and industry. More recently, however, urban planners have begun to reconsider this approach. Wetlands are now increasingly recognised as useful infrastructure that can support both environmental and social goals.</p>
+<p><strong>B</strong> One important benefit is flood management. Wetlands can temporarily hold rainwater after heavy storms, reducing the speed at which water reaches drains and rivers. This does not mean that wetlands can prevent every flood. Their effectiveness depends on their size, location and the amount of water entering the system. Nevertheless, when combined with other measures, they can reduce pressure on urban drainage networks.</p>
+<p><strong>C</strong> Wetlands may also improve biodiversity. Even small areas of shallow water and vegetation can provide feeding or breeding places for insects, amphibians and birds. In some cities, restoration projects have encouraged species that had disappeared from heavily developed neighbourhoods. Yet these gains are not automatic. If water quality is poor or invasive plants dominate, the ecological value of a site may remain limited.</p>
+<p><strong>D</strong> A further attraction is that wetlands can become public spaces. Paths, viewing platforms and educational signs can turn them into places for walking and outdoor learning. This social role can help local residents understand why the site is being protected. On the other hand, planners must balance public access with habitat protection. Too much disturbance can reduce the value of the wetland for wildlife.</p>
+<p><strong>E</strong> Successful projects therefore require long-term management. Restoring a wetland is not a one-time construction task. Water levels, vegetation, litter and public use may all need to be monitored. The most effective schemes are usually those in which engineers, ecologists and local communities share responsibility rather than treating the wetland as the concern of only one professional group.</p>
+</section>
+
+<section class="panel questions">
+<h2>Questions 1–8</h2>
+
+<div class="question" data-answer="True">
+<p><strong>1.</strong> In the past, many city wetlands were removed to create space for development.</p>
+<div class="options">
+<label><input type="radio" name="q1" value="True">True</label>
+<label><input type="radio" name="q1" value="False">False</label>
+<label><input type="radio" name="q1" value="Not Given">Not Given</label>
+</div>
+<div class="feedback"><strong>Answer: True.</strong><br><span class="evidence">Paragraph A says wetlands were drained to make space for roads, housing and industry.</span><br><strong>Strategy:</strong> Match the statement to a clear factual claim in the passage.<br><strong>Vocabulary:</strong> drained = water removed; development = building/use of land.</div>
+</div>
+
+<div class="question" data-answer="False">
+<p><strong>2.</strong> Urban wetlands are able to stop all flooding during severe storms.</p>
+<div class="options">
+<label><input type="radio" name="q2" value="True">True</label>
+<label><input type="radio" name="q2" value="False">False</label>
+<label><input type="radio" name="q2" value="Not Given">Not Given</label>
+</div>
+<div class="feedback"><strong>Answer: False.</strong><br><span class="evidence">Paragraph B explicitly says wetlands cannot prevent every flood.</span><br><strong>Strategy:</strong> Watch for absolute words such as “all” and “every.”</div>
+</div>
+
+<div class="question" data-answer="Not Given">
+<p><strong>3.</strong> Restored wetlands always increase nearby property prices.</p>
+<div class="options">
+<label><input type="radio" name="q3" value="True">True</label>
+<label><input type="radio" name="q3" value="False">False</label>
+<label><input type="radio" name="q3" value="Not Given">Not Given</label>
+</div>
+<div class="feedback"><strong>Answer: Not Given.</strong><br><span class="evidence">The passage does not discuss property prices.</span><br><strong>Strategy:</strong> Do not use outside knowledge. If the passage gives no evidence for or against the claim, choose Not Given.</div>
+</div>
+
+<div class="question" data-answer="B">
+<p><strong>4.</strong> Which paragraph explains how wetlands can reduce pressure on city drainage systems?</p>
+<div class="options">
+<label><input type="radio" name="q4" value="A">A</label>
+<label><input type="radio" name="q4" value="B">B</label>
+<label><input type="radio" name="q4" value="C">C</label>
+<label><input type="radio" name="q4" value="D">D</label>
+</div>
+<div class="feedback"><strong>Answer: B.</strong><br><span class="evidence">Paragraph B explains temporary water storage and reduced pressure on drainage networks.</span><br><strong>Strategy:</strong> Match ideas, not repeated words.</div>
+</div>
+
+<div class="question" data-answer="C">
+<p><strong>5.</strong> Which paragraph warns that ecological benefits may be limited by poor conditions?</p>
+<div class="options">
+<label><input type="radio" name="q5" value="A">A</label>
+<label><input type="radio" name="q5" value="B">B</label>
+<label><input type="radio" name="q5" value="C">C</label>
+<label><input type="radio" name="q5" value="E">E</label>
+</div>
+<div class="feedback"><strong>Answer: C.</strong><br><span class="evidence">Paragraph C mentions poor water quality and invasive plants limiting ecological value.</span><br><strong>Vocabulary:</strong> invasive = spreading in a harmful/uncontrolled way.</div>
+</div>
+
+<div class="question" data-answer="habitat protection">
+<p><strong>6.</strong> Complete the sentence using words from the passage.<br>Planners need to balance public access with __________.</p>
+<input type="text" name="q6" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px" placeholder="Type your answer">
+<div class="feedback"><strong>Answer: habitat protection.</strong><br><span class="evidence">Paragraph D: “planners must balance public access with habitat protection.”</span><br><strong>Strategy:</strong> Respect the wording and spelling from the passage.</div>
+</div>
+
+<div class="question" data-answer="long-term management">
+<p><strong>7.</strong> Complete the sentence using words from the passage.<br>Successful wetland projects require __________.</p>
+<input type="text" name="q7" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px" placeholder="Type your answer">
+<div class="feedback"><strong>Answer: long-term management.</strong><br><span class="evidence">Paragraph E begins: “Successful projects therefore require long-term management.”</span><br><strong>Vocabulary:</strong> long-term = continuing over an extended period.</div>
+</div>
+
+<div class="question" data-answer="engineers, ecologists and local communities">
+<p><strong>8.</strong> Who should share responsibility in the most effective wetland schemes?</p>
+<div class="options">
+<label><input type="radio" name="q8" value="engineers only">Engineers only</label>
+<label><input type="radio" name="q8" value="engineers, ecologists and local communities">Engineers, ecologists and local communities</label>
+<label><input type="radio" name="q8" value="local residents only">Local residents only</label>
+<label><input type="radio" name="q8" value="private companies">Private companies</label>
+</div>
+<div class="feedback"><strong>Answer: Engineers, ecologists and local communities.</strong><br><span class="evidence">Paragraph E identifies all three groups.</span><br><strong>Strategy:</strong> For “who” questions, scan for groups or people, then verify the full sentence.</div>
+</div>
+
+<button class="btn gold" id="submitBtn" style="width:100%;margin-top:12px">Submit & Analyse</button>
+<div class="score" id="scoreBox"></div>
+</section>
+</div>
+</div>
+
+<footer>
+<p><strong>Smart Students Hub</strong> · Original IELTS-style educational practice. This is not an official IELTS or Cambridge test.</p>
+<p class="rtl">محتوى تدريبي أصلي من Smart Students Hub يحاكي نمط IELTS، وليس اختبارًا رسميًا تابعًا لـ IELTS أو Cambridge.</p>
+</footer>
+
+<script>
+(function(){
+const root=document;
+const learningBtn=root.getElementById('learningBtn');
+const examBtn=root.getElementById('examBtn');
+const resetBtn=root.getElementById('resetBtn');
+const submitBtn=root.getElementById('submitBtn');
+const scoreBox=root.getElementById('scoreBox');
+const questions=[...root.querySelectorAll('.question')];
+const bar=root.getElementById('bar');
+const progressText=root.getElementById('progressText');
+const timerEl=root.getElementById('timer');
+let mode='learning', remaining=20*60, timerId=null;
+
+function normalize(s){return (s||'').trim().toLowerCase().replace(/[.]+$/,'').replace(/\s+/g,' ')}
+function selected(q){
+ const radio=q.querySelector('input[type=radio]:checked'); if(radio)return radio.value;
+ const text=q.querySelector('input[type=text]'); return text?text.value:'';
+}
+function updateProgress(){
+ const n=questions.filter(q=>normalize(selected(q))!=='').length;
+ progressText.textContent=n+' of '+questions.length+' answered';
+ bar.style.width=(n/questions.length*100)+'%';
+}
+function setMode(next){
+ mode=next;
+ learningBtn.className='btn '+(mode==='learning'?'primary':'light');
+ examBtn.className='btn '+(mode==='exam'?'dark':'light');
+ questions.forEach(q=>{q.querySelector('.feedback').style.display='none';});
+ scoreBox.style.display='none';
+}
+function showFeedback(q,isCorrect){
+ if(mode!=='learning')return;
+ const f=q.querySelector('.feedback'); f.style.display='block';
+ f.classList.toggle('correct',isCorrect); f.classList.toggle('incorrect',!isCorrect);
+}
+function markOne(q){
+ const ans=normalize(q.dataset.answer), val=normalize(selected(q));
+ const ok=val!=='' && val===ans;
+ showFeedback(q,ok); return ok;
+}
+questions.forEach(q=>{
+ q.addEventListener('change',()=>{updateProgress(); if(mode==='learning')markOne(q)});
+ const t=q.querySelector('input[type=text]'); if(t)t.addEventListener('input',updateProgress);
+});
+learningBtn.addEventListener('click',()=>setMode('learning'));
+examBtn.addEventListener('click',()=>setMode('exam'));
+submitBtn.addEventListener('click',()=>{
+ let correct=0; questions.forEach(q=>{if(markOne(q))correct++;});
+ scoreBox.style.display='block';
+ const pct=Math.round(correct/questions.length*100);
+ scoreBox.innerHTML='<strong>Score: '+correct+'/'+questions.length+' ('+pct+'%)</strong><br>'+
+ (pct>=75?'Strong practice result. Review any errors and repeat in Exam Mode.':'Review the explanations, focus on weak question types, then try again.')+
+ '<br><span class="small">Practice score only — not an official IELTS band score.</span>';
+ scoreBox.scrollIntoView({behavior:'smooth',block:'nearest'});
+});
+resetBtn.addEventListener('click',()=>{
+ root.querySelectorAll('input').forEach(i=>{if(i.type==='radio'||i.type==='checkbox')i.checked=false;else i.value='';});
+ questions.forEach(q=>q.querySelector('.feedback').style.display='none');
+ scoreBox.style.display='none'; remaining=20*60; updateTimer(); updateProgress();
+});
+function updateTimer(){
+ const m=Math.floor(remaining/60),s=remaining%60; timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+timerId=setInterval(()=>{if(remaining>0){remaining--;updateTimer()}else{clearInterval(timerId);timerEl.textContent='Time up';}},1000);
+setMode('learning');updateTimer();updateProgress();
+})();
+</script>
+</body>
+</html>
