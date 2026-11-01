@@ -108,7 +108,8 @@ document.getElementById('profileBtn').addEventListener('click',()=>{
  '<div class="grid"><div class="metric"><strong>Task 1 word count</strong>'+w1+'</div><div class="metric"><strong>Task 2 word count</strong>'+w2+'</div><div class="metric"><strong>Self-review average</strong>'+avg+' / 5</div><div class="metric"><strong>Priority areas</strong>'+(priorities.length?priorities.join(' · '):'Complete rubric review')+'</div></div>'+
  '<p><strong>Diagnostic flags:</strong> '+(readiness.length?readiness.join(' · '):'Both tasks meet the minimum word counts and the self-review is complete.')+'</p>'+
  '<p class="small">This diagnostic does not calculate an official IELTS Writing band. Reliable Writing evaluation requires trained judgment against the official criteria. Your responses can be reviewed separately for detailed feedback.</p>';
- r.scrollIntoView({behavior:'smooth',block:'start'});
+ const percent=selected.length?Math.round((selected.reduce((a,b)=>a+b.val,0)/(selected.length*5))*100):0;
+ localStorage.setItem('ssh_ielts_diag_writing',JSON.stringify({percent:percent,priorities:priorities,saved:new Date().toISOString(),task1Words:w1,task2Words:w2})); r.scrollIntoView({behavior:'smooth',block:'start'});
 });
 document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Clear both writing tasks and restart the timer?'))location.reload()});
 updateCounter('task1','c1','s1',150);updateCounter('task2','c2','s2',250);
