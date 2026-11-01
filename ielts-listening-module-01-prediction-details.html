@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Listening Module 1 | Smart Students Hub</title>
+<meta name="description" content="IELTS Listening Module 1 on prediction, numbers, names and spelling with one-play guided practice and mastery check.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:var(--navy);color:#fff;padding:28px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1050px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.badge{display:inline-block;background:#eef4fb;color:var(--navy);font-weight:800;border-radius:999px;padding:5px 10px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+.tip{background:#fff8e8;border-left:4px solid var(--gold);padding:14px;border-radius:10px}.example{background:#eef8f2;border-left:4px solid var(--green);padding:14px;border-radius:10px}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}
+.audio{background:#eef4fb;border-radius:12px;padding:12px;margin:12px 0}.question{padding:14px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}
+.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:6px 0}.options input{margin-right:8px}
+input[type=text]{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px}.feedback{display:none;background:#f8fbff;padding:9px;border-radius:8px;margin-top:8px}.result{display:none;border:2px solid var(--gold);background:#fffaf0;border-radius:14px;padding:16px}
+.progress{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden}.bar{height:100%;background:var(--blue);width:0}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS LISTENING LAB</div>
+<h1>Module 1: Prediction, Numbers, Names & Spelling</h1>
+<p>Predict before you listen. Catch details accurately.</p>
+<p class="rtl">توقّع قبل أن تستمع، والتقط التفاصيل بدقة.</p>
+</header>
+
+<div class="wrap">
+<section class="card">
+<span class="badge">Strategy Lesson</span>
+<h2 style="color:#142b5f">1. Predict the Answer Type</h2>
+<p>Before the recording starts, ask: <strong>What kind of answer fits here?</strong> A name? A number? A time? A place? A noun?</p>
+<div class="example"><strong>Example:</strong> “The appointment is at ______.” → predict a <strong>time</strong>.</div>
+<div class="tip"><strong>Why it helps:</strong> prediction reduces the amount of information your brain has to process while listening.</div>
+</section>
+
+<section class="card">
+<h2 style="color:#142b5f">2. High-Risk Detail Areas</h2>
+<ul>
+<li><strong>Numbers:</strong> 15 vs 50, 13 vs 30</li>
+<li><strong>Names:</strong> listen for spelling corrections</li>
+<li><strong>Dates:</strong> distinguish day / month / year</li>
+<li><strong>Prices:</strong> catch corrected amounts</li>
+<li><strong>Spelling:</strong> one wrong letter can lose the answer</li>
+</ul>
+</section>
+
+<section class="card">
+<span class="badge">Guided Practice</span>
+<h2 style="color:#142b5f">3. Guided Listening</h2>
+<p>Read Questions 1–3 before pressing Play.</p>
+<div class="audio">
+<button class="btn primary" id="play1">▶ Play once</button>
+<span class="small" id="status1">Not played</span>
+</div>
+<div class="question" data-answer="16" data-exp="The speaker corrects 60 to 16.">
+<p><strong>1.</strong> How many participants are expected?</p>
+<input type="text" name="q1"><div class="feedback"></div></div>
+<div class="question" data-answer="Mason" data-exp="The surname is Mason, spelled M-A-S-O-N.">
+<p><strong>2.</strong> What is the speaker's surname?</p>
+<input type="text" name="q2"><div class="feedback"></div></div>
+<div class="question" data-answer="9:30" data-exp="The original time mentioned is 9:00, but it is corrected to 9:30.">
+<p><strong>3.</strong> What time does the session begin?</p>
+<input type="text" name="q3"><div class="feedback"></div></div>
+<button class="btn primary" id="checkGuided">Check Guided Practice</button>
+</section>
+
+<section class="card">
+<span class="badge">One-Play Practice</span>
+<h2 style="color:#142b5f">4. Independent Practice</h2>
+<p>Read Questions 4–6, then play the recording once.</p>
+<div class="audio">
+<button class="btn primary" id="play2">▶ Play once</button>
+<span class="small" id="status2">Not played</span>
+</div>
+
+<div class="question exam" data-answer="Thursday">
+<p><strong>4.</strong> Which day is the workshop?</p>
+<div class="options"><label><input type="radio" name="q4" value="Tuesday">Tuesday</label><label><input type="radio" name="q4" value="Thursday">Thursday</label><label><input type="radio" name="q4" value="Friday">Friday</label></div></div>
+
+<div class="question exam" data-answer="27">
+<p><strong>5.</strong> What is the room number?</p>
+<input type="text" name="q5"></div>
+
+<div class="question exam" data-answer="Parker">
+<p><strong>6.</strong> What is the contact surname?</p>
+<input type="text" name="q6"></div>
+</section>
+
+<section class="card">
+<span class="badge">Mastery Check</span>
+<h2 style="color:#142b5f">5. Mastery Check</h2>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<p class="small" id="progressText">0 of 3 answered</p>
+<button class="btn gold" id="submit">Submit Mastery Check</button>
+<div class="result" id="result"></div>
+</section>
+</div>
+
+<script>
+const a1="We are expecting sixteen participants. I should clarify that: not sixty, but one six, sixteen. My surname is Mason, M A S O N. The session was originally planned for nine o'clock, but it will now begin at nine thirty.";
+const a2="The workshop will be held on Thursday, not Tuesday as stated in the earlier email. Please go to room twenty-seven. If you have questions, contact Ms Parker. That's Parker, P A R K E R.";
+const played={};
+function speak(id,text,status){
+ if(played[id]){alert('This recording has already been played once.');return}
+ if(!('speechSynthesis'in window)){alert('Speech playback is not supported in this browser.');return}
+ played[id]=true;const u=new SpeechSynthesisUtterance(text);u.rate=.92;
+ const voices=speechSynthesis.getVoices();const en=voices.find(v=>/^en/i.test(v.lang));if(en)u.voice=en;
+ document.getElementById(status).textContent='Playing…';u.onend=()=>document.getElementById(status).textContent='Played once';speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+document.getElementById('play1').onclick=()=>speak('a1',a1,'status1');
+document.getElementById('play2').onclick=()=>speak('a2',a2,'status2');
+function norm(s){return(s||'').trim().toLowerCase().replace(/\s+/g,' ')}
+document.getElementById('checkGuided').onclick=()=>{
+ document.querySelectorAll('.question:not(.exam)').forEach(q=>{
+  const t=q.querySelector('input'),fb=q.querySelector('.feedback');fb.style.display='block';
+  fb.innerHTML=norm(t.value)===norm(q.dataset.answer)?'<strong>Correct.</strong> '+q.dataset.exp:'<strong>Review:</strong> '+q.dataset.exp;
+ });
+};
+const exams=[...document.querySelectorAll('.exam')],bar=document.getElementById('bar'),pt=document.getElementById('progressText');
+function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text]');return t?t.value:''}
+function progress(){const n=exams.filter(q=>norm(val(q))).length;pt.textContent=n+' of 3 answered';bar.style.width=(n/3*100)+'%'}
+document.addEventListener('change',progress);document.addEventListener('input',progress);
+document.getElementById('submit').onclick=()=>{
+ let score=0;exams.forEach(q=>{if(norm(val(q))===norm(q.dataset.answer))score++});
+ const mastered=score===3,r=document.getElementById('result');r.style.display='block';
+ r.innerHTML='<h3 style="color:#142b5f">Mastery Result</h3><p><strong>'+score+'/3</strong></p><p>'+(mastered?'Mastery achieved. Move to the next Listening module.':'Repeat prediction and detail practice before retesting.')+'</p>';
+ localStorage.setItem('ssh_ielts_listening_module1',JSON.stringify({score,total:3,mastered,saved:new Date().toISOString()}));
+ r.scrollIntoView({behavior:'smooth',block:'start'});
+};
+progress();
+</script>
+</body>
+</html>
