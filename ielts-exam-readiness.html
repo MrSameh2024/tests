@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IELTS Exam Readiness | Smart Students Hub</title><style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--text:#1f2a44;--border:#d9e3f0}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}header{background:var(--navy);color:#fff;padding:28px 18px;text-align:center}.w{max-width:1050px;margin:auto;padding:20px}.c{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.metric{border:1px solid var(--border);border-radius:14px;padding:14px;background:#f8fbff}.metric strong{display:block;color:var(--navy)}.good{color:var(--green);font-weight:800}.warn{color:#b36b00;font-weight:800}.bad{color:#b42318;font-weight:800}.route{border-left:4px solid var(--gold);background:#fff8e8;padding:16px;border-radius:10px}.btn{display:inline-block;text-decoration:none;border-radius:10px;padding:10px 14px;font-weight:800;background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}@media(max-width:760px){.grid{grid-template-columns:1fr}}</style></head><body>
+<header><div style="color:#d8a93a;font-weight:800">SMART STUDENTS HUB · IELTS PREPARATION HUB</div><h1>Exam Readiness Check</h1><p>Use evidence from diagnostics, mastery modules and mock completion to decide what to do next.</p></header>
+<div class="w">
+<section class="c"><h2 style="color:#142b5f">Readiness Evidence</h2><div class="grid" id="metrics"></div></section>
+<section class="c"><h2 style="color:#142b5f">Readiness Decision</h2><div class="route" id="decision"></div></section>
+<section class="c"><h2 style="color:#142b5f">Next Action</h2><div id="actions"></div></section>
+<section class="c"><p><strong>Important:</strong> This is an internal learning-readiness check, not an official IELTS band prediction. Reliable evaluation of Writing and Speaking requires trained human judgement.</p></section>
+</div>
+<script>
+function load(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
+const profile=load('ssh_ielts_complete_profile'),mock=load('ssh_ielts_mock01_status');
+const finalMods=[
+ ['Reading',load('ssh_ielts_reading_module7')],
+ ['Listening',load('ssh_ielts_listening_module7')],
+ ['Writing',load('ssh_ielts_writing_module7')],
+ ['Speaking',load('ssh_ielts_speaking_module7')]
+];
+const mastered=finalMods.filter(x=>x[1]&&x[1].mastered).length;
+const profileReady=!!profile, mockReady=!!(mock&&mock.ready), overall=profile?profile.overall:0;
+metrics.innerHTML=
+ '<div class="metric"><strong>Complete learner profile</strong><span class="'+(profileReady?'good':'bad')+'">'+(profileReady?'Available':'Missing')+'</span></div>'+
+ '<div class="metric"><strong>Module 7 mastery</strong><span class="'+(mastered===4?'good':mastered>=2?'warn':'bad')+'">'+mastered+'/4 skills</span></div>'+
+ '<div class="metric"><strong>Full Mock 01</strong><span class="'+(mockReady?'good':'bad')+'">'+(mockReady?'Completed':'Incomplete')+'</span></div>'+
+ '<div class="metric"><strong>Overall internal profile</strong><span class="'+(overall>=70?'good':overall>=55?'warn':'bad')+'">'+(profileReady?overall+'%':'Not available')+'</span></div>';
+let level,html,action;
+if(profileReady&&mastered===4&&mockReady&&overall>=70){level='Ready for repeated full-test practice';html='Your evidence shows stable progress across the four skills. Continue with repeated full mocks, external feedback for Writing/Speaking, and precise error repair rather than broad study.';action='<a class="btn gold" href="ielts-mock-test-centre.html">Return to Mock Centre</a>'}
+else if(profileReady&&(mastered>=2||mockReady)){level='Approaching readiness';html='You have substantial progress, but one or more skill areas still need targeted mastery or mock completion before relying on full-test performance.';action='<a class="btn" href="ielts-personalised-study-dashboard.html">Open Study Dashboard</a>'}
+else{level='Build foundations and skill mastery';html='Complete the diagnostic profile, follow the personalised study dashboard and achieve mastery in the final modules before full mock testing.';action='<a class="btn" href="ielts-complete-learner-profile.html">Open Learner Profile</a>'}
+decision.innerHTML='<h3 style="margin-top:0;color:#142b5f">'+level+'</h3><p>'+html+'</p>';actions.innerHTML=action;
+localStorage.setItem('ssh_ielts_readiness',JSON.stringify({level,profileReady,mastered,mockReady,overall,saved:new Date().toISOString()}));
+</script></body></html>
