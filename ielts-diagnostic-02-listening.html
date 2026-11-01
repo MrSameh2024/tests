@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Diagnostic 02 Listening | Smart Students Hub</title>
+<meta name="description" content="Original IELTS listening diagnostic with playback, automatic scoring and skill analysis.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header{background:var(--navy);color:#fff;padding:26px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.7rem,4vw,2.5rem)}header p{max-width:850px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.audio{background:#eef4fb;border-radius:14px;padding:14px;margin:14px 0}.audio button{margin-right:8px}
+.btn{border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.light{background:#fff;color:var(--navy);border:1px solid var(--border)}
+.question{padding:15px 0;border-top:1px solid var(--border)}.question:first-of-type{border-top:0}.options label{display:block;border:1px solid var(--border);border-radius:10px;padding:9px 10px;margin:7px 0;cursor:pointer;background:white}.options input{margin-right:8px}
+input[type=text]{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px}.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}
+.result{display:none;border:2px solid var(--gold);border-radius:16px;background:#fffaf0;padding:18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px}.metric strong{display:block;color:var(--navy)}
+.progress{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden}.bar{height:100%;background:var(--blue);width:0}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS DIAGNOSTIC CENTRE</div>
+<h1>Diagnostic 02: Listening</h1>
+<p>Three short listening sections · 12 questions · one playback per section</p>
+<p class="rtl">ثلاثة مقاطع استماع قصيرة · 12 سؤالًا · تشغيل واحد لكل مقطع</p>
+</header>
+
+<div class="wrap">
+<div class="card">
+<div class="small">Progress</div><div class="progress"><div class="bar" id="bar"></div></div>
+<div class="small" id="progressText">0 of 12 answered</div>
+</div>
+
+<div class="card">
+<h2 style="color:#142b5f">Section 1 — Booking a Study Room</h2>
+<p class="small">Listen once, then answer Questions 1–4.</p>
+<div class="audio">
+<button class="btn primary playBtn" data-audio="a1">▶ Play Section 1</button>
+<span class="small" id="s1status">Not played</span>
+</div>
+
+<div class="question" data-skill="detail" data-answer="Thursday">
+<p><strong>1.</strong> Which day does the student book the room for?</p>
+<div class="options"><label><input type="radio" name="q1" value="Wednesday">Wednesday</label><label><input type="radio" name="q1" value="Thursday">Thursday</label><label><input type="radio" name="q1" value="Friday">Friday</label></div></div>
+
+<div class="question" data-skill="detail" data-answer="3:30">
+<p><strong>2.</strong> What time does the booking begin?</p>
+<div class="options"><label><input type="radio" name="q2" value="3:00">3:00</label><label><input type="radio" name="q2" value="3:30">3:30</label><label><input type="radio" name="q2" value="4:00">4:00</label></div></div>
+
+<div class="question" data-skill="spelling" data-answer="projector">
+<p><strong>3.</strong> Complete the note: The student also requests a ______.</p>
+<input type="text" name="q3" placeholder="Type one word"></div>
+
+<div class="question" data-skill="distractor" data-answer="six">
+<p><strong>4.</strong> How many students will use the room?</p>
+<div class="options"><label><input type="radio" name="q4" value="four">four</label><label><input type="radio" name="q4" value="five">five</label><label><input type="radio" name="q4" value="six">six</label></div></div>
+</div>
+
+<div class="card">
+<h2 style="color:#142b5f">Section 2 — Campus Orientation</h2>
+<p class="small">Listen once, then answer Questions 5–8.</p>
+<div class="audio">
+<button class="btn primary playBtn" data-audio="a2">▶ Play Section 2</button>
+<span class="small" id="s2status">Not played</span>
+</div>
+
+<div class="question" data-skill="detail" data-answer="library">
+<p><strong>5.</strong> The tour begins beside the ______.</p>
+<input type="text" name="q5" placeholder="Type one word"></div>
+
+<div class="question" data-skill="distractor" data-answer="east">
+<p><strong>6.</strong> Which side of the campus is the science building on?</p>
+<div class="options"><label><input type="radio" name="q6" value="north">north</label><label><input type="radio" name="q6" value="east">east</label><label><input type="radio" name="q6" value="west">west</label></div></div>
+
+<div class="question" data-skill="detail" data-answer="student centre">
+<p><strong>7.</strong> Where can students collect their ID cards?</p>
+<div class="options"><label><input type="radio" name="q7" value="library">library</label><label><input type="radio" name="q7" value="student centre">student centre</label><label><input type="radio" name="q7" value="science building">science building</label></div></div>
+
+<div class="question" data-skill="inference" data-answer="because it is quieter in the morning">
+<p><strong>8.</strong> Why does the guide recommend visiting the careers office before noon?</p>
+<div class="options"><label><input type="radio" name="q8" value="because it is quieter in the morning">because it is quieter in the morning</label><label><input type="radio" name="q8" value="because it closes at noon">because it closes at noon</label><label><input type="radio" name="q8" value="because staff leave for lunch">because staff leave for lunch</label></div></div>
+</div>
+
+<div class="card">
+<h2 style="color:#142b5f">Section 3 — Short Academic Talk</h2>
+<p class="small">Listen once, then answer Questions 9–12.</p>
+<div class="audio">
+<button class="btn primary playBtn" data-audio="a3">▶ Play Section 3</button>
+<span class="small" id="s3status">Not played</span>
+</div>
+
+<div class="question" data-skill="mainidea" data-answer="urban trees can reduce heat but need careful planning">
+<p><strong>9.</strong> What is the main idea of the talk?</p>
+<div class="options"><label><input type="radio" name="q9" value="urban trees can reduce heat but need careful planning">urban trees can reduce heat but need careful planning</label><label><input type="radio" name="q9" value="all cities should plant the same trees">all cities should plant the same trees</label><label><input type="radio" name="q9" value="urban trees are too expensive to maintain">urban trees are too expensive to maintain</label></div></div>
+
+<div class="question" data-skill="detail" data-answer="shade">
+<p><strong>10.</strong> One direct benefit of urban trees is providing ______.</p>
+<input type="text" name="q10" placeholder="Type one word"></div>
+
+<div class="question" data-skill="detail" data-answer="water availability">
+<p><strong>11.</strong> Which factor must planners consider when choosing tree species?</p>
+<div class="options"><label><input type="radio" name="q11" value="water availability">water availability</label><label><input type="radio" name="q11" value="road colour">road colour</label><label><input type="radio" name="q11" value="office size">office size</label></div></div>
+
+<div class="question" data-skill="inference" data-answer="poorly chosen trees may create new problems">
+<p><strong>12.</strong> What can be inferred from the final sentence?</p>
+<div class="options"><label><input type="radio" name="q12" value="poorly chosen trees may create new problems">poorly chosen trees may create new problems</label><label><input type="radio" name="q12" value="tree planting always succeeds">tree planting always succeeds</label><label><input type="radio" name="q12" value="cities should avoid planting trees">cities should avoid planting trees</label></div></div>
+</div>
+
+<div class="card">
+<button class="btn gold" id="submitBtn" style="width:100%">Generate Listening Profile</button>
+<div class="result" id="result"></div>
+</div>
+</div>
+
+<script>
+(function(){
+const texts={
+a1:"Hello, I'd like to book a study room for Thursday afternoon. I first thought about three o'clock, but three thirty would be better. There will be six of us altogether. I was going to ask for room 4 because it seats five, but that is too small, so any room for six is fine. We will also need a projector for a short presentation.",
+a2:"Welcome to the campus tour. We are starting beside the library. From here, walk past the main courtyard and you will see the science building on the east side of the campus. Some maps still show the old west entrance, but that entrance is now closed. Student ID cards can be collected from the student centre. If you need career advice, the careers office is open all day, but I recommend going before noon because it is usually much quieter in the morning.",
+a3:"Urban trees can help reduce city temperatures by providing shade and through the cooling effect of water released from leaves. However, successful planting requires careful planning. Tree species should be chosen according to local conditions such as soil depth and water availability. A species that grows well in one region may perform poorly in another. Therefore, planting more trees is useful, but poorly chosen trees can create maintenance problems rather than solve them."
+};
+const played={a1:false,a2:false,a3:false};
+function speak(id,btn){
+ if(played[id]){alert('This section has already been played once.');return;}
+ if(!('speechSynthesis' in window)){alert('Speech playback is not supported in this browser.');return;}
+ played[id]=true;btn.disabled=true;
+ const u=new SpeechSynthesisUtterance(texts[id]);u.rate=0.94;u.pitch=1;
+ const voices=speechSynthesis.getVoices();const en=voices.find(v=>/^en/i.test(v.lang));if(en)u.voice=en;
+ const status=document.getElementById(id==='a1'?'s1status':id==='a2'?'s2status':'s3status');status.textContent='Playing…';
+ u.onend=()=>status.textContent='Played once';speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+document.querySelectorAll('.playBtn').forEach(b=>b.addEventListener('click',()=>speak(b.dataset.audio,b)));
+const qs=[...document.querySelectorAll('.question')],bar=document.getElementById('bar'),pt=document.getElementById('progressText');
+function norm(s){return(s||'').trim().toLowerCase().replace(/[.]+$/,'').replace(/\s+/g,' ')}
+function val(q){const r=q.querySelector('input[type=radio]:checked');if(r)return r.value;const t=q.querySelector('input[type=text]');return t?t.value:''}
+function progress(){const n=qs.filter(q=>norm(val(q))).length;pt.textContent=n+' of '+qs.length+' answered';bar.style.width=(n/qs.length*100)+'%'}
+document.addEventListener('change',progress);document.addEventListener('input',progress);
+document.getElementById('submitBtn').addEventListener('click',()=>{
+ const g={detail:[0,0],spelling:[0,0],distractor:[0,0],inference:[0,0],mainidea:[0,0]};let total=0;
+ qs.forEach(q=>{const ok=norm(val(q))===norm(q.dataset.answer),k=q.dataset.skill;g[k][1]++;if(ok){g[k][0]++;total++;}});
+ const pct=k=>g[k][1]?Math.round(g[k][0]/g[k][1]*100):0;
+ const scores={Detail:pct('detail'),Spelling:pct('spelling'),Distractors:pct('distractor'),Inference:pct('inference'),'Main idea':pct('mainidea')};
+ const priority=Object.entries(scores).sort((a,b)=>a[1]-b[1]).slice(0,2).map(x=>x[0]);
+ const overall=Math.round(total/qs.length*100);
+ let level=overall<55?'Foundation listening work recommended':overall<75?'Targeted listening skills work recommended':'Move toward timed IELTS-style listening practice';
+ const r=document.getElementById('result');r.style.display='block';
+ r.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Listening Diagnostic Profile</h2>'+
+ '<div class="grid"><div class="metric"><strong>Overall</strong>'+total+'/'+qs.length+' · '+overall+'%</div>'+
+ '<div class="metric"><strong>Detail</strong>'+scores.Detail+'%</div>'+
+ '<div class="metric"><strong>Distractor control</strong>'+scores.Distractors+'%</div>'+
+ '<div class="metric"><strong>Inference</strong>'+scores.Inference+'%</div></div>'+
+ '<p><strong>Priority areas:</strong> '+priority.join(' · ')+'</p><p><strong>Recommended next step:</strong> '+level+'</p>'+
+ '<p class="small">Internal learning diagnostic only. This is not an official IELTS band score. Speech is generated by your browser and may vary by device and voice.</p>';
+ r.scrollIntoView({behavior:'smooth',block:'start'});
+});
+progress();
+})();
+</script>
+</body>
+</html>
