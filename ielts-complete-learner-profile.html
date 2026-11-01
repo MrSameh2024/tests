@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IELTS Complete Learner Profile | Smart Students Hub</title>
+<meta name="description" content="Complete IELTS learner profile combining Reading, Listening, Writing and Speaking diagnostics into a personalised study route.">
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--bg:#f5f8fc;--card:#fff;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0;--danger:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+header{background:var(--navy);color:#fff;padding:28px 18px;text-align:center}header h1{margin:6px 0;font-size:clamp(1.8rem,4vw,2.6rem)}header p{max-width:900px;margin:5px auto;color:#dbe7ff}
+.wrap{max-width:1100px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.skill{border:1px solid var(--border);border-radius:14px;padding:16px;background:#f8fbff}
+.skill h3{margin-top:0;color:var(--navy)}label{display:block;font-weight:700;margin:8px 0 5px}input[type=number]{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font-size:16px}
+.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.gold{background:var(--gold);color:var(--navy)}.light{background:#eef4fb;color:var(--navy)}
+.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}.result{display:none}.metric{border:1px solid var(--border);border-radius:14px;padding:14px;background:#fff}.metric strong{display:block;color:var(--navy)}
+.rank{padding:10px 12px;border-radius:10px;background:#eef4fb;margin:7px 0}.route{background:#eef8f2;border-left:4px solid var(--green);padding:16px;border-radius:10px}.warning{background:#fff8e8;border-left:4px solid var(--gold);padding:12px;border-radius:8px}
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.step{background:#142b5f;color:#fff;border-radius:12px;padding:14px;text-align:center}.step span{display:block;color:#d8a93a;font-weight:800}
+.barbg{height:10px;background:#e7edf7;border-radius:999px;overflow:hidden;margin-top:6px}.bar{height:100%;background:var(--blue)}
+@media(max-width:760px){.grid,.path{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div style="font-weight:800;color:#d8a93a">SMART STUDENTS HUB · IELTS PREPARATION HUB</div>
+<h1>Complete Learner Profile</h1>
+<p>Combine your Reading, Listening, Writing and Speaking diagnostics into one personalised study direction.</p>
+<p class="rtl">اجمع نتائج القراءة والاستماع والكتابة والمحادثة في ملف واحد يحدد اتجاه دراستك بصورة شخصية.</p>
+</header>
+
+<div class="wrap">
+<div class="card warning">
+<strong>How it works:</strong> If you completed the diagnostics on this browser, the profile may import saved results automatically. Otherwise, enter your scores manually. Writing and Speaking use internal diagnostic percentages, not official IELTS bands.
+</div>
+
+<div class="card">
+<h2 style="color:#142b5f">Your Diagnostic Results</h2>
+<div class="grid">
+<div class="skill">
+<h3>Reading</h3>
+<label>Raw score out of 40</label>
+<input id="readingRaw" type="number" min="0" max="40" placeholder="e.g. 30">
+<div class="small" id="readingImport">No saved result detected yet.</div>
+</div>
+<div class="skill">
+<h3>Listening</h3>
+<label>Raw score out of 40</label>
+<input id="listeningRaw" type="number" min="0" max="40" placeholder="e.g. 31">
+<div class="small" id="listeningImport">No saved result detected yet.</div>
+</div>
+<div class="skill">
+<h3>Writing</h3>
+<label>Internal diagnostic percentage</label>
+<input id="writingPct" type="number" min="0" max="100" placeholder="e.g. 68">
+<div class="small" id="writingImport">Enter your diagnostic percentage or import saved result.</div>
+</div>
+<div class="skill">
+<h3>Speaking</h3>
+<label>Internal diagnostic percentage</label>
+<input id="speakingPct" type="number" min="0" max="100" placeholder="e.g. 72">
+<div class="small" id="speakingImport">Enter your diagnostic percentage or import saved result.</div>
+</div>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+<button class="btn primary" id="importBtn">Import Saved Results</button>
+<button class="btn gold" id="profileBtn">Generate Complete Profile</button>
+<button class="btn light" id="clearBtn">Clear</button>
+</div>
+</div>
+
+<div class="card result" id="result">
+<h2 style="color:#142b5f">Your Personalised IELTS Study Profile</h2>
+<div class="grid" id="metrics"></div>
+
+<h3 style="color:#142b5f">Skill Ranking</h3>
+<div id="ranking"></div>
+
+<h3 style="color:#142b5f">Recommended Starting Route</h3>
+<div class="route" id="route"></div>
+
+<h3 style="color:#142b5f">Your Personalised Study Sequence</h3>
+<div class="path" id="path"></div>
+
+<h3 style="color:#142b5f">Priority Actions</h3>
+<div id="actions"></div>
+
+<p class="small">This profile is an internal Smart Students Hub learning recommendation. It does not replace official IELTS scoring or trained examiner judgement.</p>
+</div>
+</div>
+
+<script>
+const keys={
+ reading:'ssh_ielts_diag_reading',
+ listening:'ssh_ielts_diag_listening',
+ writing:'ssh_ielts_diag_writing',
+ speaking:'ssh_ielts_diag_speaking'
+};
+function load(key){try{return JSON.parse(localStorage.getItem(key)||'null')}catch(e){return null}}
+function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
+function rawToPct(raw){return clamp(Math.round(raw/40*100),0,100)}
+function importSaved(){
+ const r=load(keys.reading),l=load(keys.listening),w=load(keys.writing),s=load(keys.speaking);
+ if(r&&Number.isFinite(r.raw)){document.getElementById('readingRaw').value=r.raw;document.getElementById('readingImport').textContent='Saved Reading result imported.'}
+ if(l&&Number.isFinite(l.raw)){document.getElementById('listeningRaw').value=l.raw;document.getElementById('listeningImport').textContent='Saved Listening result imported.'}
+ if(w&&Number.isFinite(w.percent)){document.getElementById('writingPct').value=w.percent;document.getElementById('writingImport').textContent='Saved Writing result imported.'}
+ if(s&&Number.isFinite(s.percent)){document.getElementById('speakingPct').value=s.percent;document.getElementById('speakingImport').textContent='Saved Speaking result imported.'}
+}
+function metric(name,pct){
+ return '<div class="metric"><strong>'+name+'</strong>'+pct+'%<div class="barbg"><div class="bar" style="width:'+pct+'%"></div></div></div>';
+}
+function routeFor(avg,weakest){
+ if(avg<55) return '<strong>Foundation Route</strong><br>Build academic English foundations first, while beginning light IELTS familiarisation. Give special attention to <strong>'+weakest+'</strong>.';
+ if(avg<72) return '<strong>Skills Route</strong><br>Focus on question-type mastery, task strategy and targeted repair. Start with <strong>'+weakest+'</strong>.';
+ return '<strong>Performance Route</strong><br>Move into timed exam-style practice, consistency training and detailed error analysis. Keep <strong>'+weakest+'</strong> as your first repair priority.';
+}
+function actionFor(skill,pct){
+ const map={
+  Reading:'Timed passage practice + paraphrase recognition + weakest question-type repair',
+  Listening:'One-play listening sets + distractor control + spelling/detail review',
+  Writing:'Task 1/Task 2 planning + rubric-based teacher feedback + grammar/lexical repair',
+  Speaking:'Timed Parts 1–3 practice + recorded self-review + fluency/pronunciation feedback'
+ };
+ const intensity=pct<55?'High priority':pct<72?'Medium priority':'Maintenance / performance';
+ return '<div class="rank"><strong>'+skill+' — '+intensity+'</strong><br>'+map[skill]+'</div>';
+}
+document.getElementById('profileBtn').addEventListener('click',()=>{
+ const rr=+document.getElementById('readingRaw').value,lr=+document.getElementById('listeningRaw').value,wp=+document.getElementById('writingPct').value,sp=+document.getElementById('speakingPct').value;
+ if(!Number.isFinite(rr)||rr<0||rr>40||!Number.isFinite(lr)||lr<0||lr>40||!Number.isFinite(wp)||wp<0||wp>100||!Number.isFinite(sp)||sp<0||sp>100){alert('Please enter valid results for all four skills.');return;}
+ const scores=[['Reading',rawToPct(rr)],['Listening',rawToPct(lr)],['Writing',Math.round(wp)],['Speaking',Math.round(sp)]];
+ const avg=Math.round(scores.reduce((a,b)=>a+b[1],0)/4);
+ const sorted=[...scores].sort((a,b)=>a[1]-b[1]);
+ const weakest=sorted[0][0],strongest=sorted[sorted.length-1][0];
+ document.getElementById('metrics').innerHTML=metric('Overall learning profile',avg)+metric('Reading',scores[0][1])+metric('Listening',scores[1][1])+metric('Writing',scores[2][1])+metric('Speaking',scores[3][1])+metric('Strongest skill',scores[3][1]===Math.max(...scores.map(x=>x[1]))?scores[3][1]:Math.max(...scores.map(x=>x[1])));
+ document.getElementById('ranking').innerHTML=sorted.map((x,i)=>'<div class="rank"><strong>'+(i+1)+'. '+x[0]+'</strong> — '+x[1]+'%</div>').join('');
+ document.getElementById('route').innerHTML=routeFor(avg,weakest)+'<br><br><strong>Strongest area:</strong> '+strongest+'<br><strong>First priority:</strong> '+weakest;
+ document.getElementById('path').innerHTML=sorted.map((x,i)=>'<div class="step"><span>Step '+(i+1)+'</span>'+x[0]+'</div>').join('');
+ document.getElementById('actions').innerHTML=sorted.map(x=>actionFor(x[0],x[1])).join('');
+ document.getElementById('result').style.display='block';
+ document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
+ localStorage.setItem('ssh_ielts_complete_profile',JSON.stringify({created:new Date().toISOString(),overall:avg,scores:Object.fromEntries(scores),route:avg<55?'Foundation':avg<72?'Skills':'Performance',priority:weakest,strongest}));
+});
+document.getElementById('importBtn').addEventListener('click',importSaved);
+document.getElementById('clearBtn').addEventListener('click',()=>{['readingRaw','listeningRaw','writingPct','speakingPct'].forEach(id=>document.getElementById(id).value='');document.getElementById('result').style.display='none';});
+importSaved();
+</script>
+</body>
+</html>
