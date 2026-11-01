@@ -180,7 +180,8 @@ document.getElementById('profileBtn').addEventListener('click',()=>{
  r.innerHTML='<h2 style="color:#142b5f;margin-top:0">Your Speaking Diagnostic Profile</h2>'+
  '<div class="grid"><div class="metric"><strong>Self-review average</strong>'+avg+' / 5</div><div class="metric"><strong>Recorded sections</strong>'+recorded+' / 3</div><div class="metric"><strong>Priority areas</strong>'+(priorities.length?priorities.join(' · '):'Complete rubric review')+'</div><div class="metric"><strong>Recommended direction</strong>'+recommendation+'</div></div>'+
  '<p class="small">This is an internal Smart Students Hub diagnostic profile. Reliable IELTS Speaking band assessment requires trained human judgment against the official criteria.</p>';
- r.scrollIntoView({behavior:'smooth',block:'start'});
+ const percent=chosen.length?Math.round((chosen.reduce((a,b)=>a+b.val,0)/(chosen.length*5))*100):0;
+ localStorage.setItem('ssh_ielts_diag_speaking',JSON.stringify({percent:percent,priorities:priorities,saved:new Date().toISOString(),recordedSections:recorded})); r.scrollIntoView({behavior:'smooth',block:'start'});
 });
 document.getElementById('resetBtn').addEventListener('click',()=>{if(confirm('Restart the speaking diagnostic? Current browser recordings will be lost.'))location.reload()});
 </script>
