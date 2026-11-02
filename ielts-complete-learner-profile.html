@@ -130,7 +130,7 @@ document.getElementById('profileBtn').addEventListener('click',()=>{
  const avg=Math.round(scores.reduce((a,b)=>a+b[1],0)/4);
  const sorted=[...scores].sort((a,b)=>a[1]-b[1]);
  const weakest=sorted[0][0],strongest=sorted[sorted.length-1][0];
- document.getElementById('metrics').innerHTML=metric('Overall learning profile',avg)+metric('Reading',scores[0][1])+metric('Listening',scores[1][1])+metric('Writing',scores[2][1])+metric('Speaking',scores[3][1])+metric('Strongest skill',scores[3][1]===Math.max(...scores.map(x=>x[1]))?scores[3][1]:Math.max(...scores.map(x=>x[1])));
+ document.getElementById('metrics').innerHTML=metric('Overall learning profile',avg)+metric('Reading',scores[0][1])+metric('Listening',scores[1][1])+metric('Writing',scores[2][1])+metric('Speaking',scores[3][1])+'<div class="metric"><strong>Strongest skill</strong>'+strongest+' · '+Math.max(...scores.map(x=>x[1]))+'%</div>';
  document.getElementById('ranking').innerHTML=sorted.map((x,i)=>'<div class="rank"><strong>'+(i+1)+'. '+x[0]+'</strong> — '+x[1]+'%</div>').join('');
  document.getElementById('route').innerHTML=routeFor(avg,weakest)+'<br><br><strong>Strongest area:</strong> '+strongest+'<br><strong>First priority:</strong> '+weakest;
  document.getElementById('path').innerHTML=sorted.map((x,i)=>'<div class="step"><span>Step '+(i+1)+'</span>'+x[0]+'</div>').join('');
