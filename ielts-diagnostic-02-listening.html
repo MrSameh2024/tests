@@ -36,7 +36,7 @@ input[type=text],select{width:100%;padding:10px;border:1px solid var(--border);b
 <div><button class="btn light" id="resetBtn">Reset</button></div>
 </div>
 
-<div class="card note"><strong>Important:</strong> Each recording can be played only once. Read the questions first, then start the audio when ready. Browser-generated speech is used for this prototype, so pronunciation may vary slightly by device.</div>
+<div class="card note"><strong>Important:</strong> Each recording can be played only once. Read the questions first, then start the audio when ready. Slower playback with pauses between turns. Conversations use a different available English voice for each speaker; monologues use one narrator. Natural voices are preferred where available. Voice quality depends on your browser and device. If there are too few English voices, dialogue playback will not start. No speaker names are read aloud.</div>
 
 <div id="parts"></div>
 
@@ -126,15 +126,65 @@ partsData.forEach((p,i)=>{
  partsEl.insertAdjacentHTML('beforeend','<section class="card"><div class="part-head"><div><span class="badge">Part '+(i+1)+'</span><h2 style="color:#142b5f">'+p.title+'</h2></div><div class="small">Questions '+(i*10+1)+'–'+(i*10+10)+'</div></div><div class="audio"><button class="btn primary playBtn" data-id="'+p.audioId+'">▶ Play once</button> <span class="small" id="'+p.statusId+'">Not played</span></div>'+p.questions.map(qHTML).join('')+'</section>');
 });
 
+// Dialogue playback v2: stable speaker voices, slower pace and turn pauses.
+const dialogueOne = [
+ ['Receptionist', 'Good morning. How can I help you?'],
+ ['Daniel', "Good morning. I'd like to register for the weekend photography course."],
+ ['Receptionist', 'Of course. Could I have your name, please?'],
+ ['Daniel', "My name is Daniel Mercer, that's M E R C E R. I originally wanted the Saturday morning class."],
+ ['Receptionist', 'The Saturday morning class is full. We have places on Sunday afternoon.'],
+ ['Daniel', "I'll take Sunday afternoon instead. What time does the course start?"],
+ ['Receptionist', 'The course starts at two thirty and finishes at five.'],
+ ['Daniel', 'I thought the fee was eighty-five dollars. Is that right?'],
+ ['Receptionist', 'The fee is seventy-five dollars, including materials.'],
+ ['Daniel', 'What should I bring?'],
+ ['Receptionist', 'Please bring a notebook and your own camera. Tripods are provided. The course is held in Room 204 on the second floor.'],
+ ['Daniel', 'How many people are in the group?'],
+ ['Receptionist', "There are twelve people in the group. Parking is free after one o'clock on Sundays."],
+ ['Daniel', 'And what if I need to cancel?'],
+ ['Receptionist', 'If you need to cancel, contact the centre at least forty-eight hours in advance.']
+];
+function getTurns(part){
+ if(part.audioId==='a1') return dialogueOne;
+ if(part.audioId==='a3') return [...part.audio.matchAll(/(Tutor|Maya|Leon):\s*([\s\S]*?)(?=(?:Tutor|Maya|Leon):|$)/g)].map(m=>[m[1],m[2].trim()]);
+ return [['Narrator',part.audio]];
+}
+function englishVoices(){
+ const seen=new Set();
+ return speechSynthesis.getVoices().filter(v=>/^en(?:[-_]|$)/i.test(v.lang)).filter(v=>{const key=v.voiceURI||v.name;if(seen.has(key))return false;seen.add(key);return true;}).sort((a,b)=>Number(/natural|neural|online|premium|enhanced/i.test(b.name))-Number(/natural|neural|online|premium|enhanced/i.test(a.name)));
+}
+let activeAudio=null;
 const played={};
-function speakPart(id,btn){
- const p=partsData.find(x=>x.audioId===id); if(played[id]){alert('This part has already been played once.');return;}
- if(!('speechSynthesis'in window)){alert('Speech playback is not supported in this browser.');return;}
- played[id]=true;btn.disabled=true;
- const u=new SpeechSynthesisUtterance(p.audio);u.rate=.92;u.pitch=1;
- const voices=speechSynthesis.getVoices();const en=voices.find(v=>/^en/i.test(v.lang));if(en)u.voice=en;
- const st=document.getElementById(p.statusId);st.textContent='Playing…';u.onend=()=>st.textContent='Played once';
- speechSynthesis.cancel();speechSynthesis.speak(u);
+function setAudioLock(locked){document.querySelectorAll('.playBtn').forEach(b=>b.disabled=locked||!!played[b.dataset.id]);}
+async function speakPart(id,btn){
+ const part=partsData.find(x=>x.audioId===id);
+ if(!part||played[id]||activeAudio)return;
+ if(!('speechSynthesis' in window)){alert('Speech playback is not supported in this browser.');return;}
+ const st=document.getElementById(part.statusId);
+ activeAudio=id;setAudioLock(true);
+ let voices=englishVoices();
+ if(!voices.length){st.textContent='Loading English voices…';await new Promise(resolve=>{const timer=setTimeout(done,1800);function done(){clearTimeout(timer);speechSynthesis.removeEventListener('voiceschanged',done);resolve();}speechSynthesis.addEventListener('voiceschanged',done);});voices=englishVoices();}
+ const turns=getTurns(part),roles=[...new Set(turns.map(t=>t[0]))];
+ if(voices.length<roles.length){
+  st.textContent='This device needs '+roles.length+' distinct English voices for this part. Try a browser/device with more English voices. / يحتاج هذا الجزء إلى '+roles.length+' أصوات إنجليزية مختلفة.';
+  activeAudio=null;setAudioLock(false);return;
+ }
+ const assigned=Object.fromEntries(roles.map((role,i)=>[role,voices[i]]));
+ let index=0;let started=false;let failed=false;
+ function fail(){if(failed)return;failed=true;activeAudio=null;if(!started)delete played[id];setAudioLock(false);st.textContent=started?'Audio interrupted. Use Reset to start a fresh attempt.':'Audio could not start. You may try again.';}
+ function next(){
+  if(failed)return;
+  if(index===turns.length){activeAudio=null;setAudioLock(false);st.textContent='Played once · slower multi-voice playback';return;}
+  const [role,text]=turns[index++];
+  const u=new SpeechSynthesisUtterance(text);u.voice=assigned[role];u.lang=assigned[role].lang;u.rate=.82;u.pitch=1;
+  // Keep a strong reference until completion (some browsers otherwise stop long speech).
+  window.sshListeningUtterance=u;
+  u.onstart=()=>{started=true;played[id]=true;st.textContent='Playing · '+role;};
+  u.onend=()=>setTimeout(next,550);
+  u.onerror=fail;
+  try{speechSynthesis.speak(u);}catch(e){fail();}
+ }
+ speechSynthesis.cancel();next();
 }
 document.querySelectorAll('.playBtn').forEach(b=>b.addEventListener('click',()=>speakPart(b.dataset.id,b)));
 
@@ -173,7 +223,7 @@ document.getElementById('submitBtn').addEventListener('click',()=>{
  localStorage.setItem('ssh_ielts_diag_listening',JSON.stringify({raw:total,percent:overall,priorities:priorities.map(x=>x[0]),saved:new Date().toISOString()})); r.scrollIntoView({behavior:'smooth',block:'start'});
 });
 document.getElementById('resetBtn').addEventListener('click',()=>{
- speechSynthesis.cancel();location.reload();
+ if('speechSynthesis' in window)speechSynthesis.cancel();location.reload();
 });
 progress();
 </script>
