@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 10 Writing · Module 3 Article | Smart Students Hub</title>
+<style>
+:root{--navy:#142b5f;--blue:#2f6fed;--green:#2fa36b;--gold:#d8a93a;--purple:#7b1fa2;--bg:#f5f8fc;--text:#1f2a44;--muted:#5b6780;--border:#d9e3f0}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,#102a56,#2f6fed);color:#fff;padding:34px 18px;text-align:center}
+header h1{margin:8px 0;font-size:clamp(2rem,5vw,3.4rem)}header p{max-width:820px;margin:8px auto}
+.wrap{max-width:1040px;margin:auto;padding:20px}.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 10px 30px rgba(20,43,95,.06)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.station{border:1px solid var(--border);border-radius:16px;padding:18px;background:#fff}
+.station.locked{opacity:.55}.badge{display:inline-block;padding:5px 10px;border-radius:999px;font-size:.85rem;font-weight:800;background:#eef4fb;color:var(--navy)}
+.btn{display:inline-block;border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer;text-decoration:none;background:var(--blue);color:#fff}
+.btn.secondary{background:#fff;color:var(--navy);border:2px solid var(--blue)}.btn.green{background:var(--green)}.btn.gold{background:var(--gold);color:var(--navy)}
+input,textarea,select{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;font:inherit;margin:6px 0 12px}
+textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.result{display:none;border:2px solid var(--gold);background:#fffaf0;border-radius:14px;padding:14px;margin-top:12px}
+.progress{height:12px;background:#e7edf7;border-radius:999px;overflow:hidden}.bar{height:100%;background:var(--green);width:0}
+.small{font-size:.9rem;color:var(--muted)}.rtl{direction:rtl;text-align:right}.score{font-size:1.2rem;font-weight:800}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{border:0;padding:8px 11px;border-radius:8px;background:#eef4fb;color:var(--navy);font-weight:800;cursor:pointer}.nav button.active{background:var(--navy);color:#fff}
+.section{display:none}.section.active{display:block}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<div style="color:#d8a93a;font-weight:800;letter-spacing:1px">SMART STUDENTS HUB · GRADE 10 WRITING</div>
+<h1>Module 3 · Article Writing</h1>
+<p><strong>Describe a Place</strong> — A Special Day at Souq Waqif</p>
+<p class="rtl"><strong>كتابة مقال وصفي عن مكان</strong> — يوم مميز في سوق واقف</p>
+</header>
+
+<div class="wrap">
+<section class="card">
+<h2>Course Goal</h2>
+<p>Write a vivid, well-organised article with a catchy title and four paragraphs: introduction, features, personal impression/highlight, and recommendation. Use descriptive adjectives, one question and one exclamation.</p>
+<p class="rtl">اكتب مقالاً وصفياً منظمًا بعنوان جذاب وأربع فقرات: مقدمة، ملامح المكان، الانطباع الشخصي وأبرز تجربة، ثم التوصية، مع استخدام صفات وصفية وسؤال وتعجب.</p>
+<div class="progress"><div id="bar" class="bar"></div></div>
+<p id="progressText"><strong>Progress:</strong> 0 / 10 stations</p>
+<p class="small">Stations 1–5 are automatically marked. Stations 6–10 save your writing locally and require teacher review. Minimum progression score: 10/20.</p>
+</section>
+
+<section class="card">
+<div class="nav" id="nav"></div>
+</section>
+
+<section id="s1" class="card section">
+<span class="badge">Station 1 · Words & Meaning</span>
+<h2>Build the vocabulary</h2>
+<p>Match each word to the best meaning.</p>
+<div class="q" data-a="traditional"><p>1. showing the customs of a place</p><select><option></option><option>crowded</option><option>traditional</option><option>colourful</option></select></div>
+<div class="q" data-a="colourful"><p>2. full of bright colours</p><select><option></option><option>colourful</option><option>peaceful</option><option>modern</option></select></div>
+<div class="q" data-a="crowded"><p>3. full of many people</p><select><option></option><option>crowded</option><option>ancient</option><option>quiet</option></select></div>
+<div class="q" data-a="memorable"><p>4. easy to remember because it was special</p><select><option></option><option>ordinary</option><option>memorable</option><option>empty</option></select></div>
+<button class="btn" onclick="markAuto(1,4)">Check Station 1</button><div id="r1" class="result"></div>
+</section>
+
+<section id="s2" class="card section">
+<span class="badge">Station 2 · Main Verbs</span>
+<h2>Choose precise verbs</h2>
+<div class="q" data-a="visited"><p>1. Last Friday, I ___ Souq Waqif with my family.</p><select><option></option><option>visited</option><option>visiting</option><option>visit</option></select></div>
+<div class="q" data-a="explored"><p>2. We ___ the narrow streets and small shops.</p><select><option></option><option>explored</option><option>exploring</option><option>explores</option></select></div>
+<div class="q" data-a="enjoyed"><p>3. I really ___ the traditional food.</p><select><option></option><option>enjoyed</option><option>enjoying</option><option>enjoys</option></select></div>
+<div class="q" data-a="recommend"><p>4. I would ___ this place to visitors.</p><select><option></option><option>recommended</option><option>recommend</option><option>recommending</option></select></div>
+<button class="btn" onclick="markAuto(2,4)">Check Station 2</button><div id="r2" class="result"></div>
+</section>
+
+<section id="s3" class="card section">
+<span class="badge">Station 3 · Linking Words</span>
+<h2>Connect ideas smoothly</h2>
+<div class="q" data-a="First"><p>1. ___, we walked through the main market.</p><select><option></option><option>First</option><option>However</option><option>Because</option></select></div>
+<div class="q" data-a="Then"><p>2. ___, we stopped for a traditional meal.</p><select><option></option><option>Then</option><option>Although</option><option>Finally</option></select></div>
+<div class="q" data-a="because"><p>3. I liked the atmosphere ___ it felt lively and authentic.</p><select><option></option><option>because</option><option>but</option><option>so</option></select></div>
+<div class="q" data-a="Finally"><p>4. ___, I bought a small souvenir before leaving.</p><select><option></option><option>First</option><option>Finally</option><option>While</option></select></div>
+<button class="btn" onclick="markAuto(3,4)">Check Station 3</button><div id="r3" class="result"></div>
+</section>
+
+<section id="s4" class="card section">
+<span class="badge">Station 4 · Reference Words</span>
+<h2>Avoid unnecessary repetition</h2>
+<div class="q" data-a="It"><p>1. Souq Waqif is in Doha. ___ is famous for its traditional atmosphere.</p><select><option></option><option>It</option><option>They</option><option>We</option></select></div>
+<div class="q" data-a="They"><p>2. The shops sell spices and souvenirs. ___ are popular with visitors.</p><select><option></option><option>It</option><option>They</option><option>This</option></select></div>
+<div class="q" data-a="This"><p>3. I watched a street performance. ___ was the highlight of my visit.</p><select><option></option><option>Those</option><option>This</option><option>They</option></select></div>
+<div class="q" data-a="there"><p>4. We spent two hours at the market and ate dinner ___.</p><select><option></option><option>there</option><option>them</option><option>this</option></select></div>
+<button class="btn" onclick="markAuto(4,4)">Check Station 4</button><div id="r4" class="result"></div>
+</section>
+
+<section id="s5" class="card section">
+<span class="badge">Station 5 · Sentence Order</span>
+<h2>Build the article structure</h2>
+<p>Choose the best paragraph order.</p>
+<div class="q" data-a="Introduction → Features → Personal impression/highlight → Recommendation">
+<select><option></option><option>Features → Recommendation → Introduction → Highlight</option><option>Introduction → Features → Personal impression/highlight → Recommendation</option><option>Recommendation → Introduction → Features → Highlight</option></select>
+</div>
+<p>Which title is most suitable?</p>
+<div class="q" data-a="A Special Day at Souq Waqif"><select><option></option><option>My Homework</option><option>A Special Day at Souq Waqif</option><option>Places</option></select></div>
+<p>Which sentence works best as a recommendation?</p>
+<div class="q" data-a="I strongly recommend visiting Souq Waqif because it offers a memorable experience."><select><option></option><option>I strongly recommend visiting Souq Waqif because it offers a memorable experience.</option><option>There are shops.</option><option>I went home.</option></select></div>
+<p>Which line adds an exclamation naturally?</p>
+<div class="q" data-a="What an unforgettable evening!"><select><option></option><option>What an unforgettable evening!</option><option>The market is in Doha.</option><option>I saw people.</option></select></div>
+<button class="btn" onclick="markAuto(5,4)">Check Station 5</button><div id="r5" class="result"></div>
+</section>
+
+<section id="s6" class="card section">
+<span class="badge">Station 6 · Write the Opening</span>
+<h2>Introduction paragraph</h2>
+<p>Write 45–70 words. Introduce Souq Waqif, when you visited, who you went with and why the day was special.</p>
+<textarea id="t6" placeholder="Write your introduction here..."></textarea>
+<button class="btn green" onclick="saveWriting(6)">Save Station 6</button><div id="r6" class="result"></div>
+</section>
+
+<section id="s7" class="card section">
+<span class="badge">Station 7 · Write the Body</span>
+<h2>Features paragraph</h2>
+<p>Write 60–90 words describing the place. Include at least three descriptive adjectives and one linking word.</p>
+<textarea id="t7" placeholder="Describe the streets, shops, food, sounds, colours and atmosphere..."></textarea>
+<button class="btn green" onclick="saveWriting(7)">Save Station 7</button><div id="r7" class="result"></div>
+</section>
+
+<section id="s8" class="card section">
+<span class="badge">Station 8 · Personal Impression</span>
+<h2>Your highlight</h2>
+<p>Write 50–80 words about the most memorable part of your visit. Include one question or one exclamation.</p>
+<textarea id="t8" placeholder="What was the highlight? How did you feel?"></textarea>
+<button class="btn green" onclick="saveWriting(8)">Save Station 8</button><div id="r8" class="result"></div>
+</section>
+
+<section id="s9" class="card section">
+<span class="badge">Station 9 · Recommendation</span>
+<h2>Write the ending</h2>
+<p>Write 35–60 words. Give a clear recommendation and explain why someone should visit.</p>
+<textarea id="t9" placeholder="Would you recommend Souq Waqif? Why?"></textarea>
+<button class="btn green" onclick="saveWriting(9)">Save Station 9</button><div id="r9" class="result"></div>
+</section>
+
+<section id="s10" class="card section">
+<span class="badge">Station 10 · Independent Writing</span>
+<h2>Write the full article</h2>
+<p>Write your complete article with a catchy title and four paragraphs. Aim for 180–230 words.</p>
+<input id="title10" placeholder="Article title">
+<textarea id="t10" style="min-height:320px" placeholder="Write the full article here..."></textarea>
+<div class="grid">
+<div><strong id="wc10">0 words</strong></div><div class="small">Checklist: 4 paragraphs · descriptive adjectives · question · exclamation · recommendation</div>
+</div>
+<button class="btn gold" onclick="saveWriting(10)">Save Final Article</button>
+<button class="btn secondary" onclick="copyFinal()">Copy for Teacher</button>
+<div id="r10" class="result"></div>
+</section>
+
+<section class="card">
+<h2>Teacher Review</h2>
+<p>Stations 6–10 are saved only in this browser. The student can use <strong>Copy for Teacher</strong> at Station 10 and paste the article into the teacher’s approved submission channel.</p>
+<p class="rtl">المحطات 6–10 تُحفظ على هذا المتصفح فقط. يمكن للطالب استخدام زر <strong>Copy for Teacher</strong> ثم إرسال النص عبر وسيلة التسليم التي يحددها المعلم.</p>
+</section>
+</div>
+
+<script>
+const KEY='ssh_g10_writing_article_v1';
+let state={scores:{},writing:{},completed:{}};
+try{state=Object.assign(state,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));renderProgress()}
+function showStation(n){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById('s'+n).classList.add('active');document.querySelectorAll('#nav button').forEach((b,i)=>b.classList.toggle('active',i===n-1));location.hash='station-'+n}
+function makeNav(){const nav=document.getElementById('nav');for(let i=1;i<=10;i++){const b=document.createElement('button');b.textContent='Station '+i;b.onclick=()=>showStation(i);nav.appendChild(b)}}
+function norm(s){return(s||'').trim().toLowerCase()}
+function markAuto(n,total){const s=document.getElementById('s'+n);const qs=[...s.querySelectorAll('.q')];let correct=0;qs.forEach(q=>{const el=q.querySelector('select,input');if(el&&norm(el.value)===norm(q.dataset.a))correct++});const score=Math.round(correct/total*20);state.scores[n]=score;state.completed[n]=score>=10;save();const r=document.getElementById('r'+n);r.style.display='block';r.innerHTML='<div class="score">'+score+'/20</div><p>'+(score>=10?'Progression achieved. You may continue.':'Review this station and try again. You need at least 10/20.')+'</p>'}
+function saveWriting(n){const id=n===10?'t10':'t'+n;const text=document.getElementById(id).value.trim();const title=n===10?document.getElementById('title10').value.trim():'';if(text.split(/\s+/).filter(Boolean).length<15){alert('Please write a fuller response before saving.');return}state.writing[n]={text,title,saved:new Date().toISOString()};state.completed[n]=true;save();const r=document.getElementById('r'+n);r.style.display='block';r.innerHTML='<p><strong>Saved locally.</strong> Teacher review required before an official score is recorded.</p>'}
+function renderProgress(){const done=Object.values(state.completed).filter(Boolean).length;document.getElementById('bar').style.width=(done/10*100)+'%';document.getElementById('progressText').innerHTML='<strong>Progress:</strong> '+done+' / 10 stations';for(let n=6;n<=10;n++){const v=state.writing[n];const el=document.getElementById('t'+n);if(v&&el)el.value=v.text||'';if(n===10&&v)document.getElementById('title10').value=v.title||''}}
+function copyFinal(){const t=(document.getElementById('title10').value+'\n\n'+document.getElementById('t10').value).trim();navigator.clipboard.writeText(t).then(()=>alert('Copied. Paste it into your teacher submission channel.'))}
+document.getElementById('t10').addEventListener('input',()=>{document.getElementById('wc10').textContent=document.getElementById('t10').value.trim().split(/\s+/).filter(Boolean).length+' words'})
+makeNav();renderProgress();showStation(1);
+</script>
+</body></html>
