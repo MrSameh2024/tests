@@ -21,7 +21,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 .nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{border:0;padding:8px 11px;border-radius:8px;background:#eef4fb;color:var(--navy);font-weight:800;cursor:pointer}.nav button.active{background:var(--navy);color:#fff}
 .section{display:none}.section.active{display:block}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
-</style>
+.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:3px 7px;cursor:pointer;font-weight:700}</style>
 </head>
 <body>
 <header>
@@ -155,7 +155,8 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 </section>
 </div>
 
-<script>
+<script>function speak(text){if(!("speechSynthesis" in window)){alert("Audio pronunciation is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=.88;speechSynthesis.speak(u);}
+
 const KEY='ssh_g10_writing_article_v1';
 let state={scores:{},writing:{},completed:{}};
 try{state=Object.assign(state,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
