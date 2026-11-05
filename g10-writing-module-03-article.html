@@ -21,7 +21,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 .nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{border:0;padding:8px 11px;border-radius:8px;background:#eef4fb;color:var(--navy);font-weight:800;cursor:pointer}.nav button.active{background:var(--navy);color:#fff}
 .section{display:none}.section.active{display:block}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
-.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:3px 7px;cursor:pointer;font-weight:700}.ssh-bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.ssh-bank-box{background:#f8fbff;border:1px solid #d9e3f0;border-radius:14px;padding:16px}.ssh-bi-sentence,.ssh-dict-row{border-top:1px solid #d9e3f0;padding:12px 0}.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:4px 8px;cursor:pointer}.rtl{direction:rtl;text-align:right}</style>
+.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:3px 7px;cursor:pointer;font-weight:700}.ssh-bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.ssh-bank-box{background:#f8fbff;border:1px solid #d9e3f0;border-radius:14px;padding:16px}.ssh-bi-sentence,.ssh-dict-row{border-top:1px solid #d9e3f0;padding:12px 0}.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:4px 8px;cursor:pointer}.rtl{direction:rtl;text-align:right}.ssh-inline-support{margin:6px 0 12px;padding:8px 10px;background:#f7f9fd;border-left:3px solid #2f6fed;border-radius:8px}.ssh-inline-support .rtl{margin-top:4px}</style>
 </head>
 <body>
 <header>
@@ -198,6 +198,99 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 </div>
 
 <script>
+const sshStationLangArticle={
+"showing the customs of a place":"يعكس عادات وتقاليد المكان",
+"traditional":"تقليدي",
+"crowded":"مزدحم",
+"colourful":"زاهي الألوان",
+"peaceful":"هادئ",
+"modern":"حديث",
+"full of bright colours":"مليء بالألوان الزاهية",
+"easy to remember because it was special":"سهل التذكر لأنه كان مميزًا",
+"memorable":"لا يُنسى",
+"ordinary":"عادي",
+"empty":"فارغ",
+"Last Friday, I ___ Souq Waqif with my family.":"يوم الجمعة الماضي، ___ سوق واقف مع أسرتي.",
+"visited":"زرت",
+"visiting":"زيارة / أثناء الزيارة",
+"visit":"يزور",
+"We ___ the narrow streets and small shops.":"نحن ___ الشوارع الضيقة والمتاجر الصغيرة.",
+"explored":"استكشفنا",
+"exploring":"استكشاف",
+"explores":"يستكشف",
+"I really ___ the traditional food.":"لقد ___ حقًا بالطعام التقليدي.",
+"enjoyed":"استمتعت",
+"enjoying":"الاستمتاع",
+"enjoys":"يستمتع",
+"I would ___ this place to visitors.":"سوف ___ بهذا المكان للزوار.",
+"recommended":"أوصى",
+"recommend":"أوصي",
+"recommending":"التوصية",
+"___, we walked through the main market.":"___، مشينا عبر السوق الرئيسي.",
+"First":"أولًا",
+"However":"ومع ذلك",
+"Because":"لأن",
+"___, we stopped for a traditional meal.":"___، توقفنا لتناول وجبة تقليدية.",
+"Then":"ثم",
+"Although":"على الرغم من",
+"Finally":"أخيرًا",
+"I liked the atmosphere ___ it felt lively and authentic.":"أعجبتني الأجواء ___ لأنها بدت نابضة بالحياة وأصيلة.",
+"because":"لأن",
+"but":"لكن",
+"so":"لذلك",
+"___, I bought a small souvenir before leaving.":"___، اشتريت تذكارًا صغيرًا قبل المغادرة.",
+"While":"بينما",
+"Souq Waqif is in Doha. ___ is famous for its traditional atmosphere.":"يقع سوق واقف في الدوحة. ___ مشهور بأجوائه التقليدية.",
+"It":"هو / إنه",
+"They":"هم / إنها للجمع",
+"We":"نحن",
+"The shops sell spices and souvenirs. ___ are popular with visitors.":"تبيع المتاجر التوابل والهدايا التذكارية. ___ تحظى بشعبية لدى الزوار.",
+"This":"هذا",
+"I watched a street performance. ___ was the highlight of my visit.":"شاهدت عرضًا في الشارع. ___ كان أبرز ما في زيارتي.",
+"Those":"تلك",
+"We spent two hours at the market and ate dinner ___.":"قضينا ساعتين في السوق وتناولنا العشاء ___.",
+"there":"هناك",
+"them":"إياهم / لهم",
+"Correct paragraph order":"ترتيب الفقرات الصحيح",
+"Introduction → Features → Personal impression/highlight → Recommendation":"مقدمة ← ملامح المكان ← الانطباع الشخصي/أبرز تجربة ← التوصية",
+"Features → Recommendation → Introduction → Highlight":"الملامح ← التوصية ← المقدمة ← أبرز تجربة",
+"Recommendation → Introduction → Features → Highlight":"التوصية ← المقدمة ← الملامح ← أبرز تجربة",
+"Which title is most suitable?":"أي عنوان هو الأنسب؟",
+"My Homework":"واجبي المنزلي",
+"A Special Day at Souq Waqif":"يوم مميز في سوق واقف",
+"Places":"أماكن",
+"Which sentence works best as a recommendation?":"أي جملة تصلح أفضل كتوصية؟",
+"I strongly recommend visiting Souq Waqif because it offers a memorable experience.":"أوصي بشدة بزيارة سوق واقف لأنه يقدم تجربة لا تُنسى.",
+"There are shops.":"هناك متاجر.",
+"I went home.":"ذهبت إلى المنزل.",
+"Which line adds an exclamation naturally?":"أي جملة تضيف تعجبًا بصورة طبيعية؟",
+"What an unforgettable evening!":"يا لها من أمسية لا تُنسى!",
+"The market is in Doha.":"يقع السوق في الدوحة.",
+"I saw people.":"رأيت أشخاصًا.",
+"Write 45–70 words. Introduce Souq Waqif, when you visited, who you went with and why the day was special.":"اكتب من 45 إلى 70 كلمة. قدّم سوق واقف، ومتى زرته، ومع من ذهبت، ولماذا كان اليوم مميزًا.",
+"Write 60–90 words describing the place. Include at least three descriptive adjectives and one linking word.":"اكتب من 60 إلى 90 كلمة تصف المكان، مع ثلاث صفات وصفية على الأقل وأداة ربط واحدة.",
+"Write 50–80 words about the most memorable part of your visit. Include one question or one exclamation.":"اكتب من 50 إلى 80 كلمة عن أكثر جزء لا يُنسى في زيارتك، مع سؤال أو تعجب واحد.",
+"Write 35–60 words. Give a clear recommendation and explain why someone should visit.":"اكتب من 35 إلى 60 كلمة. قدم توصية واضحة واشرح لماذا ينبغي زيارة المكان.",
+"Write your complete article with a catchy title and four paragraphs. Aim for 180–230 words.":"اكتب مقالك كاملًا بعنوان جذاب وأربع فقرات، في حدود 180–230 كلمة."
+};
+function sshStripText(el){const clone=el.cloneNode(true);clone.querySelectorAll("button,.rtl,.ssh-inline-support").forEach(x=>x.remove());return clone.textContent.replace(/^\s*\d+\.\s*/,"").trim();}
+function sshEnhanceStations(dict){
+ document.querySelectorAll(".section").forEach(sec=>{
+   sec.querySelectorAll(".q p, .section>p").forEach(p=>{
+     const en=sshStripText(p); if(!en||!dict[en]||p.dataset.sshEnhanced)return;
+     p.dataset.sshEnhanced="1";
+     const s=document.createElement("div");s.className="ssh-inline-support";
+     s.innerHTML='<button type="button" class="speak" onclick="sshSpeak('+JSON.stringify(en)+')">🔊 Listen · استمع</button><div class="rtl">'+dict[en]+'</div>';
+     p.after(s);
+   });
+   sec.querySelectorAll("select").forEach(sel=>{
+     if(sel.dataset.sshEnhanced)return;sel.dataset.sshEnhanced="1";
+     const support=document.createElement("div");support.className="ssh-inline-support";sel.after(support);
+     sel.addEventListener("change",()=>{const en=sel.value||sel.options[sel.selectedIndex]?.text||"";if(!en)return;sshSpeak(en);support.innerHTML='<div class="rtl">'+(dict[en]||"")+'</div>';});
+   });
+ });
+}
+
 function sshSpeak(text,rate){if(!("speechSynthesis" in window)){alert("Audio is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate||.82;speechSynthesis.speak(u);}
 function sshNorm(s){return(s||"").toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();}
 function sshCheckDict(id,en,ar){const r=document.getElementById(id+"r");r.style.display="block";const ok=sshNorm(document.getElementById(id).value)===sshNorm(en);r.innerHTML=ok?'<strong>Correct · صحيح</strong><p>'+en+'</p><p class="rtl">'+ar+'</p>':'<strong>Try again · حاول مرة أخرى</strong><p>'+en+'</p><p class="rtl">'+ar+'</p>';}
@@ -220,6 +313,6 @@ function saveWriting(n){const id=n===10?'t10':'t'+n;const text=document.getEleme
 function renderProgress(){const done=Object.values(state.completed).filter(Boolean).length;document.getElementById('bar').style.width=(done/10*100)+'%';document.getElementById('progressText').innerHTML='<strong>Progress:</strong> '+done+' / 10 stations';for(let n=6;n<=10;n++){const v=state.writing[n];const el=document.getElementById('t'+n);if(v&&el)el.value=v.text||'';if(n===10&&v)document.getElementById('title10').value=v.title||''}}
 function copyFinal(){const t=(document.getElementById('title10').value+'\n\n'+document.getElementById('t10').value).trim();navigator.clipboard.writeText(t).then(()=>alert('Copied. Paste it into your teacher submission channel.'))}
 document.getElementById('t10').addEventListener('input',()=>{document.getElementById('wc10').textContent=document.getElementById('t10').value.trim().split(/\s+/).filter(Boolean).length+' words'})
-makeNav();renderProgress();sshBuildRandomArticle();showStation(1);
+makeNav();renderProgress();sshBuildRandomArticle();sshEnhanceStations(sshStationLangArticle);showStation(1);
 </script>
 </body></html>
