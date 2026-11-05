@@ -335,7 +335,7 @@ window.sshLock=function(on){['sshEmail','sshPhone','sshConsent'].forEach(id=>{co
 window.sshSend=function(holder,payload){
   const box=document.createElement('div');box.className='ssh-status';holder.prepend(box);
   const em=$('sshEmail').value.trim(),ph=$('sshPhone').value.trim();
-  const body=Object.assign({},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
+  const body=Object.assign({type:'submission',page:location.pathname.split('/').pop()||''},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
   const go=()=>{
     if(!ENDPOINT){box.className='ssh-status no';box.innerHTML='<b>Sending is not switched on yet.</b> Print your report and give it to your teacher.<span class="ar">الإرسال غير مفعّل بعد. اطبع تقريرك وسلّمه لمعلمك.</span>';return}
     box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b> Keep this page open.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة.</span>';
