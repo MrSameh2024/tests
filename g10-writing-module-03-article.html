@@ -21,7 +21,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 .nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{border:0;padding:8px 11px;border-radius:8px;background:#eef4fb;color:var(--navy);font-weight:800;cursor:pointer}.nav button.active{background:var(--navy);color:#fff}
 .section{display:none}.section.active{display:block}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
-.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:3px 7px;cursor:pointer;font-weight:700}</style>
+.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:3px 7px;cursor:pointer;font-weight:700}.ssh-bank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.ssh-bank-box{background:#f8fbff;border:1px solid #d9e3f0;border-radius:14px;padding:16px}.ssh-bi-sentence,.ssh-dict-row{border-top:1px solid #d9e3f0;padding:12px 0}.speak{border:1px solid #d9e3f0;background:#fff;border-radius:8px;padding:4px 8px;cursor:pointer}.rtl{direction:rtl;text-align:right}</style>
 </head>
 <body>
 <header>
@@ -41,14 +41,56 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <p class="small">Stations 1–5 are automatically marked. Stations 6–10 save your writing locally and require teacher review. Minimum progression score: 10/20.</p>
 </section>
 
-<section class="card">
+<section class="card ssh-learning-bank">
+<span class="badge">Language Bank · بنك اللغة</span>
+<h2>Language for Article Writing · لغة كتابة المقال</h2>
+<p>Listen to each word, verb and linker before using it in your article.</p>
+<p class="rtl">استمع إلى كل كلمة وفعل وأداة ربط قبل استخدامها في مقالك.</p>
+<div class="ssh-bank-grid">
+<div class="ssh-bank-box"><h3>🔑 Key Words · الكلمات الأساسية</h3>
+<p><strong>traditional</strong> — تقليدي <button class="speak" onclick="sshSpeak('traditional')">🔊</button></p>
+<p><strong>colourful</strong> — زاهي الألوان <button class="speak" onclick="sshSpeak('colourful')">🔊</button></p>
+<p><strong>crowded</strong> — مزدحم <button class="speak" onclick="sshSpeak('crowded')">🔊</button></p>
+<p><strong>memorable</strong> — لا يُنسى <button class="speak" onclick="sshSpeak('memorable')">🔊</button></p>
+<p><strong>lively</strong> — نابض بالحياة <button class="speak" onclick="sshSpeak('lively')">🔊</button></p>
+<p><strong>atmosphere</strong> — أجواء <button class="speak" onclick="sshSpeak('atmosphere')">🔊</button></p></div>
+<div class="ssh-bank-box"><h3>⚙️ Key Verbs · الأفعال الأساسية</h3>
+<p><strong>visit</strong> — يزور <button class="speak" onclick="sshSpeak('visit')">🔊</button></p>
+<p><strong>explore</strong> — يستكشف <button class="speak" onclick="sshSpeak('explore')">🔊</button></p>
+<p><strong>enjoy</strong> — يستمتع <button class="speak" onclick="sshSpeak('enjoy')">🔊</button></p>
+<p><strong>notice</strong> — يلاحظ <button class="speak" onclick="sshSpeak('notice')">🔊</button></p>
+<p><strong>recommend</strong> — يوصي <button class="speak" onclick="sshSpeak('recommend')">🔊</button></p>
+<p><strong>remember</strong> — يتذكر <button class="speak" onclick="sshSpeak('remember')">🔊</button></p></div>
+<div class="ssh-bank-box"><h3>🔗 Linkers · أدوات الربط</h3>
+<p><strong>First,</strong> — أولًا <button class="speak" onclick="sshSpeak('First')">🔊</button></p>
+<p><strong>Then,</strong> — ثم <button class="speak" onclick="sshSpeak('Then')">🔊</button></p>
+<p><strong>In addition,</strong> — بالإضافة إلى ذلك <button class="speak" onclick="sshSpeak('In addition')">🔊</button></p>
+<p><strong>Because</strong> — لأن <button class="speak" onclick="sshSpeak('Because')">🔊</button></p>
+<p><strong>Finally,</strong> — أخيرًا <button class="speak" onclick="sshSpeak('Finally')">🔊</button></p>
+<p><strong>Overall,</strong> — بوجه عام <button class="speak" onclick="sshSpeak('Overall')">🔊</button></p></div></div>
+<h3>🎧 Model Sentences · جمل نموذجية</h3>
+<div class="ssh-bi-sentence"><p><strong>Souq Waqif is one of the most traditional places in Doha.</strong> <button class="speak" onclick="sshSpeak('Souq Waqif is one of the most traditional places in Doha.')">🔊</button></p><p class="rtl">يُعد سوق واقف واحدًا من أكثر الأماكن التراثية في الدوحة.</p></div>
+<div class="ssh-bi-sentence"><p><strong>The narrow streets were colourful, lively and full of visitors.</strong> <button class="speak" onclick="sshSpeak('The narrow streets were colourful, lively and full of visitors.')">🔊</button></p><p class="rtl">كانت الشوارع الضيقة زاهية ونابضة بالحياة ومليئة بالزوار.</p></div>
+<div class="ssh-bi-sentence"><p><strong>What an unforgettable evening!</strong> <button class="speak" onclick="sshSpeak('What an unforgettable evening!')">🔊</button></p><p class="rtl">يا لها من أمسية لا تُنسى!</p></div>
+<div class="ssh-bi-sentence"><p><strong>I strongly recommend visiting Souq Waqif.</strong> <button class="speak" onclick="sshSpeak('I strongly recommend visiting Souq Waqif.')">🔊</button></p><p class="rtl">أوصي بشدة بزيارة سوق واقف.</p></div>
+</section>
+<section class="card"><span class="badge">Dictation Lab · مختبر الإملاء</span><h2>Sentence-by-Sentence Dictation · إملاء جملة بجملة</h2><p>Listen to one sentence, type exactly what you hear, then check your answer.</p><p class="rtl">استمع إلى جملة واحدة، واكتب ما تسمعه بدقة، ثم تحقّق من إجابتك.</p><div class="ssh-dict-row"><p><strong>Sentence 1 · الجملة 1</strong></p><p class="rtl">يُعد سوق واقف واحدًا من أكثر الأماكن التراثية في الدوحة.</p><button class="btn" onclick="sshSpeak("Souq Waqif is one of the most traditional places in Doha.",.66)">🔊 Play · تشغيل</button> <button class="btn secondary" onclick="sshSpeak("Souq Waqif is one of the most traditional places in Doha.",.5)">🐢 Slow · بطيء</button><input id="artd1" placeholder="Type the English sentence · اكتب الجملة الإنجليزية"><button class="btn secondary" onclick="sshCheckDict('artd1',"Souq Waqif is one of the most traditional places in Doha.","يُعد سوق واقف واحدًا من أكثر الأماكن التراثية في الدوحة.")">Check · تحقق</button><div id="artd1r" class="result"></div></div><div class="ssh-dict-row"><p><strong>Sentence 2 · الجملة 2</strong></p><p class="rtl">كانت الشوارع الضيقة زاهية ونابضة بالحياة ومليئة بالزوار.</p><button class="btn" onclick="sshSpeak("The narrow streets were colourful, lively and full of visitors.",.66)">🔊 Play · تشغيل</button> <button class="btn secondary" onclick="sshSpeak("The narrow streets were colourful, lively and full of visitors.",.5)">🐢 Slow · بطيء</button><input id="artd2" placeholder="Type the English sentence · اكتب الجملة الإنجليزية"><button class="btn secondary" onclick="sshCheckDict('artd2',"The narrow streets were colourful, lively and full of visitors.","كانت الشوارع الضيقة زاهية ونابضة بالحياة ومليئة بالزوار.")">Check · تحقق</button><div id="artd2r" class="result"></div></div><div class="ssh-dict-row"><p><strong>Sentence 3 · الجملة 3</strong></p><p class="rtl">استمتعت باستكشاف المتاجر وتذوق الطعام التقليدي.</p><button class="btn" onclick="sshSpeak("I enjoyed exploring the shops and tasting the traditional food.",.66)">🔊 Play · تشغيل</button> <button class="btn secondary" onclick="sshSpeak("I enjoyed exploring the shops and tasting the traditional food.",.5)">🐢 Slow · بطيء</button><input id="artd3" placeholder="Type the English sentence · اكتب الجملة الإنجليزية"><button class="btn secondary" onclick="sshCheckDict('artd3',"I enjoyed exploring the shops and tasting the traditional food.","استمتعت باستكشاف المتاجر وتذوق الطعام التقليدي.")">Check · تحقق</button><div id="artd3r" class="result"></div></div><div class="ssh-dict-row"><p><strong>Sentence 4 · الجملة 4</strong></p><p class="rtl">يا لها من أمسية لا تُنسى!</p><button class="btn" onclick="sshSpeak("What an unforgettable evening!",.66)">🔊 Play · تشغيل</button> <button class="btn secondary" onclick="sshSpeak("What an unforgettable evening!",.5)">🐢 Slow · بطيء</button><input id="artd4" placeholder="Type the English sentence · اكتب الجملة الإنجليزية"><button class="btn secondary" onclick="sshCheckDict('artd4',"What an unforgettable evening!","يا لها من أمسية لا تُنسى!")">Check · تحقق</button><div id="artd4r" class="result"></div></div></section>
+<section class="card"><span class="badge">Paragraph Completion 1 · إكمال الفقرة 1</span><h2>Complete in Sequence · أكمل بالترتيب</h2><p>Choose the correct missing sentence for each gap.</p><p class="rtl">اختر الجملة الصحيحة الناقصة لكل فراغ.</p>
+<p>Last Friday, I visited Souq Waqif with my family.<br><span class="rtl">يوم الجمعة الماضي، زرت سوق واقف مع أسرتي.</span></p>
+<select id="artg1"><option value="">Choose · اختر</option><option value="a">The market was colourful, lively and full of visitors. — كان السوق زاهيًا ونابضًا بالحياة ومليئًا بالزوار.</option><option value="x">I strongly recommend visiting Souq Waqif. — أوصي بشدة بزيارة سوق واقف.</option></select>
+<p>We explored the narrow streets and enjoyed the traditional food.<br><span class="rtl">استكشفنا الشوارع الضيقة واستمتعنا بالطعام التقليدي.</span></p>
+<select id="artg2"><option value="">Choose · اختر</option><option value="b">The highlight was a wonderful street performance. — كان أبرز ما في الزيارة عرضًا رائعًا في الشارع.</option><option value="x">The market closes every morning. — يغلق السوق كل صباح.</option></select>
+<p>What an unforgettable evening!<br><span class="rtl">يا لها من أمسية لا تُنسى!</span></p>
+<select id="artg3"><option value="">Choose · اختر</option><option value="c">I strongly recommend visiting Souq Waqif. — أوصي بشدة بزيارة سوق واقف.</option><option value="x">I forgot the whole visit. — نسيت الزيارة كلها.</option></select>
+<button class="btn" onclick="sshCheckGuidedArticle()">Check · تحقق</button><div id="artguided" class="result"></div></section>
+<section class="card"><span class="badge">Paragraph Completion 2 · إكمال الفقرة 2</span><h2>Random Sentence Challenge · تحدي الجمل العشوائية</h2><p>The missing sentences are shuffled. Rebuild the paragraph correctly.</p><p class="rtl">تم خلط الجمل الناقصة. أعد بناء الفقرة بالترتيب الصحيح.</p><div id="artrandom"></div><button class="btn secondary" onclick="sshBuildRandomArticle()">🔀 Shuffle · خلط</button> <button class="btn" onclick="sshCheckRandomArticle()">Check · تحقق</button><div id="artrandomr" class="result"></div></section><section class="card">
 <div class="nav" id="nav"></div>
 </section>
 
 <section id="s1" class="card section">
 <span class="badge">Station 1 · Words & Meaning</span>
 <h2>Build the vocabulary · ابنِ حصيلتك اللغوية</h2>
-<p>Match each word to the best meaning.</p>
+<p>Match each word to the best meaning.<br><span class="rtl">طابق كل كلمة مع أفضل معنى.</span></p>
 <div class="q" data-a="traditional"><p>1. showing the customs of a place</p><select><option></option><option>crowded</option><option>traditional</option><option>colourful</option></select></div>
 <div class="q" data-a="colourful"><p>2. full of bright colours</p><select><option></option><option>colourful</option><option>peaceful</option><option>modern</option></select></div>
 <div class="q" data-a="crowded"><p>3. full of many people</p><select><option></option><option>crowded</option><option>ancient</option><option>quiet</option></select></div>
@@ -58,7 +100,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 
 <section id="s2" class="card section">
 <span class="badge">Station 2 · Main Verbs</span>
-<h2>Choose precise verbs · اختر الأفعال الدقيقة</h2>
+<h2>Choose precise verbs · اختر الأفعال الدقيقة · اختر الأفعال الدقيقة</h2>
 <div class="q" data-a="visited"><p>1. Last Friday, I ___ Souq Waqif with my family.</p><select><option></option><option>visited</option><option>visiting</option><option>visit</option></select></div>
 <div class="q" data-a="explored"><p>2. We ___ the narrow streets and small shops.</p><select><option></option><option>explored</option><option>exploring</option><option>explores</option></select></div>
 <div class="q" data-a="enjoyed"><p>3. I really ___ the traditional food.</p><select><option></option><option>enjoyed</option><option>enjoying</option><option>enjoys</option></select></div>
@@ -68,7 +110,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 
 <section id="s3" class="card section">
 <span class="badge">Station 3 · Linking Words</span>
-<h2>Connect ideas smoothly · اربط الأفكار بسلاسة</h2>
+<h2>Connect ideas smoothly · اربط الأفكار بسلاسة · اربط الأفكار بسلاسة</h2>
 <div class="q" data-a="First"><p>1. ___, we walked through the main market.</p><select><option></option><option>First</option><option>However</option><option>Because</option></select></div>
 <div class="q" data-a="Then"><p>2. ___, we stopped for a traditional meal.</p><select><option></option><option>Then</option><option>Although</option><option>Finally</option></select></div>
 <div class="q" data-a="because"><p>3. I liked the atmosphere ___ it felt lively and authentic.</p><select><option></option><option>because</option><option>but</option><option>so</option></select></div>
@@ -78,7 +120,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 
 <section id="s4" class="card section">
 <span class="badge">Station 4 · Reference Words</span>
-<h2>Avoid unnecessary repetition · تجنب التكرار</h2>
+<h2>Avoid unnecessary repetition · تجنب التكرار غير الضروري · تجنب التكرار</h2>
 <div class="q" data-a="It"><p>1. Souq Waqif is in Doha. ___ is famous for its traditional atmosphere.</p><select><option></option><option>It</option><option>They</option><option>We</option></select></div>
 <div class="q" data-a="They"><p>2. The shops sell spices and souvenirs. ___ are popular with visitors.</p><select><option></option><option>It</option><option>They</option><option>This</option></select></div>
 <div class="q" data-a="This"><p>3. I watched a street performance. ___ was the highlight of my visit.</p><select><option></option><option>Those</option><option>This</option><option>They</option></select></div>
@@ -89,7 +131,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s5" class="card section">
 <span class="badge">Station 5 · Sentence Order</span>
 <h2>Build the article structure · ابنِ هيكل المقال</h2>
-<p>Choose the best paragraph order.</p>
+<p>Choose the best paragraph order.<br><span class="rtl">اختر أفضل ترتيب للفقرات.</span></p>
 <div class="q" data-a="Introduction → Features → Personal impression/highlight → Recommendation">
 <select><option></option><option>Features → Recommendation → Introduction → Highlight</option><option>Introduction → Features → Personal impression/highlight → Recommendation</option><option>Recommendation → Introduction → Features → Highlight</option></select>
 </div>
@@ -105,7 +147,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s6" class="card section">
 <span class="badge">Station 6 · Write the Opening</span>
 <h2>Introduction paragraph · فقرة المقدمة</h2>
-<p>Write 45–70 words. Introduce Souq Waqif, when you visited, who you went with and why the day was special.</p>
+<p>Write 45–70 words. Introduce Souq Waqif, when you visited, who you went with and why the day was special.<br><span class="rtl">اكتب من 45 إلى 70 كلمة. قدّم سوق واقف، ومتى زرته، ومع من ذهبت، ولماذا كان اليوم مميزًا.</span></p>
 <textarea id="t6" placeholder="Write your introduction here..."></textarea>
 <button class="btn green" onclick="saveWriting(6)">Save Station 6</button><div id="r6" class="result"></div>
 </section>
@@ -113,7 +155,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s7" class="card section">
 <span class="badge">Station 7 · Write the Body</span>
 <h2>Features paragraph · فقرة وصف الملامح</h2>
-<p>Write 60–90 words describing the place. Include at least three descriptive adjectives and one linking word.</p>
+<p>Write 60–90 words describing the place. Include at least three descriptive adjectives and one linking word.<br><span class="rtl">اكتب من 60 إلى 90 كلمة تصف المكان، مع ثلاث صفات وصفية على الأقل وأداة ربط واحدة.</span></p>
 <textarea id="t7" placeholder="Describe the streets, shops, food, sounds, colours and atmosphere..."></textarea>
 <button class="btn green" onclick="saveWriting(7)">Save Station 7</button><div id="r7" class="result"></div>
 </section>
@@ -121,7 +163,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s8" class="card section">
 <span class="badge">Station 8 · Personal Impression</span>
 <h2>Your highlight · أبرز تجربة</h2>
-<p>Write 50–80 words about the most memorable part of your visit. Include one question or one exclamation.</p>
+<p>Write 50–80 words about the most memorable part of your visit. Include one question or one exclamation.<br><span class="rtl">اكتب من 50 إلى 80 كلمة عن أكثر جزء لا يُنسى في زيارتك، مع سؤال أو تعجب واحد.</span></p>
 <textarea id="t8" placeholder="What was the highlight? How did you feel?"></textarea>
 <button class="btn green" onclick="saveWriting(8)">Save Station 8</button><div id="r8" class="result"></div>
 </section>
@@ -129,7 +171,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s9" class="card section">
 <span class="badge">Station 9 · Recommendation</span>
 <h2>Write the ending · اكتب الخاتمة</h2>
-<p>Write 35–60 words. Give a clear recommendation and explain why someone should visit.</p>
+<p>Write 35–60 words. Give a clear recommendation and explain why someone should visit.<br><span class="rtl">اكتب من 35 إلى 60 كلمة وقدّم توصية واضحة واشرح لماذا ينبغي زيارة المكان.</span></p>
 <textarea id="t9" placeholder="Would you recommend Souq Waqif? Why?"></textarea>
 <button class="btn green" onclick="saveWriting(9)">Save Station 9</button><div id="r9" class="result"></div>
 </section>
@@ -137,7 +179,7 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 <section id="s10" class="card section">
 <span class="badge">Station 10 · Independent Writing</span>
 <h2>Write the full article · اكتب المقال كاملًا</h2>
-<p>Write your complete article with a catchy title and four paragraphs. Aim for 180–230 words.</p>
+<p>Write your complete article with a catchy title and four paragraphs. Aim for 180–230 words.<br><span class="rtl">اكتب مقالك كاملًا بعنوان جذاب وأربع فقرات، في حدود 180–230 كلمة.</span></p>
 <input id="title10" placeholder="Article title">
 <textarea id="t10" style="min-height:320px" placeholder="Write the full article · اكتب المقال كاملًا here..."></textarea>
 <div class="grid">
@@ -155,7 +197,16 @@ textarea{min-height:150px}.q{padding:12px 0;border-top:1px solid var(--border)}.
 </section>
 </div>
 
-<script>function dictate(text,rate){if(!("speechSynthesis" in window)){alert("Audio is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate||.7;speechSynthesis.speak(u);}function cleanText(s){return(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();}function checkParagraph(){const a=cleanText('Souq Waqif is one of the most traditional places in Doha. The narrow streets were colourful, lively and full of visitors. I enjoyed exploring the shops and tasting the traditional food. What an unforgettable evening!').split(' '),g=cleanText(document.getElementById('dp').value).split(' ');let n=0;g.forEach((w,i)=>{if(w===a[i])n++});const p=Math.round(n/a.length*100),r=document.getElementById('dpr');r.style.display='block';r.innerHTML='<strong>'+p+'% matched</strong><p>'+(p>=80?'Very good · ممتاز':'Listen again and retry · أعد الاستماع وحاول مرة أخرى')+'</p>';}function speak(text){if(!("speechSynthesis" in window)){alert("Audio pronunciation is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=.88;speechSynthesis.speak(u);}
+<script>
+function sshSpeak(text,rate){if(!("speechSynthesis" in window)){alert("Audio is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate||.82;speechSynthesis.speak(u);}
+function sshNorm(s){return(s||"").toLowerCase().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ").trim();}
+function sshCheckDict(id,en,ar){const r=document.getElementById(id+"r");r.style.display="block";const ok=sshNorm(document.getElementById(id).value)===sshNorm(en);r.innerHTML=ok?'<strong>Correct · صحيح</strong><p>'+en+'</p><p class="rtl">'+ar+'</p>':'<strong>Try again · حاول مرة أخرى</strong><p>'+en+'</p><p class="rtl">'+ar+'</p>';}
+function sshCheckGuidedArticle(){const ok=artg1.value==="a"&&artg2.value==="b"&&artg3.value==="c";artguided.style.display="block";artguided.innerHTML=ok?'<strong>Excellent · ممتاز</strong>':'<strong>Review and try again · راجع وحاول مرة أخرى</strong>';}
+const artChoices=[{id:"1",t:"The market was colourful, lively and full of visitors. — كان السوق زاهيًا ونابضًا بالحياة ومليئًا بالزوار."},{id:"2",t:"The highlight was a wonderful street performance. — كان أبرز ما في الزيارة عرضًا رائعًا في الشارع."},{id:"3",t:"I strongly recommend visiting Souq Waqif. — أوصي بشدة بزيارة سوق واقف."}];
+function sshShuffle(a){return a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);}
+function sshBuildRandomArticle(){const a=sshShuffle(artChoices);artrandom.innerHTML='<p>Last Friday, I visited Souq Waqif with my family.<br><span class="rtl">يوم الجمعة الماضي، زرت سوق واقف مع أسرتي.</span></p>'+[1,2,3].map((n,i)=>'<select id="artr'+n+'"><option value="">Choose · اختر</option>'+a.map(x=>'<option value="'+x.id+'">'+x.t+'</option>').join("")+'</select>'+(i===0?'<p>We explored the narrow streets and enjoyed the traditional food.<br><span class="rtl">استكشفنا الشوارع الضيقة واستمتعنا بالطعام التقليدي.</span></p>':i===1?'<p>What an unforgettable evening!<br><span class="rtl">يا لها من أمسية لا تُنسى!</span></p>':'')).join("");}
+function sshCheckRandomArticle(){const ok=artr1.value==="1"&&artr2.value==="2"&&artr3.value==="3";artrandomr.style.display="block";artrandomr.innerHTML=ok?'<strong>Correct · صحيح</strong>':'<strong>Try again · حاول مرة أخرى</strong>';}
+function dictate(text,rate){if(!("speechSynthesis" in window)){alert("Audio is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=rate||.7;speechSynthesis.speak(u);}function cleanText(s){return(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').replace(/\s+/g,' ').trim();}function checkParagraph(){const a=cleanText('Souq Waqif is one of the most traditional places in Doha. The narrow streets were colourful, lively and full of visitors. I enjoyed exploring the shops and tasting the traditional food. What an unforgettable evening!').split(' '),g=cleanText(document.getElementById('dp').value).split(' ');let n=0;g.forEach((w,i)=>{if(w===a[i])n++});const p=Math.round(n/a.length*100),r=document.getElementById('dpr');r.style.display='block';r.innerHTML='<strong>'+p+'% matched</strong><p>'+(p>=80?'Very good · ممتاز':'Listen again and retry · أعد الاستماع وحاول مرة أخرى')+'</p>';}function speak(text){if(!("speechSynthesis" in window)){alert("Audio pronunciation is not supported in this browser.");return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=.88;speechSynthesis.speak(u);}
 
 const KEY='ssh_g10_writing_article_v1';
 let state={scores:{},writing:{},completed:{}};
@@ -169,6 +220,6 @@ function saveWriting(n){const id=n===10?'t10':'t'+n;const text=document.getEleme
 function renderProgress(){const done=Object.values(state.completed).filter(Boolean).length;document.getElementById('bar').style.width=(done/10*100)+'%';document.getElementById('progressText').innerHTML='<strong>Progress:</strong> '+done+' / 10 stations';for(let n=6;n<=10;n++){const v=state.writing[n];const el=document.getElementById('t'+n);if(v&&el)el.value=v.text||'';if(n===10&&v)document.getElementById('title10').value=v.title||''}}
 function copyFinal(){const t=(document.getElementById('title10').value+'\n\n'+document.getElementById('t10').value).trim();navigator.clipboard.writeText(t).then(()=>alert('Copied. Paste it into your teacher submission channel.'))}
 document.getElementById('t10').addEventListener('input',()=>{document.getElementById('wc10').textContent=document.getElementById('t10').value.trim().split(/\s+/).filter(Boolean).length+' words'})
-makeNav();renderProgress();showStation(1);
+makeNav();renderProgress();sshBuildRandomArticle();showStation(1);
 </script>
 </body></html>
