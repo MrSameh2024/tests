@@ -161,6 +161,7 @@ body.gated{overflow:hidden}
 <p class="or">* Give at least ONE: email or mobile. · أدخل واحدًا على الأقل: البريد أو الجوال.</p>
 <div class="hp" aria-hidden="true"><label>Website<input type="text" id="sshWebsite" tabindex="-1" autocomplete="off"></label></div>
 <label class="cons"><input type="checkbox" id="sshConsent"><span>I agree to send my name, class, contact details, answers and writing to my teacher, Mr Sameh Soliman (Smart Students Hub), for marking and feedback. They are kept private and never published or shared. *<span class="ar" style="display:block;margin-top:4px">أوافق على إرسال اسمي وصفي وبيانات التواصل وإجاباتي وكتابتي إلى معلمي أ. سامح سليمان (Smart Students Hub) للتصحيح والتغذية الراجعة. تبقى البيانات خاصة ولا تُنشر ولا تُشارك مع أحد.</span></span></label>
+<p class="auto" style="margin:10px 0 0;font-size:.88rem;font-weight:700;color:#1a6b3c">📨 When you press Check, your result is sent to your teacher automatically. <span class="ar" style="display:block">📨 عند الضغط على Check تُرسل نتيجتك إلى معلمك تلقائيًا.</span></p>
 <div class="err" id="sshErr" role="alert"></div></div></section>
 
 <form id="test" autocomplete="off"></form>
@@ -331,7 +332,7 @@ window.sshLock=function(on){['sshEmail','sshPhone','sshConsent'].forEach(id=>{co
 window.sshSend=function(holder,payload){
   const box=document.createElement('div');box.className='ssh-status';holder.prepend(box);
   const em=$('sshEmail').value.trim(),ph=$('sshPhone').value.trim();
-  const body=Object.assign({type:'submission',page:location.pathname.split('/').pop()||''},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
+  const body=Object.assign({},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
   const go=()=>{
     if(!ENDPOINT){box.className='ssh-status no';box.innerHTML='<b>Sending is not switched on yet.</b> Print your report and give it to your teacher.<span class="ar">الإرسال غير مفعّل بعد. اطبع تقريرك وسلّمه لمعلمك.</span>';return}
     box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b> Keep this page open.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة.</span>';
@@ -344,6 +345,9 @@ window.sshSend=function(holder,payload){
   };
   go();
 };
+// Auto-send: results go to the teacher as soon as the test is checked (details + consent are required before Check).
+(function(){let busy=false;const tryClick=()=>{const b=document.getElementById('sendBtn');if(b&&!b.disabled&&!busy&&document.body.contains(b)){busy=true;setTimeout(()=>{if(document.body.contains(b)&&!b.disabled)b.click();busy=false},300)}};
+ new MutationObserver(tryClick).observe(document.documentElement,{childList:true,subtree:true});})();
 })();
 </script>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">

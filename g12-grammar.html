@@ -171,6 +171,7 @@ body.gated{overflow:hidden}
 <p class="or">* Give at least ONE: email or mobile. · أدخل واحدًا على الأقل: البريد أو الجوال.</p>
 <div class="hp" aria-hidden="true"><label>Website<input type="text" id="sshWebsite" tabindex="-1" autocomplete="off"></label></div>
 <label class="cons"><input type="checkbox" id="sshConsent"><span>I agree to send my name, class, contact details, answers to my teacher, Mr Sameh Soliman (Smart Students Hub), to follow my progress. They are kept private and never published or shared. *<span class="ar" style="display:block;margin-top:4px">أوافق على إرسال اسمي وصفي وبيانات التواصل وإجاباتي إلى معلمي أ. سامح سليمان (Smart Students Hub) لمتابعة تقدّمي. تبقى البيانات خاصة ولا تُنشر ولا تُشارك مع أحد.</span></span></label>
+<p class="auto" style="margin:10px 0 0;font-size:.88rem;font-weight:700;color:#1a6b3c">📨 When you press Check, your result is sent to your teacher automatically. <span class="ar" style="display:block">📨 عند الضغط على Check تُرسل نتيجتك إلى معلمك تلقائيًا.</span></p>
 <div class="err" id="sshErr" role="alert"></div></div></section>
 <form id="test" autocomplete="off"></form>
 <div class="actions" id="actions"></div>
@@ -301,6 +302,9 @@ window.sshSend=function(holder,payload){
   };
   go();
 };
+// Auto-send: results go to the teacher as soon as the test is checked (details + consent are required before Check).
+(function(){let busy=false;const tryClick=()=>{const b=document.getElementById('sendBtn');if(b&&!b.disabled&&!busy&&document.body.contains(b)){busy=true;setTimeout(()=>{if(document.body.contains(b)&&!b.disabled)b.click();busy=false},300)}};
+ new MutationObserver(tryClick).observe(document.documentElement,{childList:true,subtree:true});})();
 })();
 </script>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">
