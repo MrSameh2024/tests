@@ -1,12 +1,30 @@
-/* Smart Students Hub – shared voice settings for all read-aloud audio.
-   Picks the most natural MALE English voice available on the device,
-   at normal speed (rate 1) and normal pitch (pitch 1).
-   Deliberate "slow" practice buttons (rate below 0.7) are kept as chosen.
-   Multi-speaker audio gets a different male voice per speaker when the device has more than one. */
+/* Smart Students Hub – shared voice for all read-aloud audio.
+   1) If a pre-recorded natural male voice file exists for the text (audio/manifest.json),
+      it is played instead of the device's robotic voice.
+   2) Otherwise the best MALE English device voice is used, at normal speed and pitch.
+   Deliberate "Slow" practice buttons (rate 0.55 or lower) still play slower.
+   Multi-speaker audio keeps a different voice per speaker. */
 (function () {
-  if (!('speechSynthesis' in window) || !window.SpeechSynthesis) return;
+  if (!window.SpeechSynthesis || !('speechSynthesis' in window)) return;
+  var synth = window.speechSynthesis;
+  var base = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/[^\/]*$/, '') : '';
 
-  // Best first: neural/natural male voices, then good standard male voices.
+  /* ---------- pre-recorded human-like audio ---------- */
+  var manifest = null;
+  var norm = function (t) { return String(t || '').replace(/\s+/g, ' ').trim(); };
+  try {
+    fetch(base + 'audio/manifest.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (m) { manifest = m; })
+      .catch(function () {});
+  } catch (e) {}
+
+  var current = null;      // { audio, u }
+  function stopCurrent() {
+    if (current) { try { current.audio.pause(); current.audio.src = ''; } catch (e) {} current = null; }
+  }
+
+  /* ---------- device voice fallback ---------- */
   var PREFERRED = [
     /Microsoft (Andrew|Brian|Guy|Christopher|Eric|Roger|Steffan|Ryan|Thomas|William|Liam|Connor|Mitchell|Neil|Prabhat) .*Natural/i,
     /Google UK English Male/i,
@@ -15,11 +33,10 @@
     /en[-_](us|gb|au)[-_]x[-_].*(iom|rjs|gbd|gbg|iol|tpd|tpc|aud|auc|sfg)/i,
     /\b(male|man)\b/i
   ];
-  var FEMALE = /(female|woman|Zira|Aria|Jenny|Sonia|Libby|Hazel|Susan|Samantha|Victoria|Karen|Moira|Tessa|Fiona|Serena|Kate|Emma|Ava|Allison|Michelle|Natasha|Clara|Emily|Ana\b|Google US English$|Google UK English Female)/i;
-
+  var FEMALE = /(female|woman|Zira|Aria|Jenny|Sonia|Libby|Hazel|Susan|Samantha|Victoria|Karen|Moira|Tessa|Fiona|Serena|Kate|Emma|Ava|Allison|Michelle|Natasha|Clara|Emily|Ana\b|Google US English$)/i;
   var males = [];
   function load() {
-    var all = window.speechSynthesis.getVoices().filter(function (v) { return /^en([-_]|$)/i.test(v.lang); });
+    var all = synth.getVoices().filter(function (v) { return /^en([-_]|$)/i.test(v.lang); });
     var seen = {}, list = [];
     PREFERRED.forEach(function (re) {
       all.forEach(function (v) {
@@ -30,11 +47,7 @@
     males = list;
   }
   load();
-  if ('onvoiceschanged' in window.speechSynthesis) {
-    window.speechSynthesis.addEventListener('voiceschanged', load);
-  }
-
-  // Keep different speakers distinct: map each original voice to its own male voice.
+  try { synth.addEventListener('voiceschanged', load); } catch (e) {}
   var roleMap = {}, nextRole = 0;
   function maleFor(orig) {
     if (!males.length) load();
@@ -44,14 +57,48 @@
     return males[roleMap[key]];
   }
 
-  var originalSpeak = window.SpeechSynthesis.prototype.speak;
-  window.SpeechSynthesis.prototype.speak = function (u) {
+  var P = window.SpeechSynthesis.prototype;
+  var originalSpeak = P.speak, originalCancel = P.cancel, originalPause = P.pause, originalResume = P.resume;
+  var slow = function (u) { return u.rate > 0 && u.rate <= 0.55; };
+
+  function fire(u, name) { try { if (typeof u['on' + name] === 'function') u['on' + name]({ type: name, utterance: u }); } catch (e) {} }
+
+  function deviceSpeak(self, u) {
     try {
       var v = maleFor(u.voice);
       if (v) { u.voice = v; u.lang = v.lang; }
-      if (!(u.rate > 0 && u.rate < 0.7)) u.rate = 1;   // normal speed (keep explicit slow practice)
-      u.pitch = 1;                                    // natural pitch, not deep
+      if (!slow(u)) u.rate = 1;
+      u.pitch = 1;
     } catch (e) {}
-    return originalSpeak.call(this, u);
+    return originalSpeak.call(self, u);
+  }
+
+  P.speak = function (u) {
+    var self = this;
+    var file = manifest && manifest[norm(u && u.text)];
+    if (!file) return deviceSpeak(self, u);
+    stopCurrent();
+    var a = new Audio(base + file);
+    a.preload = 'auto';
+    if (slow(u)) { a.playbackRate = 0.8; try { a.preservesPitch = true; } catch (e) {} }
+    current = { audio: a, u: u };
+    var started = false, done = false;
+    a.addEventListener('playing', function () { if (!started) { started = true; fire(u, 'start'); } });
+    a.addEventListener('ended', function () { if (done) return; done = true; if (current && current.audio === a) current = null; fire(u, 'end'); });
+    a.addEventListener('error', function () {
+      if (done) return; done = true; if (current && current.audio === a) current = null;
+      deviceSpeak(self, u);   // fall back to device voice
+    });
+    var p = a.play();
+    if (p && p.catch) p.catch(function () { if (!done) { done = true; current = null; deviceSpeak(self, u); } });
   };
+  P.cancel = function () { stopCurrent(); return originalCancel.call(this); };
+  P.pause = function () { if (current) { try { current.audio.pause(); } catch (e) {} } return originalPause.call(this); };
+  P.resume = function () { if (current) { try { current.audio.play(); } catch (e) {} } return originalResume.call(this); };
+  try {
+    var desc = Object.getOwnPropertyDescriptor(P, 'speaking');
+    if (desc && desc.get) {
+      Object.defineProperty(P, 'speaking', { configurable: true, get: function () { return !!current || desc.get.call(this); } });
+    }
+  } catch (e) {}
 })();
