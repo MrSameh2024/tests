@@ -366,4 +366,4 @@ $('gSend').onclick=()=>{const name=$('gName').value.trim().replace(/\s+/g,' '),r
  fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email,phone,consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
   .then(x=>x.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
   .catch(()=>open()); // never lock visitors out if the connection fails
-};})();</script></body></html>
+};})();</script><script src="ssh-direct.js"></script></body></html>
