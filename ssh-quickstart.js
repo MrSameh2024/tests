@@ -28,7 +28,59 @@
     document.head.appendChild(css);
   })();
 
+  // easier details box: one "email or mobile" field, no tick box, class only for students
+  function simplify() {
+    var det = $('sshDet');
+    if (!det || det.dataset.easy) return;
+    det.dataset.easy = '1';
+    var reg = {}; try { reg = JSON.parse(get('ssh_reg') || '{}') || {}; } catch (e) {}
+    var em = $('sshEmail'), ph = $('sshPhone'), cs = $('sshConsent'), cl = $('sshClass') || $('sclass');
+    var ping = function (el) { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
+    if (em && ph) {
+      var lab = document.createElement('label');
+      lab.className = 'f'; lab.htmlFor = 'sshContact';
+      lab.innerHTML = 'Email or mobile · البريد الإلكتروني أو الجوال *<input type="text" id="sshContact" autocomplete="email" maxlength="120" placeholder="name@example.com · +974 5xxx xxxx">';
+      var emL = em.closest('label') || em, phL = ph.closest('label') || ph;
+      emL.parentNode.insertBefore(lab, emL);
+      emL.style.display = 'none'; phL.style.display = 'none';
+      var box = $('sshContact');
+      box.value = em.value || ph.value || reg.email || reg.phone || '';
+      var route = function () {
+        var v = box.value.trim(), mail = v.indexOf('@') >= 0;
+        em.value = mail ? v : ''; ph.value = mail ? '' : v; ping(em); ping(ph);
+      };
+      box.addEventListener('input', route); box.addEventListener('change', route);
+      if (box.value) route();
+      // keep the visible field in step if the page fills or locks the hidden ones
+      var back = function () { var v = em.value || ph.value; if (v && v !== box.value.trim()) box.value = v; box.disabled = em.disabled; };
+      em.addEventListener('input', back); ph.addEventListener('input', back);
+      setInterval(back, 1500);
+      var or = det.querySelector('.or'); if (or) or.hidden = true;
+    }
+    if (cs) {
+      cs.checked = true; ping(cs); cs.style.display = 'none';
+      var cl2 = cs.closest('label');
+      if (cl2) { var tip = document.createElement('b'); tip.textContent = 'ℹ️ By pressing Check: · بالضغط على «صحّح»: '; tip.style.cssText = 'display:block;margin-bottom:2px'; var sp = cl2.querySelector('span'); if (sp) sp.insertBefore(tip, sp.firstChild); else cl2.insertBefore(tip, cl2.firstChild); }
+    }
+    classForRole();
+  }
+  function classForRole() {
+    var reg = {}; try { reg = JSON.parse(get('ssh_reg') || '{}') || {}; } catch (e) {}
+    var cl = $('sshClass') || $('sclass');
+    var ping = function (el) { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); };
+    if (cl) {
+      var role = reg.role || '';
+      if (!cl.value && (reg.cls || get('ssh_class'))) { cl.value = reg.cls || get('ssh_class'); ping(cl); }
+      if (role && role !== 'Student') {
+        (cl.closest('label') || cl).style.display = 'none';
+        if (!cl.value.trim()) { cl.value = role; ping(cl); }
+      }
+      cl.placeholder = 'e.g. 12-3 · any form · بأي صيغة';
+    }
+  }
+
   function init() {
+    simplify(); classForRole();
     var det = $('sshDet');
     if (!det || det.dataset.qs) return;
     det.dataset.qs = '1';
@@ -57,7 +109,7 @@
     det.parentNode.insertBefore(bar, det);
     var paint = function () {
       bar.innerHTML = '<span style="font-size:1.4rem">✅</span><span class="who"><b>Ready</b> · <b dir="rtl">جاهز</b> — <bdi>' +
-        esc(nameEl.value) + '</bdi> · Class <bdi>' + esc(classEl.value) + '</bdi><br><small>Your details are saved; your result goes to your teacher when you press Check.</small><br><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة، وتُرسَل نتيجتك إلى معلمك عند الضغط على «صحّح».</small></span>' +
+        esc(nameEl.value) + '</bdi>' + ((classEl.closest('label') || classEl).style.display === 'none' ? '' : ' · Class <bdi>' + esc(classEl.value) + '</bdi>') + '<br><small>Your details are saved; your result goes to your teacher when you press Check.</small><br><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة، وتُرسَل نتيجتك إلى معلمك عند الضغط على «صحّح».</small></span>' +
         '<button type="button" class="edit">Edit details · تعديل</button>';
       bar.querySelector('.edit').onclick = function () { det.hidden = false; bar.hidden = true; (nameEl || det).focus(); };
     };
@@ -94,7 +146,7 @@
   var prev = window.SSH_AFTER_GATE;
   window.SSH_AFTER_GATE = function () { if (typeof prev === 'function') prev(); init(); };
   var gateOpen = function () { var g = $('gate'); return g && !g.hidden; };
-  var start = function () { if (!gateOpen()) init(); };
+  var start = function () { try { simplify(); } catch (e) {} if (!gateOpen()) init(); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 50); });
   else setTimeout(start, 50);
 })();

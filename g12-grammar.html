@@ -164,7 +164,7 @@ body.gated{overflow:hidden}
 <section class="card" id="detailsCard"><div class="ssh-det" id="sshDet"><h3>Your details · بياناتك</h3>
 <p style="margin:0;font-size:.9rem">Your teacher needs these to follow your progress. Fields marked * are required.</p>
 <p class="ar" style="margin:2px 0 0;font-size:.9rem">يحتاجها المعلم ليتابع تقدّمك. الحقول المعلَّمة بـ * إلزامية.</p>
-<div class="g"><label class="f" for="sshName">Full name (first + family) · الاسم الكامل *<input type="text" id="sshName" autocomplete="name" required></label>
+<div class="g"><label class="f" for="sshName">Name · الاسم *<input type="text" id="sshName" autocomplete="name" required></label>
 <label class="f" for="sshClass">Class · الصف/الشعبة *<input type="text" id="sshClass" placeholder="e.g. 12-3" required></label>
 <label class="f" for="sshEmail">Email · البريد الإلكتروني<input type="email" id="sshEmail" autocomplete="email" placeholder="name@example.com" inputmode="email"></label>
 <label class="f" for="sshPhone">Mobile / WhatsApp · الجوال / واتساب<input type="tel" id="sshPhone" autocomplete="tel" placeholder="+974 5xxx xxxx" inputmode="tel"></label></div>
@@ -268,13 +268,13 @@ const ENDPOINT="https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vS
 const $=id=>document.getElementById(id);
 const FAKE=/^(test|asdf|aaa+|abc|example|qwerty|none|no|x+)@|@(test|example|mail)\.(com|net)$/i;
 function cleanPhone(p){return String(p||'').replace(/[\s\-()]/g,'')}
-function phoneOk(p){p=cleanPhone(p);if(/^(\+974|00974)?[3567]\d{7}$/.test(p))return true;return /^(\+|00)[1-9]\d{7,13}$/.test(p)}
+function phoneOk(p){p=cleanPhone(p);return /^(\+|00)?\d{8,15}$/.test(p)}
 function emailOk(e){e=String(e||'').trim();return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e)&&!FAKE.test(e)}
 window.sshValidate=function(nameId,classId){
   const n=$(nameId),c=$(classId),em=$('sshEmail'),ph=$('sshPhone'),cs=$('sshConsent'),err=$('sshErr');const msgs=[];
   [n,c,em,ph].forEach(x=>x&&x.classList.remove('bad'));
   const words=(n.value.trim().match(/[^\s]+/g)||[]).filter(w=>/[A-Za-z\u0600-\u06FF]/.test(w));
-  if(words.length<2){n.classList.add('bad');msgs.push('Write your full name (first and family name). · اكتب اسمك الكامل.')}
+  if(words.length<1){n.classList.add('bad');msgs.push('Write your name. · اكتب اسمك.')}
   if(!c.value.trim()){c.classList.add('bad');msgs.push('Write your class. · اكتب صفك.')}
   const e=em.value.trim(),p=ph.value.trim();
   if(e&&!emailOk(e)){em.classList.add('bad');msgs.push('Check your email address. · تحقق من البريد الإلكتروني.')}
@@ -312,34 +312,33 @@ window.sshSend=function(holder,payload){
 <p style="font-size:.88rem">Please register once to open the free resources. It takes 20 seconds. · <bdi dir="rtl">سجّل مرة واحدة لفتح الموارد المجانية، يستغرق ذلك 20 ثانية.</bdi></p></div>
 <div class="gb gb2"><label class="l" for="gName">Your full name · اسمك الكامل</label><input type="text" id="gName" autocomplete="name" maxlength="80"></div>
 <div class="gb gb3"><span class="l">I am a… · أنا</span>
-<div class="groles" role="radiogroup" aria-label="I am a"><label><input type="radio" name="gRole" value="Teacher"><span><i>👩‍🏫</i>Teacher<br>معلم</span></label><label><input type="radio" name="gRole" value="Student"><span><i>🎓</i>Student<br>طالب</span></label><label><input type="radio" name="gRole" value="Parent"><span><i>👨‍👩‍👧</i>Parent<br>ولي أمر</span></label></div></div>
-<div class="gb gb4"><label class="l" for="gEmail">Email · البريد الإلكتروني <small>(required · إلزامي)</small></label><input type="email" id="gEmail" autocomplete="email" inputmode="email" maxlength="120" placeholder="name@example.com">
-<label class="l" for="gPhone" style="margin-top:8px">Mobile · الجوال <small>(optional · اختياري)</small></label><input type="tel" id="gPhone" autocomplete="tel" inputmode="tel" maxlength="25" placeholder="+974 5xxx xxxx"></div>
+<div class="groles" role="radiogroup" aria-label="I am a"><label><input type="radio" name="gRole" value="Teacher"><span><i>👩‍🏫</i>Teacher<br>معلم</span></label><label><input type="radio" name="gRole" value="Student"><span><i>🎓</i>Student<br>طالب</span></label><label><input type="radio" name="gRole" value="Parent"><span><i>👨‍👩‍👧</i>Parent<br>ولي أمر</span></label></div><div id="gClassBox" hidden><label class="l" for="gClass" style="margin-top:8px">Class · الصف <small>(any form, e.g. 12-3 · بأي صيغة)</small></label><input type="text" id="gClass" maxlength="30" placeholder="12-3"></div></div>
+<div class="gb gb4"><label class="l" for="gEmail">Email or mobile · البريد الإلكتروني أو الجوال</label><input type="text" id="gEmail" autocomplete="email" maxlength="120" placeholder="name@example.com  ·  +974 5xxx xxxx"><small style="display:block;margin-top:4px">Write one of them only. · اكتب أحدهما فقط.</small></div>
 <input type="text" class="hp" id="gWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
-<div class="gb gb5"><label class="ok"><input type="checkbox" id="gOk"><span><b>I agree to receive updates about new resources, and to Smart Students Hub recording which tools I use.</b><b dir="rtl" style="display:block;text-align:right">أوافق على إرسال تحديثات الموارد لي، وعلى تسجيل المنصة للأدوات التي أستخدمها.</b><small style="display:block;margin-top:4px">Your details stay private and are used only to document how our free resources are used. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، وتُستخدم فقط لتوثيق الاستفادة من مواردنا المجانية. ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></label>
+<div class="gb gb5"><div class="ok"><span><b>By pressing Enter, you agree to receive updates about new resources, and to Smart Students Hub recording which tools you use.</b><b dir="rtl" style="display:block;text-align:right">بالضغط على «دخول» توافق على إرسال تحديثات الموارد لك، وعلى تسجيل المنصة للأدوات التي تستخدمها.</b><small style="display:block;margin-top:4px">Your details stay private and are used only to document how our free resources are used. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، وتُستخدم فقط لتوثيق الاستفادة من مواردنا المجانية. ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></div>
 <button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='g12-grammar',$=s=>document.getElementById(s);
-const EOK=e=>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e||'');
+const EOK=e=>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e||''),POK=p=>/^\+?[0-9 ]{8,16}$/.test(p||'');
 let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
 let reg=false;try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
-if(reg&&!EOK(r.email))reg=false; // email is now required: ask older registrations once more
+if(reg&&!EOK(r.email)&&!POK(r.phone))reg=false; // email is now required: ask older registrations once more
 const pre=()=>{[['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
 const logUse=()=>{try{const d=new Date().toISOString().slice(0,10),k='ssh_use_'+PAGE;if(localStorage.getItem(k)===d)return;localStorage.setItem(k,d)}catch(e){}
- try{fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'use',name:r.name||'',role:r.role||'',email:r.email||'',page:PAGE,ref:location.pathname.split('/').pop()}),keepalive:true}).catch(()=>{})}catch(e){}};
+ try{fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'use',name:r.name||'',role:r.role||'',email:r.email||'',phone:r.phone||'',page:PAGE,ref:location.pathname.split('/').pop()}),keepalive:true}).catch(()=>{})}catch(e){}};
 const after=()=>{pre();logUse();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
 if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}
 const g=$('gate');g.hidden=false;document.body.classList.add('gated');
-if(r.name)$('gName').value=r.name;if(r.phone)$('gPhone').value=r.phone;if(r.role){const x=document.querySelector('input[name=gRole][value="'+r.role+'"]');if(x)x.checked=true}
+if(r.name)$('gName').value=r.name;if(r.email||r.phone)$('gEmail').value=r.email||r.phone;if(r.cls)$('gClass').value=r.cls;const syncCls=()=>{$('gClassBox').hidden=(document.querySelector('input[name=gRole]:checked')||{}).value!=='Student'};document.querySelectorAll('input[name=gRole]').forEach(x=>x.addEventListener('change',syncCls));syncCls();if(r.role){const x=document.querySelector('input[name=gRole][value="'+r.role+'"]');if(x)x.checked=true}
 setTimeout(()=>(r.name?$('gEmail'):$('gName')).focus(),50);
 const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(r))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
 const msg=t=>{$('gMsg').textContent=t};
-$('gSend').onclick=()=>{const name=$('gName').value.trim().replace(/\s+/g,' '),role=(document.querySelector('input[name=gRole]:checked')||{}).value,email=$('gEmail').value.trim().toLowerCase(),phone=$('gPhone').value.replace(/[^0-9+ ]/g,'').trim();
- if(name.length<3)return msg('Please write your full name. · اكتب اسمك الكامل.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
- if(!EOK(email))return msg('Please write a valid email. · اكتب بريدًا إلكترونيًا صحيحًا.');
- if(phone&&!/^\+?[0-9 ]{8,16}$/.test(phone))return msg('Check the mobile number or leave it empty. · راجع رقم الجوال أو اتركه فارغًا.');
- if(!$('gOk').checked)return msg('Please tick the agreement box. · ضع علامة الموافقة.');
- r={name,role,email,phone};$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
+$('gSend').onclick=()=>{const name=$('gName').value.trim().replace(/\s+/g,' '),role=(document.querySelector('input[name=gRole]:checked')||{}).value,c=$('gEmail').value.trim(),email=EOK(c)?c.toLowerCase():'',phone=email?'':c.replace(/[^0-9+ ]/g,'').trim(),cls=role==='Student'?$('gClass').value.trim():'';
+ if(name.length<2)return msg('Please write your name. · اكتب اسمك.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
+ if(!email&&!POK(phone))return msg('Write your email or mobile number. · اكتب بريدك الإلكتروني أو رقم جوالك.');if(role==='Student'&&!cls)return msg('Write your class. · اكتب صفك.');
+ 
+ 
+ r={name,role,email,phone,cls};try{if(cls)localStorage.setItem('ssh_class',cls);localStorage.setItem('ssh_name',name)}catch(e){}$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
  const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);
  fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email,phone,consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
   .then(x=>x.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
   .catch(()=>open()); // never lock visitors out if the connection fails
-};})();</script><script src="ssh-quickstart.js?v=4"></script></body></html>
+};})();</script><script src="ssh-quickstart.js?v=5"></script></body></html>
