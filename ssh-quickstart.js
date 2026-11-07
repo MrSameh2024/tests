@@ -9,6 +9,25 @@
   var get = function (k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } };
   var set = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
 
+  // styles: applied at once (also behind the welcome screen)
+  (function () {
+    var css = document.createElement('style');
+    css.textContent = '.ssh-ready{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(90deg,#e8f6ee,#eef3fb);border:2px solid #1a7f4b;border-radius:14px;padding:10px 14px;margin:12px 0;font-size:.95rem;color:#14244a}' +
+      '.ssh-ready b{color:#1a6b3c}.ssh-ready .who{flex:1;min-width:200px}.ssh-ready button{background:#fff;border:1.5px solid #14244a;color:#14244a;border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer}' +
+      '.ssh-ready .go{background:#1e6fd9;border-color:#1e6fd9;color:#fff}';
+    var COLS = ['#8c2f52','#1e6fd9','#1a6b3c','#b4530a','#5b2a86','#0f4c5c','#a8471f','#14244a','#c2185b','#00796b','#3949ab','#6d4c41'];
+    var tiles = COLS.map(function (c, i) { return '.picker a:nth-child(' + COLS.length + 'n+' + (i + 1) + '){background:' + c + '}'; }).join('');
+    css.textContent += '.card:has(#picker){background:linear-gradient(120deg,#14244a 0%,#1e6fd9 100%);color:#fff;border:0;box-shadow:0 12px 30px rgba(20,36,74,.18)}' +
+      '.card:has(#picker) h1,.card:has(#picker) h2,.card:has(#picker) p,.card:has(#picker) div{color:#fff}' +
+      '.card:has(#picker) .eyebrow,.card:has(#picker) [dir=rtl],.card:has(#picker) .ar{color:#ffd36b}' +
+      '.picker{gap:12px}.picker a{position:relative;color:#fff!important;border:0!important;border-radius:16px;padding:12px 12px 48px;min-height:118px;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s;font-weight:600;line-height:1.3}' +
+      '.picker a:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.25)}' +
+      '.picker a b{display:table!important;color:#fff!important;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 10px;font-size:.78rem;margin-bottom:6px}' +
+      '.picker a::after{content:"Start · ابدأ ▸";position:absolute;left:12px;right:12px;bottom:10px;background:#fff;color:#14244a;border-radius:10px;text-align:center;font-weight:800;font-size:.85rem;padding:5px 0}' +
+      '.picker a.on{outline:4px solid #ffd36b;outline-offset:2px}.picker a.on::after{content:"✓ Now open · مفتوح الآن";background:#ffd36b}' + tiles;
+    document.head.appendChild(css);
+  })();
+
   function init() {
     var det = $('sshDet');
     if (!det || det.dataset.qs) return;
@@ -32,21 +51,7 @@
       return nameEl && nameEl.value.trim() && classEl && classEl.value.trim() &&
         ((emailEl && emailEl.value.trim()) || (phoneEl && phoneEl.value.trim())) && consentEl && consentEl.checked;
     };
-    var css = document.createElement('style');
-    css.textContent = '.ssh-ready{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(90deg,#e8f6ee,#eef3fb);border:2px solid #1a7f4b;border-radius:14px;padding:10px 14px;margin:12px 0;font-size:.95rem;color:#14244a}' +
-      '.ssh-ready b{color:#1a6b3c}.ssh-ready .who{flex:1;min-width:200px}.ssh-ready button{background:#fff;border:1.5px solid #14244a;color:#14244a;border-radius:10px;padding:6px 12px;font-weight:700;cursor:pointer}' +
-      '.ssh-ready .go{background:#1e6fd9;border-color:#1e6fd9;color:#fff}';
-    var COLS = ['#8c2f52','#1e6fd9','#1a6b3c','#b4530a','#5b2a86','#0f4c5c','#a8471f','#14244a','#c2185b','#00796b','#3949ab','#6d4c41'];
-    var tiles = COLS.map(function (c, i) { return '.picker a:nth-child(' + COLS.length + 'n+' + (i + 1) + '){background:' + c + '}'; }).join('');
-    css.textContent += '.card:has(#picker){background:linear-gradient(120deg,#14244a 0%,#1e6fd9 100%);color:#fff;border:0;box-shadow:0 12px 30px rgba(20,36,74,.18)}' +
-      '.card:has(#picker) h1,.card:has(#picker) h2,.card:has(#picker) p,.card:has(#picker) div{color:#fff}' +
-      '.card:has(#picker) .eyebrow,.card:has(#picker) [dir=rtl],.card:has(#picker) .ar{color:#ffd36b}' +
-      '.picker{gap:12px}.picker a{position:relative;color:#fff!important;border:0!important;border-radius:16px;padding:12px 12px 48px;min-height:118px;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s;font-weight:600;line-height:1.3}' +
-      '.picker a:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(0,0,0,.25)}' +
-      '.picker a b{display:table!important;color:#fff!important;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 10px;font-size:.78rem;margin-bottom:6px}' +
-      '.picker a::after{content:"Start · ابدأ ▸";position:absolute;left:12px;right:12px;bottom:10px;background:#fff;color:#14244a;border-radius:10px;text-align:center;font-weight:800;font-size:.85rem;padding:5px 0}' +
-      '.picker a.on{outline:4px solid #ffd36b;outline-offset:2px}.picker a.on::after{content:"✓ Now open · مفتوح الآن";background:#ffd36b}' + tiles;
-    document.head.appendChild(css);
+
     var bar = document.createElement('div');
     bar.className = 'ssh-ready'; bar.setAttribute('role', 'status');
     det.parentNode.insertBefore(bar, det);
