@@ -166,6 +166,15 @@ details.genre summary{cursor:pointer;padding:12px 0;font-family:Cairo;color:var(
 #report .rsign div{flex:1;border-top:1px solid #672445;padding-top:4px;font-size:.9em}
 #report .rsign span{font-family:Cairo;font-weight:700;color:#672445}
 #report .rfoot{margin-top:12px;font-size:.75em;color:#8a7a82;text-align:center;font-family:Cairo}
+
+.privacy{font-size:.92rem;color:#5a4a52;background:#f6eef2;border-radius:10px;padding:8px 12px}
+#sendstat{margin:10px 0;font-size:.95rem}
+#sendstat .st{border-radius:10px;padding:10px 14px;border:1px solid #d8c5ce;background:#fff}
+#sendstat .st.ok{border-color:#2e8b57;background:#eef8f0;color:#1d5a35}
+#sendstat .st.no{border-color:#c0392b;background:#fdf0ee;color:#8a2a1e}
+#sendstat .st .en{display:block}
+#sendstat .ref{font-family:monospace;font-size:1.05rem}
+.rref{margin:6px 0 0;font-size:9.5pt;color:#1d5a35}
 </style><style>
 .gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#f7d774 0%,#e8a317 55%,#c98a0b 100%);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
 .gate[hidden]{display:none}.gbox{background:#14244a;border:3px solid #14244a;border-radius:18px;max-width:460px;width:100%;padding:0;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);color:#14244a}
@@ -315,8 +324,10 @@ main{max-width:1180px}
 
 <section class="card finish" id="finish"><h2><svg class="ic" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> إنهاء الورشة وطباعة تقريري · Finish and print my report</h2>
 <p>يمكنك إنهاء الورشة في أي وقت، ولا يُشترط إكمال جميع المراحل. سيتضمن التقرير بياناتك وبيانات الورشة والمدرب، والخطوات التي أنجزتها، وإجاباتك ومشاركاتك.<br><span class="en">You can finish at any time; completing every stage is not required. Your report includes your details, the workshop and trainer details, the steps you completed, and your answers and contributions.</span></p>
-<ol class="howprint"><li>اضغط الزر أدناه · <span class="en">Press the button below.</span></li><li>في نافذة الطباعة اختر «حفظ بصيغة PDF» · <span class="en">In the print window choose “Save as PDF”.</span></li></ol>
-<div class="btns"><button type="button" class="btn gold" data-finish>إنهاء الورشة وطباعة التقرير PDF · Finish &amp; print PDF</button><button type="button" class="btn ghost" id="resetall">مسح بياناتي من هذا الجهاز · Clear my data</button></div></section>
+<ol class="howprint"><li>اضغط الزر أدناه · <span class="en">Press the button below.</span></li><li>يُرسل تقريرك تلقائياً إلى المدرب كدليل على المشاركة، وتحصل على رقم مرجعي · <span class="en">Your report is sent automatically to the trainer as evidence of participation, and you get a reference number.</span></li><li>في نافذة الطباعة اختر «حفظ بصيغة PDF» · <span class="en">In the print window choose “Save as PDF”.</span></li></ol>
+<p class="privacy">🔒 يصل التقرير إلى المدرب سامح سليمان فقط لأغراض متابعة التدريب والتطوير المهني. · <span class="en">Your report goes only to the trainer, Sameh Soliman, for training follow-up and professional development.</span></p>
+<div id="sendstat" aria-live="polite"></div>
+<div class="btns"><button type="button" class="btn gold" data-finish>إنهاء الورشة وإرسال وطباعة التقرير · Finish, send &amp; print</button><button type="button" class="btn ghost" id="sendonly">إرسال التقرير للمدرب فقط · Send to trainer only</button><button type="button" class="btn ghost" id="resetall">مسح بياناتي من هذا الجهاز · Clear my data</button></div></section>
 <div id="report" aria-hidden="true"></div>
 <section class="card" id="enrich"><h2><svg class="ic" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9v6l5-3z" fill="currentColor"/></svg> إثراء: فيديوهات وقراءات · Enrichment</h2><p>شاهد فيديو واحداً هذا الأسبوع وجرّب فكرة منه في صفك. · <span class="en">Watch one video this week and try one idea in class.</span></p>
 <div class="resg"><a class="res" target="_blank" rel="noopener" href="https://www.edutopia.org/video/5-scaffolding-strategies-bolster-student-learning"><span class="tag v">VIDEO</span><b class="ltr">5 Scaffolding Strategies to Bolster Student Learning</b><span class="src ltr">Edutopia · video</span><span>خمس استراتيجيات سقالات قصيرة وعملية تجعل التعلم في متناول جميع الطلاب</span></a><a class="res" target="_blank" rel="noopener" href="https://www.teachingenglish.org.uk/professional-development/teachers/understanding-my-professional-identity/english-teaching-talks-5"><span class="tag v">VIDEO</span><b class="ltr">English teaching talks – Understanding differentiation</b><span class="src ltr">British Council TeachingEnglish · 6 short videos (Rachael Roberts)</span><span>ستة فيديوهات قصيرة عن التمايز في حصة الإنجليزي: التجميع والأسئلة والمهارات</span></a><a class="res" target="_blank" rel="noopener" href="https://www.teachingenglish.org.uk/professional-development/teachers/managing-lesson/unit-5-preparing-write"><span class="tag v">VIDEO</span><b class="ltr">Unit 5: Preparing to write</b><span class="src ltr">British Council TeachingEnglish · 4 classroom videos</span><span>معلمون في صفوف حقيقية يستخدمون أنشطة ما قبل الكتابة والنماذج والأطر</span></a><a class="res" target="_blank" rel="noopener" href="https://edweek.org/teaching-learning/differentiating-instruction-its-not-as-hard-as-you-think-video/2018/09"><span class="tag v">VIDEO</span><b class="ltr">Differentiating Instruction: It’s Not as Hard as You Think</b><span class="src ltr">Education Week · animated video (Larry Ferlazzo)</span><span>التمايز مرونة واستجابة لاحتياجات الطلاب، لا تخطيطاً مرهقاً</span></a><a class="res" target="_blank" rel="noopener" href="https://tesol.org/blog/posts/5-tips-for-scaffolding-writing-for-multilingual-learners-of-english"><span class="tag r">READ</span><b class="ltr">5 Tips for Scaffolding Writing for Multilingual Learners of English</b><span class="src ltr">TESOL International</span><span>صور ومنظمات، أطر جمل، تقسيم المهمة، نمذجة بصوت مرتفع، عمل ثنائي</span></a><a class="res" target="_blank" rel="noopener" href="https://www.edutopia.org/article/6-foundational-ways-to-scaffold-student-learning"><span class="tag r">READ</span><b class="ltr">6 Foundational Ways to Scaffold Student Learning</b><span class="src ltr">Edutopia (Youki Terada)</span><span>ست طرق أساسية للسقالات: مواد واضحة، مفردات، منظمات بصرية، تدريب غير مُقيَّم</span></a><a class="res" target="_blank" rel="noopener" href="https://www.edutopia.org/article/differentiation-english-class-video-game-style-supports"><span class="tag r">READ</span><b class="ltr">Powering Up for Differentiated Instruction</b><span class="src ltr">Edutopia (Andrew Atherton)</span><span>دعم مؤقت في حصة الإنجليزي على طريقة ألعاب الفيديو: بطاقات وشرائط بناء الفقرة</span></a><a class="res" target="_blank" rel="noopener" href="https://www.teachingenglish.org.uk/sites/teacheng/files/How_to_teach_writing_workbook_2025.pdf"><span class="tag r">READ</span><b class="ltr">How to teach writing – workbook (PDF)</b><span class="src ltr">British Council TeachingEnglish</span><span>دفتر عملي لتعليم الكتابة: مهارات الكاتب الجيد والكتابة كعملية وأنشطة صفية</span></a><a class="res" target="_blank" rel="noopener" href="https://smartstudentshub.com/grade-12/grade-12-writing-courses/"><span class="tag p">SSH</span><b class="ltr">Grade 12 Writing Courses + scaffolded courses</b><span>صفحة دورات الكتابة للصف 12 ودورات السقالات</span></a><a class="res" target="_blank" rel="noopener" href="https://smartstudentshub.com/differentiated-worksheet-planning-guide/"><span class="tag p">SSH</span><b class="ltr">Differentiated Worksheet Planning Guide</b><span>دليل تخطيط أوراق العمل المتمايزة</span></a><a class="res" target="_blank" rel="noopener" href="https://smartstudentshub.com/english-writing-skills-worksheet/"><span class="tag p">SSH</span><b class="ltr">English Writing Skills Worksheet</b><span>ورقة عمل مهارات الكتابة</span></a><a class="res" target="_blank" rel="noopener" href="https://smartstudentshub.com/formative-assessment-checklist/"><span class="tag p">SSH</span><b class="ltr">Formative Assessment Checklist</b><span>قائمة التحقق للتقويم التكويني</span></a></div></section>
@@ -440,6 +451,7 @@ main{max-width:1180px}
       '<div class="rcard"><h3>بيانات الورشة · Workshop</h3><p><b>توظيف أنشطة متدرجة تناسب قدرات الطلاب المختلفة – الكتابة للصف الثاني عشر</b><br><span class="ren">Tiered Activities for Diverse Learners – Grade 12 Writing</span></p><p>الورشة 6 · Workshop 6 · ساعة واحدة في وحدتين · 1 hour, 2 modules</p><p>الجلسة الحضورية: الخميس 12/11/2026 · In-person session: Thursday 12/11/2026</p><p><b>المدرب · Trainer:</b> ' + TRAINER + '<br><span class="ren">' + TRAINER_ROLE + '</span></p></div>' +
       '<div class="rcard"><h3>بيانات المعلم · Teacher</h3><p><b>الاسم · Name:</b> ' + esc(name) + '</p><p><b>المدرسة · School:</b> ' + esc(f['p-school'] || '—') + '</p><p><b>التواصل · Contact:</b> ' + esc(f['p-contact'] || '—') + '</p><p><b>المادة والصف · Subject:</b> ' + esc(f['p-subject'] || '—') + '</p><p><b>بدأ · Started:</b> ' + fmt(S.started) + '<br><b>أنهى · Finished:</b> ' + fmt(now) + '</p></div>' +
     '</div>' +
+    (S.sentRef ? '<p class="rref">✓ أُرسل التقرير إلى المدرب · Sent to the trainer — Ref: <b>' + esc(S.sentRef) + '</b></p>' : '') +
     '<div class="rthanks"><b>شكراً لك ' + esc((f['p-name']||'').trim()) + ' على حضورك الورشة وعلى ما أنجزته من تقدم فيها.</b><br><span class="ren">Thank you for attending the workshop and for the progress you made in it.</span></div>' +
     '<h2>خطوات التقدم · Progress steps <span class="rpill">' + done + ' / ' + STEPS.length + '</span></h2>' +
     '<p class="rnote">لا يُشترط إكمال جميع المراحل؛ يعرض التقرير ما أنجزه المعلم حتى لحظة الإنهاء. · <span class="ren">Completing every stage is not required; this report shows what was completed by the time of finishing.</span></p>' +
@@ -461,12 +473,69 @@ main{max-width:1180px}
     '<div class="rsign"><div><span>' + TRAINER + '</span><br>المدرب · Trainer</div><div><span>&nbsp;</span><br>توقيع المعلم · Teacher signature</div></div>' +
     '<div class="rfoot">smartstudentshub.com · Smart Students Hub Academy provides independent professional learning; this report records participation and is not an accredited qualification.</div>';
   }
-  function finish(){
-    var r = document.getElementById('report');
-    r.innerHTML = build();
-    S.finished = new Date().toISOString(); save();
-    setTimeout(function(){ window.print(); }, 150);
+  // ---------- send evidence to the trainer (same endpoint as the Academy registration)
+  var EP = 'https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec';
+  function reg(){ try{ return JSON.parse(localStorage.getItem('ssh_reg') || '{}') || {}; }catch(e){ return {}; } }
+  function contact(){
+    var r = reg(), c = (S.f['p-contact'] || '').trim(), em = r.email || '', ph = r.phone || '';
+    if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c)) em = c;
+    else if(c.replace(/\D/g,'').length >= 8) ph = c.replace(/[^\d+]/g,'');
+    return {email: em, phone: ph};
   }
+  function plain(){
+    var f = S.f, L = [], sc = score();
+    L.push('STEPS: ' + STEPS.map(function(st, i){ return (i+1) + '.' + st[2] + '=' + (S.steps[st[0]] ? 'done' : 'not done'); }).join('; '));
+    function qa(id, i){ var q = QUIZ[i-1], a = S.picks[id] || (f[id] || '').trim() || '—'; return id + ' ' + q[0] + ' | answer: ' + a + ' | key: ' + q[3]; }
+    L.push('QUICK CHECKS:'); [1,2,3].forEach(function(i){ L.push(qa('c1-' + i, i)); }); [4,5,6].forEach(function(i){ L.push(qa('c2-' + i, i)); });
+    L.push('FINAL ASSESSMENT (A–B ' + sc.auto + '/6):'); for(var i = 1; i <= 9; i++) L.push(qa('f-' + i, i));
+    return L.join('\n');
+  }
+  function contributions(){
+    var f = S.f;
+    function g(k){ return (f[k] || '').trim() || '—'; }
+    return ['Writing challenge: ' + g('a-challenge'), 'New idea learned: ' + g('a-learned'), 'Platform notes: ' + g('a-platform'),
+      'TIERED TASK — Genre: ' + g('d-genre') + ' | Objective: ' + g('d-obj') + ' | Support: ' + g('d-support') + ' | Core: ' + g('d-core') + ' | Extension: ' + g('d-ext') + ' | Moving up: ' + g('d-move'),
+      'Feedback: ' + g('a-feedback'), 'Action plan: ' + g('a-plan')].join('\n\n');
+  }
+  function stat(cls, html){ var b = document.getElementById('sendstat'); if(b) b.innerHTML = '<div class="st ' + cls + '">' + html + '</div>'; }
+  function send(){
+    var n = 0; STEPS.forEach(function(st){ if(S.steps[st[0]]) n++; });
+    var sc = score(), ct = contact(), f = S.f;
+    var body = {type:'submission', page:'course-tiered-writing.html',
+      test:'Teacher Workshop 6 · Tiered Activities – Grade 12 Writing (12/11/2026)',
+      name:(f['p-name'] || reg().name || '').trim(), cls:((f['p-school'] || '').trim() + ((f['p-subject'] || '').trim() ? ' · ' + f['p-subject'].trim() : '')).slice(0,118),
+      score:sc.auto, max:6, percent:Math.round(sc.auto / 6 * 100),
+      breakdown:'Progress ' + n + '/' + STEPS.length + ' steps; Final A–B ' + sc.auto + '/6 (' + sc.done + ' answered); Part C self-check; started ' + S.started + '; finished ' + new Date().toISOString(),
+      topic:('Tiered task: ' + ((f['d-genre'] || '').trim() || '—') + ' · ' + ((f['d-obj'] || '').trim())).slice(0,118),
+      essay:contributions(), answers:plain(), email:ct.email, phone:ct.phone, consent:true, website:''};
+    stat('', '⏳ <b>جارٍ إرسال تقريرك إلى المدرب…</b><span class="en">Sending your report to the trainer…</span>');
+    return new Promise(function(res){
+      var done = false, ctl = window.AbortController ? new AbortController() : null;
+      var t = setTimeout(function(){ if(ctl) ctl.abort(); fin(null); }, 12000);
+      function fin(ref){
+        if(done) return; done = true; clearTimeout(t);
+        if(ref){ S.sentRef = ref; S.sentAt = new Date().toISOString(); save();
+          stat('ok', '✅ <b>وصل تقريرك إلى المدرب.</b> رقمك المرجعي: <span class="ref">' + esc(ref) + '</span><span class="en">Your report reached the trainer. Reference: ' + esc(ref) + '</span>'); }
+        else stat('no', '⚠️ <b>تعذّر الإرسال الآن.</b> اطبع التقرير PDF وأرسله للمدرب، أو اضغط «إرسال التقرير للمدرب فقط» لاحقاً.<span class="en">Could not send now. Save the PDF and send it to the trainer, or press “Send to trainer only” later.</span>');
+        res(ref);
+      }
+      try{
+        fetch(EP, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body), redirect:'follow', signal:ctl ? ctl.signal : undefined})
+          .then(function(r){ return r.json(); }).then(function(d){ fin(d && d.ok ? (d.ref || 'OK') : null); }).catch(function(){ fin(null); });
+      }catch(e){ fin(null); }
+    });
+  }
+  function finish(){
+    var bs = $$('[data-finish]'); bs.forEach(function(b){ b.disabled = true; });
+    var fc = document.getElementById('finish'); if(fc) fc.scrollIntoView({block:'center'});
+    send().then(function(){
+      S.finished = new Date().toISOString(); save();
+      document.getElementById('report').innerHTML = build();
+      bs.forEach(function(b){ b.disabled = false; });
+      setTimeout(function(){ window.print(); }, 200);
+    });
+  }
+  var so = document.getElementById('sendonly'); if(so) so.addEventListener('click', function(){ so.disabled = true; send().then(function(){ so.disabled = false; }); });
   $$('[data-finish]').forEach(function(b){ b.addEventListener('click', finish); });
   var rs = document.getElementById('resetall');
   if(rs) rs.addEventListener('click', function(){
@@ -485,7 +554,7 @@ main{max-width:1180px}
 <div class="gb gb4"><label class="l" for="gEmail">Email or mobile · البريد الإلكتروني أو الجوال</label><input type="text" id="gEmail" autocomplete="email" maxlength="120" placeholder="name@example.com  ·  +974 5xxx xxxx"><small style="display:block;margin-top:4px">Write one of them only. · اكتب أحدهما فقط.</small></div>
 <input type="text" class="hp" id="gWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
 <div class="gb gb5"><div class="ok"><span><b>By pressing Enter, you agree to receive updates about new resources, and to Smart Students Hub recording which tools you use.</b><b dir="rtl" style="display:block;text-align:right">بالضغط على «دخول» توافق على إرسال تحديثات الموارد لك، وعلى تسجيل المنصة للأدوات التي تستخدمها.</b><small style="display:block;margin-top:4px">Your details stay private and are used only to document how our free resources are used. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، وتُستخدم فقط لتوثيق الاستفادة من مواردنا المجانية. ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></div>
-<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='course-tiered-writing',$=s=>document.getElementById(s);
+<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='academy',$=s=>document.getElementById(s);
 const EOK=e=>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e||''),POK=p=>/^\+?[0-9 ]{8,16}$/.test(p||'');
 let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
 let reg=false;try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
