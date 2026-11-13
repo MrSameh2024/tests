@@ -28,11 +28,28 @@ function pictures(){
  document.querySelectorAll('#lessons .question').forEach(function(q){if(q.dataset.gp)return;q.dataset.gp='1';var t=q.querySelector('p');if(!t)return;var w=picFor(t.textContent),ot=' '+norm(Array.prototype.map.call(q.querySelectorAll('[data-answer]'),function(b){return b.textContent}).join(' '))+' ';if(w&&ot.indexOf(norm(w))>=0)w=null;if(w){var im=document.createElement('img');im.className='g-qpic';im.src=MAP[w];im.alt=w;im.loading='lazy';q.insertBefore(im,q.firstChild);}});
  document.querySelectorAll('#lessons article').forEach(function(a){var pass=a.querySelector('.passage');if(pass&&!pass.dataset.gp){pass.dataset.gp='1';var ws=[],t=' '+norm(pass.textContent)+' ';WORDS.forEach(function(w){if(ws.length<3&&ws.indexOf(w)<0&&new RegExp(' '+norm(w).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(s|es)? ').test(t))ws.push(w);});if(ws.length){var row=document.createElement('div');row.className='g-prow';ws.forEach(function(w){var im=document.createElement('img');im.src=MAP[w];im.alt=w;im.loading='lazy';row.appendChild(im);});pass.parentNode.insertBefore(row,pass);}}});
 }
+
+/* writing stage: colourful cards + tap-a-picture word bank */
+var lastInput=null;document.addEventListener('focusin',function(e){if(e.target.matches&&e.target.matches('[data-write]'))lastInput=e.target;});
+function writing(){
+ document.querySelectorAll('#lessons .stage.writing').forEach(function(st){if(st.dataset.gw)return;st.dataset.gw='1';
+  var cols=['#ec4899','#38bdf8','#4ade80','#fb923c','#a78bfa'],icons=['✏️','🖍️','📝','✒️','🖊️'];
+  st.querySelectorAll(':scope > label').forEach(function(lab,k){var card=document.createElement('div');card.className='g-wcard';card.style.setProperty('--c',cols[k%5]);
+   lab.parentNode.insertBefore(card,lab);var n=lab;var list=[];while(n&&(n===lab||n.tagName!=='LABEL')&&!(n.classList&&n.classList.contains('muted'))&&!(n.matches&&n.matches('[data-writing-done]'))){list.push(n);n=n.nextSibling;}
+   var ic=document.createElement('span');ic.className='g-wicon';ic.textContent=icons[k%5];card.appendChild(ic);list.forEach(function(x){card.appendChild(x);});});
+  var art=st.closest('article');if(!art)return;var words=[];art.querySelectorAll('.word h3').forEach(function(h){var w=h.textContent.trim();if(MAP[w])words.push(w);});
+  if(words.length){var bank=document.createElement('div');bank.className='g-bank';bank.innerHTML='<p class="g-bank-t">🧺 Word basket · سلة الكلمات — tap a picture to put the word in your sentence · اضغط صورة لتضع الكلمة في جملتك</p><div class="g-bank-w">'+words.map(function(w){return '<button type="button" data-bank="'+w.replace(/"/g,'&quot;')+'"><img src="'+MAP[w]+'" alt="" loading="lazy"><span>'+w+'</span></button>';}).join('')+'</div>';
+   var first=st.querySelector('.g-wcard');st.insertBefore(bank,first);
+   bank.addEventListener('click',function(e){var b=e.target.closest('[data-bank]');if(!b)return;var inp=(lastInput&&st.contains(lastInput))?lastInput:Array.prototype.find.call(st.querySelectorAll('[data-write]'),function(x){return !x.value.trim()})||st.querySelector('[data-write]');if(!inp)return;inp.value=(inp.value.trim()?inp.value.trim()+' ':'')+b.dataset.bank;inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));inp.focus();sfx('coin');b.classList.add('g-used');});}
+  var done=st.querySelector('[data-writing-done]');if(done)done.classList.add('g-done');});
+ document.querySelectorAll('#lessons .pen-colour').forEach(function(b){if(b.dataset.gc)return;b.dataset.gc='1';var c=b.style.borderColor;b.style.setProperty('--pc',c);});
+ document.querySelectorAll('#lessons article > .row:not(.g-nav)').forEach(function(r){r.classList.add('g-nav');});
+}
 /* celebrate answers made by the student */
-var lastTap=0;document.addEventListener('click',function(e){if(e.target.closest('[data-answer]'))lastTap=Date.now();if(e.target.closest('[data-stage],[data-section]'))sfx('go');},true);
+var lastTap=0;document.addEventListener('click',function(e){if(e.target.closest('[data-answer]'))lastTap=Date.now();if(e.target.closest('[data-stage],[data-section]'))sfx('go');var wd=e.target.closest('[data-writing-done]');if(wd){var st=wd.closest('.stage');var filled=st?Array.prototype.filter.call(st.querySelectorAll('[data-write]'),function(x){return x.value.trim()}).length:0;if(filled){banner('✍️ GREAT WRITING!');confetti(30);sfx('ok');addCoins(filled,wd);}}},true);
 function watch(){var root=$('#lessons');if(!root||root.dataset.gw)return;root.dataset.gw='1';
- new MutationObserver(function(ms){var fresh=Date.now()-lastTap<1500;ms.forEach(function(m){var el=m.target;if(m.type==='attributes'&&el.classList&&el.classList.contains('feedback')&&fresh){if(el.classList.contains('good')){banner(['SUPER!','GREAT!','WELL DONE!'][Math.floor(Math.random()*3)]);sfx('ok');confetti(18);addCoins(2,el);}else if(el.classList.contains('retry')){banner('TRY AGAIN!',true);sfx('no');var q=el.closest('.question');if(q){q.classList.remove('g-shake');void q.offsetWidth;q.classList.add('g-shake');}}lastTap=0;}});pictures();}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
- pictures();}
+ new MutationObserver(function(ms){var fresh=Date.now()-lastTap<1500;ms.forEach(function(m){var el=m.target;if(m.type==='attributes'&&el.classList&&el.classList.contains('feedback')&&fresh){if(el.classList.contains('good')){banner(['SUPER!','GREAT!','WELL DONE!'][Math.floor(Math.random()*3)]);sfx('ok');confetti(18);addCoins(2,el);}else if(el.classList.contains('retry')){banner('TRY AGAIN!',true);sfx('no');var q=el.closest('.question');if(q){q.classList.remove('g-shake');void q.offsetWidth;q.classList.add('g-shake');}}lastTap=0;}});pictures();writing();}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+ pictures();writing();}
 function start(){hud();watch();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 window.addEventListener('aesn-ready',start);setTimeout(start,800);
