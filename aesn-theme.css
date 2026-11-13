@@ -1,0 +1,83 @@
+/* Smart Students Hub – AESN game theme for the course pages (matches the Games Arena). */
+body{background:#0d1530!important}
+header{background:radial-gradient(circle at 20% 0,#7c3aed,transparent 55%),radial-gradient(circle at 90% 20%,#0ea5e9,transparent 50%),#0d1530!important}
+header h1{text-shadow:0 3px 0 #000,0 0 18px #7c3aed}
+.welcome-visual{border:5px solid #fde047;box-shadow:0 10px 0 #0005}
+main{color:#172b41}
+main>.muted,main>.ar.muted{color:#c7d2fe!important}
+.controls{background:#1c2752!important;color:#fff;border:0!important;box-shadow:0 8px 24px #0006}
+.controls label,.controls .status{color:#fff}
+button,a.btn{border:0!important;box-shadow:0 5px 0 #0003;font-weight:800!important;transition:transform .08s}
+button:active,a.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0003}
+button.primary,button[aria-pressed=true]{background:linear-gradient(#22c55e,#15803d)!important;color:#fff!important}
+button:not(.primary):not([aria-pressed=true]):not(.picture),a.btn{background:linear-gradient(#ffffff,#e2e8f0);color:#14244a}
+.stop{background:linear-gradient(#fecaca,#f87171)!important;color:#7f1d1d!important}
+/* section tiles */
+#sections{gap:12px}
+#sections button{min-height:96px;color:#fff!important;border-radius:18px;font-size:.95em;text-shadow:0 2px 0 #0004;box-shadow:0 7px 0 #0005}
+#sections button .ar{color:#fff;text-align:center}
+#sections button:nth-child(1){background:linear-gradient(#ec4899,#9d174d)!important}
+#sections button:nth-child(2){background:linear-gradient(#38bdf8,#0369a1)!important}
+#sections button:nth-child(3){background:linear-gradient(#4ade80,#15803d)!important}
+#sections button:nth-child(4){background:linear-gradient(#fb923c,#c2410c)!important}
+#sections button:nth-child(5){background:linear-gradient(#a78bfa,#6d28d9)!important}
+#sections button[aria-pressed=true]{outline:5px solid #fde047;outline-offset:3px;transform:scale(1.04)}
+#sections button[aria-pressed=true]::after{content:' ▶ NOW';display:block;font-size:.7em;color:#fde047}
+/* lesson card */
+article{border:0!important;border-radius:24px!important;box-shadow:0 10px 30px #0008;position:relative;overflow:hidden}
+article::before{content:'';position:absolute;left:0;right:0;top:0;height:10px;background:linear-gradient(90deg,#ec4899,#38bdf8,#4ade80,#fb923c,#a78bfa)}
+article h2{font-size:1.9rem;color:#1e3a8a}
+.badge{background:linear-gradient(#fde047,#f59e0b)!important;color:#3b2600!important;font-weight:800}
+.instruction{background:linear-gradient(#eef2ff,#e0e7ff)!important;border-left:6px solid #6366f1!important;border-radius:16px!important}
+.sticky{background:#ffffffee!important;border-radius:16px;padding:8px!important}
+/* stage tabs as game levels */
+.steps button{border-radius:30px!important;min-height:56px}
+.steps button:nth-child(1)::before{content:'👀 '}.steps button:nth-child(2)::before{content:'🗣️ '}.steps button:nth-child(3)::before{content:'🎯 '}.steps button:nth-child(4)::before{content:'✍️ '}
+.steps button[aria-pressed=true]{background:linear-gradient(#fde047,#f59e0b)!important;color:#3b2600!important;transform:scale(1.05)}
+/* word cards */
+.cards{gap:16px!important}
+.word{border:0!important;border-radius:20px!important;background:linear-gradient(#fff,#f8fafc)!important;box-shadow:0 6px 0 #c7d2fe,0 10px 20px #0002;transition:transform .2s}
+.word:hover{transform:translateY(-4px) rotate(-.5deg)}
+.word h3{font-size:1.4em;color:#1e3a8a}
+.picture{border-radius:16px!important;border:4px solid #fde047!important;box-shadow:none!important;background:#fff!important}
+.g-pic{display:block;width:100%;height:170px;object-fit:contain;background:#fff}
+.phrase{background:#fff;border-radius:16px;margin:8px 0;border:0!important;box-shadow:0 4px 0 #e0e7ff}
+.g-thumb{width:84px;height:64px;object-fit:contain;border-radius:10px;border:3px solid #fde047;background:#fff}
+.passage{background:#fffbeb;border:4px dashed #f59e0b;border-radius:18px;padding:14px 18px}
+.g-prow{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.g-prow img{width:130px;height:98px;object-fit:contain;border-radius:12px;border:4px solid #fde047;background:#fff}
+/* questions */
+.options button[aria-pressed=true]{background:linear-gradient(#c7d2fe,#818cf8)!important;color:#1e1b4b!important}
+.question:has(.feedback.good) .options button[aria-pressed=true]{background:linear-gradient(#bbf7d0,#22c55e)!important;color:#14532d!important}
+.question:has(.feedback.retry) .options button[aria-pressed=true]{background:linear-gradient(#fecaca,#f87171)!important;color:#7f1d1d!important}
+.question{border:0!important;border-radius:20px!important;background:linear-gradient(#f8fafc,#eef2ff);box-shadow:0 6px 0 #c7d2fe;position:relative}
+.question::after{content:'';display:block;clear:both}
+.g-qpic{float:right;width:120px;height:90px;object-fit:contain;border-radius:12px;border:4px solid #fde047;background:#fff;margin:0 0 8px 10px}
+.options button{min-height:58px;font-size:1.05em;border-radius:16px}
+.feedback.good{background:linear-gradient(#bbf7d0,#86efac)!important;color:#14532d!important;font-weight:800;border-radius:14px!important;animation:gpop .4s}
+.feedback.retry{background:linear-gradient(#fef3c7,#fde68a)!important;color:#713f12!important;font-weight:800;border-radius:14px!important}
+.writing input{border:4px solid #6366f1!important;border-radius:14px!important}
+.drawing-tool canvas{border:5px solid #fde047!important;border-radius:16px}
+.panel{border:0!important;border-radius:24px!important;box-shadow:0 10px 30px #0008}
+.footer,.footer a{color:#a5b4fc}
+/* HUD and effects */
+.g-hud{background:#1c2752;color:#fff;border-radius:20px;padding:12px 14px;margin:14px 0;box-shadow:0 8px 24px #0006}
+.g-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.g-chip{background:#ffffff1f;border:1px solid #ffffff33;border-radius:20px;padding:3px 12px;font-weight:900}
+.g-xp{flex:1;min-width:140px;height:14px;background:#ffffff22;border-radius:10px;overflow:hidden}.g-xp i{display:block;height:100%;width:0;background:linear-gradient(90deg,#22c55e,#fde047);transition:width .6s}
+.g-small{min-height:40px!important;padding:4px 12px!important;background:#2b3a72!important;color:#fff!important}
+.g-links{margin-top:10px}
+.g-btn{display:inline-flex;align-items:center;min-height:50px;padding:8px 18px;border-radius:14px;font-weight:900;text-decoration:none;box-shadow:0 5px 0 #0004}
+.g-gold{background:linear-gradient(#fde047,#f59e0b);color:#3b2600!important}.g-blue{background:linear-gradient(#38bdf8,#0369a1);color:#fff!important}
+.g-tip{margin:8px 0 0;font-size:.75em;color:#c7d2fe}
+.g-banner{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:60;font-size:clamp(2.4rem,9vw,5rem);font-weight:900;color:#fde047;text-shadow:0 5px 0 #b45309,0 0 30px #f59e0b,0 10px 20px #000;pointer-events:none;animation:gban 1.3s ease-out forwards;white-space:nowrap}
+.g-banner.no{color:#fff;text-shadow:0 5px 0 #991b1b,0 0 24px #ef4444,0 10px 20px #000}
+@keyframes gban{0%{transform:translate(-50%,-50%) scale(.2) rotate(-12deg);opacity:0}25%{transform:translate(-50%,-50%) scale(1.15) rotate(3deg);opacity:1}70%{opacity:1}100%{transform:translate(-50%,-80%);opacity:0}}
+.g-conf{position:fixed;top:-30px;z-index:59;pointer-events:none;font-size:22px;animation:gfall linear forwards}
+@keyframes gfall{to{transform:translateY(110vh) rotate(720deg)}}
+.g-plus{position:fixed;z-index:61;font-weight:900;color:#fde047;text-shadow:0 2px 0 #000;font-size:1.6em;pointer-events:none;animation:gplus 1s ease-out forwards}
+@keyframes gplus{to{transform:translateY(-70px);opacity:0}}
+@keyframes gpop{0%{transform:scale(.8)}70%{transform:scale(1.04)}100%{transform:scale(1)}}
+.g-shake{animation:gshake .4s}@keyframes gshake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+body.quiet-view .g-banner,body.quiet-view .g-conf{display:none}
+@media (prefers-reduced-motion:reduce){.g-banner,.g-conf,.g-plus,.word,.feedback.good{animation:none!important;transition:none!important}}
+@media print{.g-hud,.g-banner,.g-conf{display:none!important}body{background:#fff!important}}
