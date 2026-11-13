@@ -121,3 +121,23 @@ article details summary::before{content:'👨‍👩‍👦 '}
 [data-draw-action=undo]{background:linear-gradient(#e0e7ff,#a5b4fc)!important;color:#1e1b4b!important}
 [data-draw-action=clear]{background:linear-gradient(#fecaca,#f87171)!important;color:#7f1d1d!important}
 [data-draw-action=save]{background:linear-gradient(#bbf7d0,#22c55e)!important;color:#14532d!important}
+/* every Listen / hear button: bright blue */
+button[data-say],button[data-read-writing],#regListen,#welcome{background:linear-gradient(#38bdf8,#0369a1)!important;color:#fff!important}
+/* Say & Read sentences as colourful rows */
+.phrase{border-left:10px solid #f59e0b!important;padding:12px 14px!important;font-size:1.15em;font-weight:800;color:#1e3a8a}
+.phrase:nth-of-type(5n+1){border-left-color:#ec4899!important;background:#fdf2f8}
+.phrase:nth-of-type(5n+2){border-left-color:#38bdf8!important;background:#f0f9ff}
+.phrase:nth-of-type(5n+3){border-left-color:#4ade80!important;background:#f0fdf4}
+.phrase:nth-of-type(5n+4){border-left-color:#fb923c!important;background:#fff7ed}
+.phrase:nth-of-type(5n+5){border-left-color:#a78bfa!important;background:#f5f3ff}
+.stage h3,.stage h4{color:#7e22ce}
+.stage h3::before{content:'⭐ '}
+/* panels and form fields */
+.panel:not(#registration){background:linear-gradient(#ffffff,#f0f9ff)!important}
+.panel .muted{color:#475569!important}
+#registration input[type=text],#registration select,input,select{border:3px solid #818cf8!important;border-radius:14px!important;min-height:52px;background:#fff}
+#print{background:linear-gradient(#a78bfa,#6d28d9)!important;color:#fff!important}
+#reset{background:linear-gradient(#fecaca,#f87171)!important;color:#7f1d1d!important}
+header>p:not(.ar){color:#e0e7ff}
+.scope-note{background:#ffffff14;border-radius:14px;padding:8px 12px}
+.status{color:#fde047}
