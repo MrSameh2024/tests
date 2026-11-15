@@ -138,7 +138,7 @@ function path(){const p=prog()[WI]||[];$('path').innerHTML=LEVELS.map((v,k)=>'<b
 function done(msg){mark(WI,L);sfx('win');confetti(40);banner('⭐ MISSION DONE!');addCoins(10,$('t'));path();
   $('t').insertAdjacentHTML('beforeend','<div class="center" style="margin-top:12px"><p class="fb ok">'+msg+'</p><button type="button" class="primary" id="nextL">'+(L<5?'Next mission ▶ · المهمة التالية':'🏆 Finish the world · أنهِ العالم')+'</button></div>');
   $('nextL').onclick=()=>{if(L<5)level(L+1);else finishWorld();};$('nextL').scrollIntoView({block:'center',behavior:'smooth'});}
-function finishWorld(){const n=(prog()[WI]||[]).length;$('t').innerHTML='<div class="center"><div class="trophy">🏆</div><h2>World '+(WI+1)+' complete! · أكملت العالم</h2><p style="font-size:1.2em;font-weight:900">⭐ '+n+' / 6 missions</p><div class="row" style="justify-content:center"><button type="button" class="gold" id="toHome">🌍 Choose another world · عالم آخر</button><a class="btn blue" href="aesn-games.html?g='+G+'">🎮 Games · الألعاب</a></div></div>';confetti(80);sfx('win');$('toHome').onclick=home;}
+function finishWorld(){const n=(prog()[WI]||[]).length;const essay=($('para')&&$('para').value.trim())||'';$('t').innerHTML='<div class="center"><div class="trophy">🏆</div><h2>World '+(WI+1)+' complete! · أكملت العالم</h2><p style="font-size:1.2em;font-weight:900">⭐ '+n+' / 6 missions</p><p id="aesnSt" class="aesn-st"></p><div class="row" style="justify-content:center"><button type="button" class="gold" id="toHome">🌍 Choose another world · عالم آخر</button><a class="btn blue" href="aesn-games.html?g='+G+'">🎮 Games · الألعاب</a></div></div>';confetti(80);sfx('win');$('toHome').onclick=home;try{AESN_LOG.send({grade:G,activity:'Challenge: World '+(WI+1)+' – '+W.title,score:n,max:6,breakdown:n+' / 6 missions completed',essay}).then(c=>AESN_LOG.status($('aesnSt'),c));}catch(e){}}
 function choice(q,opts,ans,onDone,why){const ord=shuffle(opts.map((o,k)=>({o,k})));const id='c'+Math.random().toString(36).slice(2,7);
   return {html:'<div class="opts" id="'+id+'">'+ord.map(x=>'<button type="button" data-k="'+x.k+'">'+esc(x.o)+'</button>').join('')+'</div><p class="fb" id="'+id+'f"></p>',
    wire(){$(id).querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;if(k===ans){b.classList.add('right');$(id).querySelectorAll('button').forEach(x=>x.disabled=true);$(id+'f').className='fb ok';$(id+'f').textContent='✓ Correct! · صحيح!'+(why?' '+why:'');sfx('ok');say('Correct! '+opts[ans]);addCoins(2,b);onDone&&onDone();}else{b.classList.add('wrong');b.disabled=true;$(id+'f').className='fb no';$(id+'f').textContent='Try again. · حاول مرة أخرى.'+(why?' 💡 '+why:'');sfx('no');shake(b);}});}};}
@@ -169,5 +169,5 @@ function level(l){L=l;path();const t=$('t');const head='<h2>'+LEVELS[l][0]+' '+L
 }
 home();
 </script>
-</body>
+<script src="aesn-log.js"></script></body>
 </html>

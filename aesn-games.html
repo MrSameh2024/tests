@@ -234,9 +234,9 @@ $('hub').addEventListener('click',e=>{const b=e.target.closest('[data-game]');if
 function frame(g,scene){return '<div class="hud"><button type="button" id="back">⬅ Games</button><span class="title">'+g.icon+' '+esc(g.title)+'</span><span class="stat" id="sb"></span></div>'+scene+'<div class="task" id="q"></div>';}
 let cleanup=null;
 function wireBack(fn){cleanup=fn||null;$('back').onclick=()=>{if(cleanup)cleanup();synth&&synth.cancel();hub();};}
-function finale(g,score,max,line,lineAr){const st=stars(score,max);saveBest(g.id,st);const earned=score*5+st*10;
+function finale(g,score,max,line,lineAr){const st=stars(score,max);saveBest(g.id,st);const earned=score*5+st*10;try{const sv=$('sec')?$('sec').value:'all',sn=sv==='all'?'all sections':((D().sections[+sv]||[])[0]||'');AESN_LOG.send({grade:G,activity:'Game: '+g.title+(HARD()?' (Challenge mode)':''),score,max,breakdown:score+' / '+max+' correct · '+st+' star(s) · book section: '+sn}).then(c=>AESN_LOG.status(document.getElementById('aesnSt'),c));}catch(e){}
   setTimeout(()=>{confetti(st>=2?70:30);sfx('win');addCoins(earned,$('q'));},200);
-  return '<div class="final"><div class="trophy">'+(st===3?'🏆':st===2?'🥈':st>=1?'🥉':'💪')+'</div><div class="stars">'+[0,1,2].map(k=>'<span>'+(k<st?'⭐':'☆')+'</span>').join('')+'</div><h2 style="margin:.2em 0">'+esc(line)+'</h2><span class="ar" style="text-align:center">'+esc(lineAr)+'</span><p style="font-size:1.3em;font-weight:900">'+score+' / '+max+' · +'+earned+' 🪙</p><div class="row" style="justify-content:center"><button type="button" class="primary" id="again">🔁 Play again · مرة أخرى</button><button type="button" class="blue" id="home2">🎮 Other games · ألعاب أخرى</button></div></div>';}
+  return '<div class="final"><div class="trophy">'+(st===3?'🏆':st===2?'🥈':st>=1?'🥉':'💪')+'</div><div class="stars">'+[0,1,2].map(k=>'<span>'+(k<st?'⭐':'☆')+'</span>').join('')+'</div><h2 style="margin:.2em 0">'+esc(line)+'</h2><span class="ar" style="text-align:center">'+esc(lineAr)+'</span><p style="font-size:1.3em;font-weight:900">'+score+' / '+max+' · +'+earned+' 🪙</p><p id="aesnSt" class="aesn-st"></p><div class="row" style="justify-content:center"><button type="button" class="primary" id="again">🔁 Play again · مرة أخرى</button><button type="button" class="blue" id="home2">🎮 Other games · ألعاب أخرى</button></div></div>';}
 function wireFinale(again){$('again').onclick=again;$('home2').onclick=hub;}
 function pick(btns,ans,k){btns.forEach((b,j)=>{b.disabled=true;if(j===ans)b.classList.add('right');else if(j===k)b.classList.add('wrong');});}
 
@@ -364,5 +364,5 @@ function treasure(g){
 }
 hub();
 </script>
-</body>
+<script src="aesn-log.js"></script></body>
 </html>
