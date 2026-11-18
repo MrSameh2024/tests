@@ -449,10 +449,15 @@
   }
 
   /* Tell students, right next to the send button, that sending is what issues the certificate */
-  var SEND_RE = /send my (result|results|practice)|submit to (your )?teacher|submit writing|أرسل نتيجتي|إرسال الموضوع/i;
+  var SEND_RE = /send my (result|results|practice)|submit to (your )?teacher|submit writing|submit station|أرسل نتيجتي|إرسال الموضوع/i;
   var issuedHere = false;
   function hintHTML(btn) {
     if (issuedHere) return '<b>🎓 Certificate issued!</b> · ' + 'شهادتك جاهزة' + '<span class="ar">افتحها أو حمّلها من «شهاداتي».</span><button type="button" class="sshc-open">📂 Open my certificate · افتح شهادتي</button>';
+    if (/submit station/i.test(btn.textContent)) {
+      var stn = (document.title.match(/Station\s*(\d+)/i) || [])[1];
+      return '<b>🎓 Your certificate:</b> finish all the stations. When you submit <b>the final station</b>, your work is sent to your teacher and your certificate appears straight away.' +
+        '<span class="ar">🎓 شهادتك: أكمل جميع المحطات، وعند إرسال المحطة الأخيرة تُرسل إلى معلمك وتظهر شهادتك فورًا.</span>';
+    }
     return '<b>🎓 Your certificate:</b> press <b>“' + esc(btn.textContent.trim().split(' · ')[0].replace(/^[^A-Za-z]+/, '')) + '”</b> and your certificate appears straight away, with PDF download and print.' +
       '<span class="ar">🎓 شهادتك: اضغط زر الإرسال وستظهر شهادتك فورًا مع إمكانية التنزيل PDF والطباعة.</span>' +
       (btn.disabled ? '<span class="warn">First finish the steps above (for example, self-mark every answer) so the button becomes active.</span><span class="warn ar">أكمل الخطوات أعلاه أولًا (مثل التصحيح الذاتي لكل إجابة) ليُفعَّل زر الإرسال.</span>' : '');
