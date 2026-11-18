@@ -301,7 +301,7 @@ function renderScore(){
   $('#result').innerHTML=`<h2>Your result · نتيجتك</h2><div class="big">${x.total} / 30</div><div>${pct}% · Writing (10 marks) will be marked by your teacher.</div>
   <div class="bars">${[['Use of Language',x.lang,18],['Reading',x.read,12]].map(([l,g,m])=>`<div class="bar"><span>${l}</span><div class="track"><i style="width:${g/m*100}%"></i></div><b>${g}/${m}</b></div>`).join('')}</div>
   <p class="mute">${x.pending?`<b style="color:#b3261e">${x.pending} answer(s) still need your self-mark.</b> Scroll up, compare with the model and tap a button. · `:''}${Object.keys(SELF).length} answer(s) are self-marked: be honest — your teacher can see them.</p><div id="sendWrap"></div>`;
-  if(!sent)$('#sendWrap').innerHTML=`<button class="btn" type="button" id="sendBtn" ${x.pending?'disabled':''}>Send my results and writing to my teacher · أرسل لمعلمي</button>`;
+  if(!sent)$('#sendWrap').innerHTML=`<button class="btn" type="button" id="sendBtn" data-pending="${x.pending||0}">Send my results and writing to my teacher · أرسل لمعلمي</button>${x.pending?'<p class="mute" style="margin-top:6px">Your result is sent to your teacher automatically when you finish self-marking. You can also send it now. · تُرسل نتيجتك إلى معلمك تلقائيًا عند انتهائك من التصحيح الذاتي، ويمكنك إرسالها الآن.</p>':''}`;
 }
 const actions=$('#actions');
 function setActions(s){actions.innerHTML=s==='start'?'<button type="button" class="btn" id="checkBtn">Check my answers · صحح إجاباتي</button>':s==='confirm'?'<div class="confirm"><span>Check now? You can’t change answers afterwards.</span><button type="button" class="btn" id="yesBtn">Yes, check</button><button type="button" class="btn ghost" id="noBtn">Keep working</button></div>':'<a class="btn ghost" style="text-decoration:none" href="?t='+(t<10?t+1:1)+'">Next test → Test '+(t<10?t+1:1)+'</a>'}
@@ -312,9 +312,9 @@ document.addEventListener('click',e=>{
   if(id==='noBtn')setActions('start');
   if(id==='yesBtn'){mark();document.querySelectorAll('#test input,#test textarea,#test select').forEach(el=>el.disabled=true);sshLock(true);$('#sshName').disabled=true;$('#sshClass').disabled=true;renderScore();setActions('done');
     const first=document.querySelector('.self:not(.hidden)');(first||$('#result')).scrollIntoView({block:'center',behavior:'smooth'})}
-  if(id==='sendBtn'){const x=totals();const ans=[];
+  if(id==='sendBtn'){if(+e.target.dataset.pending>0&&!window.SSH_AUTO_SEND&&!confirm(e.target.dataset.pending+' answer(s) are not self-marked yet. Send now? Your teacher will mark them. · '+e.target.dataset.pending+' إجابة لم تُصحَّح ذاتيًا بعد. هل ترسل الآن؟ سيصححها معلمك.'))return;const x=totals();const ans=[];
     const rad=(p,arr,s)=>arr.map((q,i)=>{const c=document.querySelector(`input[name="${p}${i}"]:checked`);const v=c?+c.value:-1;return (s+i)+') '+(v<0?'-':L[v])+(v===q.a?' ✓':' ✗ (key '+L[q.a]+')')}).join(' | ');
-    const sm=k=>SELF[k]?(' [self: '+SELF[k].got+'/'+SELF[k].pts+']'):'';
+    const sm=k=>SELF[k]?(SELF[k].got===null?' [not self-marked: teacher to mark]':' [self: '+SELF[k].got+'/'+SELF[k].pts+']'):'';
     ans.push('Q1-7: '+rad('m',T.mcq,1));
     ans.push('8.A: '+T.g8a.map((q,i)=>(i+1)+') '+($('#a'+i).value||'-')+($('#a'+i).value===q.a?' ✓':' ✗ (key '+q.a+')')).join(' | '));
     ans.push('8.B: '+T.g8b.map((q,i)=>(i+1)+') '+($('#b'+i).value||'-')+($('#b'+i).value===q.a?' ✓':' ✗ (key '+q.a+')')).join(' | '));
@@ -327,7 +327,7 @@ document.addEventListener('click',e=>{
     const wt=document.querySelector('input[name="wt"]:checked').value;
     e.target.disabled=true;sent=true;
     sshSend($('#result'),{test:'Grade 12 Advanced Test '+t,name:$('#sshName').value.trim(),cls:$('#sshClass').value.trim(),score:x.total,max:30,percent:Math.round(x.total/30*100),
-      breakdown:'Use of Language '+x.lang+'/18; Reading '+x.read+'/12; Writing /10 by teacher (Content · Organisation · Language · Accuracy)',
+      breakdown:'Use of Language '+x.lang+'/18; Reading '+x.read+'/12; Writing /10 by teacher (Content · Organisation · Language · Accuracy)'+(x.pending?'; '+x.pending+' answer(s) not self-marked: teacher to mark':''),
       topic:(wt==='1'?'Cover letter – '+T.w1.job+': '+T.w1.ad:'Essay: '+T.w2.ins).slice(0,118),essay:essay.value.trim(),answers:ans.join('\n')});
     e.target.remove();}
 });
@@ -366,7 +366,7 @@ window.sshSend=function(holder,payload){
     if(!ENDPOINT){box.className='ssh-status no';box.innerHTML='<b>Sending is not switched on yet.</b> Print your report and give it to your teacher.<span class="ar">الإرسال غير مفعّل بعد. اطبع تقريرك وسلّمه لمعلمك.</span>';return}
     box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b> Keep this page open.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة.</span>';
     const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),25000);
-    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),signal:ctl.signal,redirect:'follow'})
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),signal:ctl.signal,redirect:'follow',keepalive:JSON.stringify(body).length<60000})
      .then(r=>r.json()).then(d=>{clearTimeout(t);
        if(d&&d.ok){box.className='ssh-status ok';box.innerHTML='✅ <b>Sent to your teacher.</b> Your reference number: <b class="ref">'+d.ref+'</b><br>Keep this number. Feedback on your writing will reach you by email or WhatsApp.<span class="ar">✅ تم الإرسال إلى المعلم. رقمك المرجعي: '+d.ref+' — احتفظ به، وستصلك ملاحظات الكتابة عبر البريد أو واتساب.</span>'}
        else throw new Error(d&&d.error||'error')})
@@ -375,8 +375,20 @@ window.sshSend=function(holder,payload){
   go();
 };
 // Auto-send: results go to the teacher as soon as the test is checked (details + consent are required before Check).
-(function(){let busy=false;const tryClick=()=>{const b=document.getElementById('sendBtn');if(b&&!b.disabled&&!busy&&document.body.contains(b)){busy=true;setTimeout(()=>{if(document.body.contains(b)&&!b.disabled)b.click();busy=false},300)}};
- new MutationObserver(tryClick).observe(document.documentElement,{childList:true,subtree:true});})();
+// If some answers still wait for the student's self-mark, we wait while they mark, but the result is never lost:
+// it is sent when the last answer is marked, after 3 minutes without marking, or when the student leaves the page.
+(function(){const WAIT=180000;let timer=null,queued=false,lastB=null,lastP=null;
+ const btn=()=>{const b=document.getElementById('sendBtn');return b&&document.body.contains(b)&&!b.disabled?b:null};
+ const pend=b=>+(b.dataset.pending||0);
+ const fire=force=>{const b=btn();if(!b)return;if(!force&&pend(b)>0)return;clearTimeout(timer);timer=null;window.SSH_AUTO_SEND=true;try{b.click()}finally{window.SSH_AUTO_SEND=false}};
+ const check=()=>{const b=btn();if(!b){clearTimeout(timer);timer=null;lastB=null;return}
+  const p=pend(b);if(b===lastB&&p===lastP)return;lastB=b;lastP=p;
+  if(p>0){clearTimeout(timer);timer=setTimeout(()=>fire(true),WAIT)}
+  else if(!queued){queued=true;setTimeout(()=>{queued=false;fire(false)},300)}};
+ new MutationObserver(check).observe(document.documentElement,{childList:true,subtree:true});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')fire(true)});
+ window.addEventListener('pagehide',()=>fire(true));
+})();
 })();
 </script>
 <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">
