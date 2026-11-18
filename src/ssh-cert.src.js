@@ -259,7 +259,11 @@
     ".sshc-ls{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}.sshc-ls li{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid #e3e8f0;border-radius:10px;padding:8px 10px}" +
     ".sshc-ls button{font:inherit;font-weight:700;border:2px solid #14244a;background:#fff;border-radius:9px;padding:5px 10px;cursor:pointer}" +
     "button.sshc-fab{position:fixed!important;left:14px!important;bottom:14px!important;z-index:2147482000;box-shadow:0 8px 24px rgba(0,0,0,.25)!important;background:linear-gradient(135deg,#c9a646,#a67c00)!important;border-color:#a67c00!important;font-size:.9rem!important}" +
-    "@media print{.sshc-ov,.sshc-fab{display:none!important}}";
+    ".sshc-hint-box{margin:10px 0;padding:10px 14px;border-radius:12px;border:2px dashed #c9a646;background:#fffaf0;color:#14244a;font:600 .95rem/1.45 system-ui,'Segoe UI',Arial,'SSHTaj',sans-serif;text-align:left;direction:ltr}" +
+    ".sshc-hint-box b{color:#a67c00}.sshc-hint-box .ar{display:block;direction:rtl;text-align:right;font-weight:500;margin-top:2px}" +
+    ".sshc-hint-box .warn{display:block;color:#b03a2e;margin-top:4px}.sshc-hint-box.done{border-style:solid;border-color:#13795b;background:#e9f7f0}" +
+    ".sshc-hint-box button{font:inherit;font-weight:800;margin-top:6px;border:2px solid #13795b;background:#fff;color:#13795b;border-radius:10px;padding:6px 12px;cursor:pointer}" +
+    "@media print{.sshc-ov,.sshc-fab,.sshc-hint-box{display:none!important}}";
 
   function close() { var o = document.querySelector('.sshc-ov'); if (o) o.remove(); document.removeEventListener('keydown', onKey); }
   function onKey(e) { if (e.key === 'Escape') close(); }
@@ -316,7 +320,7 @@
   }
 
   function issueRec(c) {
-    save(c);
+    save(c); issuedHere = true;
     setTimeout(function () { show(c, true); }, 900);
     return c;
   }
@@ -443,6 +447,29 @@
       return p;
     };
   }
+
+  /* Tell students, right next to the send button, that sending is what issues the certificate */
+  var SEND_RE = /send my (result|results|practice)|submit to (your )?teacher|submit writing|أرسل نتيجتي|إرسال الموضوع/i;
+  var issuedHere = false;
+  function hintHTML(btn) {
+    if (issuedHere) return '<b>🎓 Certificate issued!</b> · ' + 'شهادتك جاهزة' + '<span class="ar">افتحها أو حمّلها من «شهاداتي».</span><button type="button" class="sshc-open">📂 Open my certificate · افتح شهادتي</button>';
+    return '<b>🎓 Your certificate:</b> press <b>“' + esc(btn.textContent.trim().split(' · ')[0].replace(/^[^A-Za-z]+/, '')) + '”</b> and your certificate appears straight away, with PDF download and print.' +
+      '<span class="ar">🎓 شهادتك: اضغط زر الإرسال وستظهر شهادتك فورًا مع إمكانية التنزيل PDF والطباعة.</span>' +
+      (btn.disabled ? '<span class="warn">First finish the steps above (for example, self-mark every answer) so the button becomes active.</span><span class="warn ar">أكمل الخطوات أعلاه أولًا (مثل التصحيح الذاتي لكل إجابة) ليُفعَّل زر الإرسال.</span>' : '');
+  }
+  function paintHints() {
+    var bs = document.querySelectorAll('button'), i, b, box;
+    for (i = 0; i < bs.length; i++) {
+      b = bs[i];
+      if (!SEND_RE.test(b.textContent || '') || b.closest('.sshc-ov')) continue;
+      if (!b.offsetParent && !b.getClientRects().length) continue;
+      box = b._sshcHint;
+      if (!box) { ensureStyle(); box = document.createElement('div'); box.className = 'sshc-hint-box'; box.setAttribute('role', 'note'); b.parentNode.insertBefore(box, b); b._sshcHint = box; }
+      var key = (issuedHere ? 'done' : '') + '|' + b.disabled;
+      if (box._k !== key) { box._k = key; box.className = 'sshc-hint-box' + (issuedHere ? ' done' : ''); box.innerHTML = hintHTML(b); var o = box.querySelector('.sshc-open'); if (o) o.onclick = function () { var l = load(); if (l.length) show(l[l.length - 1], false); }; }
+    }
+  }
+  setInterval(paintHints, 1200);
 
   window.SSH_CERT = { issue: issue, show: show, list: list, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fab); else fab();
