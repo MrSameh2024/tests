@@ -460,7 +460,14 @@
     }
     return '<b>🎓 Your certificate:</b> press <b>“' + esc(btn.textContent.trim().split(' · ')[0].replace(/^[^A-Za-z]+/, '')) + '”</b> and your certificate appears straight away, with PDF download and print.' +
       '<span class="ar">🎓 شهادتك: اضغط زر الإرسال وستظهر شهادتك فورًا مع إمكانية التنزيل PDF والطباعة.</span>' +
-      (btn.disabled ? '<span class="warn">First finish the steps above (for example, self-mark every answer) so the button becomes active.</span><span class="warn ar">أكمل الخطوات أعلاه أولًا (مثل التصحيح الذاتي لكل إجابة) ليُفعَّل زر الإرسال.</span>' : '');
+      (btn.disabled ? '<span class="warn">First finish the steps above (for example, self-mark every answer) so the button becomes active.</span><span class="warn ar">أكمل الخطوات أعلاه أولًا (مثل التصحيح الذاتي لكل إجابة) ليُفعَّل زر الإرسال.</span>' +
+        (unmarked().length ? '<button type="button" class="sshc-goto">👆 Show me what to mark (' + unmarked().length + ') · أرني ما أصحّحه</button>' : '') : '');
+  }
+  /* self-mark boxes (✓ I got it / ✗ Not yet) that the student has not answered yet */
+  function unmarked() {
+    return [].slice.call(document.querySelectorAll('.self:not(.hidden)')).filter(function (x) {
+      return x.querySelector('button') && !x.querySelector('button.on') && (x.offsetParent || x.getClientRects().length);
+    });
   }
   function paintHints() {
     var bs = document.querySelectorAll('button'), i, b, box;
@@ -470,8 +477,9 @@
       if (!b.offsetParent && !b.getClientRects().length) continue;
       box = b._sshcHint;
       if (!box) { ensureStyle(); box = document.createElement('div'); box.className = 'sshc-hint-box'; box.setAttribute('role', 'note'); b.parentNode.insertBefore(box, b); b._sshcHint = box; }
-      var key = (issuedHere ? 'done' : '') + '|' + b.disabled;
-      if (box._k !== key) { box._k = key; box.className = 'sshc-hint-box' + (issuedHere ? ' done' : ''); box.innerHTML = hintHTML(b); var o = box.querySelector('.sshc-open'); if (o) o.onclick = function () { var l = load(); if (l.length) show(l[l.length - 1], false); }; }
+      var key = (issuedHere ? 'done' : '') + '|' + b.disabled + '|' + unmarked().length;
+      if (box._k !== key) { box._k = key; box.className = 'sshc-hint-box' + (issuedHere ? ' done' : ''); box.innerHTML = hintHTML(b); var o = box.querySelector('.sshc-open'); if (o) o.onclick = function () { var l = load(); if (l.length) show(l[l.length - 1], false); };
+        var g = box.querySelector('.sshc-goto'); if (g) g.onclick = function () { var u = unmarked()[0]; if (u) { u.scrollIntoView({ behavior: 'smooth', block: 'center' }); u.style.outline = '3px solid #c9a646'; u.style.outlineOffset = '4px'; u.style.borderRadius = '10px'; setTimeout(function () { u.style.outline = ''; }, 2500); } }; }
     }
   }
   setInterval(paintHints, 1200);
