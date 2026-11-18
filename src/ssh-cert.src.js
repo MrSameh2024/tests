@@ -1,6 +1,7 @@
 /* Smart Students Hub – Certificates for students and teachers:
    Grades 10, 11, 12 and AESN tests/courses/activities, IELTS modules and diagnostics,
-   the English Placement Test and the Academy teacher workshops.
+   the English Placement Test, the Academy teacher workshops and the teacher self-checks
+   (TKT-style test, IELTS-style self-check, Teaching Strategies tests).
    Built from src/ssh-cert.src.js by src/build-cert.py (adds the signature) → ssh-cert.js.
 
    How it works
@@ -59,7 +60,7 @@
     var score = b.score === '' || b.score == null ? null : +b.score, max = +b.max || 0;
     var pct = b.percent === '' || b.percent == null ? (score != null && max ? Math.round(100 * score / max) : null) : Math.round(+b.percent);
     if (pct != null && !isFinite(pct)) pct = null;
-    var prog = b.cert_prog || (/^IELTS|^VIV /i.test(test) ? 'ielts' : '');
+    var prog = b.cert_prog || (/^Teaching Strategies Test|^TKT|self-check/i.test(test) || /^Teacher/i.test(b.cls || '') ? 'teacher' : /^IELTS|^VIV /i.test(test) ? 'ielts' : '');
     var src = prog ? '' : test + ' ' + (b.cls || '');
     var g = (src.match(/\bG(?:rade)?\s*(1[0-2])\b/i) || src.match(/\b(1[0-2])\b/) || [])[1] || '';
     var aesn = /AESN|ASEN|ADSEN/i.test(src);
@@ -135,6 +136,7 @@
   var A = function (t) { return '<span class="sshc-a" dir="rtl">' + esc(t) + '</span>'; };
   function grLabel(c) {
     if (c.prog === 'ielts') return { en: 'IELTS Academic Preparation', ar: 'التحضير لاختبار IELTS الأكاديمي' };
+    if (c.prog === 'teacher') return { en: 'Teacher Professional Learning · Self-check', ar: 'التعلم المهني للمعلمين · اختبار ذاتي' };
     if (c.prog === 'placement') return { en: 'Indicative CEFR placement', ar: 'تحديد مستوى تقديري وفق الإطار الأوروبي' };
     if (c.prog === 'workshop') return { en: 'Smart Students Hub Academy · 1-hour CPD', ar: 'أكاديمية سمارت ستيودنتس هب · ساعة تطوير مهني' };
     var g = c.grade ? 'Grade ' + c.grade : '', ga = c.grade ? 'الصف ' + ({ 10: 'العاشر', 11: 'الحادي عشر', 12: 'الثاني عشر' })[c.grade] : '';
@@ -144,7 +146,7 @@
   var LINE = { test: ['for successfully completing', 'تقديرًا لإتمام'], course: ['for successfully completing the course', 'تقديرًا لإتمام الدورة بنجاح'],
     placement: ['for completing the', 'لإتمام'], workshop: ['for successfully completing the professional development workshop', 'لإتمامه ورشة التطوير المهني بنجاح'] };
   function certHTML(c, nameOverride) {
-    var t = TIERS[c.tier] || TIERS.completion, nm = nameOverride || c.name || (c.prog === 'workshop' ? 'Teacher' : 'Student');
+    var t = TIERS[c.tier] || TIERS.completion, nm = nameOverride || c.name || (c.prog === 'workshop' || c.prog === 'teacher' ? 'Teacher' : 'Student');
     var d = new Date(c.date), ds = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     var gl = grLabel(c), ar = /[؀-ۿ]/.test(nm);
     var showScore = c.pct != null && c.tier !== 'effort';
@@ -160,7 +162,7 @@
         '<div><span>Status · ' + A('الحالة') + '</span><b>' + (c.tier === 'effort' ? 'Completed · ' + A('أتمّ') : 'Submitted · ' + A('سُلّم')) + '</b></div>') +
       '<div><span>Date · ' + A('التاريخ') + '</span><b>' + esc(ds) + '</b></div></div>';
     return '<div class="sshc" style="--c:' + t.col + ';--s:' + t.soft + '"><div class="sshc-f"><div class="sshc-i">' +
-      '<div class="sshc-h"><img src="' + BASE + 'ssh-logo.png" alt="" crossorigin="anonymous"><div><p class="sshc-b">SMART STUDENTS HUB</p><p class="sshc-bs">' + (c.prog === 'workshop' ? 'Academy · Teacher Professional Development · ' + A('التطوير المهني للمعلمين') : 'Student Recognition Programme · ' + A('برنامج تقدير الطلاب')) + '</p></div></div>' +
+      '<div class="sshc-h"><img src="' + BASE + 'ssh-logo.png" alt="" crossorigin="anonymous"><div><p class="sshc-b">SMART STUDENTS HUB</p><p class="sshc-bs">' + ((c.prog === 'workshop' || c.prog === 'teacher') ? 'Academy · Teacher Professional Development · ' + A('التطوير المهني للمعلمين') : 'Student Recognition Programme · ' + A('برنامج تقدير الطلاب')) + '</p></div></div>' +
       '<p class="sshc-t">' + esc(t.en) + '</p><p class="sshc-ta">' + A(t.ar) + '</p>' +
       '<p class="sshc-l">This certificate is proudly presented to · <span class="sshc-la">' + A('تُمنح هذه الشهادة بكل فخر إلى') + '</span></p>' +
       '<p class="sshc-n' + (ar ? ' ar' : '') + '" dir="auto">' + esc(nm) + '</p>' +
@@ -174,9 +176,10 @@
       '<div class="sshc-ft"><div class="sshc-sg"><span class="sv">' + SIG + '</span><i></i><b>Sameh Soliman</b><small>Founder &amp; Educational Lead<br>Smart Students Hub</small></div>' +
       '<div class="sshc-se" aria-hidden="true"><em>' + t.icon + '</em><span>SMART STUDENTS</span><b>HUB</b><span>' + esc(new Date(c.date).getFullYear()) + '</span></div>' +
       '<div class="sshc-id"><span>Certificate No. · ' + A('رقم الشهادة') + '</span><b>' + esc(c.no) + '</b><span>Issued by · ' + A('جهة الإصدار') + '</span><b>smartstudentshub.com</b>' +
-      (c.recorded ? '<span>Recorded · ' + A('موثّقة') + '</span><b style="font-size:7.5pt">in the ' + (c.prog === 'workshop' ? 'Academy completion register' : 'teacher\u2019s follow-up register') + '</b>' : '') + '</div></div>' +
+      (c.recorded ? '<span>Recorded · ' + A('موثّقة') + '</span><b style="font-size:7.5pt">in the ' + (c.prog === 'workshop' || c.prog === 'teacher' ? 'Smart Students Hub Academy register' : 'teacher\u2019s follow-up register') + '</b>' : '') + '</div></div>' +
       '<p class="sshc-x">' + (c.prog === 'placement' ? 'Indicative online placement based on the CEFR; not issued by the Council of Europe, the British Council or Cambridge, and not an official qualification. · ' + A('تحديد مستوى تقديري عبر الإنترنت وليس شهادة رسمية.') :
         c.prog === 'workshop' ? 'Independent, non-accredited CPD provided by Smart Students Hub; not issued on behalf of any ministry, school or examination board. · ' + A('تطوير مهني مستقل غير معتمد رسميًا.') :
+        c.prog === 'teacher' ? 'Practice self-check by Smart Students Hub for teachers\u2019 professional learning; not an official TKT, IELTS or other qualification. · ' + A('اختبار ذاتي للتطوير المهني وليس مؤهلًا رسميًا.') :
         c.prog === 'ielts' ? 'Awarded by Smart Students Hub for IELTS preparation work. IELTS is a registered trademark of its owners; this is not an IELTS result or band score. · ' + A('شهادة تقديرية وليست نتيجة رسمية لاختبار IELTS.') :
         'Awarded by Smart Students Hub to recognise learning and effort. It is not an official qualification of any ministry, school or examination board. · ' + A('شهادة تقديرية من منصة سمارت ستيودنتس هب، وليست مؤهلًا رسميًا.')) + '</p>' +
       '</div></div></div>';
@@ -275,7 +278,7 @@
       (needName ? '<label class="sshc-nm">Your full name for the certificate · اسمك الكامل للشهادة<input id="sshcName" autocomplete="name" value="' + esc(c.name) + '" placeholder="e.g. Ahmed Ali Hassan"></label>' : '') +
       '<div class="sshc-pv"><div></div></div>' +
       '<div class="sshc-bt"><button id="sshcPdf">⬇️ Download PDF · تنزيل PDF</button><button class="alt" id="sshcPrint">🖨️ Print · طباعة</button><button class="alt" id="sshcAll">📂 My certificates · شهاداتي</button></div>' +
-      '<p class="sshc-hint">Certificate No. ' + esc(c.no) + (c.recorded ? (c.prog === 'workshop' ? ' · recorded in the Academy completion register · مسجّلة في سجل إتمام الأكاديمية' : ' · recorded in your teacher’s follow-up register · مسجّلة في سجل متابعة المعلم') : '') + '</p></div>';
+      '<p class="sshc-hint">Certificate No. ' + esc(c.no) + (c.recorded ? (c.prog === 'workshop' || c.prog === 'teacher' ? ' · recorded in the Academy register · مسجّلة في سجل الأكاديمية' : ' · recorded in your teacher’s follow-up register · مسجّلة في سجل متابعة المعلم') : '') + '</p></div>';
     document.body.appendChild(o);
     var pv = o.querySelector('.sshc-pv'), nmEl = o.querySelector('#sshcName');
     var nm = function () { return nmEl ? nmEl.value.trim() : ''; };
@@ -317,7 +320,13 @@
     setTimeout(function () { show(c, true); }, 900);
     return c;
   }
-  function issue(b, ref) { return issueRec(fromSubmission(b, ref)); }
+  function issue(b, ref) {
+    var c = fromSubmission(b, ref);
+    /* the same result sent twice (e.g. the optional "send to trainer" form) keeps its first certificate */
+    var dup = load().filter(function (x) { var s1 = x.test, s2 = c.test; return (s1.indexOf(s2) === 0 || s2.indexOf(s1) === 0) && x.score === c.score && Date.now() - new Date(x.date) < 15 * 60000; })[0];
+    if (dup) return dup;
+    return issueRec(c);
+  }
 
   /* ---------- IELTS pages: they keep results only on the device, so record them first ---------- */
   var EP_URL = 'https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec';
@@ -342,25 +351,50 @@
     if (v.percent != null) return { kind: 'test', score: v.raw != null ? +v.raw : '', max: '', percent: +v.percent, sig: 'p' + v.percent };
     return null;
   }
-  function recordIelts(res, extra) {
+  function recordIelts(res, extra) { return recordResult(res, { test: pageTitle() + (extra || '') }); }
+  /* opts: test, prog ('ielts' | 'teacher') */
+  function recordResult(res, opts) {
+    var prog = opts.prog || 'ielts';
     var r = {}; try { r = JSON.parse(localStorage.getItem('ssh_reg') || '{}') || {}; } catch (e) {}
     var name = String(r.name || '').trim(); if (!name) return;
     if (name.split(/\s+/).length < 2) name += ' (' + (r.role || 'Student') + ')';
-    var test = pageTitle() + (extra || '');
+    var test = opts.test;
     var k = 'ssh_cert_sent|' + test + '|' + res.sig;
     try { if (localStorage.getItem(k)) return; } catch (e) {}
     var pct = res.percent != null ? Math.round(res.percent) : res.max ? Math.round(100 * res.score / res.max) : '';
     var body = { type: 'submission', page: location.pathname.split('/').pop() || '', test: test.slice(0, 60), name: name,
-      cls: ('IELTS · ' + (r.cls || r.role || 'Learner')).slice(0, 30), email: r.email || '', phone: r.phone || '', consent: true,
+      cls: (prog === 'teacher' ? 'Teacher' + (r.cls ? ' · ' + r.cls : '') : 'IELTS · ' + (r.cls || r.role || 'Learner')).slice(0, 30), email: r.email || '', phone: r.phone || '', consent: true,
       score: res.kind === 'course' ? '' : res.score, max: res.kind === 'course' ? '' : res.max, percent: res.kind === 'course' ? '' : pct,
       breakdown: res.kind === 'course' ? 'Completed (self-assessed or teacher review)' : 'Score ' + res.score + (res.max ? '/' + res.max : ''),
-      topic: 'IELTS – progress record (no marking needed)', essay: '', answers: '', website: '', cert_prog: 'ielts', cert_kind: res.kind };
+      topic: (prog === 'teacher' ? 'Teacher self-check' : 'IELTS') + ' – progress record (no marking needed)', essay: '', answers: '', website: '', cert_prog: prog, cert_kind: res.kind };
     if (!LIVE) { issueRec(fromSubmission(body, '')); return; }
     try { localStorage.setItem(k, '1'); } catch (e) {}
     window.fetch(EP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), redirect: 'follow' })
       .then(function (x) { return x.json(); }).then(function (d) { if (!d || !d.ok) try { localStorage.removeItem(k); } catch (e) {} })
       .catch(function () { try { localStorage.removeItem(k); } catch (e) {} });
   }
+  /* Teacher self-checks: read the result the page shows, then record it */
+  function watch(id, fn) {
+    var el = document.getElementById(id); if (!el) return;
+    var last = '';
+    new MutationObserver(function () { var t = el.textContent; if (t && t !== last) { last = t; fn(el); } }).observe(el, { childList: true, subtree: true, characterData: true });
+  }
+  var PAGE = location.pathname.split('/').pop();
+  function teacherPages() {
+    if (PAGE === 'teacher-tkt-self-check.html') watch('res', function (el) {
+      var m = el.textContent.match(/(\d+)\s*\/\s*30/); if (m) recordResult({ kind: 'test', score: +m[1], max: 30, sig: m[1] }, { prog: 'teacher', test: 'TKT-style Teaching Knowledge Self-Check' });
+    });
+    if (PAGE === 'teacher-ielts-self-check.html') {
+      watch('rres', function (el) {
+        var m = el.textContent.match(/(\d+)\s*\/\s*13/); if (m) recordResult({ kind: 'test', score: +m[1], max: 13, sig: m[1] }, { prog: 'teacher', test: 'IELTS-style Academic Reading Self-Check' });
+      });
+      watch('wres', function (el) {
+        var w = (el.textContent.match(/Words:\s*(\d+)/) || [])[1]; if (+w > 0) recordResult({ kind: 'course', sig: 'w' + w }, { prog: 'teacher', test: 'IELTS-style Writing Task 2 Self-Assessment' });
+      });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', teacherPages); else teacherPages();
+
   var setItem = Storage.prototype.setItem;
   Storage.prototype.setItem = function (key, val) {
     var out = setItem.apply(this, arguments);
@@ -368,6 +402,13 @@
       if (this === window.localStorage && /^ssh_ielts_/.test(key)) {
         var res = ieltsResult(key, JSON.parse(val));
         if (res) setTimeout(function () { recordIelts(res); }, 50);
+      } else if (this === window.localStorage && key === 'ssh_ts_v1') {
+        var t = +(new URLSearchParams(location.search).get('t') || 0), H = JSON.parse(val) || {}, pc = H['t' + t];
+        var h2 = document.querySelector('#test h2');
+        if (t && pc != null) setTimeout(function () {
+          recordResult({ kind: 'test', score: Math.round(pc * 20 / 100), max: 20, percent: pc, sig: String(pc) },
+            { prog: 'teacher', test: 'Teaching Strategies Test ' + t + (h2 ? ' · ' + h2.textContent.replace(/^Test\s*\d+\s*·\s*/, '') : '') });
+        }, 50);
       } else if (this === window.localStorage && /^viv-[a-z]+-scores$/.test(key)) {
         var sc = JSON.parse(val) || [], groups = document.querySelectorAll('[id^="quiz"]').length || sc.length;
         var done = 0, tot = 0; for (var i = 0; i < groups; i++) if (sc[i] != null) { done++; tot += +sc[i]; }
@@ -385,6 +426,7 @@
       try {
         if (opt && typeof opt.body === 'string' && EP.test(String(url && url.url || url))) {
           body = JSON.parse(opt.body);
+          if (body && !body.type && body.test) body.type = 'submission';
           if (!body || body.website || ['submission', 'placement', 'course'].indexOf(body.type) < 0) body = null;
         }
       } catch (e) { body = null; }
