@@ -1,0 +1,294 @@
+/* Smart Students Hub – Student certificates of achievement (Grades 10, 11, 12 and AESN).
+   Built from src/ssh-cert.src.js by src/build-cert.py (adds the signature) → ssh-cert.js.
+
+   How it works
+   • Every test, course and activity already sends its result to the teacher's private Google Sheet
+     (Apps Script endpoint, payload type:'submission'). This script listens for that request.
+   • When the sheet confirms the result (ok:true), the student receives a personalised, bilingual
+     certificate. Its number is the sheet's own Reference (e.g. SSH-261118-4821), so every certificate
+     matches one row of the "Submissions" tab and is listed automatically in "Student Certificates".
+   • The student can print it or download it as a PDF. Certificates are kept on the device under
+     "My certificates" so they can be printed again later.
+   • Nothing is issued for review copies or when the result could not be recorded. */
+(function () {
+  if (window.SSH_CERT) return;
+  var ME = document.currentScript, BASE = ME && ME.src ? ME.src.replace(/[^\/]*$/, '') : '';
+  var SIG = __SIG__;
+  var KEY = 'ssh_certs', EP = /script\.google\.com\/macros\//;
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var load = function () { try { return JSON.parse(localStorage.getItem(KEY) || '[]') || []; } catch (e) { return []; } };
+  var store = function (l) { try { localStorage.setItem(KEY, JSON.stringify(l.slice(-60))); } catch (e) {} };
+
+  /* ---------- certificate level ---------- */
+  var TIERS = {
+    excellence: { en: 'Certificate of Excellence', ar: 'شهادة تميّز', col: '#a67c00', soft: '#fff6dc', icon: '🏆',
+      msg: 'An outstanding result. Your hard work and focus truly show. Keep shining!',
+      msgAr: 'نتيجة متميزة تعكس اجتهادك وتركيزك. واصل تألقك!' },
+    achievement: { en: 'Certificate of Achievement', ar: 'شهادة إنجاز', col: '#1d5fb8', soft: '#e8f1fd', icon: '🎖️',
+      msg: 'A strong result that shows real progress. Keep building on it!',
+      msgAr: 'نتيجة قوية تُظهر تقدمًا حقيقيًا. استمر في البناء عليها!' },
+    effort: { en: 'Certificate of Effort & Perseverance', ar: 'شهادة تقدير للجهد والمثابرة', col: '#13795b', soft: '#e5f6ee', icon: '🌱',
+      msg: 'Every attempt builds your skills. Review your feedback and try again: you can do it!',
+      msgAr: 'كل محاولة تبني مهاراتك. راجع ملاحظات معلمك وحاول مجددًا، فأنت قادر على النجاح!' },
+    completion: { en: 'Certificate of Completion', ar: 'شهادة إتمام', col: '#0f6b75', soft: '#e3f4f5', icon: '✍️',
+      msg: 'You completed every step and submitted your work. Well done for your commitment!',
+      msgAr: 'أتممت جميع الخطوات وسلّمت عملك. أحسنت على التزامك!' }
+  };
+  function tierOf(c) {
+    if (c.kind === 'course' || c.pct == null) return 'completion';
+    return c.pct >= 85 ? 'excellence' : c.pct >= 60 ? 'achievement' : 'effort';
+  }
+
+  /* ---------- build a certificate record from a recorded submission ---------- */
+  function fromSubmission(b, ref) {
+    var test = String(b.test || 'Smart Students Hub activity').trim();
+    var score = b.score === '' || b.score == null ? null : +b.score, max = +b.max || 0;
+    var pct = b.percent === '' || b.percent == null ? (score != null && max ? Math.round(100 * score / max) : null) : Math.round(+b.percent);
+    if (pct != null && !isFinite(pct)) pct = null;
+    var src = test + ' ' + (b.cls || '');
+    var g = (src.match(/\bG(?:rade)?\s*(1[0-2])\b/i) || src.match(/\b(1[0-2])\b/) || [])[1] || '';
+    var aesn = /AESN|ASEN|ADSEN/i.test(src);
+    var writing = /writing|scaffold/i.test(test) && !/test\s*\d|mock|module test/i.test(test);
+    var name = String(b.name || '').trim();
+    if (/name not collected/i.test(name)) name = '';
+    var c = { no: ref || ('SSH-C-' + Date.now().toString(36).toUpperCase()), name: name, test: test,
+      grade: g, aesn: aesn, kind: writing ? 'course' : 'test', score: score, max: max, pct: writing ? null : pct,
+      page: b.page || location.pathname.split('/').pop() || '', date: new Date().toISOString(), recorded: !!ref };
+    c.tier = tierOf(c);
+    return c;
+  }
+
+  /* ---------- certificate markup (A4 landscape, mm units) ---------- */
+  var CSS = "@font-face{font-family:'SSHTaj';src:url('" + BASE + "fonts/tajawal-arabic-700-normal.woff2') format('woff2');font-weight:700}" +
+    "@font-face{font-family:'SSHTaj';src:url('" + BASE + "fonts/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:500}" +
+    ".sshc{width:297mm;height:210mm;box-sizing:border-box;padding:7mm;background:#fff;color:#14244a;font-family:system-ui,'Segoe UI',Arial,'SSHTaj',sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}" +
+    ".sshc *{box-sizing:border-box}" +
+    ".sshc-f{height:100%;border:2.6mm solid var(--c);padding:1.6mm;border-radius:2mm}" +
+    ".sshc-i{position:relative;height:100%;border:.5mm solid #c9a646;border-radius:1mm;padding:8mm 16mm 6mm;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden;" +
+    "background:radial-gradient(ellipse at 50% 42%,#ffffff 0%,#ffffff 52%,var(--s) 100%)}" +
+    ".sshc-i:before,.sshc-i:after{content:'';position:absolute;width:34mm;height:34mm;border:.6mm solid var(--c);opacity:.35;transform:rotate(45deg)}" +
+    ".sshc-i:before{top:-22mm;left:-22mm}.sshc-i:after{bottom:-22mm;right:-22mm}" +
+    ".sshc-h{display:flex;align-items:center;gap:4mm}.sshc-h img{width:15mm;height:15mm}" +
+    ".sshc-b{margin:0;font-weight:800;letter-spacing:.24em;font-size:15pt;color:#14244a;text-align:left}" +
+    ".sshc-bs{margin:.6mm 0 0;font-size:8.5pt;letter-spacing:.06em;color:#7a6320;text-align:left}" +
+    ".sshc-t{margin:5mm 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-size:31pt;font-weight:700;letter-spacing:.03em;color:var(--c);line-height:1.05}" +
+    ".sshc-ta{margin:1mm 0 0;font-family:'SSHTaj',Tahoma,sans-serif;font-weight:700;font-size:17pt;color:var(--c)}" +
+    ".sshc-l{margin:3.2mm 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:13.5pt}" +
+    ".sshc-la{font-family:'SSHTaj',Tahoma,sans-serif;font-style:normal;font-weight:500;font-size:11pt;color:#43506a}" +
+    ".sshc-n{margin:1.5mm 0 0;font-family:'Cormorant Garamond',Georgia,'SSHTaj',serif;font-size:31pt;font-weight:700;line-height:1.15;border-bottom:.5mm solid #c9a646;padding:0 14mm .8mm;min-width:120mm}" +
+    ".sshc-n:lang(ar),.sshc-n.ar{font-family:'SSHTaj',Tahoma,sans-serif;font-size:27pt}" +
+    ".sshc-c{margin:1.6mm 0 0;font-size:16pt;font-weight:800;color:#0f4c5c;line-height:1.2;max-width:225mm}" +
+    ".sshc-g{margin:1mm 0 0;font-size:9.5pt;letter-spacing:.08em;text-transform:uppercase;color:#6b7a90;font-weight:700}" +
+    ".sshc-r{display:flex;gap:4mm;margin-top:3.2mm;justify-content:center}" +
+    ".sshc-r div{border:.35mm solid #e2d3a0;background:#fffdf6;border-radius:2mm;padding:1.4mm 5mm;min-width:30mm}" +
+    ".sshc-r span{display:block;font-size:6.5pt;letter-spacing:.14em;text-transform:uppercase;color:#7a6320;font-weight:700}" +
+    ".sshc-r b{font-size:12.5pt}" +
+    ".sshc-m{margin:3mm 0 0;font-size:10.5pt;font-style:italic;color:#2c3a55;max-width:220mm}" +
+    ".sshc-ma{display:block;font-family:'SSHTaj',Tahoma,sans-serif;font-style:normal;font-weight:500;margin-top:.6mm}" +
+    ".sshc-ft{margin-top:auto;width:100%;display:flex;align-items:flex-end;justify-content:space-between}" +
+    ".sshc-sg{display:flex;flex-direction:column;align-items:center;min-width:64mm;font-size:9pt}" +
+    ".sshc-sg .sv{display:block;width:56mm;line-height:0;margin-bottom:-2mm}.sshc-sg .sv svg{width:100%;height:auto}" +
+    ".sshc-sg i{display:block;width:58mm;border-top:.3mm solid #14244a;margin:1mm 0}" +
+    ".sshc-sg small{color:#55627a;font-size:7.5pt;line-height:1.3}" +
+    ".sshc-se{width:32mm;height:32mm;border-radius:50%;border:.9mm double var(--c);background:radial-gradient(circle,#fff,var(--s));display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--c);font-weight:800;line-height:1.15}" +
+    ".sshc-se em{font-style:normal;font-size:15pt}.sshc-se span{font-size:5.6pt;letter-spacing:.12em}.sshc-se b{font-size:7pt;letter-spacing:.06em}" +
+    ".sshc-id{min-width:64mm;text-align:right;font-size:9pt;line-height:1.25}" +
+    ".sshc-id span{display:block;font-size:6.5pt;letter-spacing:.14em;text-transform:uppercase;color:#7a6320;font-weight:700;margin-top:1mm}" +
+    ".sshc-x{margin:2.4mm 0 0;font-size:6.6pt;color:#7b8798}" +
+    ".sshc .sshc-a{letter-spacing:0!important;text-transform:none!important;font-family:'SSHTaj',Tahoma,sans-serif;unicode-bidi:isolate;display:inline!important;margin:0!important;font-size:inherit}";
+
+  /* Arabic must never inherit letter-spacing/uppercase (breaks letter joining in PDFs) */
+  var A = function (t) { return '<span class="sshc-a" dir="rtl">' + esc(t) + '</span>'; };
+  function grLabel(c) {
+    var g = c.grade ? 'Grade ' + c.grade : '', ga = c.grade ? 'الصف ' + ({ 10: 'العاشر', 11: 'الحادي عشر', 12: 'الثاني عشر' })[c.grade] : '';
+    if (c.aesn) return { en: (g ? g + ' · ' : '') + 'AESN Supported English', ar: (ga ? ga + ' · ' : '') + 'الدعم الخاص في اللغة الإنجليزية' };
+    return { en: (g ? g + ' · ' : '') + 'English', ar: ga ? ga + ' · اللغة الإنجليزية' : 'اللغة الإنجليزية' };
+  }
+  function certHTML(c, nameOverride) {
+    var t = TIERS[c.tier] || TIERS.completion, nm = nameOverride || c.name || 'Student';
+    var d = new Date(c.date), ds = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    var gl = grLabel(c), ar = /[؀-ۿ]/.test(nm);
+    var showScore = c.pct != null && c.tier !== 'effort';
+    var res = '<div class="sshc-r">' +
+      (showScore ? '<div><span>Score · ' + A('الدرجة') + '</span><b>' + esc(c.score) + ' / ' + esc(c.max) + '</b></div><div><span>Result · ' + A('النسبة') + '</span><b>' + esc(c.pct) + '%</b></div>' :
+        '<div><span>Status · ' + A('الحالة') + '</span><b>' + (c.tier === 'effort' ? 'Completed · ' + A('أتمّ') : 'Submitted · ' + A('سُلّم')) + '</b></div>') +
+      '<div><span>Date · ' + A('التاريخ') + '</span><b>' + esc(ds) + '</b></div></div>';
+    return '<div class="sshc" style="--c:' + t.col + ';--s:' + t.soft + '"><div class="sshc-f"><div class="sshc-i">' +
+      '<div class="sshc-h"><img src="' + BASE + 'ssh-logo.png" alt="" crossorigin="anonymous"><div><p class="sshc-b">SMART STUDENTS HUB</p><p class="sshc-bs">Student Recognition Programme · ' + A('برنامج تقدير الطلاب') + '</p></div></div>' +
+      '<p class="sshc-t">' + esc(t.en) + '</p><p class="sshc-ta">' + A(t.ar) + '</p>' +
+      '<p class="sshc-l">This certificate is proudly presented to · <span class="sshc-la">' + A('تُمنح هذه الشهادة بكل فخر إلى') + '</span></p>' +
+      '<p class="sshc-n' + (ar ? ' ar' : '') + '" dir="auto">' + esc(nm) + '</p>' +
+      '<p class="sshc-l">' + (c.kind === 'course' ? 'for successfully completing the course' : 'for successfully completing') +
+      ' · <span class="sshc-la">' + A(c.kind === 'course' ? 'تقديرًا لإتمام الدورة بنجاح' : 'تقديرًا لإتمام') + '</span></p>' +
+      '<p class="sshc-c" dir="auto">' + esc(c.test) + '</p>' +
+      '<p class="sshc-g">' + esc(gl.en) + (gl.ar ? ' · ' + A(gl.ar) : '') + '</p>' +
+      res +
+      '<p class="sshc-m">' + esc(t.msg) + '<span class="sshc-ma" dir="rtl">' + esc(t.msgAr) + '</span></p>' +
+      '<div class="sshc-ft"><div class="sshc-sg"><span class="sv">' + SIG + '</span><i></i><b>Sameh Soliman</b><small>Founder &amp; Educational Lead<br>Smart Students Hub</small></div>' +
+      '<div class="sshc-se" aria-hidden="true"><em>' + t.icon + '</em><span>SMART STUDENTS</span><b>HUB</b><span>' + esc(new Date(c.date).getFullYear()) + '</span></div>' +
+      '<div class="sshc-id"><span>Certificate No. · ' + A('رقم الشهادة') + '</span><b>' + esc(c.no) + '</b><span>Issued by · ' + A('جهة الإصدار') + '</span><b>smartstudentshub.com</b>' +
+      (c.recorded ? '<span>Recorded · ' + A('موثّقة') + '</span><b style="font-size:7.5pt">in the teacher’s follow-up register</b>' : '') + '</div></div>' +
+      '<p class="sshc-x">Awarded by Smart Students Hub to recognise learning and effort. It is not an official qualification of any ministry, school or examination board. · ' + A('شهادة تقديرية من منصة سمارت ستيودنتس هب، وليست مؤهلًا رسميًا.') + '</p>' +
+      '</div></div></div>';
+  }
+  var FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&display=swap">';
+
+  /* ---------- print (also "Save as PDF" in the print dialog) ---------- */
+  function printCert(c, nm) {
+    var html = '<!doctype html><html><head><meta charset="utf-8"><title>Certificate ' + esc(c.no) + '</title>' + FONTS +
+      '<style>@page{size:A4 landscape;margin:0}html,body{margin:0;padding:0;background:#fff}' + CSS + '</style></head><body>' + certHTML(c, nm) + '</body></html>';
+    var f = document.createElement('iframe');
+    f.setAttribute('aria-hidden', 'true');
+    f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    document.body.appendChild(f);
+    var w = f.contentWindow, doc = w.document;
+    doc.open(); doc.write(html); doc.close();
+    var go = function () { try { w.focus(); w.print(); } catch (e) { var p = window.open('', '_blank'); if (p) { p.document.write(html); p.document.close(); setTimeout(function () { p.print(); }, 600); } } setTimeout(function () { f.remove(); }, 60000); };
+    var ready = function () { (doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve()).then(function () { setTimeout(go, 250); }); };
+    var img = doc.querySelector('img');
+    if (img && !img.complete) { img.onload = img.onerror = ready; } else ready();
+  }
+
+  /* ---------- direct PDF download (A4 landscape) ---------- */
+  var libs;
+  function lib(src) { return new Promise(function (ok, no) { var s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+  function loadLibs() {
+    if (!libs) libs = Promise.all([
+      window.html2canvas ? 0 : lib(BASE + 'vendor/html2canvas-1.4.1.min.js'),
+      window.jspdf ? 0 : lib(BASE + 'vendor/jspdf-2.5.1.umd.min.js')
+    ]).catch(function (e) { libs = null; throw e; });
+    return libs;
+  }
+  function ensureStyle() {
+    if (document.getElementById('sshc-css')) return;
+    var st = document.createElement('style'); st.id = 'sshc-css'; st.textContent = CSS + UI; document.head.appendChild(st);
+    if (!document.querySelector('link[href*="Cormorant+Garamond"]')) document.head.insertAdjacentHTML('beforeend', FONTS);
+  }
+  function fileName(c, nm) {
+    return ('SSH-Certificate_' + String(nm || c.name || 'Student').replace(/[\\\/:*?"<>|]+/g, '').replace(/\s+/g, '-') + '_' + c.no).slice(0, 120) + '.pdf';
+  }
+  function downloadPDF(c, nm, btn) {
+    ensureStyle();
+    var old = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Preparing PDF… · جارٍ التجهيز'; }
+    var host = document.createElement('div');
+    host.style.cssText = 'position:fixed;left:-10000px;top:0;width:297mm;height:210mm;background:#fff;z-index:-1';
+    host.innerHTML = certHTML(c, nm); document.body.appendChild(host);
+    var done = function () { host.remove(); if (btn) { btn.disabled = false; btn.innerHTML = old; } };
+    loadLibs().then(function () { return document.fonts && document.fonts.ready; }).then(function () {
+      var im = host.querySelector('img');
+      return im && !im.complete ? new Promise(function (r) { im.onload = im.onerror = r; }) : 0;
+    }).then(function () {
+      return window.html2canvas(host.firstChild, { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false });
+    }).then(function (cv) {
+      var pdf = new window.jspdf.jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+      pdf.addImage(cv.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, 297, 210);
+      pdf.setProperties({ title: 'Smart Students Hub certificate ' + c.no, author: 'Smart Students Hub', subject: c.test });
+      pdf.save(fileName(c, nm)); done();
+    }).catch(function () { done(); printCert(c, nm); });
+  }
+
+  /* ---------- on-screen panel ---------- */
+  var UI = ".sshc-ov{position:fixed;inset:0;z-index:2147483000;background:rgba(10,20,45,.62);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:18px 10px;font-family:system-ui,'Segoe UI',Arial,'SSHTaj',sans-serif}" +
+    ".sshc-pn{text-align:left;line-height:1.4;background:#fff;border-radius:18px;max-width:880px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:18px 18px 16px;color:#14244a;position:relative}" +
+    ".sshc-pn h2{margin:0 36px 4px 0;font-size:1.3rem}.sshc-pn p{margin:.3em 0}" +
+    ".sshc-x2{position:absolute;top:10px;right:12px;border:0;background:#eef2f8;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer;color:#14244a}" +
+    ".sshc-pv{margin:12px 0;border-radius:10px;overflow:hidden;border:1px solid #e3e8f0;background:#f6f8fb}" +
+    ".sshc-pv>div{transform-origin:0 0}" +
+    ".sshc-bt{display:flex;flex-wrap:wrap;gap:8px;align-items:center}" +
+    ".sshc-pn .sshc-bt button,.sshc-fab{font:inherit!important;font-size:1rem!important;font-weight:800!important;border:2px solid #14244a!important;border-radius:12px!important;padding:10px 16px!important;cursor:pointer;background:#14244a!important;color:#fff!important;box-shadow:none!important;transform:none!important;min-height:0!important;width:auto!important;margin:0!important;text-shadow:none!important}" +
+    ".sshc-pn .sshc-bt button.alt{background:#fff!important;color:#14244a!important}" +
+    ".sshc-pn .sshc-x2{position:absolute!important;top:10px!important;right:12px!important;border:0!important;background:#eef2f8!important;border-radius:50%!important;width:34px!important;height:34px!important;padding:0!important;font-size:18px!important;cursor:pointer;color:#14244a!important;box-shadow:none!important;min-height:0!important;margin:0!important}" +
+    ".sshc-pn .sshc-ls button{font:inherit!important;font-weight:700!important;border:2px solid #14244a!important;background:#fff!important;color:#14244a!important;border-radius:9px!important;padding:5px 10px!important;box-shadow:none!important;min-height:0!important;width:auto!important;margin:0!important}" +
+    ".sshc-bt button:disabled{opacity:.6;cursor:wait}" +
+    ".sshc-nm{display:block;margin:8px 0;font-weight:700}.sshc-nm input{display:block;width:100%;max-width:420px;font:inherit;padding:9px 11px;border:2px solid #cfd8e6;border-radius:10px;margin-top:4px}" +
+    ".sshc-hint{font-size:.85rem;color:#55627a}" +
+    ".sshc-ls{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}.sshc-ls li{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid #e3e8f0;border-radius:10px;padding:8px 10px}" +
+    ".sshc-ls button{font:inherit;font-weight:700;border:2px solid #14244a;background:#fff;border-radius:9px;padding:5px 10px;cursor:pointer}" +
+    "button.sshc-fab{position:fixed!important;left:14px!important;bottom:14px!important;z-index:2147482000;box-shadow:0 8px 24px rgba(0,0,0,.25)!important;background:linear-gradient(135deg,#c9a646,#a67c00)!important;border-color:#a67c00!important;font-size:.9rem!important}" +
+    "@media print{.sshc-ov,.sshc-fab{display:none!important}}";
+
+  function close() { var o = document.querySelector('.sshc-ov'); if (o) o.remove(); document.removeEventListener('keydown', onKey); }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+  function fit(pv) {
+    var inner = pv.firstChild; if (!inner) return;
+    var k = pv.clientWidth / inner.firstChild.offsetWidth;
+    inner.style.transform = 'scale(' + k + ')'; pv.style.height = Math.ceil(inner.firstChild.offsetHeight * k) + 'px';
+  }
+  function show(c, isNew) {
+    ensureStyle(); close();
+    var t = TIERS[c.tier] || TIERS.completion, needName = !c.name;
+    var o = document.createElement('div'); o.className = 'sshc-ov'; o.setAttribute('role', 'dialog'); o.setAttribute('aria-modal', 'true');
+    o.innerHTML = '<div class="sshc-pn"><button class="sshc-x2" aria-label="Close · إغلاق">✕</button>' +
+      '<h2>' + (isNew ? '🎉 Congratulations! You earned a certificate · مبارك! حصلت على شهادة' : '🎓 Your certificate · شهادتك') + '</h2>' +
+      '<p><b>' + t.icon + ' ' + esc(t.en) + ' · <span dir="rtl">' + esc(t.ar) + '</span></b></p>' +
+      (needName ? '<label class="sshc-nm">Your full name for the certificate · اسمك الكامل للشهادة<input id="sshcName" autocomplete="name" placeholder="e.g. Ahmed Ali Hassan"></label>' : '') +
+      '<div class="sshc-pv"><div></div></div>' +
+      '<div class="sshc-bt"><button id="sshcPdf">⬇️ Download PDF · تنزيل PDF</button><button class="alt" id="sshcPrint">🖨️ Print · طباعة</button><button class="alt" id="sshcAll">📂 My certificates · شهاداتي</button></div>' +
+      '<p class="sshc-hint">Certificate No. ' + esc(c.no) + (c.recorded ? ' · recorded in your teacher’s follow-up register · مسجّلة في سجل متابعة المعلم' : '') + '</p></div>';
+    document.body.appendChild(o);
+    var pv = o.querySelector('.sshc-pv'), nmEl = o.querySelector('#sshcName');
+    var nm = function () { return nmEl ? nmEl.value.trim() : ''; };
+    var draw = function () { pv.firstChild.innerHTML = certHTML(c, nm()); fit(pv); };
+    draw(); setTimeout(function () { fit(pv); }, 300);
+    window.addEventListener('resize', function () { fit(pv); });
+    if (nmEl) nmEl.addEventListener('input', draw);
+    var ok = function () { if (nmEl && nm().split(/\s+/).filter(Boolean).length < 2) { nmEl.focus(); nmEl.style.borderColor = '#c0392b'; return false; } if (nmEl) { c.name = nm(); save(c); } return true; };
+    o.querySelector('.sshc-x2').onclick = close;
+    o.addEventListener('click', function (e) { if (e.target === o) close(); });
+    document.addEventListener('keydown', onKey);
+    o.querySelector('#sshcPdf').onclick = function () { if (ok()) downloadPDF(c, nm(), this); };
+    o.querySelector('#sshcPrint').onclick = function () { if (ok()) printCert(c, nm()); };
+    o.querySelector('#sshcAll').onclick = list;
+  }
+  function list() {
+    ensureStyle(); close();
+    var l = load().slice().reverse();
+    var o = document.createElement('div'); o.className = 'sshc-ov';
+    o.innerHTML = '<div class="sshc-pn"><button class="sshc-x2" aria-label="Close · إغلاق">✕</button><h2>📂 My certificates · شهاداتي</h2>' +
+      '<p class="sshc-hint">Saved on this device. Your teacher keeps the official record. · محفوظة على هذا الجهاز، ويحتفظ معلمك بالسجل الرسمي.</p>' +
+      (l.length ? '<ul class="sshc-ls">' + l.map(function (c, i) { var t = TIERS[c.tier] || TIERS.completion; return '<li><span>' + t.icon + ' <b>' + esc(c.test) + '</b><br><small>' + esc(t.en) + ' · ' + esc(new Date(c.date).toLocaleDateString('en-GB')) + ' · ' + esc(c.no) + '</small></span><button data-i="' + i + '">Open · فتح</button></li>'; }).join('') + '</ul>' : '<p>No certificates yet. Finish a test or course to earn one! · لا توجد شهادات بعد.</p>') + '</div>';
+    document.body.appendChild(o);
+    o.querySelector('.sshc-x2').onclick = close;
+    o.addEventListener('click', function (e) { if (e.target === o) close(); var b = e.target.closest && e.target.closest('button[data-i]'); if (b) show(l[+b.dataset.i], false); });
+    document.addEventListener('keydown', onKey);
+  }
+  function save(c) { var l = load().filter(function (x) { return x.no !== c.no; }); l.push(c); store(l); fab(); }
+  function fab() {
+    if (!load().length || !document.body) return;
+    ensureStyle();
+    var b = document.querySelector('.sshc-fab');
+    if (!b) { b = document.createElement('button'); b.className = 'sshc-fab'; b.type = 'button'; b.onclick = list; document.body.appendChild(b); }
+    b.textContent = '🎓 My certificates · شهاداتي (' + load().length + ')';
+  }
+
+  function issue(b, ref) {
+    var c = fromSubmission(b, ref);
+    save(c);
+    setTimeout(function () { show(c, true); }, 900);
+    return c;
+  }
+
+  /* ---------- listen for recorded results ---------- */
+  var of = window.fetch;
+  if (of) {
+    window.fetch = function (url, opt) {
+      var p = of.apply(this, arguments), body = null;
+      try {
+        if (opt && typeof opt.body === 'string' && EP.test(String(url && url.url || url))) {
+          body = JSON.parse(opt.body);
+          if (!body || body.type !== 'submission' || body.website) body = null;
+        }
+      } catch (e) { body = null; }
+      if (body) {
+        p.then(function (r) { return r.clone().json(); })
+          .then(function (d) { if (d && d.ok) issue(body, d.ref || ''); })
+          .catch(function () {});
+      }
+      return p;
+    };
+  }
+
+  window.SSH_CERT = { issue: issue, show: show, list: list, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fab); else fab();
+})();
