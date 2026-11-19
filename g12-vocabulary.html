@@ -314,18 +314,40 @@ window.sshSend=function(holder,payload){
   const box=document.createElement('div');box.className='ssh-status';holder.prepend(box);
   const em=$('sshEmail').value.trim(),ph=$('sshPhone').value.trim();
   const body=Object.assign({type:'submission',page:location.pathname.split('/').pop()||''},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
+  body.sid=body.sid||('S'+Date.now().toString(36)+Math.random().toString(36).slice(2,7));
+  const PK='ssh-pending';
+  const pend=(add)=>{try{let L=JSON.parse(localStorage.getItem(PK)||'[]').filter(x=>x&&x.body&&x.body.sid!==body.sid&&Date.now()-x.t<14*864e5);if(add)L.push({t:Date.now(),url:location.pathname,body:body});localStorage.setItem(PK,JSON.stringify(L))}catch(e){}};
+  let tries=0,busy=false,done=false,timer=null;const WAIT=[3,10,30];
+  const fail=(msg,auto)=>{box.className='ssh-status no';box.innerHTML=msg+(auto?'':'<button type="button">Try again · أعد المحاولة</button>');const b=box.querySelector('button');if(b)b.onclick=()=>{tries=0;go()}};
   const go=()=>{
+    clearTimeout(timer);if(busy||done)return;
     if(!ENDPOINT){box.className='ssh-status no';box.innerHTML='<b>Sending is not switched on yet.</b> Print your report and give it to your teacher.<span class="ar">الإرسال غير مفعّل بعد. اطبع تقريرك وسلّمه لمعلمك.</span>';return}
-    box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b> Keep this page open.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة.</span>';
-    const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),25000);
+    busy=true;tries++;
+    box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b>'+(tries>1?' (attempt '+tries+')':'')+' Keep this page open — your certificate appears when the result is saved.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة، وستظهر شهادتك بعد حفظ النتيجة.</span>';
+    const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),60000);
     fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),signal:ctl.signal,redirect:'follow'})
-     .then(r=>r.json()).then(d=>{clearTimeout(t);
-       if(d&&d.ok){box.className='ssh-status ok';box.innerHTML='✅ <b>Sent to your teacher.</b> Your reference number: <b class="ref">'+d.ref+'</b><br>Keep this number. Your teacher can now see your result.<span class="ar">✅ تم الإرسال إلى المعلم. رقمك المرجعي: '+d.ref+' — احتفظ به، وأصبح بإمكان معلمك رؤية نتيجتك.</span>'}
-       else throw new Error(d&&d.error||'error')})
-     .catch(()=>{clearTimeout(t);box.className='ssh-status no';box.innerHTML='<b>Could not send.</b> Check your internet connection and try again.<span class="ar">تعذّر الإرسال. تحقق من الاتصال بالإنترنت وحاول مرة أخرى.</span><button type="button">Try again · أعد المحاولة</button>';box.querySelector('button').onclick=go});
+     .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(d=>{clearTimeout(t);busy=false;
+       if(d&&d.ok){done=true;pend(false);box.className='ssh-status ok';box.innerHTML='✅ <b>Sent to your teacher.</b> Your reference number: <b class="ref">'+d.ref+'</b><br>Keep this number. Your teacher can now see your result.<span class="ar">✅ تم الإرسال إلى المعلم. رقمك المرجعي: '+d.ref+' — احتفظ به، وأصبح بإمكان معلمك رؤية نتيجتك.</span>'}
+       else{const e=new Error(String(d&&d.error||'not accepted'));e.server=true;throw e}})
+     .catch(err=>{clearTimeout(t);busy=false;
+       if(err&&err.server){pend(true);fail('<b>Your teacher\'s sheet did not save the result</b> ('+String(err.message).replace(/[<>&]/g,'')+'). Press “Try again”. If it keeps happening, take a screenshot of this page and send it to your teacher.<span class="ar">لم يتم حفظ النتيجة في سجل المعلم. اضغط «أعد المحاولة»، وإن تكرر ذلك أرسل صورة لهذه الصفحة إلى معلمك.</span>');return}
+       pend(true);
+       if(tries<=WAIT.length){let s=WAIT[tries-1];const tick=()=>{if(done||busy)return;if(s<=0)return go();fail('<b>The connection is slow or lost.</b> Trying again automatically in '+s+' s… Keep this page open.<span class="ar">الاتصال ضعيف أو منقطع. ستتم إعادة المحاولة تلقائيًا خلال '+s+' ثانية… لا تغلق الصفحة.</span>',true);s--;timer=setTimeout(tick,1000)};tick();return}
+       fail('<b>Could not send yet.</b> Your result is <b>saved on this device</b>. It will be sent automatically when the internet works again (or the next time you open this test on this device), and your certificate will appear then. You can also press “Try again”.<span class="ar">تعذّر الإرسال حاليًا، لكن نتيجتك محفوظة على هذا الجهاز وستُرسل تلقائيًا عند عودة الإنترنت (أو عند فتح هذا الاختبار مرة أخرى على الجهاز نفسه)، وستظهر شهادتك عندها. يمكنك أيضًا الضغط على «أعد المحاولة».</span>');
+     });
   };
+  window.addEventListener('online',()=>{if(!done){tries=0;go()}});
   go();
 };
+/* Results that could not be sent earlier on this device are sent again when the page opens (the certificate then appears). */
+(function(){if(!ENDPOINT)return;let L=[];try{L=JSON.parse(localStorage.getItem('ssh-pending')||'[]')}catch(e){}
+ L=L.filter(x=>x&&x.body&&x.url===location.pathname&&Date.now()-x.t<14*864e5);if(!L.length)return;
+ const flush=()=>L.forEach(x=>{fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(x.body),redirect:'follow'}).then(r=>r.json()).then(d=>{if(!d||!d.ok)return;
+   try{localStorage.setItem('ssh-pending',JSON.stringify(JSON.parse(localStorage.getItem('ssh-pending')||'[]').filter(y=>!(y&&y.body&&y.body.sid===x.body.sid))))}catch(e){}
+   const n=document.createElement('div');n.className='ssh-status ok';n.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:640px;margin:0 auto;box-shadow:0 6px 24px rgba(0,0,0,.2)';
+   n.innerHTML='✅ <b>Your earlier result'+(x.body.test?' ('+String(x.body.test).replace(/[<>&]/g,'')+')':'')+' has now been sent to your teacher.</b> Reference: <b class="ref">'+String(d.ref||'').replace(/[<>&]/g,'')+'</b><span class="ar">✅ تم الآن إرسال نتيجتك السابقة إلى المعلم.</span><button type="button">OK</button>';
+   n.querySelector('button').onclick=()=>n.remove();document.body.appendChild(n)}).catch(()=>{})});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',flush);else flush();})();
 // Auto-send: results go to the teacher as soon as the test is checked (details + consent are required before Check).
 (function(){let busy=false;const tryClick=()=>{const b=document.getElementById('sendBtn');if(b&&!b.disabled&&!busy&&document.body.contains(b)){busy=true;setTimeout(()=>{if(document.body.contains(b)&&!b.disabled)b.click();busy=false},300)}};
  new MutationObserver(tryClick).observe(document.documentElement,{childList:true,subtree:true});})();
