@@ -76,7 +76,9 @@ return '<article id="lesson-'+i+'" hidden><span class="badge">Section '+(i+1)+' 
 for(const [key,val] of Object.entries(state.writing)){const [i,j]=key.split('-');const input=$('#write-'+i+'-'+j);if(input)input.value=val;}
 for(const [key,record] of Object.entries(state.answers)){const [i,j]=key.split('-').map(Number);if(DATA[i]?.qs[j])paintAnswer(i,j,record.choice,false);}
 const match=location.hash.match(/^#section-([1-5])$/);showSection(match?Number(match[1])-1:state.section||0,false);updateSummary();}
-const stageState={};function showSection(i,announce=true){if(!Number.isInteger(i)||i<0||i>=5)i=0;synth?.cancel();document.querySelectorAll('article').forEach((a,j)=>a.hidden=j!==i);document.querySelectorAll('[data-section]').forEach(b=>{if(b.closest('#sections'))b.setAttribute('aria-pressed',Number(b.dataset.section)===i?'true':'false');});state.section=i;save();history.replaceState(null,'','#section-'+(i+1));if(announce)say('Section '+(i+1)+'. '+DATA[i].title+'. '+DATA[i].goal);updateSummary();}
+const stageState={};function showSection(i,announce=true){if(!Number.isInteger(i)||i<0||i>=5)i=0;synth?.cancel();document.querySelectorAll('article').forEach((a,j)=>a.hidden=j!==i);document.querySelectorAll('[data-section]').forEach(b=>{if(b.closest('#sections'))b.setAttribute('aria-pressed',Number(b.dataset.section)===i?'true':'false');});state.section=i;save();
+if(location.hash!=='#registration'||!document.getElementById('learning').hidden)history.replaceState(null,'','#section-'+(i+1));
+if(announce)say('Section '+(i+1)+'. '+DATA[i].title+'. '+DATA[i].goal);updateSummary();}
 function showStage(i,k){document.querySelectorAll('#lesson-'+i+' .stage').forEach((s,j)=>s.hidden=j!==k);document.querySelectorAll('#lesson-'+i+' [data-stage]').forEach((b,j)=>b.setAttribute('aria-pressed',String(j===k)));stageState[i]=k;const stage=$('#stage-'+i+'-'+k);const ins=$('[data-say]',stage);if(ins)say(ins.dataset.say);stage.scrollIntoView({block:'start',behavior:'auto'});}
 function feedbackText(i,j,k){const q=DATA[i].qs[j];return k===q[2]?'Well done! You got it. '+q[3]:'Good try. Take your time. '+q[3]+' Let us try again. You can do it.';}
 function paintAnswer(i,j,k,speak=true){const q=DATA[i].qs[j],good=k===q[2],f=$('#feedback-'+i+'-'+j);const msg=feedbackText(i,j,k);f.className='feedback '+(good?'good':'retry');f.textContent=msg;const ar=document.createElement('span');ar.className='ar';ar.lang='ar';ar.textContent=good?'أحسنت! إجابة صحيحة.':'محاولة طيبة. خذ وقتك، اقرأ التلميح وجرّب مرة أخرى. أنت تستطيع.';f.append(ar);$('#q-'+i+'-'+j).querySelectorAll('[data-answer]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.answer.split(',')[2])===k)));state.answers[i+'-'+j]={choice:k,correct:good};if(speak)say(msg,true);updateSummary();}
@@ -165,7 +167,11 @@ accessForm.onsubmit=async e=>{
  }
 };
 
-(function(){let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}const role=r.role,contact=r.email||r.phone||'',grade=String(r.grade||r.cls||'').match(/^(10|11|12)(?:\D|$)/)?.[1]||'';if(['Student','Teacher','Parent'].includes(role)){const radio=document.querySelector('input[name=registrationRole][value="'+role+'"]');if(radio)radio.checked=true;}$('#regContact').value=contact;$('#regGrade').value=grade;let registered=false;try{registered=localStorage.getItem('ssh_registered')==='1'||sessionStorage.getItem('ssh_registered')==='1'}catch(e){}if(REG_LIVE&&registered&&validSimpleRegistration(role,contact,grade))unlockRegistration({...r,cls:grade,grade});})();
+(function(){let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}const role=r.role,contact=r.email||r.phone||'',grade=String(r.grade||r.cls||'').match(/^(10|11|12)(?:\D|$)/)?.[1]||'';if(['Student','Teacher','Parent'].includes(role)){const radio=document.querySelector('input[name=registrationRole][value="'+role+'"]');if(radio)radio.checked=true;}$('#regContact').value=contact;$('#regGrade').value=grade;let registered=false;try{registered=localStorage.getItem('ssh_registered')==='1'||sessionStorage.getItem('ssh_registered')==='1'}catch(e){}if(REG_LIVE&&registered&&validSimpleRegistration(role,contact,grade)){
+ const registrationLink=location.hash==='#registration';
+ unlockRegistration({...r,cls:grade,grade});
+ if(registrationLink){history.replaceState(null,'','#section-'+((state.section||0)+1));$('#learning').scrollIntoView({block:'start'});}
+}})();
 </script><script>
 (function(){
 const learning=document.getElementById('learning'),controls=document.querySelector('.controls');
