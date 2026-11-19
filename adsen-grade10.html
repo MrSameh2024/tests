@@ -117,6 +117,7 @@ const accessParams = new URLSearchParams(location.search);
 const accessForm = $('#registrationForm');
 const registrationStatus = $('#regStatus');
 const registrationButton = $('#regEnter');
+$('#regListen').onclick = () => say('Welcome. Choose student, teacher, or parent. Enter your full name. Enter your email address or phone number. Choose your grade. Then press Start learning.');
 
 function openLearning(registration) {
  const destination = access.activityUrl(accessParams.get('activity'), accessParams.get('g') || registration.grade);
