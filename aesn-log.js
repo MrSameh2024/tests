@@ -1,11 +1,11 @@
 /* AESN activity results → teacher (private Google Sheet, "Submissions" tab).
    Uses the same Apps Script endpoint and payload as aesn-tests.html (type:'submission').
-   Identity comes from the site registration (localStorage "ssh_reg"); nothing is sent if the
+   Identity comes from the confirmed AESN session; nothing is sent if the
    student has not registered, and nothing is sent outside the published site (review copies). */
 (function(){
   var EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec';
   var LIVE=location.protocol==='https:'&&['mrsameh2024.github.io','smartstudentshub.com','www.smartstudentshub.com'].indexOf(location.hostname.toLowerCase())>=0&&!/[?&]mock=1/.test(location.search);
-  function reg(){try{return JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){return {}}}
+  function reg(){return window.AESN_ACCESS?.get() || {};}
   var last={};
   window.AESN_LOG={
     registered:function(){var r=reg();return !!(r.email||r.phone);},
