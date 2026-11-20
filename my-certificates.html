@@ -38,7 +38,7 @@ ul.cl li small{color:var(--mute)}
 .steps li{margin:4px 0}
 a{color:var(--blue)}
 </style>
-<script src="ssh-cert.js?v=6"></script>
+<script src="ssh-cert.js?v=7"></script>
 </head><body><main>
 <header><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB</b><h1>🎓 My certificates · <span class="ar" style="display:inline">شهاداتي</span></h1></div></header>
 
@@ -76,7 +76,8 @@ a{color:var(--blue)}
 <script>
 (function(){
 /* Paste the certificate-lookup web app URL here (see src/certificate-lookup.gs). */
-var LOOKUP_URL = '';
+var LOOKUP_URL = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/lookup_certificates';
+var LOOKUP_KEY = 'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
 var TITLES = { job: 'Cover Letter — Job Application', event: 'Informal Email — Cultural Event', essay: 'Advantages and Disadvantages Essay',
   story: 'Personal Narrative — Story', process: 'Procedural Text — Describing a Process' };
 var $ = function (id) { return document.getElementById(id); };
@@ -95,8 +96,9 @@ $('f').addEventListener('submit', function (e) {
   var contact = $('contact').value.trim(), first = $('first').value.trim();
   if (!contact || first.length < 2) { msg('no', ERR.missing); return; }
   if (!LOOKUP_URL) { msg('info', 'This page is being switched on. Please try again soon, or ask your teacher for your certificate. · يجري تفعيل هذه الصفحة، حاول قريبًا أو اطلب شهادتك من معلمك.'); return; }
+  if ($('website').value) { msg('no', ERR.contact); return; }
   var b = $('go'); b.disabled = true; b.textContent = '⏳ Searching… · جارٍ البحث…';
-  fetch(LOOKUP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ type: 'lookup', contact: contact, first: first, website: $('website').value }), redirect: 'follow' })
+  fetch(LOOKUP_URL, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: LOOKUP_KEY }, body: JSON.stringify({ p_contact: contact, p_first: first }) })
     .then(function (x) { return x.json(); })
     .then(function (d) {
       if (!d || !d.ok) { msg('no', ERR[d && d.error] || ERR.contact); return; }
