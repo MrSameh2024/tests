@@ -427,14 +427,30 @@
   /* ---------- copy each recorded test result to the certificate store, so students can reopen it on any device ---------- */
   var SB_URL = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/';
   var SB_KEY = 'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
-  function keepOnline(b, ref) {
-    if (!LIVE || !of || !/^SSH-\d{6}-\d{4}$/.test(ref || '')) return;
+  function sendOnline(p) {
+    if (!LIVE || !of) return;
     try {
       of.call(window, SB_URL + 'record_result', { method: 'POST', keepalive: true,
-        headers: { 'Content-Type': 'application/json', apikey: SB_KEY },
-        body: JSON.stringify({ p: { ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent } })
+        headers: { 'Content-Type': 'application/json', apikey: SB_KEY }, body: JSON.stringify({ p: p })
       }).catch(function () {});
     } catch (e) {}
+  }
+  function regInfo() { try { return JSON.parse(localStorage.getItem('ssh_reg') || '{}') || {}; } catch (e) { return {}; } }
+  function keepOnline(b, ref) {
+    if (!/^SSH-\d{6}-\d{4}$/.test(ref || '')) return;
+    sendOnline({ ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent, cert_kind: b.cert_kind || '' });
+  }
+  /* English Placement Test: the page sends the email only, so add the registered mobile too */
+  function keepPlacement(b) {
+    var r = regInfo();
+    sendOnline({ kind: 'placement', ref: b.ref, name: b.name || r.name, email: b.email || r.email, phone: b.phone || r.phone,
+      level: b.level, reading: b.reading, listening: b.listening, uoe: b.uoe });
+  }
+  /* Academy teacher workshops (certificate number made on the page, e.g. SSH-AIT-261120-1234) */
+  function keepWorkshop(b, c) {
+    var r = regInfo();
+    sendOnline({ kind: 'workshop', ref: b.cert, test: b.course, name: b.name, cls: (c && c.sub) || '', email: b.email || r.email,
+      phone: b.phone || r.phone, score: b.score, max: b.max });
   }
 
   /* ---------- listen for recorded results ---------- */
@@ -453,8 +469,8 @@
         p.then(function (r) { return r.clone().json(); })
           .then(function (d) {
             if (!d || !d.ok) return;
-            if (body.type === 'placement') issueRec(fromPlacement(body));
-            else if (body.type === 'course') issueRec(fromCourse(body));
+            if (body.type === 'placement') { issueRec(fromPlacement(body)); keepPlacement(body); }
+            else if (body.type === 'course') { var wc = issueRec(fromCourse(body)); keepWorkshop(body, wc); }
             else { issue(body, d.ref || ''); keepOnline(body, d.ref); }
           })
           .catch(function () {});
@@ -499,6 +515,6 @@
   }
   setInterval(paintHints, 1200);
 
-  window.SSH_CERT = { issue: issue, show: show, list: list, keep: save, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission };
+  window.SSH_CERT = { issue: issue, show: show, list: list, keep: save, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission, _placement: fromPlacement, _workshop: fromCourse };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fab); else fab();
 })();

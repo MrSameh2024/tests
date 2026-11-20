@@ -38,18 +38,18 @@ ul.cl li small{color:var(--mute)}
 .steps li{margin:4px 0}
 a{color:var(--blue)}
 </style>
-<script src="ssh-cert.js?v=7"></script>
+<script src="ssh-cert.js?v=8"></script>
 </head><body><main>
 <header><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB</b><h1>🎓 My certificates · <span class="ar" style="display:inline">شهاداتي</span></h1></div></header>
 
 <div class="card">
-<p style="margin-top:0">Open your certificates again on <b>any phone or computer</b>. Use the <b>same email or mobile number</b> you wrote when you sent your test or writing.</p>
-<p class="ar">افتح شهاداتك مرة أخرى من <b>أي جوال أو جهاز</b>. اكتب <b>نفس البريد الإلكتروني أو رقم الجوال</b> الذي كتبته عند إرسال الاختبار أو الكتابة.</p>
+<p style="margin-top:0">Open your certificates again on <b>any phone or computer</b>. Use the <b>same email or mobile number</b> you wrote when you sent your test, writing, placement test or workshop. For <b>students and teachers</b>.</p>
+<p class="ar">افتح شهاداتك مرة أخرى من <b>أي جوال أو جهاز</b>. اكتب <b>نفس البريد الإلكتروني أو رقم الجوال</b> الذي كتبته عند إرسال الاختبار أو الكتابة أو اختبار تحديد المستوى أو الورشة. <b>للطلاب والمعلمين</b>.</p>
 <form id="f" novalidate>
 <label for="contact">Email or mobile · البريد الإلكتروني أو الجوال</label>
 <input type="text" id="contact" autocomplete="email" inputmode="email" maxlength="120" placeholder="name@education.qa  ·  5xxx xxxx">
 <label for="first">Your first name · اسمك الأول <small>(as you wrote it · كما كتبته)</small></label>
-<input type="text" id="first" autocomplete="given-name" maxlength="40" placeholder="Abdullah · عبدالله">
+<input type="text" id="first" autocomplete="given-name" maxlength="40" placeholder="Abdullah · عبدالله · Sameh">
 <input type="text" id="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 <button type="submit" class="go" id="go">🔎 Find my certificates · ابحث عن شهاداتي</button>
 </form>
@@ -69,6 +69,10 @@ a{color:var(--blue)}
 <li class="ar"><b>الاختبارات:</b> شهادة لكل اختبار – بأفضل محاولة لك.</li>
 <li><b>Writing courses:</b> one certificate for each writing topic, after you send <b>the final station (Station 10)</b>.</li>
 <li class="ar"><b>دورات الكتابة:</b> شهادة واحدة لكل موضوع كتابة، بعد إرسال <b>المحطة الأخيرة (المحطة ١٠)</b>.</li>
+<li><b>English Placement Test:</b> one certificate with your latest CEFR level.</li>
+<li class="ar"><b>اختبار تحديد المستوى:</b> شهادة واحدة بآخر مستوى حصلت عليه.</li>
+<li><b>Teachers – workshops and self-checks:</b> one certificate for each workshop (your best result) and for each teacher self-check.</li>
+<li class="ar"><b>المعلمون – الورش والاختبارات الذاتية:</b> شهادة لكل ورشة (بأفضل نتيجة) ولكل اختبار ذاتي للمعلم.</li>
 </ul>
 <p class="mute">Not found? Check the email or number, or message your teacher on <a href="https://wa.me/97450406473" target="_blank" rel="noopener">WhatsApp +974 5040 6473</a>. · لم تجد شهادتك؟ تأكد من البريد أو الرقم، أو راسل معلمك على واتساب.</p>
 </div>
@@ -106,7 +110,10 @@ $('f').addEventListener('submit', function (e) {
       if (!found.length) { $('res').hidden = true; msg('no', 'No certificates found for these details. Use the same email or mobile you wrote in the test, and your first name as you wrote it. · لم نجد شهادات بهذه البيانات. استخدم نفس البريد أو الجوال الذي كتبته في الاختبار، واسمك الأول كما كتبته.'); return; }
       msg('ok', '✅ We found ' + found.length + ' certificate' + (found.length > 1 ? 's' : '') + '. · وجدنا ' + found.length + ' ' + (found.length > 2 && found.length < 11 ? 'شهادات' : 'شهادة') + '.');
       $('list').innerHTML = found.map(function (c, i) {
-        var res = c.kind === 'course' ? 'Writing course (دورة كتابة)' : esc(c.score) + ' / ' + esc(c.max) + ' · ' + esc(c.percent) + '%';
+        var res = c.kind === 'course' ? 'Course completed (إتمام دورة)'
+          : c.kind === 'workshop' ? 'Teacher workshop (ورشة معلمين)' + (c.max !== '' && c.max != null ? ' · ' + esc(c.score) + ' / ' + esc(c.max) : '')
+          : c.kind === 'placement' ? 'Placement level (المستوى): ' + esc(c.level || '')
+          : esc(c.score) + ' / ' + esc(c.max) + ' · ' + esc(c.percent) + '%';
         return '<li><span><b>' + esc(nice(c.test)) + '</b><small>' + res + ' · ' + esc(new Date(c.date).toLocaleDateString('en-GB')) + ' · ' + esc(c.no) + '</small></span><button type="button" data-i="' + i + '">Open · فتح</button></li>';
       }).join('');
       $('res').hidden = false; $('res').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -116,8 +123,15 @@ $('f').addEventListener('submit', function (e) {
 });
 $('list').addEventListener('click', function (e) {
   var btn = e.target.closest('button[data-i]'); if (!btn || !window.SSH_CERT) return;
-  var d = found[+btn.dataset.i];
-  var c = window.SSH_CERT._from({ type: 'submission', test: nice(d.test), name: d.name, cls: d.cls, score: d.kind === 'course' ? '' : d.score, max: d.kind === 'course' ? '' : d.max,
+  var d = found[+btn.dataset.i], c;
+  if (d.kind === 'placement' && window.SSH_CERT._placement) {
+    c = window.SSH_CERT._placement({ ref: d.no, name: d.name, level: d.level, reading: d.reading, listening: d.listening, uoe: d.uoe, finished: d.date });
+  } else if (d.kind === 'workshop' && window.SSH_CERT._workshop) {
+    c = window.SSH_CERT._workshop({ cert: d.no, name: d.name, course: d.test, score: d.score, max: d.max, finished: d.date });
+    c.sub = d.cls || ''; c.page = 'my-certificates.html';
+  }
+  if (c) { c.date = d.date; c.recorded = true; window.SSH_CERT.keep(c); window.SSH_CERT.show(c, false); return; }
+  c = window.SSH_CERT._from({ type: 'submission', test: nice(d.test), name: d.name, cls: d.cls, score: d.kind === 'course' ? '' : d.score, max: d.kind === 'course' ? '' : d.max,
     percent: d.kind === 'course' ? '' : d.percent, page: 'my-certificates.html', cert_kind: d.kind === 'course' ? 'course' : 'test' }, d.no);
   c.date = d.date; c.no = d.no; c.recorded = true;
   window.SSH_CERT.keep(c);
