@@ -2,6 +2,12 @@
 <title>Writing Progress Report · تقرير تقدم الكتابة | Smart Students Hub</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="ssh-logo.png">
+<link rel="manifest" href="teacher-report.webmanifest">
+<meta name="theme-color" content="#14244a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Writing Reports">
+<link rel="apple-touch-icon" href="teacher-report-180.png">
 <style>
 @font-face{font-family:'Taj';src:url('fonts/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:400 600}
 @font-face{font-family:'Taj';src:url('fonts/tajawal-arabic-800-normal.woff2') format('woff2');font-weight:700 900}
@@ -94,10 +100,12 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 <div class="card" id="lockCard">
 <label for="key">Teacher key · مفتاح المعلم</label>
 <div class="row"><input type="password" id="key" autocomplete="current-password" placeholder="SSH-xxxxx-xxxxx-xxxxx"><button id="unlock">🔓 Open · فتح</button></div>
+<div class="opts"><label><input type="checkbox" id="remember" checked> Remember the key on this phone (only on your own device) · تذكّر المفتاح على هذا الجهاز (على جهازك الشخصي فقط)</label></div>
 <div class="msg" id="keyMsg" role="status"></div>
 </div>
 
 <div class="card" id="searchCard" hidden>
+<p style="margin:0 0 6px;text-align:right"><button class="sec" id="lock" type="button" style="padding:4px 10px;font-size:.85rem">🔒 Lock &amp; forget key · قفل ونسيان المفتاح</button></p>
 <label for="q">Find a student · ابحث عن طالب</label>
 <div class="row"><input type="text" id="q" placeholder="Name, email or class · الاسم أو البريد أو الصف"><button id="go">🔎 Search · بحث</button></div>
 <p class="mute" style="margin:6px 0 0">If the same student used more than one email or mobile, tick all their entries to combine them in one report. · إذا استخدم الطالب أكثر من بريد أو جوال، حدّد كل سجلاته لدمجها في تقرير واحد.</p>
@@ -137,18 +145,20 @@ function call(args) {
   return fetch(RPC, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY }, body: JSON.stringify(args) })
     .then(function (r) { return r.json(); });
 }
-function tkey() { try { return sessionStorage.getItem('ssh_tkey') || ''; } catch (e) { return ''; } }
+function tkey() { try { return sessionStorage.getItem('ssh_tkey') || localStorage.getItem('ssh_tkey') || ''; } catch (e) { return ''; } }
+function forget() { try { sessionStorage.removeItem('ssh_tkey'); localStorage.removeItem('ssh_tkey'); } catch (e) {} }
 
 /* ---------- unlock ---------- */
 function unlock(k, quiet) {
   $('unlock').disabled = true;
   call({ p_key: k, p_query: '' }).then(function (d) {
-    if (!d || !d.ok) { if (!quiet) { $('keyMsg').className = 'msg no'; $('keyMsg').textContent = ERR[d && d.error] || 'Could not open. · تعذّر الفتح.'; } return; }
-    try { sessionStorage.setItem('ssh_tkey', k); } catch (e) {}
+    if (!d || !d.ok) { if (d && d.error === 'key') forget(); if (!quiet) { $('keyMsg').className = 'msg no'; $('keyMsg').textContent = ERR[d && d.error] || 'Could not open. · تعذّر الفتح.'; } return; }
+    try { sessionStorage.setItem('ssh_tkey', k); if (quiet || $('remember').checked) localStorage.setItem('ssh_tkey', k); } catch (e) {}
     $('lockCard').hidden = true; $('searchCard').hidden = false; $('q').focus();
   }).catch(function () { $('keyMsg').className = 'msg no'; $('keyMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
     .then(function () { $('unlock').disabled = false; });
 }
+$('lock').onclick = function () { forget(); location.reload(); };
 $('unlock').onclick = function () { var k = $('key').value.trim(); if (k) unlock(k); };
 $('key').onkeydown = function (e) { if (e.key === 'Enter') $('unlock').click(); };
 if (tkey()) unlock(tkey(), true);
