@@ -438,7 +438,8 @@
   function regInfo() { try { return JSON.parse(localStorage.getItem('ssh_reg') || '{}') || {}; } catch (e) { return {}; } }
   function keepOnline(b, ref) {
     if (!/^SSH-\d{6}-\d{4}$/.test(ref || '')) return;
-    sendOnline({ ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent, cert_kind: b.cert_kind || '' });
+    sendOnline({ ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent, cert_kind: b.cert_kind || '',
+      topic: b.topic || '', essay: b.essay || '', answers: b.answers || '' });
   }
   /* English Placement Test: the page sends the email only, so add the registered mobile too */
   function keepPlacement(b) {
