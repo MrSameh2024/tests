@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Writing Progress Report · تقرير تقدم الكتابة | Smart Students Hub</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="ssh-logo.png">
+<style>
+@font-face{font-family:'Taj';src:url('fonts/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:400 600}
+@font-face{font-family:'Taj';src:url('fonts/tajawal-arabic-800-normal.woff2') format('woff2');font-weight:700 900}
+:root{--navy:#14244a;--gold:#b89548;--teal:#0f4c5c;--line:#d9e1ec;--soft:#f4f6fb;--ok:#1a6b3c;--warn:#a8471f}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,'Segoe UI',Arial,'Taj',sans-serif;color:#1d2840;background:#eef2f8;line-height:1.5}
+.ar{font-family:'Taj',Tahoma,sans-serif;direction:rtl}
+main.tool{max-width:900px;margin:0 auto;padding:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0;box-shadow:0 4px 14px rgba(20,36,74,.06)}
+header.top{display:flex;align-items:center;gap:12px}
+header.top img{width:44px;height:44px}
+header.top b{letter-spacing:.18em;font-size:.8rem;color:var(--gold)}
+h1{margin:0;font-size:1.3rem;color:var(--navy)}
+label{display:block;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=password],textarea{width:100%;font:inherit;padding:10px 12px;border:1.5px solid #b8c6d9;border-radius:10px;background:#fff}
+textarea{min-height:80px}
+button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--navy);color:#fff}
+button.sec{background:#fff;color:var(--navy);border:1.5px solid var(--navy)}
+button:disabled{opacity:.55;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>input{flex:1;min-width:200px}
+.msg{margin-top:8px;font-weight:600}.msg.no{color:#b3261e}.msg.ok{color:var(--ok)}
+.mute{color:#5b6780;font-size:.9rem}
+ul.students{list-style:none;padding:0;margin:8px 0}
+ul.students li{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px;margin:6px 0}
+ul.students li input{margin-top:5px;width:18px;height:18px}
+ul.students small{display:block;color:#5b6780}
+.opts label{display:flex;gap:8px;align-items:center;font-weight:500;margin:6px 0}
+.opts input[type=checkbox]{width:18px;height:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+
+/* ---------- report (A4) ---------- */
+#report{display:none}
+.rep{background:#fff;max-width:210mm;margin:16px auto;padding:14mm 13mm;box-shadow:0 6px 24px rgba(20,36,74,.14);font-size:10.5pt}
+.rep-h{display:flex;align-items:center;justify-content:space-between;border-bottom:2.5px solid var(--navy);padding-bottom:8px}
+.rep-h .b{display:flex;align-items:center;gap:10px}
+.rep-h img{width:46px;height:46px}
+.rep-h .t1{font-weight:800;letter-spacing:.2em;font-size:11pt;color:var(--navy)}
+.rep-h .t2{font-size:8.5pt;color:#7a6320}
+.rep-h .school{text-align:right;font-size:9pt;color:#384560}
+.rep h2{font-size:16pt;color:var(--navy);margin:10px 0 0;text-align:center}
+.rep h2 + .ar{display:block;text-align:center;font-weight:800;color:var(--teal);font-size:13pt}
+.info{width:100%;border-collapse:collapse;margin:10px 0 6px}
+.info td{border:1px solid var(--line);padding:5px 8px;vertical-align:top}
+.info td.k{background:var(--soft);font-weight:700;width:22%;color:var(--navy);font-size:9pt}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.kpi{border:1px solid #e2d3a0;background:#fffdf6;border-radius:8px;padding:6px;text-align:center}
+.kpi b{display:block;font-size:15pt;color:var(--navy)}
+.kpi span{font-size:7.5pt;color:#6b5a22;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.kpi span.ar{display:block;text-transform:none;letter-spacing:0}
+.rep h3{font-size:12.5pt;margin:14px 0 2px;color:#fff;background:var(--teal);padding:6px 10px;border-radius:6px}
+.rep h3 small{font-weight:500;font-size:9pt;opacity:.9}
+.sub{font-size:9pt;color:#4a5670;margin:2px 0 6px}
+table.st{width:100%;border-collapse:collapse;font-size:9pt;margin:4px 0}
+table.st th{background:var(--navy);color:#fff;padding:4px 5px;text-align:left;font-weight:700}
+table.st td{border-bottom:1px solid var(--line);padding:4px 5px;vertical-align:top}
+table.st td:nth-child(2){white-space:nowrap}
+table.st tr:nth-child(even) td{background:#fafbfd}
+.up{color:var(--ok);font-weight:700}.pend{color:var(--warn);font-weight:600}
+.chart{margin:6px 0}
+.work{border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:6px;padding:6px 9px;margin:6px 0;page-break-inside:avoid;break-inside:avoid}
+.work .wh{font-weight:700;font-size:9pt;color:var(--navy)}
+.work .wh small{font-weight:500;color:#5b6780}
+.work .wt{white-space:pre-wrap;font-family:Georgia,'Times New Roman',serif;font-size:10.5pt;margin-top:3px}
+.chips{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
+.chips span{border:1px solid var(--line);border-radius:10px;padding:0 7px;font-size:8.5pt;background:var(--soft)}
+.comment{border:1px solid var(--line);border-radius:6px;min-height:22mm;padding:6px 9px;white-space:pre-wrap;font-size:10pt}
+.sig{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16mm;font-size:9pt;text-align:center}
+.sig div{border-top:1px solid var(--navy);padding-top:4px}
+.foot{margin-top:8mm;font-size:7.5pt;color:#6b7590;border-top:1px solid var(--line);padding-top:4px}
+.pb{page-break-before:always;break-before:page}
+.bar{position:sticky;top:0;z-index:5;background:rgba(238,242,248,.96);padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;border-bottom:1px solid var(--line)}
+@page{size:A4;margin:12mm 11mm}
+@media print{
+  body{background:#fff}
+  main.tool,.bar{display:none!important}
+  #report{display:block!important}
+  .rep{box-shadow:none;margin:0;max-width:none;width:auto;padding:0}
+}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+</style>
+</head><body>
+<main class="tool">
+<div class="card">
+<header class="top"><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB · TEACHER TOOL</b><h1>Writing Progress Report · <span class="ar" style="display:inline">تقرير تقدم الطالب في الكتابة</span></h1></div></header>
+<p class="mute" style="margin:8px 0 0">Build a printable PDF of a student's work in the writing courses: every station, scores, attempts and the student's own writing. Phone numbers are never shown. · أنشئ تقريرًا قابلًا للطباعة بإجابات الطالب ودرجاته في دورات الكتابة، دون إظهار رقم الجوال.</p>
+</div>
+
+<div class="card" id="lockCard">
+<label for="key">Teacher key · مفتاح المعلم</label>
+<div class="row"><input type="password" id="key" autocomplete="current-password" placeholder="SSH-xxxxx-xxxxx-xxxxx"><button id="unlock">🔓 Open · فتح</button></div>
+<div class="msg" id="keyMsg" role="status"></div>
+</div>
+
+<div class="card" id="searchCard" hidden>
+<label for="q">Find a student · ابحث عن طالب</label>
+<div class="row"><input type="text" id="q" placeholder="Name, email or class · الاسم أو البريد أو الصف"><button id="go">🔎 Search · بحث</button></div>
+<p class="mute" style="margin:6px 0 0">If the same student used more than one email or mobile, tick all their entries to combine them in one report. · إذا استخدم الطالب أكثر من بريد أو جوال، حدّد كل سجلاته لدمجها في تقرير واحد.</p>
+<div class="msg" id="sMsg" role="status"></div>
+<ul class="students" id="students"></ul>
+<div id="optsBox" hidden>
+<div class="grid2">
+<div><label for="school">School (optional) · المدرسة</label><input type="text" id="school" placeholder="Hassan Bin Thabit Secondary School"></div>
+<div><label for="teacher">Teacher · المعلم</label><input type="text" id="teacher" value="Sameh Soliman"></div>
+</div>
+<div class="opts">
+<label><input type="checkbox" id="optEmail" checked> Show the student's email · إظهار بريد الطالب</label>
+<label><input type="checkbox" id="optShort" checked> Include short answers (words, verbs, linkers) · إظهار الإجابات القصيرة</label>
+<label><input type="checkbox" id="optAll"> Include every attempt, not only the latest · إظهار كل المحاولات</label>
+</div>
+<label for="comment">Teacher's comment (printed on the report) · تعليق المعلم</label>
+<textarea id="comment" placeholder="e.g. Clear improvement in paragraph organisation and use of linkers since the first course."></textarea>
+<p style="margin:12px 0 0"><button id="build">📄 Build report · إنشاء التقرير</button></p>
+</div>
+</div>
+</main>
+
+<div id="report">
+<div class="bar"><button id="print">🖨️ Print / Save as PDF · طباعة / حفظ PDF</button><button class="sec" id="back">← Back · رجوع</button></div>
+<div id="pages"></div>
+</div>
+
+<script>
+(function () {
+var RPC = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/teacher_writing';
+var KEY = 'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+var ERR = { key: 'Wrong teacher key. · مفتاح غير صحيح.', wait: 'Too many wrong tries. Wait 15 minutes. · محاولات خاطئة كثيرة، انتظر ١٥ دقيقة.' };
+
+function call(args) {
+  return fetch(RPC, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY }, body: JSON.stringify(args) })
+    .then(function (r) { return r.json(); });
+}
+function tkey() { try { return sessionStorage.getItem('ssh_tkey') || ''; } catch (e) { return ''; } }
+
+/* ---------- unlock ---------- */
+function unlock(k, quiet) {
+  $('unlock').disabled = true;
+  call({ p_key: k, p_query: '' }).then(function (d) {
+    if (!d || !d.ok) { if (!quiet) { $('keyMsg').className = 'msg no'; $('keyMsg').textContent = ERR[d && d.error] || 'Could not open. · تعذّر الفتح.'; } return; }
+    try { sessionStorage.setItem('ssh_tkey', k); } catch (e) {}
+    $('lockCard').hidden = true; $('searchCard').hidden = false; $('q').focus();
+  }).catch(function () { $('keyMsg').className = 'msg no'; $('keyMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
+    .then(function () { $('unlock').disabled = false; });
+}
+$('unlock').onclick = function () { var k = $('key').value.trim(); if (k) unlock(k); };
+$('key').onkeydown = function (e) { if (e.key === 'Enter') $('unlock').click(); };
+if (tkey()) unlock(tkey(), true);
+
+/* ---------- search ---------- */
+var found = [];
+$('go').onclick = function () {
+  var q = $('q').value.trim(); if (q.length < 2) return;
+  $('go').disabled = true; $('sMsg').textContent = '';
+  call({ p_key: tkey(), p_query: q }).then(function (d) {
+    if (!d || !d.ok) { $('sMsg').className = 'msg no'; $('sMsg').textContent = ERR[d && d.error] || 'Search failed. · فشل البحث.'; return; }
+    found = d.students || [];
+    $('students').innerHTML = found.map(function (s, i) {
+      return '<li><input type="checkbox" id="s' + i + '" data-i="' + i + '"><label for="s' + i + '" style="margin:0;font-weight:500"><b>' + esc(s.name) + '</b> · ' + esc(s.cls || '') +
+        '<small>' + (s.email ? esc(s.email) + ' · ' : 'mobile on file · ') + s.courses + ' course(s) · ' + s.rows + ' submissions · last ' + new Date(s.last).toLocaleDateString('en-GB') + '</small></label></li>';
+    }).join('');
+    $('sMsg').className = 'msg ' + (found.length ? 'ok' : 'no');
+    $('sMsg').textContent = found.length ? 'Tick the student, then press Build report. · حدّد الطالب ثم اضغط «إنشاء التقرير».' : 'No writing work found. · لا توجد أعمال كتابة.';
+    $('optsBox').hidden = !found.length;
+  }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
+    .then(function () { $('go').disabled = false; });
+};
+$('q').onkeydown = function (e) { if (e.key === 'Enter') $('go').click(); };
+
+/* ---------- course data ---------- */
+var COURSES = {
+  'g12|job': ['Cover Letter — Job Application', 'رسالة تقديم لوظيفة'],
+  'g12|event': ['Informal Email — Cultural Event', 'بريد إلكتروني غير رسمي عن فعالية ثقافية'],
+  'g12|essay': ['Advantages and Disadvantages Essay', 'مقال المزايا والعيوب'],
+  'g12|story': ['Personal Narrative — Story', 'سرد شخصي — قصة'],
+  'g12|process': ['Procedural Text — Describing a Process', 'نص إجرائي — وصف عملية'],
+  'g11|diary': ['Adventure Diary (Module 3)', 'يوميات مغامرة'],
+  'g11|adventure diary': ['Adventure Diary (Module 3)', 'يوميات مغامرة'],
+  'g11|story': ['A Holiday Story (Module 3)', 'قصة عن العطلة'],
+  'g11|a holiday story': ['A Holiday Story (Module 3)', 'قصة عن العطلة'],
+  'g11|cause': ['Cause-and-effect Essay (Module 4)', 'مقال الأسباب والنتائج'],
+  'g11|cause-and-effect essay': ['Cause-and-effect Essay (Module 4)', 'مقال الأسباب والنتائج'],
+  'g11|announcement': ['An Eco-friendly Announcement (Module 4)', 'إعلان بيئي'],
+  'g11|an eco-friendly announcement': ['An Eco-friendly Announcement (Module 4)', 'إعلان بيئي'],
+  'g11|summary': ['A Summary (Module 5)', 'تلخيص نص'],
+  'g11|a summary': ['A Summary (Module 5)', 'تلخيص نص'],
+  'g11|discussion': ['Discussion Essay (Module 5)', 'مقال يناقش رأيين'],
+  'g11|discussion essay': ['Discussion Essay (Module 5)', 'مقال يناقش رأيين']
+};
+var ST = [[], ['Words', 'المفردات'], ['Verbs', 'الأفعال'], ['Linkers', 'الروابط'], ['Reference words', 'الكلمات المرجعية'], ['Order', 'الترتيب'],
+  ['Opening', 'البداية'], ['Main section', 'صلب النص'], ['Final section', 'الجزء الأخير'], ['Flexible gaps', 'الفراغات المرنة'], ['Independent writing', 'الكتابة المستقلة']];
+var STATIONS = ST.map(function (x) { return x.length ? x[0] + ' · <bdi class="ar">' + x[1] + '</bdi>' : ''; });
+/* never print a phone number, even one a student typed into the writing */
+function noPhone(t) { return String(t).replace(/\+?\d[\d\s\-().]{5,}\d/g, function (m) { return m.replace(/\D/g, '').length >= 7 && !/^(19|20)\d\d\s*[-–]\s*(19|20)\d\d$/.test(m.trim()) ? '••• ••• (number hidden)' : m; }); }
+
+function parseRow(r) {
+  var m = r.test.match(/^Grade (1[0-2]) Writing\s*[·–-]\s*(.*?)(?:\s*[·–-]\s*Station\s*(\d+))?\s*$/i) || [];
+  var g = m[1] || '', raw = (m[2] || r.test).trim(), st = m[3] ? +m[3] : null;
+  var key = raw.toLowerCase().replace(/\s*\(module\s*\d+\)\s*$/, '');
+  var c = COURSES['g' + g + '|' + key] || [raw, ''];
+  var pct = r.max > 0 && r.score != null ? Math.round(100 * r.score / r.max) : (r.max == null && r.percent != null ? Math.round(r.percent) : null);
+  return { g: g, course: 'Grade ' + g + ' · ' + c[0], courseAr: c[1], station: st, ts: r.ts, score: r.score, max: r.max, pct: pct,
+    topic: String(r.topic || '').replace(/\s*·\s*Station.*$/i, ''), essay: r.essay || '', answers: r.answers || '', status: r.status || '', ref: r.ref,
+    name: r.name, cls: r.cls, email: r.email };
+}
+function answerItems(a) {
+  var i = a.indexOf('Answers:\n'); if (i < 0) return null;
+  try { var j = JSON.parse(a.slice(i + 9)); return Array.isArray(j) ? j : null; } catch (e) { return null; }
+}
+function words(t) { return (String(t).match(/[A-Za-z’']+/g) || []).length; }
+function fmtDate(d) { return new Date(d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); }
+function pctTxt(p) { return p == null ? '—' : p + '%'; }
+
+/* ---------- build ---------- */
+$('build').onclick = function () {
+  var ids = [].slice.call(document.querySelectorAll('#students input:checked')).map(function (x) { return found[+x.dataset.i].id; });
+  if (!ids.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Tick a student first. · حدّد طالبًا أولًا.'; return; }
+  $('build').disabled = true;
+  Promise.all(ids.map(function (id) { return call({ p_key: tkey(), p_student: id }); })).then(function (res) {
+    var rows = [];
+    res.forEach(function (d) { if (d && d.ok) rows = rows.concat(d.rows || []); });
+    if (!rows.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'No writing work found. · لا توجد أعمال.'; return; }
+    render(rows.map(parseRow).sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); }));
+  }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
+    .then(function () { $('build').disabled = false; });
+};
+$('print').onclick = function () { window.print(); };
+$('back').onclick = function () { $('report').style.display = 'none'; document.querySelector('main.tool').style.display = ''; };
+
+function chart(stations) {
+  /* first attempt vs best for stations 1–10 */
+  var W = 640, H = 150, L = 34, B = 24, bw = (W - L - 8) / 10;
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Scores by station">';
+  [0, 50, 100].forEach(function (v) { var y = H - B - (H - B - 10) * v / 100; s += '<line x1="' + L + '" x2="' + W + '" y1="' + y + '" y2="' + y + '" stroke="#e3e8f0"/><text x="' + (L - 4) + '" y="' + (y + 3) + '" font-size="9" text-anchor="end" fill="#6b7590">' + v + '%</text>'; });
+  for (var n = 1; n <= 10; n++) {
+    var x = L + (n - 1) * bw + 4, st = stations[n];
+    s += '<text x="' + (x + bw / 2 - 4) + '" y="' + (H - 8) + '" font-size="9" text-anchor="middle" fill="#384560">S' + n + '</text>';
+    if (!st) continue;
+    var h1 = st.first == null ? 0 : (H - B - 10) * st.first / 100, h2 = st.best == null ? 0 : (H - B - 10) * st.best / 100;
+    s += '<rect x="' + x + '" y="' + (H - B - h1) + '" width="' + (bw / 2 - 5) + '" height="' + h1 + '" fill="#c9d3e3"/>';
+    s += '<rect x="' + (x + bw / 2 - 5) + '" y="' + (H - B - h2) + '" width="' + (bw / 2 - 5) + '" height="' + h2 + '" fill="' + (st.best == null ? '#e8d9a8' : '#0f4c5c') + '"/>';
+    if (st.best == null) s += '<text x="' + (x + bw / 2 - 4) + '" y="' + (H - B - 4) + '" font-size="8" text-anchor="middle" fill="#a8471f">review</text>';
+  }
+  s += '<rect x="' + (W - 230) + '" y="2" width="9" height="9" fill="#c9d3e3"/><text x="' + (W - 218) + '" y="10" font-size="9" fill="#384560">First attempt</text>';
+  s += '<rect x="' + (W - 140) + '" y="2" width="9" height="9" fill="#0f4c5c"/><text x="' + (W - 128) + '" y="10" font-size="9" fill="#384560">Best / latest</text>';
+  return s + '</svg>';
+}
+
+function render(R) {
+  var showEmail = $('optEmail').checked, showShort = $('optShort').checked, showAll = $('optAll').checked;
+  var name = R.reduce(function (a, r) { return r.name && r.name.length > a.length ? r.name : a; }, '');
+  var cls = R[R.length - 1].cls || '';
+  var emails = R.map(function (r) { return r.email; }).filter(function (e, i, a) { return e && a.indexOf(e) === i; });
+  var byCourse = {}, order = [];
+  R.forEach(function (r) { if (!byCourse[r.course]) { byCourse[r.course] = []; order.push(r.course); } byCourse[r.course].push(r); });
+
+  var totStations = 0, completed = 0, retried = 0, gain = 0, attempts = R.length, finalWords = [];
+  var sections = order.map(function (cn, ci) {
+    var rows = byCourse[cn], st = {}, finals = [];
+    rows.forEach(function (r) {
+      var n = r.station || 10;
+      if (!st[n]) st[n] = { list: [] };
+      st[n].list.push(r);
+    });
+    Object.keys(st).forEach(function (n) {
+      var l = st[n].list, scored = l.filter(function (r) { return r.pct != null && r.max > 0; });
+      st[n].first = scored.length ? scored[0].pct : null;
+      st[n].best = scored.length ? Math.max.apply(null, scored.map(function (r) { return r.pct; })) : null;
+      st[n].last = l[l.length - 1];
+      if (scored.length > 1 && st[n].best > st[n].first) { retried++; gain += st[n].best - st[n].first; }
+    });
+    var done = Object.keys(st).length; totStations += done;
+    if (st[10]) { completed++; var fw = words(st[10].last.essay || ''); if (fw) finalWords.push(fw); }
+    var auto = [1, 2, 3, 4, 5].filter(function (n) { return st[n] && st[n].best != null; });
+    var autoAvg = auto.length ? Math.round(auto.reduce(function (a, n) { return a + st[n].best; }, 0) / auto.length) : null;
+
+    var h = '<h3>' + esc(cn) + (rows[0].courseAr ? ' <small class="ar">· ' + esc(rows[0].courseAr) + '</small>' : '') + '</h3>';
+    var topic = rows.map(function (r) { return r.topic; }).filter(Boolean)[0];
+    h += '<p class="sub">' + (topic ? 'Topic · الموضوع: <b>' + esc(topic) + '</b> · ' : '') + 'From ' + fmtDate(rows[0].ts) + ' to ' + fmtDate(rows[rows.length - 1].ts) +
+      ' · Stations completed · المحطات المنجزة: <b>' + done + ' / 10</b>' + (autoAvg != null ? ' · Average best score (S1–S5): <b>' + autoAvg + '%</b>' : '') + '</p>';
+    h += '<div class="chart">' + chart(st) + '</div>';
+    h += '<table class="st"><thead><tr><th>Station · المحطة</th><th>Date</th><th>Attempts</th><th>First</th><th>Best</th><th>Status · الحالة</th></tr></thead><tbody>';
+    for (var n = 1; n <= 10; n++) {
+      if (!st[n]) { h += '<tr><td>' + n + '. ' + STATIONS[n] + '</td><td colspan="5" class="mute">Not submitted yet · لم تُرسل بعد</td></tr>'; continue; }
+      var s = st[n], up = s.first != null && s.best > s.first;
+      var status = s.last.status === 'pending' ? '<span class="pend">Awaiting teacher review · بانتظار مراجعة المعلم</span>'
+        : s.best == null ? '<span class="pend">Teacher review · مراجعة المعلم</span>' : s.best >= 80 ? '<span class="up">Mastered · متقن</span>' : 'Completed · منجز';
+      h += '<tr><td>' + n + '. ' + STATIONS[n] + '</td><td>' + fmtDate(s.list[0].ts) + '</td><td>' + s.list.length + '</td><td>' + pctTxt(s.first) + '</td><td' + (up ? ' class="up"' : '') + '>' +
+        pctTxt(s.best) + (up ? ' ▲' : '') + '</td><td>' + status + '</td></tr>';
+    }
+    h += '</tbody></table>';
+
+    /* the student's own work */
+    var work = '';
+    for (var k = 1; k <= 10; k++) {
+      if (!st[k]) continue;
+      /* by default show the student's best attempt (latest when scores tie, or for teacher-reviewed stations) */
+      var best = st[k].list.reduce(function (a, r) { return (r.pct != null && a.pct != null && r.pct < a.pct) ? a : r; });
+      var list = showAll ? st[k].list : [best];
+      list.forEach(function (r, ai) {
+        var items = answerItems(r.answers), body = '';
+        var isShort = items && items.every(function (x) { return typeof x === 'string' && x.length < 45; });
+        if (k === 10 && r.essay) body = '<div class="wt">' + esc(noPhone(r.essay)) + '</div><div class="mute" style="font-size:8pt">' + words(r.essay) + ' words · كلمة</div>';
+        else if (items && items.length && items.every(function (x) { return Array.isArray(x); })) body = '<div class="mute" style="font-size:8.5pt">Ordering task completed (' + items.length + ' items) · مهمة ترتيب</div>';
+        else if (items && isShort) { if (!showShort) return; body = '<div class="chips">' + items.filter(function (x) { return String(x).trim(); }).map(function (x) { return '<span>' + esc(noPhone(x)) + '</span>'; }).join('') + '</div>'; }
+        else if (items && items.length) body = '<div class="wt">' + esc(noPhone(items.filter(function (x) { return typeof x === 'string'; }).join('\n'))) + '</div>';
+        else if (r.essay) body = '<div class="wt">' + esc(noPhone(r.essay)) + '</div>';
+        else if (r.answers) body = '<div class="wt" style="font-family:inherit;font-size:9pt">' + esc(noPhone(r.answers.replace(/^Writing attempt[^\n]*\n?/, '').slice(0, 3000))) + '</div>';
+        else return;
+        work += '<div class="work"><div class="wh">Station ' + k + ' · ' + STATIONS[k] + ' <small>· ' + fmtDate(r.ts) + (showAll && st[k].list.length > 1 ? ' · attempt ' + (ai + 1) : '') +
+          (r.pct != null && r.max > 0 ? ' · ' + r.score + '/' + r.max : '') + '</small></div>' + body + '</div>';
+      });
+    }
+    if (work) h += '<p class="sub" style="margin-top:8px"><b>Student\'s answers and writing · إجابات الطالب وكتاباته</b></p>' + work;
+    return '<section' + (ci ? ' class="pb"' : '') + '>' + h + '</section>';
+  });
+
+  var first = R[0].ts, last = R[R.length - 1].ts;
+  var head = '<div class="rep-h"><div class="b"><img src="ssh-logo.png" alt=""><div><div class="t1">SMART STUDENTS HUB</div><div class="t2">Student Writing Programme · برنامج الكتابة للطلاب</div></div></div>' +
+    '<div class="school">' + esc($('school').value.trim()) + '<br>Report date · تاريخ التقرير: <b>' + fmtDate(new Date()) + '</b></div></div>';
+  var info = '<h2>Student Writing Progress Report</h2><span class="ar">تقرير تقدم الطالب في الكتابة</span>' +
+    '<table class="info"><tr><td class="k">Student · الطالب</td><td><b>' + esc(name) + '</b></td><td class="k">Class · الصف</td><td>' + esc(cls) + '</td></tr>' +
+    '<tr><td class="k">Period · الفترة</td><td>' + fmtDate(first) + ' – ' + fmtDate(last) + '</td><td class="k">Teacher · المعلم</td><td>' + esc($('teacher').value.trim()) + '</td></tr>' +
+    (showEmail && emails.length ? '<tr><td class="k">Email · البريد</td><td colspan="3">' + emails.map(esc).join(' · ') + '</td></tr>' : '') + '</table>';
+  var kpis = '<div class="kpis">' +
+    '<div class="kpi"><b>' + order.length + '</b><span>Courses started</span><span class="ar">دورات بدأها</span></div>' +
+    '<div class="kpi"><b>' + completed + '</b><span>Courses completed</span><span class="ar">دورات أتمّها</span></div>' +
+    '<div class="kpi"><b>' + totStations + '</b><span>Stations done · ' + attempts + ' attempts</span><span class="ar">محطات منجزة</span></div>' +
+    '<div class="kpi"><b>' + (retried ? '+' + Math.round(gain / retried) + '%' : (finalWords.length ? Math.max.apply(null, finalWords) : '—')) + '</b><span>' + (retried ? 'Avg gain on retried stations' : 'Words in final writing') + '</span><span class="ar">' + (retried ? 'متوسط التحسن عند إعادة المحاولة' : 'كلمات الكتابة النهائية') + '</span></div></div>';
+  var summary = '<p class="sub"><b>Summary · ملخص:</b> ' + esc(name.split(' ')[0] || 'The student') + ' worked through ' + order.length + ' writing course' + (order.length > 1 ? 's' : '') +
+    ' between ' + fmtDate(first) + ' and ' + fmtDate(last) + ', completing ' + totStations + ' station' + (totStations === 1 ? '' : 's') + ' and ' + completed + ' full course' + (completed === 1 ? '' : 's') +
+    (retried ? '. On ' + retried + ' station' + (retried > 1 ? 's' : '') + ' the student retried and raised the score by ' + Math.round(gain / retried) + ' points on average' : '') +
+    (finalWords.length ? '. Final independent writing: ' + finalWords.join(', ') + ' words' : '') + '. Stations 6–10 are reviewed by the teacher.</p>';
+  var comment = $('comment').value.trim();
+  var end = '<p class="sub" style="margin-top:12px"><b>Teacher\'s comment · تعليق المعلم</b></p><div class="comment">' + esc(comment) + '</div>' +
+    '<div class="sig"><div>Teacher · المعلم<br><b>' + esc($('teacher').value.trim()) + '</b></div><div>Head of Department · رئيس القسم</div><div>School Administration · إدارة المدرسة</div></div>' +
+    '<div class="foot">Source: Smart Students Hub writing-course records (each station is time-stamped when the student submits it). Stations 1–5 are marked automatically; stations 6–10 are reviewed by the teacher. Phone numbers are not shown. · المصدر: سجلات دورات الكتابة في منصة سمارت ستيودنتس هب.</div>';
+
+  $('pages').innerHTML = '<div class="rep">' + head + info + kpis + summary + sections.join('') + end + '</div>';
+  document.querySelector('main.tool').style.display = 'none';
+  $('report').style.display = 'block';
+  document.title = 'Writing Progress Report – ' + name;
+  window.scrollTo(0, 0);
+}
+})();
+</script>
+</body></html>
