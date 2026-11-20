@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Writing Progress Report · تقرير تقدم الكتابة | Smart Students Hub</title>
+<title>Teacher Reports · تقارير المعلم | Smart Students Hub</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="ssh-logo.png">
 <link rel="manifest" href="teacher-report.webmanifest">
 <meta name="theme-color" content="#14244a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Writing Reports">
+<meta name="apple-mobile-web-app-title" content="Teacher Reports">
 <link rel="apple-touch-icon" href="teacher-report-180.png">
 <style>
 @font-face{font-family:'Taj';src:url('fonts/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:400 600}
@@ -37,6 +37,15 @@ ul.students li input{margin-top:5px;width:18px;height:18px}
 ul.students small{display:block;color:#5b6780}
 .opts label{display:flex;gap:8px;align-items:center;font-weight:500;margin:6px 0}
 .opts input[type=checkbox]{width:18px;height:18px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tabs button{background:#fff;color:var(--navy);border:1.5px solid #b8c6d9;padding:8px 12px;font-size:.92rem}
+.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.skill{display:grid;grid-template-columns:38% 1fr 46px;gap:6px;align-items:center;font-size:8.5pt;margin:1px 0}
+.skill i{display:block;height:7px;border-radius:4px;background:#e3e8f0;overflow:hidden}.skill i b{display:block;height:100%;background:var(--teal)}
+.sheet{column-count:2;column-gap:14px;font-size:8pt;font-family:ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;border:1px solid var(--line);border-radius:6px;padding:6px 8px;margin:4px 0}
+.sheet .y{color:var(--ok)}.sheet .n{color:#b3261e}
+.base{border:1.5px solid #5b3a9a;background:#f6f1fd;border-radius:8px;padding:6px 10px;margin:8px 0;font-size:9.5pt}
+.fb{border:1px solid #cfe3d6;background:#f3faf5;border-radius:6px;padding:6px 9px;margin:6px 0;font-size:9.5pt;white-space:pre-wrap}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 @media(max-width:600px){.grid2{grid-template-columns:1fr}}
 
@@ -59,7 +68,7 @@ ul.students small{display:block;color:#5b6780}
 .kpi b{display:block;font-size:15pt;color:var(--navy)}
 .kpi span{font-size:7.5pt;color:#6b5a22;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
 .kpi span.ar{display:block;text-transform:none;letter-spacing:0}
-.rep h3{font-size:12.5pt;margin:14px 0 2px;color:#fff;background:var(--teal);padding:6px 10px;border-radius:6px}
+.rep h3{page-break-after:avoid;break-after:avoid;font-size:12.5pt;margin:14px 0 2px;color:#fff;background:var(--teal);padding:6px 10px;border-radius:6px}
 .rep h3 small{font-weight:500;font-size:9pt;opacity:.9}
 .sub{font-size:9pt;color:#4a5670;margin:2px 0 6px}
 table.st{width:100%;border-collapse:collapse;font-size:9pt;margin:4px 0}
@@ -93,8 +102,9 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 </head><body>
 <main class="tool">
 <div class="card">
-<header class="top"><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB · TEACHER TOOL</b><h1>Writing Progress Report · <span class="ar" style="display:inline">تقرير تقدم الطالب في الكتابة</span></h1></div></header>
-<p class="mute" style="margin:8px 0 0">Build a printable PDF of a student's work in the writing courses: every station, scores, attempts and the student's own writing. Phone numbers are never shown. · أنشئ تقريرًا قابلًا للطباعة بإجابات الطالب ودرجاته في دورات الكتابة، دون إظهار رقم الجوال.</p>
+<header class="top"><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB · TEACHER TOOL</b><h1 id="toolTitle">Writing Progress Report · <span class="ar" style="display:inline">تقرير تقدم الطالب في الكتابة</span></h1></div></header>
+<div class="tabs" id="tabs" role="tablist"><button type="button" data-t="writing">✍️ Writing · الكتابة</button><button type="button" data-t="exams">📝 Exams · الاختبارات</button><button type="button" data-t="ielts">🎓 IELTS</button><button type="button" data-t="workshops">👩‍🏫 Workshops · الورش</button></div>
+<p class="mute" style="margin:8px 0 0" id="toolIntro"></p>
 </div>
 
 <div class="card" id="lockCard">
@@ -106,7 +116,7 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 
 <div class="card" id="searchCard" hidden>
 <p style="margin:0 0 6px;text-align:right"><button class="sec" id="lock" type="button" style="padding:4px 10px;font-size:.85rem">🔒 Lock &amp; forget key · قفل ونسيان المفتاح</button></p>
-<label for="q">Find a student · ابحث عن طالب</label>
+<label for="q" id="qLabel">Find a student · ابحث عن طالب</label>
 <div class="row"><input type="text" id="q" placeholder="Name, email or class · الاسم أو البريد أو الصف"><button id="go">🔎 Search · بحث</button></div>
 <p class="mute" style="margin:6px 0 0">If the same student used more than one email or mobile, tick all their entries to combine them in one report. · إذا استخدم الطالب أكثر من بريد أو جوال، حدّد كل سجلاته لدمجها في تقرير واحد.</p>
 <div class="msg" id="sMsg" role="status"></div>
@@ -118,8 +128,9 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 </div>
 <div class="opts">
 <label><input type="checkbox" id="optEmail" checked> Show the student's email · إظهار بريد الطالب</label>
-<label><input type="checkbox" id="optShort" checked> Include short answers (words, verbs, linkers) · إظهار الإجابات القصيرة</label>
-<label><input type="checkbox" id="optAll"> Include every attempt, not only the latest · إظهار كل المحاولات</label>
+<label data-for="writing"><input type="checkbox" id="optShort" checked> Include short answers (words, verbs, linkers) · إظهار الإجابات القصيرة</label>
+<label data-for="exams ielts workshops"><input type="checkbox" id="optSheets"> Include answer sheets (best attempt) · إرفاق ورقة الإجابات (أفضل محاولة)</label>
+<label data-for="writing"><input type="checkbox" id="optAll"> Include every attempt, not only the best · إظهار كل المحاولات</label>
 </div>
 <label for="comment">Teacher's comment (printed on the report) · تعليق المعلم</label>
 <textarea id="comment" placeholder="e.g. Clear improvement in paragraph organisation and use of linkers since the first course."></textarea>
@@ -135,13 +146,37 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 
 <script>
 (function () {
-var RPC = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/teacher_writing';
+var RPC = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/teacher_report';
 var KEY = 'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
 var $ = function (id) { return document.getElementById(id); };
 var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
 var ERR = { key: 'Wrong teacher key. · مفتاح غير صحيح.', wait: 'Too many wrong tries. Wait 15 minutes. · محاولات خاطئة كثيرة، انتظر ١٥ دقيقة.' };
 
+var TYPES = {
+  writing: { en: 'Writing Progress Report', ar: 'تقرير تقدم الطالب في الكتابة', who: 'student',
+    intro: 'Every writing-course station, scores, attempts and the student\'s own writing. · كل محطات دورات الكتابة والدرجات والمحاولات وكتابات الطالب.' },
+  exams: { en: 'Exam Progress Report', ar: 'تقرير تقدم الطالب في الاختبارات', who: 'student',
+    intro: 'All tests and mock exams: attempts, first and best scores, skills breakdown and areas to develop. · كل الاختبارات: المحاولات وأول وأفضل درجة وتحليل المهارات.' },
+  ielts: { en: 'IELTS Progress Report', ar: 'تقرير تقدم الطالب في IELTS', who: 'learner',
+    intro: 'IELTS modules, diagnostics and mock tests, with the CEFR placement level as a baseline. · وحدات IELTS والاختبارات التشخيصية والتجريبية مع مستوى تحديد المستوى كنقطة بداية.' },
+  workshops: { en: 'Professional Development Record', ar: 'سجل التطوير المهني للمعلم', who: 'teacher',
+    intro: 'Workshops attended, quiz results, reflections, action plans, trainer feedback and self-checks. · الورش المحضورة ونتائج الاختبارات والتأملات وخطط العمل وملاحظات المدرب.' }
+};
+var TYPE = (location.search.match(/[?&]type=(writing|exams|ielts|workshops)/) || [])[1] || 'writing';
+function setType(t) {
+  TYPE = t; var T = TYPES[t];
+  [].forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.className = b.dataset.t === t ? 'on' : ''; b.setAttribute('aria-selected', b.dataset.t === t); });
+  $('toolTitle').innerHTML = esc(T.en) + ' · <span class="ar" style="display:inline">' + esc(T.ar) + '</span>';
+  $('toolIntro').textContent = T.intro + ' Phone numbers are never shown. · لا يظهر رقم الجوال أبدًا.';
+  $('qLabel').textContent = t === 'workshops' ? 'Find a teacher · ابحث عن معلم' : 'Find a student · ابحث عن طالب';
+  [].forEach.call(document.querySelectorAll('[data-for]'), function (el) { el.style.display = el.dataset.for.split(' ').indexOf(t) >= 0 ? '' : 'none'; });
+  $('students').innerHTML = ''; $('optsBox').hidden = true; $('sMsg').textContent = ''; found = [];
+  try { history.replaceState(null, '', location.pathname + (t === 'writing' ? '' : '?type=' + t)); } catch (e) {}
+  document.title = T.en + ' · Smart Students Hub';
+}
+[].forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.onclick = function () { setType(b.dataset.t); if ($('q').value.trim().length > 1 && !$('searchCard').hidden) $('go').click(); }; });
 function call(args) {
+  args.p_type = TYPE;
   return fetch(RPC, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY }, body: JSON.stringify(args) })
     .then(function (r) { return r.json(); });
 }
@@ -171,12 +206,13 @@ $('go').onclick = function () {
   call({ p_key: tkey(), p_query: q }).then(function (d) {
     if (!d || !d.ok) { $('sMsg').className = 'msg no'; $('sMsg').textContent = ERR[d && d.error] || 'Search failed. · فشل البحث.'; return; }
     found = d.students || [];
+    var unit = TYPE === 'writing' ? ' course(s) · ' : TYPE === 'workshops' ? ' workshop(s)/check(s) · ' : ' test(s) · ';
     $('students').innerHTML = found.map(function (s, i) {
       return '<li><input type="checkbox" id="s' + i + '" data-i="' + i + '"><label for="s' + i + '" style="margin:0;font-weight:500"><b>' + esc(s.name) + '</b> · ' + esc(s.cls || '') +
-        '<small>' + (s.email ? esc(s.email) + ' · ' : 'mobile on file · ') + s.courses + ' course(s) · ' + s.rows + ' submissions · last ' + new Date(s.last).toLocaleDateString('en-GB') + '</small></label></li>';
+        '<small>' + (s.email ? esc(s.email) + ' · ' : 'mobile on file · ') + s.courses + unit + s.rows + ' submissions · last ' + new Date(s.last).toLocaleDateString('en-GB') + '</small></label></li>';
     }).join('');
     $('sMsg').className = 'msg ' + (found.length ? 'ok' : 'no');
-    $('sMsg').textContent = found.length ? 'Tick the student, then press Build report. · حدّد الطالب ثم اضغط «إنشاء التقرير».' : 'No writing work found. · لا توجد أعمال كتابة.';
+    $('sMsg').textContent = found.length ? 'Tick the ' + TYPES[TYPE].who + ', then press Build report. · حدّد الاسم ثم اضغط «إنشاء التقرير».' : 'No records found for this report. · لا توجد سجلات لهذا التقرير.';
     $('optsBox').hidden = !found.length;
   }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
     .then(function () { $('go').disabled = false; });
@@ -236,11 +272,15 @@ $('build').onclick = function () {
     var rows = [];
     res.forEach(function (d) { if (d && d.ok) rows = rows.concat(d.rows || []); });
     if (!rows.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'No writing work found. · لا توجد أعمال.'; return; }
-    render(rows.map(parseRow).sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); }));
+    rows.sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); });
+    if (TYPE === 'writing') render(rows.map(parseRow));
+    else if (TYPE === 'workshops') renderWorkshops(rows);
+    else renderExams(rows, TYPE === 'ielts');
   }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
     .then(function () { $('build').disabled = false; });
 };
 $('print').onclick = function () { window.print(); };
+setType(TYPE);
 $('back').onclick = function () { $('report').style.display = 'none'; document.querySelector('main.tool').style.display = ''; };
 
 function chart(stations) {
@@ -357,6 +397,205 @@ function render(R) {
   $('report').style.display = 'block';
   document.title = 'Writing Progress Report – ' + name;
   window.scrollTo(0, 0);
+}
+
+/* ======================= shared pieces for the exam, IELTS and workshop reports ======================= */
+function pctOf(r) {
+  var sc = r.score == null ? null : +r.score, mx = r.max == null ? null : +r.max;
+  if (mx > 0 && sc != null) return Math.round(100 * sc / mx);
+  if ((mx == null || mx === 0) && r.percent != null && +r.percent > 0) return Math.round(+r.percent);
+  return null;
+}
+function longestName(R) { return R.reduce(function (a, r) { return r.name && r.name.length > a.length ? r.name : a; }, ''); }
+function uniq(a) { return a.filter(function (x, i) { return x && a.indexOf(x) === i; }); }
+function repHead(sub) {
+  return '<div class="rep-h"><div class="b"><img src="ssh-logo.png" alt=""><div><div class="t1">SMART STUDENTS HUB</div><div class="t2">' + sub + '</div></div></div>' +
+    '<div class="school">' + esc($('school').value.trim()) + '<br>Report date · تاريخ التقرير: <b>' + fmtDate(new Date()) + '</b></div></div>';
+}
+function infoTable(R, whoEn, whoAr, clsLabel) {
+  var emails = uniq(R.map(function (r) { return r.email; }));
+  return '<table class="info"><tr><td class="k">' + whoEn + ' · ' + whoAr + '</td><td><b>' + esc(longestName(R)) + '</b></td><td class="k">' + clsLabel + '</td><td>' + esc(R[R.length - 1].cls || '') + '</td></tr>' +
+    '<tr><td class="k">Period · الفترة</td><td>' + fmtDate(R[0].ts) + ' – ' + fmtDate(R[R.length - 1].ts) + '</td><td class="k">' + (TYPE === 'workshops' ? 'Trainer · المدرب' : 'Teacher · المعلم') + '</td><td>' + esc($('teacher').value.trim()) + '</td></tr>' +
+    ($('optEmail').checked && emails.length ? '<tr><td class="k">Email · البريد</td><td colspan="3">' + emails.map(esc).join(' · ') + '</td></tr>' : '') + '</table>';
+}
+function kpiBox(items) {
+  return '<div class="kpis">' + items.map(function (k) { return '<div class="kpi"><b>' + k[0] + '</b><span>' + k[1] + '</span><span class="ar">' + k[2] + '</span></div>'; }).join('') + '</div>';
+}
+function closing(labels, source) {
+  return '<p class="sub" style="margin-top:12px"><b>' + (TYPE === 'workshops' ? 'Trainer\'s comment · تعليق المدرب' : 'Teacher\'s comment · تعليق المعلم') + '</b></p><div class="comment">' + esc($('comment').value.trim()) + '</div>' +
+    '<div class="sig">' + labels.map(function (l, i) { return '<div>' + l + (i === 0 ? '<br><b>' + esc($('teacher').value.trim()) + '</b>' : '') + '</div>'; }).join('') + '</div>' +
+    '<div class="foot">' + source + ' Phone numbers are not shown. · لا تظهر أرقام الجوال.</div>';
+}
+function show(html, title) {
+  $('pages').innerHTML = '<div class="rep">' + html + '</div>';
+  document.querySelector('main.tool').style.display = 'none';
+  $('report').style.display = 'block';
+  document.title = title; window.scrollTo(0, 0);
+}
+/* "Label 3/4; Label 2/5" → [{label, s, m, p}] */
+function skills(b) {
+  var out = [];
+  String(b || '').split(/;\s*/).forEach(function (seg) {
+    var m = seg.match(/^\s*(.*?)\s*:?\s*(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)\s*$/);
+    if (m && +m[3] > 0 && m[1] && !/^(Progress|Final|Both forms correct)$/i.test(m[1])) out.push({ label: m[1], s: +m[2], m: +m[3], p: Math.round(100 * m[2] / m[3]) });
+  });
+  return out;
+}
+function develop(b) {
+  var m = String(b || '').match(/(?:Weakest|verbs to learn)\s*:\s*([^;]+)/i);
+  return m && !/^none\b/i.test(m[1].trim()) ? m[1].trim() : '';
+}
+function sheetHTML(a) {
+  return '<div class="sheet">' + esc(noPhone(String(a || '').replace(/^Writing attempt[^\n]*\n?/, '').slice(0, 6000)))
+    .replace(/✓/g, '<span class="y">✓</span>').replace(/✗/g, '<span class="n">✗</span>') + '</div>';
+}
+function timeline(points) {
+  /* points: [{t: Date, p: percent, c: colour}] → dot plot over time with a trend line */
+  var W = 640, H = 170, L = 34, B = 26, T = 10;
+  if (!points.length) return '';
+  var t0 = +points[0].t, t1 = +points[points.length - 1].t; if (t1 === t0) t1 = t0 + 864e5;
+  var X = function (t) { return L + 10 + (W - L - 30) * (t - t0) / (t1 - t0); }, Y = function (p) { return H - B - (H - B - T) * p / 100; };
+  var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="Scores over time">';
+  [0, 50, 100].forEach(function (v) { s += '<line x1="' + L + '" x2="' + W + '" y1="' + Y(v) + '" y2="' + Y(v) + '" stroke="#e3e8f0"/><text x="' + (L - 4) + '" y="' + (Y(v) + 3) + '" font-size="9" text-anchor="end" fill="#6b7590">' + v + '%</text>'; });
+  var n = points.length, mx = 0, my = 0, sxy = 0, sxx = 0;
+  points.forEach(function (q) { mx += +q.t / n; my += q.p / n; });
+  points.forEach(function (q) { sxy += (+q.t - mx) * (q.p - my); sxx += (+q.t - mx) * (+q.t - mx); });
+  if (n > 2 && sxx > 0) { var k = sxy / sxx, a = my - k * mx, y0 = Math.max(0, Math.min(100, a + k * t0)), y1 = Math.max(0, Math.min(100, a + k * t1));
+    s += '<line x1="' + X(t0) + '" y1="' + Y(y0) + '" x2="' + X(t1) + '" y2="' + Y(y1) + '" stroke="#b89548" stroke-width="2" stroke-dasharray="6 4"/>'; }
+  points.forEach(function (q) { s += '<circle cx="' + X(+q.t) + '" cy="' + Y(q.p) + '" r="4" fill="' + q.c + '" stroke="#fff" stroke-width="1"/>'; });
+  s += '<text x="' + (L + 10) + '" y="' + (H - 8) + '" font-size="9" fill="#384560">' + fmtDate(t0) + '</text><text x="' + (W - 20) + '" y="' + (H - 8) + '" font-size="9" text-anchor="end" fill="#384560">' + fmtDate(t1) + '</text>';
+  s += '<line x1="' + (W - 150) + '" y1="6" x2="' + (W - 130) + '" y2="6" stroke="#b89548" stroke-width="2" stroke-dasharray="6 4"/><text x="' + (W - 126) + '" y="9" font-size="9" fill="#384560">Trend · الاتجاه</text>';
+  return s + '</svg>';
+}
+var PAL = ['#0f4c5c', '#8c2f52', '#5b3a9a', '#1a6b3c', '#a8471f', '#2d568c', '#7a6320'];
+
+/* ======================= exams and IELTS ======================= */
+function examCat(t, ielts) {
+  if (ielts) {
+    var m = t.match(/Reading|Listening|Writing|Speaking|Foundation|Diagnostic|Mock|Vocabulary|VIV|Profile/i);
+    var k = m ? m[0].toLowerCase() : 'other';
+    return ({ reading: 'Reading · القراءة', listening: 'Listening · الاستماع', writing: 'Writing · الكتابة', speaking: 'Speaking · المحادثة', foundation: 'Academic English Foundation · التأسيس',
+      diagnostic: 'Diagnostics · التشخيص', mock: 'Mock tests · الاختبارات التجريبية', vocabulary: 'Vocabulary · المفردات', viv: 'Vocabulary · المفردات', profile: 'Diagnostics · التشخيص' })[k] || 'Other · أخرى';
+  }
+  return /Irregular Verbs/i.test(t) ? 'Irregular verbs · الأفعال الشاذة' : /Mock/i.test(t) ? 'Mock exams · الاختبارات التجريبية' : /Module/i.test(t) ? 'Module tests · اختبارات الوحدات'
+    : /Grammar/i.test(t) ? 'Grammar · القواعد' : /Vocabulary/i.test(t) ? 'Vocabulary · المفردات' : /Advanced/i.test(t) ? 'Advanced tests · الاختبارات المتقدمة'
+    : /AESN|ASEN|ADSEN/i.test(t) ? 'AESN support · دعم AESN' : 'Other tests · اختبارات أخرى';
+}
+function renderExams(R, ielts) {
+  var place = R.filter(function (r) { return r.kind === 'placement'; });
+  var T = R.filter(function (r) { return r.kind !== 'placement'; });
+  if (!T.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Only a placement test was found. · لا توجد إلا نتيجة تحديد المستوى.'; return; }
+  var tests = {}, order = [];
+  T.forEach(function (r) { r.p = pctOf(r); r.cat = examCat(r.test, ielts); if (!tests[r.test]) { tests[r.test] = []; order.push(r.test); } tests[r.test].push(r); });
+  var cats = uniq(order.map(function (t) { return tests[t][0].cat; }));
+  var bestSum = 0, bestN = 0, retried = 0, gain = 0, courses = 0;
+  var info = order.map(function (t) {
+    var l = tests[t], sc = l.filter(function (r) { return r.p != null; });
+    var first = sc.length ? sc[0].p : null, best = sc.length ? Math.max.apply(null, sc.map(function (r) { return r.p; })) : null;
+    var bestRow = sc.length ? sc.reduce(function (a, r) { return r.p >= a.p ? r : a; }) : l[l.length - 1];
+    if (best != null) { bestSum += best; bestN++; } else courses++;
+    if (sc.length > 1 && best > first) { retried++; gain += best - first; }
+    return { t: t, l: l, first: first, best: best, last: sc.length ? sc[sc.length - 1].p : null, bestRow: bestRow, cat: l[0].cat };
+  });
+  var avgBest = bestN ? Math.round(bestSum / bestN) : null;
+  var who = ielts ? ['Learner', 'المتعلم'] : ['Student', 'الطالب'];
+  var h = repHead(ielts ? 'IELTS Preparation Programme · برنامج الإعداد لاختبار IELTS' : 'Student Assessment Programme · برنامج تقييم الطلاب');
+  h += '<h2>' + esc(TYPES[TYPE].en) + '</h2><span class="ar">' + esc(TYPES[TYPE].ar) + '</span>' + infoTable(R, who[0], who[1], 'Class · الصف');
+  h += kpiBox([[order.length, ielts ? 'Modules / tests' : 'Tests taken', ielts ? 'وحدات واختبارات' : 'اختبارات'], [T.length, 'Attempts', 'محاولات'],
+    [avgBest == null ? '—' : avgBest + '%', 'Average best score', 'متوسط أفضل درجة'],
+    [retried ? '+' + Math.round(gain / retried) + '%' : (bestN ? Math.max.apply(null, info.filter(function (x) { return x.best != null; }).map(function (x) { return x.best; })) + '%' : '—'),
+      retried ? 'Avg gain on retakes' : 'Highest score', retried ? 'متوسط التحسن عند الإعادة' : 'أعلى درجة']]);
+  if (place.length) {
+    var pl = place[place.length - 1], ex = pl.extra || {};
+    h += '<div class="base">🧭 <b>English Placement Test · اختبار تحديد المستوى</b> (' + fmtDate(pl.ts) + '): estimated CEFR level · المستوى التقديري <b>' + esc(ex.level || '—') + '</b>' +
+      (ex.reading ? ' · Reading ' + esc(ex.reading) : '') + (ex.listening ? ' · Listening ' + esc(ex.listening) : '') + (ex.uoe ? ' · Grammar & vocabulary ' + esc(ex.uoe) : '') + '</div>';
+  }
+  var name1 = (longestName(R).split(' ')[0]) || 'The student';
+  h += '<p class="sub"><b>Summary · ملخص:</b> ' + esc(name1) + ' completed ' + T.length + ' attempt' + (T.length === 1 ? '' : 's') + ' on ' + order.length + ' ' + (ielts ? 'IELTS module' : 'test') + (order.length === 1 ? '' : 's') +
+    ' between ' + fmtDate(T[0].ts) + ' and ' + fmtDate(T[T.length - 1].ts) + (avgBest != null ? ', with an average best score of ' + avgBest + '%' : '') +
+    (retried ? '. On ' + retried + ' retaken test' + (retried > 1 ? 's' : '') + ' the score rose by ' + Math.round(gain / retried) + ' points on average' : '') + '.</p>';
+  var pts = T.filter(function (r) { return r.p != null; }).map(function (r) { return { t: new Date(r.ts), p: r.p, c: PAL[cats.indexOf(r.cat) % PAL.length] }; });
+  if (pts.length) h += '<div class="chart">' + timeline(pts) + '</div><p class="mute" style="font-size:8pt;margin:0">' + cats.map(function (c, i) { return '<span style="color:' + PAL[i % PAL.length] + '">●</span> ' + esc(c); }).join(' &nbsp; ') + '</p>';
+  cats.forEach(function (c) {
+    var list = info.filter(function (x) { return x.cat === c; });
+    h += '<h3>' + esc(c) + '</h3><table class="st"><thead><tr><th>Test · الاختبار</th><th>Dates</th><th>Attempts</th><th>First</th><th>Best</th><th>Latest</th></tr></thead><tbody>';
+    list.forEach(function (x) {
+      var up = x.first != null && x.best > x.first;
+      h += '<tr><td>' + esc(x.t) + '</td><td>' + fmtDate(x.l[0].ts) + (x.l.length > 1 ? ' – ' + fmtDate(x.l[x.l.length - 1].ts) : '') + '</td><td>' + x.l.length + '</td><td>' + pctTxt(x.first) + '</td><td' + (up ? ' class="up"' : '') + '>' +
+        (x.best == null ? 'Completed' : x.best + '%' + (up ? ' ▲' : '')) + '</td><td>' + pctTxt(x.last) + '</td></tr>';
+    });
+    h += '</tbody></table>';
+  });
+  /* skills and areas to develop, from the best attempt of each test */
+  var sk = '', dev = [];
+  info.forEach(function (x) {
+    var b = x.bestRow.breakdown || '', list = skills(b), d = develop(b);
+    if (d) dev.push('<li><b>' + esc(x.t) + ':</b> ' + esc(d) + '</li>');
+    if (list.length < 2) return;
+    sk += '<div class="work"><div class="wh">' + esc(x.t) + ' <small>· best attempt ' + fmtDate(x.bestRow.ts) + (x.bestRow.max > 0 ? ' · ' + x.bestRow.score + '/' + x.bestRow.max : '') + '</small></div>' +
+      list.map(function (q) { return '<div class="skill"><span>' + esc(q.label) + '</span><i><b style="width:' + q.p + '%"></b></i><span>' + q.s + '/' + q.m + '</span></div>'; }).join('') + '</div>';
+  });
+  if (sk) h += '<h3>Skills breakdown · تحليل المهارات <small>(best attempt · أفضل محاولة)</small></h3>' + sk;
+  if (dev.length) h += '<h3>Areas to develop · مجالات تحتاج إلى تطوير</h3><ul style="font-size:9.5pt;margin:4px 0 0 0;padding-inline-start:18px">' + dev.join('') + '</ul>';
+  if ($('optSheets').checked) {
+    h += '<section class="pb"><h3>Answer sheets · أوراق الإجابة <small>(best attempt · أفضل محاولة)</small></h3>';
+    info.forEach(function (x) { if (x.bestRow.answers) h += '<div class="wh" style="margin-top:8px;font-weight:700;font-size:9.5pt">' + esc(x.t) + ' <small class="mute">· ' + fmtDate(x.bestRow.ts) + '</small></div>' + sheetHTML(x.bestRow.answers); });
+    h += '</section>';
+  }
+  h += closing(['Teacher · المعلم', 'Head of Department · رئيس القسم', 'School Administration · إدارة المدرسة'],
+    'Source: Smart Students Hub test records (each attempt is time-stamped when the ' + (ielts ? 'learner' : 'student') + ' sends it; tests are marked automatically). · المصدر: سجلات الاختبارات في منصة سمارت ستيودنتس هب.');
+  show(h, TYPES[TYPE].en + ' – ' + longestName(R));
+}
+
+/* ======================= teacher workshops (CPD record) ======================= */
+function renderWorkshops(R) {
+  var W = R.filter(function (r) { return r.kind === 'workshop' || /^Teacher Workshop/i.test(r.test); });
+  var S = R.filter(function (r) { return W.indexOf(r) < 0; });
+  var clean = function (t) { return t.replace(/^Teacher Workshop\s*\d*\s*·\s*/i, '').replace(/\s*\([\d\/]*\)?\s*$/, '').trim(); };
+  var ws = {}, order = [];
+  W.forEach(function (r) { var k = clean(r.test); r.p = pctOf(r); if (!ws[k]) { ws[k] = []; order.push(k); } ws[k].push(r); });
+  var quizSum = 0, quizN = 0, completed = 0;
+  var cards = order.map(function (k) {
+    var l = ws[k], best = l.reduce(function (a, r) { return (r.p != null && (a.p == null || r.p >= a.p)) ? r : a; }, l[l.length - 1]);
+    var ex = best.extra || {}, det = ex.details || {};
+    if (best.p != null) { quizSum += best.p; quizN++; }
+    var prog = String(best.breakdown || '').match(/Progress\s*(\d+)\s*\/\s*(\d+)/i);
+    var done = /Steps completed|مكتمل الخطوات/.test(ex.completion || '') || (prog && prog[1] === prog[2]) || (det.finished && best.kind === 'workshop');
+    if (done) completed++;
+    var c = '<h3>' + esc(k) + '</h3>';
+    c += '<table class="info"><tr><td class="k">Date · التاريخ</td><td>' + fmtDate(best.ts) + (l.length > 1 ? ' (' + l.length + ' submissions)' : '') + '</td><td class="k">Duration · المدة</td><td>1 hour CPD · ساعة تطوير مهني</td></tr>' +
+      '<tr><td class="k">Final quiz · الاختبار</td><td>' + (best.max > 0 ? best.score + ' / ' + best.max + ' (' + best.p + '%)' : '—') + '</td><td class="k">Progress · الإنجاز</td><td>' +
+      (prog ? prog[1] + ' / ' + prog[2] + ' steps' : det.stages ? 'All stages · كل المراحل' : '—') + (ex.completion ? '<br><small>' + esc(ex.completion) + '</small>' : '') + '</td></tr>' +
+      (best.cls ? '<tr><td class="k">School / subject</td><td colspan="3">' + esc(best.cls) + '</td></tr>' : '') + '</table>';
+    if (best.topic) c += '<p class="sub"><b>Task objective · هدف المهمة:</b> ' + esc(noPhone(best.topic)) + '</p>';
+    if (best.essay) c += '<div class="work"><div class="wh">Teacher\'s contributions · مساهمات المعلم</div><div class="wt" style="font-family:inherit;font-size:9.5pt">' + esc(noPhone(best.essay)) + '</div></div>';
+    if (det.pre || det.post) {
+      var pre = String(det.pre).split('/').map(Number).filter(function (x) { return x > 0; }), post = String(det.post).split('/').map(Number).filter(function (x) { return x > 0; });
+      var av = function (a) { return a.length ? (a.reduce(function (s, x) { return s + x; }, 0) / a.length).toFixed(1) : '—'; };
+      c += '<p class="sub"><b>Self-rating (1–5) · التقييم الذاتي:</b> before · قبل <b>' + av(pre) + '</b> → after · بعد <b>' + av(post) + '</b></p>';
+    }
+    if (det.plan) c += '<p class="sub"><b>Action plan · خطة التطبيق:</b> ' + esc(noPhone(det.plan)) + '</p>';
+    if (det.useful) c += '<p class="sub"><b>Most useful · الأكثر فائدة:</b> ' + esc(noPhone(det.useful)) + '</p>';
+    if (det.essays) c += '<div class="work"><div class="wh">Written reflections · التأملات المكتوبة</div><div class="wt" style="font-family:inherit;font-size:9.5pt">' + esc(noPhone(det.essays)) + '</div></div>';
+    if (ex.feedback) c += '<div class="fb"><b>Trainer feedback · ملاحظات المدرب:</b>\n' + esc(ex.feedback) + '</div>';
+    if ($('optSheets').checked && best.answers) c += '<p class="sub"><b>Quiz and steps record · سجل الاختبار والخطوات</b></p>' + sheetHTML(best.answers.split('\n').map(function (ln) { var m = ln.match(/answer:\s*(.*?)\s*\|\s*key:\s*(.*)$/); if (!m) return ln;
+      var ok = m[1].trim().toLowerCase() === m[2].trim().toLowerCase(); return ln + (m[1].trim() === '—' || m[1].trim() === '' ? ' ✗' : /^[a-d]$|^(true|false)$/i.test(m[2].trim()) ? (ok ? ' ✓' : ' ✗') : ''); }).join('\n'));
+    return c;
+  });
+  var h = repHead('Academy · Teacher Professional Development · التطوير المهني للمعلمين');
+  h += '<h2>' + esc(TYPES.workshops.en) + '</h2><span class="ar">' + esc(TYPES.workshops.ar) + '</span>' + infoTable(R, 'Teacher', 'المعلم', 'School · المدرسة');
+  h += kpiBox([[order.length, 'Workshops attended', 'ورش محضورة'], [order.length + ' h', 'CPD hours', 'ساعات تطوير مهني'],
+    [quizN ? Math.round(quizSum / quizN) + '%' : '—', 'Average quiz score', 'متوسط الاختبارات'], [S.length, 'Self-checks', 'اختبارات ذاتية']]);
+  h += '<p class="sub"><b>Summary · ملخص:</b> ' + esc(longestName(R)) + ' took part in ' + order.length + ' Smart Students Hub workshop' + (order.length === 1 ? '' : 's') +
+    (order.length ? ' (' + completed + ' with all steps completed)' : '') + (S.length ? ' and ' + S.length + ' teacher self-check' + (S.length > 1 ? 's' : '') : '') + ' between ' + fmtDate(R[0].ts) + ' and ' + fmtDate(R[R.length - 1].ts) + '.</p>';
+  h += cards.join('');
+  if (S.length) {
+    h += '<h3>Teacher self-checks · الاختبارات الذاتية</h3><table class="st"><thead><tr><th>Self-check</th><th>Date</th><th>Result</th></tr></thead><tbody>' +
+      S.map(function (r) { var p = pctOf(r); return '<tr><td>' + esc(r.test) + '</td><td>' + fmtDate(r.ts) + '</td><td>' + (r.max > 0 ? r.score + ' / ' + r.max + ' (' + p + '%)' : 'Completed · مكتمل') + '</td></tr>'; }).join('') + '</tbody></table>';
+  }
+  h += closing(['Trainer · المدرب', 'Head of Department · رئيس القسم', 'PD Coordinator / Administration · منسق التطوير المهني / الإدارة'],
+    'Source: Smart Students Hub Academy records (time-stamped when the teacher submits). Independent CPD provided by Smart Students Hub; not issued on behalf of any ministry. · المصدر: سجلات أكاديمية سمارت ستيودنتس هب.');
+  show(h, 'PD Record – ' + longestName(R));
 }
 })();
 </script>

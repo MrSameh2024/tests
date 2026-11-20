@@ -439,7 +439,7 @@
   function keepOnline(b, ref) {
     if (!/^SSH-\d{6}-\d{4}$/.test(ref || '')) return;
     sendOnline({ ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent, cert_kind: b.cert_kind || '',
-      topic: b.topic || '', essay: b.essay || '', answers: b.answers || '' });
+      topic: b.topic || '', essay: b.essay || '', answers: b.answers || '', breakdown: b.breakdown || '' });
   }
   /* English Placement Test: the page sends the email only, so add the registered mobile too */
   function keepPlacement(b) {
@@ -451,7 +451,10 @@
   function keepWorkshop(b, c) {
     var r = regInfo();
     sendOnline({ kind: 'workshop', ref: b.cert, test: b.course, name: b.name, cls: (c && c.sub) || '', email: b.email || r.email,
-      phone: b.phone || r.phone, score: b.score, max: b.max });
+      phone: b.phone || r.phone, score: b.score, max: b.max,
+      details: { subject: b.subject || '', school: b.school || '', grades: b.grades || '', years: b.years || '', country: b.country || '',
+        stages: b.stages || '', tries: b.tries || '', pre: b.pre || '', post: b.post || '', plan: b.plan || '', evalr: b.evalr || '',
+        useful: b.useful || '', suggest: b.suggest || '', started: b.started || '', finished: b.finished || '', essays: String(b.essays || '').slice(0, 12000) } });
   }
 
   /* ---------- listen for recorded results ---------- */

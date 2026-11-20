@@ -1,13 +1,41 @@
 {
-  "name": "Writing Progress Report · تقرير تقدم الكتابة",
-  "short_name": "Writing Reports",
+  "name": "Teacher Reports · تقارير المعلم",
+  "short_name": "Teacher Reports",
   "start_url": "teacher-writing-report.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#eef2f8",
   "theme_color": "#14244a",
   "icons": [
-    { "src": "teacher-report-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "teacher-report-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "teacher-report-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "teacher-report-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Writing report",
+      "url": "teacher-writing-report.html"
+    },
+    {
+      "name": "Exam report",
+      "url": "teacher-writing-report.html?type=exams"
+    },
+    {
+      "name": "IELTS report",
+      "url": "teacher-writing-report.html?type=ielts"
+    },
+    {
+      "name": "Workshop record",
+      "url": "teacher-writing-report.html?type=workshops"
+    }
   ]
 }
