@@ -256,6 +256,7 @@
     ".sshc-bt button:disabled{opacity:.6;cursor:wait}" +
     ".sshc-nm{display:block;margin:8px 0;font-weight:700}.sshc-nm input{display:block;width:100%;max-width:420px;font:inherit;padding:9px 11px;border:2px solid #cfd8e6;border-radius:10px;margin-top:4px}" +
     ".sshc-hint{font-size:.85rem;color:#55627a}" +
+    ".sshc-find{margin:8px 0 12px}.sshc-find a{display:block;text-align:center;font-weight:700;color:#075e65;background:#e8f4f4;border:1.5px solid #075e65;border-radius:12px;padding:10px 12px;text-decoration:none}" +
     ".sshc-ls{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:6px}.sshc-ls li{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid #e3e8f0;border-radius:10px;padding:8px 10px}" +
     ".sshc-ls button{font:inherit;font-weight:700;border:2px solid #14244a;background:#fff;border-radius:9px;padding:5px 10px;cursor:pointer}" +
     "button.sshc-fab{position:fixed!important;left:14px!important;bottom:14px!important;z-index:2147482000;box-shadow:0 8px 24px rgba(0,0,0,.25)!important;background:linear-gradient(135deg,#c9a646,#a67c00)!important;border-color:#a67c00!important;font-size:.9rem!important}" +
@@ -304,6 +305,7 @@
     var o = document.createElement('div'); o.className = 'sshc-ov';
     o.innerHTML = '<div class="sshc-pn"><button class="sshc-x2" aria-label="Close · إغلاق">✕</button><h2>📂 My certificates · شهاداتي</h2>' +
       '<p class="sshc-hint">Saved on this device. Your teacher keeps the official record. · محفوظة على هذا الجهاز، ويحتفظ معلمك بالسجل الرسمي.</p>' +
+      '<p class="sshc-find"><a href="' + BASE + 'my-certificates.html">🔎 Can’t find a certificate? Open it from any device · لم تجد شهادتك؟ استرجعها من أي جهاز</a></p>' +
       (l.length ? '<ul class="sshc-ls">' + l.map(function (c, i) { var t = TIERS[c.tier] || TIERS.completion; return '<li><span>' + t.icon + ' <b>' + esc(c.test) + '</b><br><small>' + esc(t.en) + ' · ' + esc(new Date(c.date).toLocaleDateString('en-GB')) + ' · ' + esc(c.no) + '</small></span><button data-i="' + i + '">Open · فتح</button></li>'; }).join('') + '</ul>' : '<p>No certificates yet. Finish a test or course to earn one! · لا توجد شهادات بعد.</p>') + '</div>';
     document.body.appendChild(o);
     o.querySelector('.sshc-x2').onclick = close;
@@ -312,11 +314,11 @@
   }
   function save(c) { var l = load().filter(function (x) { return x.no !== c.no; }); l.push(c); store(l); fab(); }
   function fab() {
-    if (!load().length || !document.body) return;
+    if (!document.body || /my-certificates\.html$/.test(location.pathname)) return;
     ensureStyle();
     var b = document.querySelector('.sshc-fab');
     if (!b) { b = document.createElement('button'); b.className = 'sshc-fab'; b.type = 'button'; b.onclick = list; document.body.appendChild(b); }
-    b.textContent = '🎓 My certificates · شهاداتي (' + load().length + ')';
+    b.textContent = '🎓 My certificates · شهاداتي' + (load().length ? ' (' + load().length + ')' : '');
   }
 
   function issueRec(c) {
@@ -484,6 +486,6 @@
   }
   setInterval(paintHints, 1200);
 
-  window.SSH_CERT = { issue: issue, show: show, list: list, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission };
+  window.SSH_CERT = { issue: issue, show: show, list: list, keep: save, print: printCert, pdf: downloadPDF, _html: certHTML, _from: fromSubmission };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fab); else fab();
 })();

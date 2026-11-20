@@ -1,0 +1,126 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My certificates · شهاداتي | Smart Students Hub</title>
+<meta name="robots" content="noindex,follow">
+<meta name="description" content="Open your Smart Students Hub certificates again on any device. · استرجع شهاداتك من أي جهاز.">
+<style>
+@font-face{font-family:'SSHTaj';src:url(fonts/tajawal-arabic-500-normal.woff2) format('woff2');font-weight:400 500;unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+@font-face{font-family:'SSHTaj';src:url(fonts/tajawal-arabic-700-normal.woff2) format('woff2');font-weight:600 800;unicode-range:U+0600-06FF,U+0750-077F,U+FB50-FDFF,U+FE70-FEFF}
+:root{--ink:#14244a;--blue:#1e6fd9;--teal:#075e65;--soft:#f3f7fc;--line:#dce4f0;--gold:#e8a317;--ok:#1a7f4b;--oks:#e3f4ec;--bad:#b3261e;--bads:#fbe8e6;--mute:#46536e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--soft);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Arial,'SSHTaj',sans-serif;line-height:1.55;font-size:17px}
+main{max-width:760px;margin:0 auto;padding:18px 16px 40px}
+header{display:flex;align-items:center;gap:12px;margin:6px 0 14px}
+header img{width:52px;height:52px}
+header b{display:block;letter-spacing:.08em;font-size:.85rem;color:var(--teal)}
+h1{font-size:clamp(1.5rem,5vw,2rem);margin:0}
+.ar{direction:rtl;text-align:right;font-family:'SSHTaj',system-ui,sans-serif}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0;box-shadow:0 6px 20px rgba(20,36,74,.05)}
+label{display:block;font-weight:700;margin:12px 0 4px}
+label small{font-weight:400;color:var(--mute)}
+input[type=text]{font:inherit;color:var(--ink);border:1.5px solid #b8c9d9;border-radius:10px;padding:11px 12px;width:100%;background:#fff}
+input[type=text]:focus{outline:3px solid #bcd6fb;border-color:var(--blue)}
+.hp{position:absolute;left:-9999px}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:var(--teal);color:#fff}
+button.alt{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
+button:disabled{opacity:.6;cursor:wait}
+.go{width:100%;margin-top:16px;font-size:1.05rem}
+.mute{color:var(--mute);font-size:.92rem}
+.msg{margin-top:12px;padding:10px 12px;border-radius:10px;display:none}
+.msg.show{display:block}
+.msg.no{background:var(--bads);color:var(--bad)}
+.msg.ok{background:var(--oks);color:var(--ok)}
+.msg.info{background:#e6effb;color:var(--ink)}
+ul.cl{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:10px}
+ul.cl li{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+ul.cl li b{display:block}
+ul.cl li small{color:var(--mute)}
+.steps{margin:6px 0 0;padding-inline-start:20px}
+.steps li{margin:4px 0}
+a{color:var(--blue)}
+</style>
+<script src="ssh-cert.js?v=6"></script>
+</head><body><main>
+<header><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB</b><h1>🎓 My certificates · <span class="ar" style="display:inline">شهاداتي</span></h1></div></header>
+
+<div class="card">
+<p style="margin-top:0">Open your certificates again on <b>any phone or computer</b>. Use the <b>same email or mobile number</b> you wrote when you sent your test or writing.</p>
+<p class="ar">افتح شهاداتك مرة أخرى من <b>أي جوال أو جهاز</b>. اكتب <b>نفس البريد الإلكتروني أو رقم الجوال</b> الذي كتبته عند إرسال الاختبار أو الكتابة.</p>
+<form id="f" novalidate>
+<label for="contact">Email or mobile · البريد الإلكتروني أو الجوال</label>
+<input type="text" id="contact" autocomplete="email" inputmode="email" maxlength="120" placeholder="name@education.qa  ·  5xxx xxxx">
+<label for="first">Your first name · اسمك الأول <small>(as you wrote it · كما كتبته)</small></label>
+<input type="text" id="first" autocomplete="given-name" maxlength="40" placeholder="Abdullah · عبدالله">
+<input type="text" id="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button type="submit" class="go" id="go">🔎 Find my certificates · ابحث عن شهاداتي</button>
+</form>
+<div class="msg" id="msg" role="status" aria-live="polite"></div>
+</div>
+
+<div class="card" id="res" hidden>
+<h2 style="margin:0">Your certificates · <span class="ar" style="display:inline">شهاداتك</span></h2>
+<p class="mute" style="margin:4px 0 0">Press <b>Open</b>, then <b>Download PDF</b> or <b>Print</b>. · اضغط «فتح» ثم «تنزيل PDF» أو «طباعة».</p>
+<ul class="cl" id="list"></ul>
+</div>
+
+<div class="card">
+<h2 style="margin:0 0 4px;font-size:1.1rem">How certificates work · <span class="ar" style="display:inline">كيف تحصل على الشهادة</span></h2>
+<ul class="steps">
+<li><b>Tests:</b> one certificate for each test – your best attempt.</li>
+<li class="ar"><b>الاختبارات:</b> شهادة لكل اختبار – بأفضل محاولة لك.</li>
+<li><b>Writing courses:</b> one certificate for each writing topic, after you send <b>the final station (Station 10)</b>.</li>
+<li class="ar"><b>دورات الكتابة:</b> شهادة واحدة لكل موضوع كتابة، بعد إرسال <b>المحطة الأخيرة (المحطة ١٠)</b>.</li>
+</ul>
+<p class="mute">Not found? Check the email or number, or message your teacher on <a href="https://wa.me/97450406473" target="_blank" rel="noopener">WhatsApp +974 5040 6473</a>. · لم تجد شهادتك؟ تأكد من البريد أو الرقم، أو راسل معلمك على واتساب.</p>
+</div>
+</main>
+<script>
+(function(){
+/* Paste the certificate-lookup web app URL here (see src/certificate-lookup.gs). */
+var LOOKUP_URL = '';
+var TITLES = { job: 'Cover Letter — Job Application', event: 'Informal Email — Cultural Event', essay: 'Advantages and Disadvantages Essay',
+  story: 'Personal Narrative — Story', process: 'Procedural Text — Describing a Process' };
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+var msg = function (cls, html) { var m = $('msg'); m.className = 'msg show ' + cls; m.innerHTML = html; };
+var nice = function (t) { var m = t.match(/^(Grade 1[0-2] Writing)\s*·\s*([a-z]+)$/i); return m && TITLES[m[2].toLowerCase()] ? m[1] + ' · ' + TITLES[m[2].toLowerCase()] : t; };
+var ERR = {
+  missing: 'Write your email or mobile and your first name. · اكتب البريد أو الجوال واسمك الأول.',
+  contact: 'Check the email or mobile number. · تحقق من البريد الإلكتروني أو رقم الجوال.',
+  wait: 'Too many tries. Please wait 10 minutes and try again. · محاولات كثيرة، انتظر ١٠ دقائق ثم حاول مرة أخرى.'
+};
+try { var r = JSON.parse(localStorage.getItem('ssh_reg') || '{}') || {}; if (r.email || r.phone) $('contact').value = r.email || r.phone; if (r.name) $('first').value = String(r.name).trim().split(/\s+/)[0]; } catch (e) {}
+var found = [];
+$('f').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var contact = $('contact').value.trim(), first = $('first').value.trim();
+  if (!contact || first.length < 2) { msg('no', ERR.missing); return; }
+  if (!LOOKUP_URL) { msg('info', 'This page is being switched on. Please try again soon, or ask your teacher for your certificate. · يجري تفعيل هذه الصفحة، حاول قريبًا أو اطلب شهادتك من معلمك.'); return; }
+  var b = $('go'); b.disabled = true; b.textContent = '⏳ Searching… · جارٍ البحث…';
+  fetch(LOOKUP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ type: 'lookup', contact: contact, first: first, website: $('website').value }), redirect: 'follow' })
+    .then(function (x) { return x.json(); })
+    .then(function (d) {
+      if (!d || !d.ok) { msg('no', ERR[d && d.error] || ERR.contact); return; }
+      found = d.certs || [];
+      if (!found.length) { $('res').hidden = true; msg('no', 'No certificates found for these details. Use the same email or mobile you wrote in the test, and your first name as you wrote it. · لم نجد شهادات بهذه البيانات. استخدم نفس البريد أو الجوال الذي كتبته في الاختبار، واسمك الأول كما كتبته.'); return; }
+      msg('ok', '✅ We found ' + found.length + ' certificate' + (found.length > 1 ? 's' : '') + '. · وجدنا ' + found.length + ' ' + (found.length > 2 && found.length < 11 ? 'شهادات' : 'شهادة') + '.');
+      $('list').innerHTML = found.map(function (c, i) {
+        var res = c.kind === 'course' ? 'Writing course (دورة كتابة)' : esc(c.score) + ' / ' + esc(c.max) + ' · ' + esc(c.percent) + '%';
+        return '<li><span><b>' + esc(nice(c.test)) + '</b><small>' + res + ' · ' + esc(new Date(c.date).toLocaleDateString('en-GB')) + ' · ' + esc(c.no) + '</small></span><button type="button" data-i="' + i + '">Open · فتح</button></li>';
+      }).join('');
+      $('res').hidden = false; $('res').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    })
+    .catch(function () { msg('no', 'Could not connect. Check the internet and try again. · تعذّر الاتصال، تحقق من الإنترنت وحاول مرة أخرى.'); })
+    .then(function () { b.disabled = false; b.textContent = '🔎 Find my certificates · ابحث عن شهاداتي'; });
+});
+$('list').addEventListener('click', function (e) {
+  var btn = e.target.closest('button[data-i]'); if (!btn || !window.SSH_CERT) return;
+  var d = found[+btn.dataset.i];
+  var c = window.SSH_CERT._from({ type: 'submission', test: nice(d.test), name: d.name, cls: d.cls, score: d.kind === 'course' ? '' : d.score, max: d.kind === 'course' ? '' : d.max,
+    percent: d.kind === 'course' ? '' : d.percent, page: 'my-certificates.html', cert_kind: d.kind === 'course' ? 'course' : 'test' }, d.no);
+  c.date = d.date; c.no = d.no; c.recorded = true;
+  window.SSH_CERT.keep(c);
+  window.SSH_CERT.show(c, false);
+});
+})();
+</script>
+</body></html>
