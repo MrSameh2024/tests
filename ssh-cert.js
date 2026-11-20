@@ -424,6 +424,19 @@
     return out;
   };
 
+  /* ---------- copy each recorded test result to the certificate store, so students can reopen it on any device ---------- */
+  var SB_URL = 'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/';
+  var SB_KEY = 'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
+  function keepOnline(b, ref) {
+    if (!LIVE || !of || !/^SSH-\d{6}-\d{4}$/.test(ref || '')) return;
+    try {
+      of.call(window, SB_URL + 'record_result', { method: 'POST', keepalive: true,
+        headers: { 'Content-Type': 'application/json', apikey: SB_KEY },
+        body: JSON.stringify({ p: { ref: ref, test: b.test, name: b.name, cls: b.cls, email: b.email, phone: b.phone, score: b.score, max: b.max, percent: b.percent } })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
   /* ---------- listen for recorded results ---------- */
   var of = window.fetch;
   if (of) {
@@ -442,7 +455,7 @@
             if (!d || !d.ok) return;
             if (body.type === 'placement') issueRec(fromPlacement(body));
             else if (body.type === 'course') issueRec(fromCourse(body));
-            else issue(body, d.ref || '');
+            else { issue(body, d.ref || ''); keepOnline(body, d.ref); }
           })
           .catch(function () {});
       }
