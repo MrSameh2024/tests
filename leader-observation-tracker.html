@@ -216,6 +216,7 @@ body.gated{overflow:hidden}
 <div id="dom"></div>
 <div class="grid"><label class="lab">Strengths · نقاط القوة<textarea id="s" class="short"></textarea></label><label class="lab">Agreed target · الهدف المتفق عليه<textarea id="g" class="short"></textarea></label></div>
 <label class="lab" style="max-width:260px">Follow-up date · موعد المتابعة<input type="date" id="fu"></label>
+<label class="lab" style="display:flex;gap:8px;align-items:flex-start;font-weight:600"><input type="checkbox" id="share" style="width:auto;margin-top:4px"><span>Also record this visit in the Smart Students Hub Academy register (for teachers who attended a Smart Students Hub workshop). Only the teacher's name, class, focus, ratings, strengths, target and follow-up date are sent. · سجّل هذه الزيارة أيضًا في سجل أكاديمية سمارت ستيودنتس هب (للمعلمين الذين حضروا ورشة). تُرسل فقط بيانات الزيارة.</span></label>
 <div class="actions" style="position:static;flex-wrap:wrap"><button type="button" class="btn" id="add">Save visit · احفظ</button> <span id="msg" class="mute"></span></div></section>
 <section class="card"><div class="parthead"><h2>Department summary · ملخص القسم</h2><span class="noprint"><button type="button" class="btn ghost" id="exp">⬇️ Export CSV</button> <label class="btn ghost" style="cursor:pointer">⬆️ Import CSV<input type="file" id="imp" accept=".csv" hidden></label> <button type="button" class="btn ghost" onclick="window.print()">🖨️ Print</button></span></div><div id="sum"></div></section>
 <section class="card"><h2>All visits · كل الزيارات</h2><div id="list"></div></section>
@@ -240,7 +241,17 @@ function draw(){$('#tl').innerHTML=[...new Set(V.map(v=>v.t))].map(t=>`<option v
  $$('[data-done]').forEach(c=>c.onchange=()=>{const v=V.find(x=>x.id===c.dataset.done);v.done=c.checked;save();draw()})}
 $('#add').onclick=()=>{const t=$('#t').value.trim();if(!t){$('#msg').textContent='Write the teacher\'s name or code. · اكتب اسم المعلم أو رمزه.';return}
  V.push({id:Date.now().toString(36),t,d:$('#d').value,c:$('#c').value.trim(),ty:$('#ty').value,f:$('#f').value.trim(),r:DOM.map((d,i)=>{const x=document.querySelector(`input[name=o${i}]:checked`).value;return x==='–'?null:+x}),s:$('#s').value.trim(),g:$('#g').value.trim(),fu:$('#fu').value,done:false});
- save();['c','f','s','g','fu'].forEach(k=>$('#'+k).value='');$$('#dom input[value="–"]').forEach(x=>x.checked=true);$('#msg').textContent='✓ Saved · تم الحفظ';setTimeout(()=>$('#msg').textContent='',1800);draw()};
+ save();if($('#share').checked){const v=V[V.length-1];shareVisit(v)}['c','f','s','g','fu'].forEach(k=>$('#'+k).value='');$$('#dom input[value="–"]').forEach(x=>x.checked=true);$('#msg').textContent='✓ Saved · تم الحفظ';setTimeout(()=>$('#msg').textContent='',1800);draw()};
+/* optional: send one visit to the Academy register (Submissions tab, test = "Lesson Observation · …") */
+function shareVisit(v){let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
+ const rated=v.r.filter(x=>typeof x==='number'),sc=rated.reduce((a,b)=>a+b,0),mx=rated.length*4;
+ let nm=v.t.trim();if(nm.split(/\s+/).length<2)nm+=' (teacher)';
+ const body={type:'submission',page:'leader-observation-tracker.html',test:('Lesson Observation · '+(v.f||v.ty.split(' ·')[0]||'visit')).slice(0,60),name:nm,cls:('Observation'+(v.c?' · '+v.c:'')).slice(0,30),
+  email:r.email||'',phone:r.phone||'',consent:true,score:mx?sc:'',max:mx||'',percent:mx?Math.round(100*sc/mx):'',
+  breakdown:DOM.map((d,i)=>d[0]+' '+(v.r[i]==null?'–':v.r[i]+'/4')).join('; '),topic:'Lesson observation – record (no marking needed) · observer: '+(r.name||'—')+' · date '+v.d,
+  essay:'Strengths: '+(v.s||'—')+'\n\nAgreed target: '+(v.g||'—')+'\n\nFollow-up: '+(v.fu||'—'),words:0,answers:'Type: '+v.ty,website:''};
+ const m=t=>{$('#msg').textContent=t};
+ fetch(SC_EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(x=>x.json()).then(d=>{m(d&&d.ok?'✓ Saved and recorded in the Academy register · تم الحفظ والتسجيل':'✓ Saved on this device · could not record: '+((d&&d.error)||'try again'))}).catch(()=>m('✓ Saved on this device · could not reach the register'))}
 const CSVH=['id','teacher','date','class','type','focus',...DOM.map(d=>d[0]),'strengths','target','followup','done'];
 $('#exp').onclick=()=>{const q=x=>{x=String(x==null?'':x);return /[",\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x};const rows=[CSVH,...V.map(v=>[v.id,v.t,v.d,v.c,v.ty,v.f,...v.r.map(x=>x==null?'':x),v.s,v.g,v.fu,v.done?'yes':''])];
  const b=new Blob(['﻿'+rows.map(r=>r.map(q).join(',')).join('\n')],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='observation_visits.csv';document.body.appendChild(a);a.click();a.remove()};

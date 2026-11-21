@@ -467,6 +467,7 @@
           body = JSON.parse(opt.body);
           if (body && !body.type && body.test) body.type = 'submission';
           if (!body || body.website || ['submission', 'placement', 'course'].indexOf(body.type) < 0) body = null;
+          if (body && /^Lesson Observation/i.test(body.test || '')) body = null; /* observation records are not certificates */
         }
       } catch (e) { body = null; }
       if (body) {
