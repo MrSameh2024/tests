@@ -262,6 +262,15 @@ function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a)
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
 const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
+// Grammar CR equivalence: retain grammatical order and tense; do NOT use unordered keyword matching.
+// Ignore punctuation/case, optional reporting 'that', and an optional introductory 'I think that'.
+function grammarCR(v,a){
+  if(!v||!String(v).trim())return false;
+  const normal=x=>norm(x).replace(/\b(said|told|explained|reported) that\b/g,'$1').replace(/^i think that /,'i think ').replace(/\s+/g,' ').trim();
+  const n=normal(v);
+  return variants(a).some(answer=>n===normal(answer));
+}
+
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 
 const S={},SELF={};
@@ -283,8 +292,8 @@ function mark(){
   g=0;T.g8a.forEach((q,i)=>{const el=$('#a'+i);const ok=el.value===q.a;if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('a'+i,ok,esc(q.a))});S.w8a=g;
   g=0;T.g8b.forEach((q,i)=>{const el=$('#b'+i);const ok=el.value===q.a;if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('b'+i,ok,esc(q.a))});S.w8b=g;
   g=0;T.verbs.forEach((q,i)=>{const el=$('#vb'+i);const ok=okAns(el.value,q.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('vb'+i,ok,esc(q.a))});S.verbs=g;
-  g=0;const one=(id,start,a)=>{const el=$('#'+id);if(okAns(el.value,a)){g++;el.classList.add('right');fb(id,true,'')}else if(typed(id,start))selfItem(id,1,esc(a));else fb(id,false,esc(a))};
-  {const el=$('#rep');const ok=okAns(el.value,T.rep.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('rep',ok,esc(T.rep.a))}T.rw.forEach((q,i)=>one('rw'+i,q.start,q.a));S.autoC=g;
+  g=0;const one=(id,start,a)=>{const el=$('#'+id);if(grammarCR(el.value,a)){g++;el.classList.add('right');fb(id,true,'')}else if(typed(id,start))selfItem(id,1,esc(a));else fb(id,false,esc(a))};
+  {const el=$('#rep');const ok=grammarCR(el.value,T.rep.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('rep',ok,esc(T.rep.a))}T.rw.forEach((q,i)=>one('rw'+i,q.start,q.a));S.autoC=g;
   ['q12b','q12c'].forEach(k=>{const has=[0,1,2].some(i=>val(k+'_'+i));const model=esc(T[k].a).replace(/ · /g,'<br>');has?selfItem(k,3,model):fb(k,false,model)});
 }
 function totals(){
