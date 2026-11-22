@@ -1,0 +1,1515 @@
+
+=== g10-advanced.html (grade 10, 10 tests)
+  t1 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t1 a1     RD_DETAIL   Why did many manuscripts survive for over 600 years?
+  t1 a2     RD_VOCAB    The word "precious" in paragraph 2 is closest in meaning to __________.
+  t1 a3     RD_INFER    What can we infer about Haidara?
+  t1 tf0    RD_TFNG     Scholars came to Timbuktu only to study law.
+  t1 tf1    RD_TFNG     The manuscripts were moved to Bamako in 2012.
+  t1 tf2    RD_TFNG     Haidara was paid by the government for the operation.
+  t1 q3     RD_DETAIL   According to Haidara, what do the manuscripts prove?
+  t1 q4_0   RD_REF      1,000 kilometres
+  t1 q4_1   RD_REF      350,000
+  t1 q5     RD_LIST     Give TWO things that have destroyed pages of the manuscripts.
+  t1 q6     RD_LIST     Mention TWO ways the volunteers moved the manuscripts to safety.
+  t1 v0     VO_WF       The museum has an impressive __________ of ancient manuscripts.
+  t1 v1     VO_TOPIC    The manuscripts were hidden __________ piles of rice.
+  t1 v2     VO_TOPIC    It was very __________ of the volunteers to risk their lives.
+  t1 v3     VO_TOPIC    Scanning the pages will __________ a huge difference to researchers.
+  t1 v4     VO_WF       The librarian gave a detailed __________ of how the books were saved.
+  t1 wf0    VO_WF       The __________ (explore) of the Sahara was dangerous in the past.
+  t1 wf1    VO_WF       They made an urgent __________ (announce) on national radio.
+  t1 wf2    VO_WF       The __________ (connect) between trade and learning was very strong.
+  t1 wf3    VO_WF       There has been a remarkable __________ (improve) in how manuscripts are stored.
+  t1 wf4    VO_WF       The __________ (arrange) of the books on the shelves took weeks.
+  t1 g0     GR_PPERF    Experts __________ more than half of the manuscripts so far.
+  t1 g1     GR_PASS     The manuscripts __________ to Bamako in 2012.
+  t1 g2     GR_COMP     Timbuktu was once one of __________ cities in Africa.
+  t1 g3     GR_REL      Haidara, __________ family had collected books for generations, led the operation.
+  t1 g4     GR_MOD_OBL  Visitors __________ touch the pages. They are too fragile.
+  t1 g5     GR_PPERF    I haven't visited a library like this __________ I was a child.
+  t1 rw0    GR_PASS     People don't know this history in many parts of the world. (Passive: This history …)
+  t1 rw1    GR_REL      This is the city. Scholars studied astronomy there. (where)
+  t1 rw2    GR_COMP     No library in Africa is older than this one. (oldest)
+  t1 rw3    GR_PPERF    Haidara started protecting manuscripts many years ago. (for)
+  t1 writing: WR_ARTICLE
+  t2 a0     RD_MAIN     What is the text MAINLY about?
+  t2 a1     RD_DETAIL   According to paragraph 2, why might remote workers be more productive?
+  t2 a2     RD_VOCAB    The word "isolated" in paragraph 3 is closest in meaning to __________.
+  t2 a3     RD_DETAIL   Which statement would the writer most likely agree with?
+  t2 tf0    RD_TFNG     Companies used to hire mainly local people.
+  t2 tf1    RD_TFNG     Remote workers always meet their colleagues once a month.
+  t2 tf2    RD_TFNG     Most remote workers are under 30 years old.
+  t2 q3     RD_DETAIL   Why do remote workers need to be patient?
+  t2 q4_0   RD_REF      2023
+  t2 q4_1   RD_REF      40%
+  t2 q5     RD_LIST     Give TWO benefits of remote hiring for businesses.
+  t2 q6     RD_LIST     Mention TWO problems remote employees may face.
+  t2 v0     VO_TOPIC    Her __________ includes her salary and the rent from two flats.
+  t2 v1     VO_TOPIC    The company __________ 50 new engineers last year.
+  t2 v2     VO_TOPIC    He has the knowledge, but he lacks practical __________.
+  t2 v3     VO_TOPIC    A __________ worker always meets deadlines.
+  t2 v4     VO_TOPIC    You should __________ an effort to reply to emails quickly.
+  t2 wf0    VO_COLL     She has __________ a lot of research into remote work.
+  t2 wf1    VO_COLL     He __________ a terrible impression by arriving late to the interview.
+  t2 wf2    VO_COLL     If you __________ well in this project, you will get a promotion.
+  t2 wf3    VO_COLL     I'm sorry, but this plan doesn't __________ any sense.
+  t2 wf4    VO_COLL     Could you __________ me a favour and check my application?
+  t2 g0     GR_PPERF    The company __________ remote workers since 2020.
+  t2 g1     GR_COMP     Working from home is __________ than travelling to an office every day.
+  t2 g2     GR_MOD_OBL  You __________ live near the office. You can work from anywhere.
+  t2 g3     GR_REL      Applicants __________ CVs are incomplete will not be considered.
+  t2 g4     GR_PASS     Most interviews __________ online these days.
+  t2 g5     GR_PPERF    She hasn't met her manager __________.
+  t2 rw0    GR_MOD_OBL  It isn't necessary for remote workers to wear a uniform. (don't have to)
+  t2 rw1    GR_PASS     The manager interviewed 200 applicants last month. (Passive: 200 applicants …)
+  t2 rw2    GR_REL      I know a designer. Her clients live in six countries. (whose)
+  t2 rw3    GR_PPERF    This is the first time I have worked from home. (never … before)
+  t2 writing: WR_FEMAIL
+  t3 a0     RD_MAIN     What is the text MAINLY about?
+  t3 a1     RD_DETAIL   How do elephants communicate over long distances?
+  t3 a2     RD_VOCAB    The word "convinced" in paragraph 3 is closest in meaning to __________.
+  t3 a3     RD_DETAIL   Why do critics think Koko did not really use language?
+  t3 tf0    RD_TFNG     Koko learned more than 1,000 signs.
+  t3 tf1    RD_TFNG     All scientists agreed that Koko could use language.
+  t3 tf2    RD_TFNG     Koko lived in a zoo in Africa.
+  t3 q3     RD_DETAIL   What do many researchers believe today about intelligence and communication?
+  t3 q4_0   RD_REF      the 1970s
+  t3 q4_1   RD_REF      2,000
+  t3 q5     RD_LIST     Give TWO examples of how animals communicate in nature.
+  t3 q6     RD_LIST     Mention TWO things Dr Patterson claimed Koko could do.
+  t3 v0     VO_TOPIC    Smartphones are so __________ now that almost every teenager has one.
+  t3 v1     VO_TOPIC    The critics __________ that the results were not reliable.
+  t3 v2     VO_TOPIC    Learning a second language is __________ in most schools in Qatar.
+  t3 v3     VO_TOPIC    Can you __________ the difference between a gorilla and a chimpanzee?
+  t3 v4     VO_TOPIC    Rewards proved to be an __________ way to train the animals.
+  t3 wf0    VO_COLL     The trainer __________ that Koko loved cats.
+  t3 wf1    VO_COLL     Scientists could not fully __________ how the gorilla learned so many signs.
+  t3 wf2    VO_COLL     It is hard to __________ facts from opinions in this report.
+  t3 wf3    VO_COLL     Neighbours __________ about the noise from the research centre.
+  t3 wf4    VO_COLL     A new team will __________ the project next year.
+  t3 g0     GR_PPERF    Koko __________ in 2018 at the age of 46.
+  t3 g1     GR_PPERF    Scientists __________ animal communication for over a century.
+  t3 g2     GR_PASS     Sign language __________ by about 70 million deaf people worldwide.
+  t3 g3     GR_REL      The gorilla __________ Patterson trained became world-famous.
+  t3 g4     GR_MOD_DED  She has been working all night. She __________ be exhausted.
+  t3 g5     GR_COMP     Koko was __________ gorilla in the study.
+  t3 rw0    GR_MOD_DED  It is possible that animals understand more than we think. (may)
+  t3 rw1    GR_PASS     The trainers gave Koko food rewards. (Passive: Koko …)
+  t3 rw2    GR_REL      I remember the year. Koko learned her first sign in that year. (when)
+  t3 rw3    GR_COMP     Bees are less intelligent than gorillas. (more)
+  t3 writing: WR_FORUM
+  t4 a0     RD_MAIN     What is the text MAINLY about?
+  t4 a1     RD_INFER    Why were paving stones shaped in a special way?
+  t4 a2     RD_VOCAB    The word "essential" in paragraph 3 is closest in meaning to __________.
+  t4 a3     RD_INFER    What does paragraph 4 suggest?
+  t4 tf0    RD_TFNG     Some Roman roads are still used today.
+  t4 tf1    RD_TFNG     Roman soldiers could march 60 kilometres a day.
+  t4 tf2    RD_TFNG     Roman roads were built mainly by slaves.
+  t4 q3     RD_DETAIL   What made Roman roads strong and long-lasting?
+  t4 q4_0   RD_REF      400,000 kilometres
+  t4 q4_1   RD_REF      4,600 years
+  t4 q5     RD_LIST     Give TWO reasons why the roads were important for the Roman Empire.
+  t4 q6     RD_LIST     Mention TWO goods that traders transported on Roman roads.
+  t4 v0     VO_TOPIC    The streets of the old town are covered with __________.
+  t4 v1     VO_WF       The strength of the road came from a clever __________ of materials.
+  t4 v2     VO_TOPIC    Workers found coins __________ the ancient road.
+  t4 v3     VO_WF       The roads improved the __________ between distant cities.
+  t4 v4     VO_TOPIC    An engineer must be __________ and plan everything logically.
+  t4 wf0    VO_WF       The __________ (introduce) of new tools made building faster.
+  t4 wf1    VO_WF       Roman engineers made careful __________ (arrange) for every project.
+  t4 wf2    VO_WF       The __________ (cancel) of the trip to Rome disappointed the class.
+  t4 wf3    VO_WF       His __________ (explain) of the building process was very clear.
+  t4 wf4    VO_WF       Please send your __________ (apply) for the archaeology course by Friday.
+  t4 g0     GR_PASS     The road __________ by Roman engineers about 2,000 years ago.
+  t4 g1     GR_PPERF    Archaeologists __________ many ancient roads in recent years.
+  t4 g2     GR_COMP     The Egyptian road is much __________ than the Roman roads.
+  t4 g3     GR_REL      The trench __________ the engineers dug was over a metre deep.
+  t4 g4     GR_MOD_OBL  Soldiers __________ march long distances. It was part of their duty.
+  t4 g5     GR_PASS     Today, the old roads __________ by millions of tourists.
+  t4 rw0    GR_PASS     Workers laid the paving stones by hand. (Passive: The paving stones …)
+  t4 rw1    GR_MOD_OBL  It wasn't necessary for traders to pay to use the roads. (didn't have to)
+  t4 rw2    GR_REL      The Romans were engineers. Their roads are still used today. (whose)
+  t4 rw3    GR_COMP     No ancient road network was longer than the Roman one. (longest)
+  t4 writing: WR_ARTICLE
+  t5 a0     RD_DETAIL   What is the writer's MAIN point?
+  t5 a1     RD_DETAIL   How did the 2021 study differ from the 2010 study?
+  t5 a2     RD_VOCAB    The word "regardless" in paragraph 3 means __________.
+  t5 a3     RD_DETAIL   Why might an imaginative person feel frustrated in some jobs?
+  t5 tf0    RD_TFNG     The 2010 study set a limit of about $75,000 a year.
+  t5 tf1    RD_TFNG     Researchers agree that money is the only thing that matters.
+  t5 tf2    RD_TFNG     Doctors are the happiest workers.
+  t5 q3     RD_DETAIL   What do experts advise young people to consider when choosing a job?
+  t5 q4_0   RD_REF      2010
+  t5 q4_1   RD_REF      2021
+  t5 q5     RD_LIST     Give TWO things, apart from money, that make people satisfied with their work.
+  t5 q6     RD_LIST     Mention TWO findings of the two studies.
+  t5 v0     VO_TOPIC    An __________ graduate hopes to become a manager within five years.
+  t5 v1     VO_TOPIC    Her monthly __________ is paid directly into her bank account.
+  t5 v2     VO_TOPIC    He applied for a senior __________ in a bank.
+  t5 v3     VO_TOPIC    Before accepting the offer, you should __________ up your mind carefully.
+  t5 v4     VO_TOPIC    Always __________ the truth in a job interview.
+  t5 wf0    VO_COLL     She has five years of __________ in marketing.
+  t5 wf1    VO_COLL     Being __________ with your manager builds trust.
+  t5 wf2    VO_COLL     Teachers need to be __________ with students who learn slowly.
+  t5 wf3    VO_COLL     A doctor needs a deep __________ of the human body.
+  t5 wf4    VO_COLL     The __________ for flats in the city centre is very high.
+  t5 g0     GR_PPERF    Researchers __________ this question for decades.
+  t5 g1     GR_COMP     For some people, free time is __________ than a high salary.
+  t5 g2     GR_MOD_ADV  You __________ choose a job only for the money. It's not a good idea.
+  t5 g3     GR_REL      People __________ work is meaningful are usually happier.
+  t5 g4     GR_PASS     The results of the study __________ in 2021.
+  t5 g5     GR_MOD_OFF  __________ about a job that matches your personality?
+  t5 rw0    GR_MOD_ADV  If I were you, I would talk to a career adviser. (should)
+  t5 rw1    GR_PASS     Researchers asked thousands of people about their jobs. (Passive: Thousands of people …)
+  t5 rw2    GR_COMP     A high salary is not as important as job satisfaction. (more important)
+  t5 rw3    GR_PPERF    She started this job ten years ago. (for)
+  t5 writing: WR_FEMAIL
+  t6 a0     RD_MAIN     What is the text MAINLY about?
+  t6 a1     RD_DETAIL   According to paragraph 1, why may gossip have helped early humans?
+  t6 a2     RD_VOCAB    The word "target" in paragraph 3 refers to a person who __________.
+  t6 a3     RD_INFER    What can we infer from paragraph 3?
+  t6 tf0    RD_TFNG     False stories on Twitter travelled faster than true ones.
+  t6 tf1    RD_TFNG     Digital citizenship lessons are compulsory in every country.
+  t6 tf2    RD_TFNG     Most online rumours are started by adults.
+  t6 q3     RD_DETAIL   Why did false stories travel faster, according to the 2018 study?
+  t6 q4_0   RD_REF      2018
+  t6 q4_1   RD_REF      six times
+  t6 q5     RD_LIST     Give TWO effects online rumours can have on students.
+  t6 q6     RD_LIST     Mention TWO things young people should do before sharing a story.
+  t6 v0     VO_TOPIC    It's unkind to __________ about classmates behind their backs.
+  t6 v1     VO_TOPIC    The two friends were __________ online until midnight.
+  t6 v2     VO_TOPIC    Never __________ a secret that a friend has trusted you with.
+  t6 v3     VO_TOPIC    Checking sources is an __________ way to avoid false news.
+  t6 v4     VO_TOPIC    He __________ sorry for posting the photo without permission.
+  t6 wf0    VO_COLL     She __________ the truth even though it was difficult.
+  t6 wf1    VO_COLL     Nobody __________ anything when the teacher asked who started the rumour.
+  t6 wf2    VO_COLL     He is always __________ jokes to make people laugh.
+  t6 wf3    VO_COLL     If you disagree, please __________ so.
+  t6 wf4    VO_COLL     It's hard to __________ the difference between real and fake news.
+  t6 g0     GR_PASS     The rumour __________ by thousands of users before it was deleted.
+  t6 g1     GR_PPERF    Social media __________ the way we communicate.
+  t6 g2     GR_COMP     False news spreads __________ than true news.
+  t6 g3     GR_REL      The student __________ photo was shared online felt upset.
+  t6 g4     GR_MOD_ADV  You __________ share a story unless you are sure it is true.
+  t6 g5     GR_MOD_OFF  __________ I post this photo? — Only if your friend agrees.
+  t6 rw0    GR_MOD_OBL  It is forbidden to post photos of other students without permission. (mustn't)
+  t6 rw1    GR_PASS     People share millions of posts every day. (Passive: Millions of posts …)
+  t6 rw2    GR_REL      I read an article. It explained how rumours spread. (which)
+  t6 rw3    GR_PPERF    The last time I used that app was in 2023. (since)
+  t6 writing: WR_FORUM
+  t7 a0     RD_MAIN     What is the text MAINLY about?
+  t7 a1     RD_DETAIL   What inspired the shape of the museum?
+  t7 a2     RD_VOCAB    The word "transformed" in paragraph 2 is closest in meaning to __________.
+  t7 a3     RD_DETAIL   Why is the old palace important to the design?
+  t7 tf0    RD_TFNG     The building is made of 316 discs.
+  t7 tf1    RD_TFNG     The palace was built in the 1950s.
+  t7 tf2    RD_TFNG     The museum is closed on Fridays.
+  t7 q3     RD_DETAIL   Why do many visitors find the experience emotional?
+  t7 q4_0   RD_REF      March 2019
+  t7 q4_1   RD_REF      eleven
+  t7 q5     RD_LIST     Give TWO topics from Qatar's history that the galleries show.
+  t7 q6     RD_LIST     Mention TWO ways the museum uses modern technology.
+  t7 v0     VO_WF       The museum has a remarkable __________ of pearl-diving tools.
+  t7 v1     VO_TOPIC    The __________ of the building is unlike anything else in Doha.
+  t7 v2     VO_WF       The guide gave a clear __________ of how the discs were made.
+  t7 v3     VO_TOPIC    The pearl divers were __________; they faced danger every day.
+  t7 v4     VO_WF       Please make a __________ before visiting the museum on holidays.
+  t7 wf0    VO_WF       The opening of the museum was a major __________ (announce) for Qatar.
+  t7 wf1    VO_WF       The building is a beautiful __________ (combine) of art and engineering.
+  t7 wf2    VO_WF       Each gallery has an __________ (introduce) in Arabic and English.
+  t7 wf3    VO_WF       The __________ (explore) of the galleries took us three hours.
+  t7 wf4    VO_WF       There is a strong __________ (connect) between the old palace and the new building.
+  t7 g0     GR_PASS     The museum __________ by the architect Jean Nouvel.
+  t7 g1     GR_PPERF    More than a million people __________ the museum since it opened.
+  t7 g2     GR_COMP     It is one of __________ buildings in the Middle East.
+  t7 g3     GR_REL      This is the palace __________ the government used to meet.
+  t7 g4     GR_MOD_OBL  Visitors __________ buy tickets online, but it saves time.
+  t7 g5     GR_MOD_OBL  Photos __________ in some galleries. Please check the signs.
+  t7 rw0    GR_PASS     Workers restored the old palace before the museum opened. (Passive: The old palace …)
+  t7 rw1    GR_REL      Jean Nouvel is an architect. His buildings are famous worldwide. (whose)
+  t7 rw2    GR_MOD_OFF  Let's visit the museum this weekend. (How about)
+  t7 rw3    GR_COMP     The old museum was smaller than the new one. (bigger)
+  t7 writing: WR_ARTICLE
+  t8 a0     RD_MAIN     What is the text MAINLY about?
+  t8 a1     RD_DETAIL   What did the researchers EXPECT to find?
+  t8 a2     RD_VOCAB    The phrase "looking foolish" in paragraph 2 means __________.
+  t8 a3     RD_DETAIL   Which statement best summarises the final quotation?
+  t8 tf0    RD_TFNG     Project Aristotle studied 180 teams.
+  t8 tf1    RD_TFNG     The number of team members was the key to success.
+  t8 tf2    RD_TFNG     Google paid each team member a bonus after the study.
+  t8 q3     RD_DETAIL   What is "psychological safety", according to the text?
+  t8 q4_0   RD_REF      2012
+  t8 q4_1   RD_REF      two-year
+  t8 q5     RD_LIST     Give TWO qualities of successful team members, apart from psychological safety.
+  t8 q6     RD_LIST     Mention TWO things managers are now encouraged to do.
+  t8 v0     VO_TOPIC    A good leader is __________ and listens before reacting.
+  t8 v1     VO_TOPIC    Don't be afraid to __________ a suggestion in the meeting.
+  t8 v2     VO_TOPIC    Our team __________ a project on renewable energy last term.
+  t8 v3     VO_TOPIC    She is very __________ and full of creative ideas.
+  t8 v4     VO_TOPIC    He applied for the __________ of team leader.
+  t8 wf0    VO_COLL     Because he is so __________, he often loses important papers.
+  t8 wf1    VO_COLL     A __________ person enjoys working with other people.
+  t8 wf2    VO_COLL     You can count on Huda; she is the most __________ member of our team.
+  t8 wf3    VO_COLL     Stay calm and take a __________ approach to the problem.
+  t8 wf4    VO_COLL     He is __________ and wants to lead his own company one day.
+  t8 g0     GR_PASS     The study __________ by Google researchers in 2012.
+  t8 g1     GR_PPERF    Since the study, many companies __________ the way they manage teams.
+  t8 g2     GR_COMP     Psychological safety is __________ factor of all.
+  t8 g3     GR_REL      Team members __________ feel safe usually perform better.
+  t8 g4     GR_MOD_OBL  You __________ be the smartest person to be a good team member.
+  t8 g5     GR_MOD_ADV  Quiet members __________ have a chance to speak. It is good for the team.
+  t8 rw0    GR_MOD_ADV  It is advisable to share decisions with the team. (should)
+  t8 rw1    GR_PASS     Researchers studied 180 teams. (Passive: 180 teams …)
+  t8 rw2    GR_REL      That is the manager. I told you about her. (whom)
+  t8 rw3    GR_COMP     Our team is not as big as theirs. (smaller)
+  t8 writing: WR_FEMAIL
+  t9 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t9 a1     RD_DETAIL   When does a language usually die?
+  t9 a2     RD_VOCAB    The word "endangered" in paragraph 4 means __________.
+  t9 a3     RD_DETAIL   What does the example of New Zealand show?
+  t9 tf0    RD_TFNG     Experts think nearly half of the world's languages may disappear by 2100.
+  t9 tf1    RD_TFNG     The Maori language disappeared completely in the 1970s.
+  t9 tf2    RD_TFNG     Most endangered languages are in Europe.
+  t9 q3     RD_DETAIL   Why is more than words lost when a language dies?
+  t9 q4_0   RD_REF      7,000
+  t9 q4_1   RD_REF      the 1970s
+  t9 q5     RD_LIST     Give TWO reasons why languages disappear.
+  t9 q6     RD_LIST     Mention TWO ways technology helps to save languages.
+  t9 v0     VO_TOPIC    In the past, using the national language at school was __________.
+  t9 v1     VO_TOPIC    Special schools proved to be an __________ way to save Maori.
+  t9 v2     VO_TOPIC    The elders __________ stories that had never been written down.
+  t9 v3     VO_TOPIC    Children who were __________ from their families lost their language.
+  t9 v4     VO_TOPIC    Some words are very hard to __________ in another language.
+  t9 wf0    VO_WF       The __________ (collect) of recordings now includes 500 hours of speech.
+  t9 wf1    VO_WF       There has been a big __________ (improve) in the number of Maori speakers.
+  t9 wf2    VO_WF       The __________ (decide) to open special schools was very important.
+  t9 wf3    VO_WF       They placed an __________ (advertise) for volunteer teachers.
+  t9 wf4    VO_WF       The dictionary includes a __________ (describe) of every word.
+  t9 g0     GR_PPERF    Many languages __________ in the last hundred years.
+  t9 g1     GR_PASS     Maori __________ in many New Zealand schools today.
+  t9 g2     GR_COMP     Is Arabic __________ than English to learn?
+  t9 g3     GR_REL      An elder is an older person __________ knowledge is respected.
+  t9 g4     GR_MOD_DED  Without help, this language __________ disappear soon.
+  t9 g5     GR_MOD_OFF  When she was young, my grandmother __________ speak three languages.
+  t9 rw0    GR_PASS     People speak about 7,000 languages in the world. (Passive: About 7,000 languages …)
+  t9 rw1    GR_MOD_ADV  It is a good idea to record elders' stories. (should)
+  t9 rw2    GR_REL      This is the village. The last speaker lived there. (where)
+  t9 rw3    GR_PPERF    They started the language project five years ago. (for)
+  t9 writing: WR_FORUM
+  t10 a0     RD_MAIN     What is the text MAINLY about?
+  t10 a1     RD_DETAIL   What problem did Noor notice?
+  t10 a2     RD_VOCAB    The word "residents" in paragraph 2 refers to __________.
+  t10 a3     RD_DETAIL   What is the main message of Noor's speech?
+  t10 tf0    RD_TFNG     Only four students joined the project at first.
+  t10 tf1    RD_TFNG     The visits took place every Friday.
+  t10 tf2    RD_TFNG     Noor wants to become a doctor.
+  t10 q3     RD_DETAIL   How did residents' lives change, according to the care centre?
+  t10 q4_0   RD_REF      sixty
+  t10 q4_1   RD_REF      2024
+  t10 q5     RD_LIST     Give TWO things the students did during their visits.
+  t10 q6     RD_LIST     Mention TWO ways the students themselves benefited.
+  t10 v0     VO_TOPIC    Volunteering is a great way to __________ a difference.
+  t10 v1     VO_TOPIC    She __________ her best to help every resident.
+  t10 v2     VO_TOPIC    You need to be __________ when you work with elderly people.
+  t10 v3     VO_TOPIC    Instead of __________ about problems, try to solve them.
+  t10 v4     VO_TOPIC    The volunteers receive no __________; they help for free.
+  t10 wf0    VO_COLL     Noor __________ an arrangement with the care centre.
+  t10 wf1    VO_COLL     The volunteers have __________ a lot of good work this year.
+  t10 wf2    VO_COLL     Everyone should __________ an effort to help their community.
+  t10 wf3    VO_COLL     The residents __________ some light exercise with the students.
+  t10 wf4    VO_COLL     It took Noor a week to __________ up her mind.
+  t10 g0     GR_PPERF    The project __________ to five schools since it started.
+  t10 g1     GR_PASS     Noor __________ a national award in 2024.
+  t10 g2     GR_COMP     Saturday became the residents' __________ day of the week.
+  t10 g3     GR_REL      The care centre, __________ is near Noor's house, has 40 residents.
+  t10 g4     GR_MOD_OBL  You __________ be rich to help others.
+  t10 g5     GR_MOD_OFF  __________ I read the newspaper to you? — Yes, please.
+  t10 rw0    GR_PASS     The students organised the visits every Saturday. (Passive: The visits …)
+  t10 rw1    GR_REL      Noor is a student. Her project helped many people. (whose)
+  t10 rw2    GR_MOD_OFF  Do you want me to help you with the video call? (Shall)
+  t10 rw3    GR_PPERF    This is the first time I have volunteered. (never … before)
+  t10 writing: WR_FEMAIL
+
+=== g11-advanced.html (grade 11, 10 tests)
+  t1 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t1 a1     RD_DETAIL   According to paragraph 2, which is one of the largest sources of microplastics?
+  t1 a2     RD_VOCAB    The word "concentrated" in paragraph 3 is closest in meaning to __________.
+  t1 a3     RD_INFER    What can we infer about the experts' view in paragraph 4?
+  t1 tf0    RD_TFNG     Microplastics are less than five millimetres long.
+  t1 tf1    RD_TFNG     Microplastics were first found in human blood in 2012.
+  t1 tf2    RD_TFNG     Tuna contain more microplastics than any other fish.
+  t1 q3     RD_DETAIL   How do microplastics move up the food chain?
+  t1 q4_0   RD_REF      five millimetres
+  t1 q4_1   RD_REF      2022
+  t1 q5     RD_LIST     Give TWO ways in which microplastics are created.
+  t1 q6     RD_LIST     Mention TWO things individuals can do to reduce microplastics.
+  t1 v0     VO_PREP     Plastic poses a serious threat __________ the marine food chain.
+  t1 v1     VO_PREP     Plankton are tiny creatures that many fish feed __________.
+  t1 v2     VO_PREF     We shouldn't __________ the danger, but we shouldn't ignore it either.
+  t1 v3     VO_EDING    Doctors were __________ by the discovery of plastic in human blood.
+  t1 v4     VO_TOPIC    Tuna are large __________ at the top of the marine food chain.
+  t1 wf0    VO_WF       Natural fabrics are a more __________ (environment) choice.
+  t1 wf1    VO_WF       The __________ (develop) of plastic-eating bacteria is promising.
+  t1 wf2    VO_WF       The results of the study were __________ (depress).
+  t1 wf3    VO_WF       Single-use plastic is not __________ (reuse).
+  t1 wf4    VO_WF       The __________ (prevent) of plastic waste is better than cleaning it up.
+  t1 g0     GR_PASTPERF By 2022, scientists __________ microplastics in many foods.
+  t1 g1     GR_PAST     While the researchers __________ blood samples, they noticed tiny particles.
+  t1 g2     GR_CONTR    __________ research is at an early stage, experts are worried.
+  t1 g3     GR_PURP     Some companies design filters __________ fibres don't reach the sea.
+  t1 g4     GR_USED     Face washes __________ contain microbeads, but many countries have banned them.
+  t1 g5     GR_MOD_OBL  You __________ throw plastic into the sea. It is illegal.
+  t1 rw0    GR_SOSUCH   The particles are very small. You can't see them. (so … that)
+  t1 rw1    GR_CONTR    Despite the bans, microplastics are still common. (Although)
+  t1 rw2    GR_PASTPERF The plastic entered the sea. Then the fish ate it. (Before)
+  t1 rw3    GR_MOD_ADV  It is advisable to wash synthetic clothes less often. (should)
+  t1 writing: WR_CAUSE
+  t2 a0     RD_MAIN     What is the text MAINLY about?
+  t2 a1     RD_DETAIL   Why did some ice warnings not reach the captain?
+  t2 a2     RD_INFER    The phrase "practically unsinkable" suggests that people __________.
+  t2 a3     RD_INFER    What can we infer from paragraph 4?
+  t2 tf0    RD_TFNG     The Titanic left Southampton on 10 April 1912.
+  t2 tf1    RD_TFNG     The ship had enough lifeboats for everyone on board.
+  t2 tf2    RD_TFNG     The captain had sailed across the Atlantic more than fifty times.
+  t2 q3     RD_DETAIL   What did Thomas Andrews realise after the collision?
+  t2 q4_0   RD_REF      11:40 pm
+  t2 q4_1   RD_REF      1985
+  t2 q5     RD_LIST     Give TWO reasons why so many people died in the disaster.
+  t2 q6     RD_LIST     Mention TWO changes that were introduced after the disaster.
+  t2 v0     VO_TOPIC    The officer __________ of the radio room did not pass on the warning.
+  t2 v1     VO_TOPIC    Many survivors never fully __________ the shock of that night.
+  t2 v2     VO_TOPIC    Some passengers were in __________ as they said goodbye to their families.
+  t2 v3     VO_EDING    The confusion on deck was __________.
+  t2 v4     VO_TOPIC    Objects from the wreck are now __________ in museums.
+  t2 wf0    VO_WF       The ship had __________ (luxury) cabins for first-class passengers.
+  t2 wf1    VO_WF       The lack of lifeboats was a terrible __________ (disappoint) to the public.
+  t2 wf2    VO_WF       The voyage across the Atlantic was __________ (adventure) for many families.
+  t2 wf3    VO_WF       The disaster could have been __________ (prevent).
+  t2 wf4    VO_WF       The __________ (discover) of the wreck made headlines worldwide.
+  t2 g0     GR_PAST     While the ship __________ at high speed, the lookout saw an iceberg.
+  t2 g1     GR_PASTPERF By the time the Carpathia arrived, the Titanic __________.
+  t2 g2     GR_PASTPERF Newspapers __________ the ship "practically unsinkable" before the voyage.
+  t2 g3     GR_CONTR    __________ the warnings, the ship kept sailing fast.
+  t2 g4     GR_CAUSE    The ship had few lifeboats __________ the law did not require more.
+  t2 g5     GR_FUT      Many families __________ start a new life in America, but they never arrived.
+  t2 rw0    GR_SOSUCH   The water was very cold. People could only survive for minutes. (so … that)
+  t2 rw1    GR_PASTPERF The ship hit the iceberg. Then water entered the compartments. (After)
+  t2 rw2    GR_PAST     The passengers were eating dinner. The radio operators received a warning. (While)
+  t2 rw3    GR_MOD_OBL  It is necessary for every ship to carry enough lifeboats. (must)
+  t2 writing: WR_STORY
+  t3 a0     RD_MAIN     What is the text MAINLY about?
+  t3 a1     RD_DETAIL   Why do concrete and asphalt make cities hotter?
+  t3 a2     RD_REF      What does "a vicious circle" in paragraph 3 refer to?
+  t3 a3     RD_INFER    Which statement best matches the writer's view in paragraph 5?
+  t3 tf0    RD_TFNG     Cities are often warmer than the countryside, especially at night.
+  t3 tf1    RD_TFNG     Dark surfaces absorb less energy than light surfaces.
+  t3 tf2    RD_TFNG     Doha is the hottest city in the world.
+  t3 q3     RD_DETAIL   Why do warmer streets lead to more driving?
+  t3 q4_0   RD_REF      2003
+  t3 q4_1   RD_REF      70,000
+  t3 q5     RD_LIST     Give TWO causes of the urban heat island effect.
+  t3 q6     RD_LIST     Mention TWO solutions that cities are using.
+  t3 v0     VO_PREP     Urban heat has a serious effect __________ public health.
+  t3 v1     VO_PREP     There has been a sharp increase __________ energy bills.
+  t3 v2     VO_PREF     Air-conditioning is often __________ in offices, wasting energy.
+  t3 v3     VO_EDING    The rise in temperatures is __________, according to scientists.
+  t3 v4     VO_TOPIC    Cities will benefit from more trees in the __________ run.
+  t3 wf0    VO_WF       Green roofs are __________ (benefit) for buildings and people.
+  t3 wf1    VO_WF       Heatwaves can be __________ (risk) for elderly people.
+  t3 wf2    VO_WF       Planting trees is a __________ (protect) measure against heat.
+  t3 wf3    VO_WF       The city's new parks are __________ (access) to everyone.
+  t3 wf4    VO_WF       Urban heat is a __________ (globe) problem.
+  t3 g0     GR_CAUSE    Cities are hotter __________ they have fewer trees.
+  t3 g1     GR_PURP     Roofs are painted white __________ reflect sunlight.
+  t3 g2     GR_CONTR    __________ the heat, many people still walked to work.
+  t3 g3     GR_SOSUCH   It was __________ a hot day that the schools closed early.
+  t3 g4     GR_PASTPERF By the time the heatwave ended, thousands of people __________ ill.
+  t3 g5     GR_USED     In the past, houses in Doha __________ have wind towers to cool them.
+  t3 rw0    GR_SOSUCH   The streets were very hot. Nobody wanted to walk. (so … that)
+  t3 rw1    GR_CONTR    Although the city is large, it has many parks. (Despite)
+  t3 rw2    GR_PURP     They planted trees. They wanted the street to be cooler. (so that)
+  t3 rw3    GR_MOD_ADV  It is a good idea to stay indoors during a heatwave. (should)
+  t3 writing: WR_CAUSE
+  t4 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t4 a1     RD_DETAIL   According to supporters, why is seeing a real animal valuable?
+  t4 a2     RD_VOCAB    The word "captivity" in paragraph 3 means __________.
+  t4 a3     RD_INFER    What does the final quotation suggest?
+  t4 tf0    RD_TFNG     The first public zoos opened in Europe in the 18th and 19th centuries.
+  t4 tf1    RD_TFNG     Most zoo animals belong to endangered species.
+  t4 tf2    RD_TFNG     Children prefer aquariums to zoos.
+  t4 q3     RD_DETAIL   Why do critics think money should be spent on natural habitats instead?
+  t4 q4_0   RD_REF      700 million
+  t4 q4_1   RD_REF      the California condor
+  t4 q5     RD_LIST     Give TWO arguments that supporters use in favour of zoos.
+  t4 q6     RD_LIST     Mention TWO ways that zoos have changed in response to criticism.
+  t4 v0     VO_PREP     The importance __________ conservation is taught in many zoos.
+  t4 v1     VO_TOPIC    Lions are __________, and zebras are their prey.
+  t4 v2     VO_TOPIC    Rare snakes are __________ in the new reptile house.
+  t4 v3     VO_PREF     Some people think zoos are __________; others think they are essential.
+  t4 v4     VO_EDING    Seeing the animals in small cages was a __________ experience.
+  t4 wf0    VO_WF       Breeding programmes are an important __________ (achieve) for zoos.
+  t4 wf1    VO_WF       Visitors were __________ (disgust) by the dirty cages in the old zoo.
+  t4 wf2    VO_WF       Zoos can be very __________ (education) for children.
+  t4 wf3    VO_WF       The __________ (protect) of habitats is a priority.
+  t4 wf4    VO_WF       The zoo has a __________ (space) new area for giraffes.
+  t4 g0     GR_CONTR    __________ some zoos are cruel, others protect endangered species.
+  t4 g1     GR_PURP     Zoos breed animals __________ they can return them to the wild.
+  t4 g2     GR_MOD_OBL  You __________ feed the animals. It can make them ill.
+  t4 g3     GR_USED     Zoos __________ keep animals in small cages, but most have changed.
+  t4 g4     GR_PASTPERF By the time the reserve opened, the oryx __________ extinct in the wild.
+  t4 g5     GR_USED     Animals born in zoos are not __________ hunting for food.
+  t4 rw0    GR_SOSUCH   The enclosure was very small. The elephants looked stressed. (so … that)
+  t4 rw1    GR_CONTR    In spite of the criticism, the zoo is popular. (Although)
+  t4 rw2    GR_MOD_OBL  It isn't necessary to visit a zoo to learn about animals. (don't have to)
+  t4 rw3    GR_FUT      I was planning to visit the zoo, but it rained. (was going to)
+  t4 writing: WR_DISCUSS
+  t5 a0     RD_MAIN     What is the text MAINLY about?
+  t5 a1     RD_DETAIL   Why did Bedouin families move in winter?
+  t5 a2     RD_VOCAB    The word "harsh" in paragraph 4 is closest in meaning to __________.
+  t5 a3     RD_INFER    What can we infer from paragraph 4 about hospitality?
+  t5 tf0    RD_TFNG     Bedouin tents were made from goat hair.
+  t5 tf1    RD_TFNG     Most Bedouin families today live a completely traditional life.
+  t5 tf2    RD_TFNG     Bedouin families usually had ten children.
+  t5 q3     RD_DETAIL   How long could a guest traditionally stay before being asked why he had come?
+  t5 q4_0   RD_REF      winter
+  t5 q4_1   RD_REF      the 20th century
+  t5 q5     RD_LIST     Give TWO skills Bedouin people needed to survive in the desert.
+  t5 q6     RD_LIST     Mention TWO ways the Bedouin heritage lives on in Qatar today.
+  t5 v0     VO_TOPIC    Young people had to __________ to modern life in the city.
+  t5 v1     VO_TOPIC    Bedouin children often __________ their parents in their skills and values.
+  t5 v2     VO_TOPIC    Families could __________ with very little food and water.
+  t5 v3     VO_PREP     The tribe was __________ good terms with its neighbours.
+  t5 v4     VO_EDING    Life in the desert must have been __________.
+  t5 wf0    VO_WF       Bedouin culture is famous for its __________ (hospitable).
+  t5 wf1    VO_WF       Desert weather is not always __________ (predict).
+  t5 wf2    VO_WF       The tents were light and __________ (protect).
+  t5 wf3    VO_WF       Moving to the city was a big __________ (develop) in their lives.
+  t5 wf4    VO_WF       Old Bedouin poems are often wise and __________ (humour).
+  t5 g0     GR_USED     In summer, Bedouin families __________ camp near wells.
+  t5 g1     GR_USED     Children __________ help their parents look after the animals.
+  t5 g2     GR_USED     They were used to __________ long distances.
+  t5 g3     GR_PASTPERF Before oil was discovered, most families __________ in tents.
+  t5 g4     GR_CONTR    Bedouin families welcomed guests __________ they had very little.
+  t5 g5     GR_PURP     The tents were light __________ the families could carry them easily.
+  t5 rw0    GR_PASTPERF They moved to the city. Life became easier. (After … had)
+  t5 rw1    GR_SOSUCH   The desert was very hot. They travelled at night. (such … that)
+  t5 rw2    GR_USED     Living in an apartment was strange for him at first, but now it is normal. (get used to) (
+  t5 rw3    GR_USED     My grandfather rode camels when he was young, but he doesn't now. (used to)
+  t5 writing: WR_DISCUSS
+  t6 a0     RD_MAIN     What is the text MAINLY about?
+  t6 a1     RD_DETAIL   What does "overfishing" mean according to the text?
+  t6 a2     RD_DETAIL   Why are mangroves and seagrass beds important?
+  t6 a3     RD_INFER    What can we infer from paragraph 4 about the future of fishing as a job?
+  t6 tf0    RD_TFNG     Hammour numbers fell by more than 80 percent in some areas.
+  t6 tf1    RD_TFNG     Desalination plants make the water cooler.
+  t6 tf2    RD_TFNG     Qatar has banned all fishing permanently.
+  t6 q3     RD_DETAIL   What happens to coral reefs when fish that feed on algae disappear?
+  t6 q4_0   RD_REF      dhows
+  t6 q4_1   RD_REF      80 percent
+  t6 q5     RD_LIST     Give TWO reasons why fishermen were able to catch more fish than before.
+  t6 q6     RD_LIST     Mention TWO measures Gulf governments have introduced.
+  t6 v0     VO_PREP     Overfishing has a serious impact __________ the marine food chain.
+  t6 v1     VO_PREP     There has been a sharp decrease __________ the number of hammour.
+  t6 v2     VO_PREF     Many people __________ how quickly fish populations can recover.
+  t6 v3     VO_TOPIC    The Gulf's __________ ecosystems are easily damaged by pollution.
+  t6 v4     VO_EDING    Fishermen were __________ by the small catches this year.
+  t6 wf0    VO_WF       Fishing provides a __________ (finance) income for many families.
+  t6 wf1    VO_WF       The fall in fish numbers is truly __________ (alarm).
+  t6 wf2    VO_WF       Artificial reefs are __________ (benefit) for young fish.
+  t6 wf3    VO_WF       The __________ (protect) of mangroves is a priority.
+  t6 wf4    VO_WF       Choosing sustainable fish is __________ (advise).
+  t6 g0     GR_USED     Fishermen __________ return with plenty of fish in the past.
+  t6 g1     GR_PASTPERF By the 2010s, hammour numbers __________ sharply.
+  t6 g2     GR_CAUSE    Catches have fallen __________ overfishing and pollution.
+  t6 g3     GR_PURP     Fishing is banned in spring __________ the fish can breed.
+  t6 g4     GR_CONTR    __________ the new rules, illegal fishing continues in some areas.
+  t6 g5     GR_MOD_OBL  Fishermen __________ use nets with very small holes. It is against the law.
+  t6 rw0    GR_SOSUCH   The demand for fish was very high. Prices rose. (so … that)
+  t6 rw1    GR_PASTPERF They built the hotel. Then the mangroves disappeared. (After … had)
+  t6 rw2    GR_CONTR    Although fish is expensive, people still buy it. (In spite of)
+  t6 rw3    GR_MOD_OBL  It is necessary to enforce the fishing rules. (must)
+  t6 writing: WR_CAUSE
+  t7 a0     RD_DETAIL   What is the writer's MAIN point?
+  t7 a1     RD_DETAIL   What is a "social emotion"?
+  t7 a2     RD_DETAIL   What did the 2012 study find about people who looked embarrassed?
+  t7 a3     RD_VOCAB    The phrase "reaching their potential" in paragraph 4 means __________.
+  t7 tf0    RD_TFNG     Young children start to feel embarrassment at about two years old.
+  t7 tf1    RD_TFNG     People who show embarrassment are trusted less.
+  t7 tf2    RD_TFNG     Women blush more often than men.
+  t7 q3     RD_DETAIL   Why do most people quickly forget someone else's embarrassing moment?
+  t7 q4_0   RD_REF      2012
+  t7 q4_1   RD_REF      two years old
+  t7 q5     RD_LIST     Give TWO physical signs of embarrassment mentioned in the text.
+  t7 q6     RD_LIST     Mention TWO pieces of advice experts give for dealing with embarrassing situations.
+  t7 v0     VO_EDING    Calling the teacher "Mum" was an __________ mistake.
+  t7 v1     VO_EDING    He felt __________ when everyone laughed at his joke.
+  t7 v2     VO_PREF     Some people __________ how much others notice their mistakes.
+  t7 v3     VO_PREP     She was __________ tears after her presentation went wrong.
+  t7 v4     VO_TOPIC    It took him weeks to __________ the embarrassment.
+  t7 wf0    VO_WF       Showing embarrassment can work like an __________ (apologise).
+  t7 wf1    VO_WF       The rules of the game were __________ (confuse), so I made a mistake.
+  t7 wf2    VO_WF       Laughing at yourself is a sign of __________ (confident).
+  t7 wf3    VO_WF       His answer was clever and __________ (humour).
+  t7 wf4    VO_WF       Avoiding new activities can be __________ (disappoint) in the long run.
+  t7 g0     GR_PAST     While she __________ her presentation, her slides stopped working.
+  t7 g1     GR_PASTPERF He realised he __________ the wrong name.
+  t7 g2     GR_CONTR    __________ he was embarrassed, he kept smiling.
+  t7 g3     GR_PURP     Some students stay quiet __________ avoid looking foolish.
+  t7 g4     GR_SOSUCH   It was __________ an embarrassing moment that I wanted to disappear.
+  t7 g5     GR_MOD_OBL  You __________ worry about small mistakes. Everyone makes them.
+  t7 rw0    GR_SOSUCH   I was so embarrassed. I couldn't speak. (so … that)
+  t7 rw1    GR_CONTR    He felt nervous. He still asked a question. (Despite)
+  t7 rw2    GR_PAST     I was walking into class. I tripped over a bag. (when)
+  t7 rw3    GR_MOD_ADV  It is a good idea to laugh at yourself. (should)
+  t7 writing: WR_STORY
+  t8 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t8 a1     RD_DETAIL   According to supporters, why are gap-year students more motivated at university?
+  t8 a2     RD_VOCAB    The word "initiative" in paragraph 3 is closest in meaning to __________.
+  t8 a3     RD_DETAIL   What is the writer's conclusion?
+  t8 tf0    RD_TFNG     Gap years are less common in the Gulf than in the UK.
+  t8 tf1    RD_TFNG     All volunteer programmes abroad are well organised.
+  t8 tf2    RD_TFNG     Most gap-year students travel to Asia.
+  t8 q3     RD_DETAIL   What do some universities allow students to do?
+  t8 q4_0   RD_REF      the United Kingdom
+  t8 q4_1   RD_REF      CV
+  t8 q5     RD_LIST     Give TWO ways a gap year can help young people develop personally.
+  t8 q6     RD_LIST     Mention TWO disadvantages of a gap year.
+  t8 v0     VO_TOPIC    She took a year off to __________ new experiences abroad.
+  t8 v1     VO_TOPIC    Students on a gap year must learn to __________ on a small budget.
+  t8 v2     VO_PREF     Some students __________ the cost of travelling abroad.
+  t8 v3     VO_PREP     He was __________ charge of a team of volunteers.
+  t8 v4     VO_EDING    Living in a new country can be a __________ experience at first.
+  t8 wf0    VO_WF       A gap year can increase a student's __________ (motivate).
+  t8 wf1    VO_WF       Learning a language abroad is very __________ (education).
+  t8 wf2    VO_WF       Travelling alone can be __________ (risk).
+  t8 wf3    VO_WF       Her greatest __________ (achieve) was teaching children in Nepal.
+  t8 wf4    VO_WF       He is an __________ (adventure) young man who loves new challenges.
+  t8 g0     GR_CAUSE    She took a gap year __________ she wanted to travel.
+  t8 g1     GR_PURP     He worked for a year __________ save money for university.
+  t8 g2     GR_CONTR    __________ the cost, many students choose to travel.
+  t8 g3     GR_PASTPERF By the time she started university, she __________ three languages.
+  t8 g4     GR_MOD_OBL  You __________ take a gap year. It is your choice.
+  t8 g5     GR_FUT      I __________ take a gap year, but I decided to start university instead.
+  t8 rw0    GR_SOSUCH   The trip was very expensive. Few students could afford it. (so … that)
+  t8 rw1    GR_PASTPERF She volunteered in Africa. Then she started university. (Before)
+  t8 rw2    GR_CONTR    Although he enjoyed travelling, he missed his family. (Despite)
+  t8 rw3    GR_USED     Living away from home was difficult at first, but now it is normal for her. (used to) (is 
+  t8 writing: WR_DISCUSS
+  t9 a0     RD_MAIN     What is the text MAINLY about?
+  t9 a1     RD_DETAIL   What caused the explosion?
+  t9 a2     RD_DETAIL   Why did the temperature drop to around 3°C?
+  t9 a3     RD_DETAIL   Why did NASA call the mission a "successful failure"?
+  t9 tf0    RD_TFNG     Apollo 13 was launched on 11 April 1970.
+  t9 tf1    RD_TFNG     The lunar module was designed for three men for four days.
+  t9 tf2    RD_TFNG     Jim Lovell later became a film director.
+  t9 q3     RD_DETAIL   What famous words did Swigert radio after the explosion?
+  t9 q4_0   RD_REF      320,000 kilometres
+  t9 q4_1   RD_REF      17 April
+  t9 q5     RD_LIST     Give TWO problems the astronauts faced after the explosion.
+  t9 q6     RD_LIST     Mention TWO materials engineers used to solve the carbon dioxide problem.
+  t9 v0     VO_TOPIC    The crew had to __________ with very little water and power.
+  t9 v1     VO_TOPIC    Apollo 13 __________ from Florida on 11 April 1970.
+  t9 v2     VO_TOPIC    The engineers finally managed to __________ the astronauts by radio.
+  t9 v3     VO_PREP     The flight director was __________ charge of Mission Control.
+  t9 v4     VO_EDING    The news of the explosion was __________ for the astronauts' families.
+  t9 wf0    VO_WF       The __________ (cancel) of the Moon landing was announced immediately.
+  t9 wf1    VO_WF       The engineers showed amazing __________ (imagine).
+  t9 wf2    VO_WF       The astronauts' calm was an __________ (inspire) to millions.
+  t9 wf3    VO_WF       Space travel is extremely __________ (risk).
+  t9 wf4    VO_WF       The crew were __________ (relief) when they landed safely.
+  t9 g0     GR_PAST     While the spacecraft __________ towards the Moon, a tank exploded.
+  t9 g1     GR_PASS     Engineers discovered that the tank __________ before the launch.
+  t9 g2     GR_FUT      The crew __________ land on the Moon, but the plan had to change.
+  t9 g3     GR_SOSUCH   Water was __________ limited that they drank very little.
+  t9 g4     GR_CONTR    __________ the danger, the astronauts stayed calm.
+  t9 g5     GR_PURP     They switched off the lights __________ save power.
+  t9 rw0    GR_PASTPERF The tank exploded. Then the crew moved into the lunar module. (After … had)
+  t9 rw1    GR_PAST     The astronauts were sleeping. They heard a loud bang. (when)
+  t9 rw2    GR_SOSUCH   It was a very difficult problem. Engineers worked all night. (such … that)
+  t9 rw3    GR_PURP     They worked hard. They wanted to bring the crew home. (so that)
+  t9 writing: WR_STORY
+  t10 a0     RD_MAIN     What is the writer's MAIN purpose?
+  t10 a1     RD_DETAIL   Why can an AI tutor be helpful for shy students?
+  t10 a2     RD_DETAIL   Why do supporters compare AI to calculators and the internet?
+  t10 a3     RD_DETAIL   What does the teacher's final quotation mean?
+  t10 tf0    RD_TFNG     AI tools can produce information that sounds convincing but is wrong.
+  t10 tf1    RD_TFNG     All schools have banned AI completely.
+  t10 tf2    RD_TFNG     Most teachers use AI every day.
+  t10 q3     RD_DETAIL   How can AI help teachers save time?
+  t10 q4_0   RD_REF      calculators
+  t10 q4_1   RD_REF      in class
+  t10 q5     RD_LIST     Give TWO advantages of AI for students mentioned in the text.
+  t10 q6     RD_LIST     Mention TWO concerns critics have about AI in schools.
+  t10 v0     VO_PREF     Some students __________ AI and use it for every small task.
+  t10 v1     VO_PREP     AI has had a huge impact __________ education.
+  t10 v2     VO_PREP     Cheating with AI poses a threat __________ real learning.
+  t10 v3     VO_TOPIC    I'll __________ checking the facts after I finish my draft.
+  t10 v4     VO_EDING    The wrong answers from the AI were very __________.
+  t10 wf0    VO_WF       AI can be very __________ (benefit) for revision.
+  t10 wf1    VO_WF       Teachers were __________ (alarm) by the number of copied essays.
+  t10 wf2    VO_WF       The __________ (develop) of AI has been extremely fast.
+  t10 wf3    VO_WF       Students need __________ (motivate) to think for themselves.
+  t10 wf4    VO_WF       Using AI to cheat is not __________ (advise).
+  t10 g0     GR_CONTR    __________ AI is useful, it can make mistakes.
+  t10 g1     GR_PURP     Some schools use AI __________ save teachers' time.
+  t10 g2     GR_MOD_OBL  Students __________ copy AI answers in exams. It is forbidden.
+  t10 g3     GR_MOD_OBL  Before AI tools appeared, students __________ search through many websites.
+  t10 g4     GR_PASTPERF By the time the teacher noticed, the student __________ the whole essay with AI.
+  t10 g5     GR_SOSUCH   The AI answer was __________ convincing that nobody noticed the mistake.
+  t10 rw0    GR_MOD_ADV  It is advisable to check every fact that AI provides. (should)
+  t10 rw1    GR_CONTR    Despite the risks, many schools allow AI. (Although)
+  t10 rw2    GR_PURP     Students write their essays in class. Teachers want to prevent cheating. (so that)
+  t10 rw3    GR_USED     In the past, students found information in books. They don't now. (used to)
+  t10 writing: WR_DISCUSS
+
+=== g12-advanced.html (grade 12, 10 tests)
+  t1 m0     VO_TOPIC    Many ______________ who arrived in Qatar decades ago have built successful businesses and 
+  t1 m1     VO_TOPIC    Sheikha is a generous ______________ who regularly gives money to build schools in poor vi
+  t1 m2     GR_REP      Fahad wanted to propose the idea to the principal, but he ______________ and said nothing.
+  t1 m3     VO_TOPIC    The new library is a wonderful improve-______________ to our school.
+  t1 m4     GR_PPERF    This perfume ______________ wonderful. Where did you buy it?
+  t1 m5     GR_PPERF    My grandfather ______________ in the garden since early this morning, and he still hasn't 
+  t1 m6     GR_FUTCP    By the time the World Cup visitors arrive, the workers ______________ the new metro statio
+  t1 r0     RD_MAIN     What is the text MAINLY about?
+  t1 r1     RD_DETAIL   Read the following from paragraph 2.
+  t1 r2     RD_DETAIL   Which of the following is NOT mentioned as part of the organisation's development
+  t1 tf0    RD_TFNG     Qatar Charity was founded in 1992.
+  t1 tf1    RD_TFNG     The organisation only works outside Qatar.
+  t1 tf2    RD_TFNG     Most of the organisation's volunteers are university teachers.
+  t1 a0     VO_TOPIC    The manager ______________ two employees who repeatedly ignored the safety rules.
+  t1 a1     VO_TOPIC    A ______________ person rarely thinks about the feelings of others.
+  t1 a2     VO_TOPIC    The traditional dishes at Souq Waqif are all ______________ Qatari recipes.
+  t1 b0     VO_PREP     Our team is capable ______________ winning the national debate competition.
+  t1 b1     VO_PREP     Students can benefit ______________ volunteering during the summer holidays.
+  t1 b2     VO_PREP     Please concentrate ______________ your studies during the final weeks.
+  t1 vb0    GR_PAST     While my father (drive) ______________ to Al Khor, he saw a beautiful flock of flamingos.
+  t1 vb1    GR_FUTCP    This time next week, we (sit) ______________ our final English exam.
+  t1 rep    GR_REPV     "I will help you with your science project," Khalid said to his brother. (offered)
+  t1 rw0    GR_USED     In the past, families in Qatar always gathered in the majlis every evening, but now they d
+  t1 rw1    GR_COND     When you heat water to 100°C, it boils. (If)
+  t1 q12b   RD_LIST     From paragraph (3), mention THREE things that emergency teams deliver.
+  t1 q12c   RD_LIST     From paragraph (5), give THREE examples of the organisation's activities inside Qatar.
+  t1 writing: WR_COVER, WR_ADVDIS
+  t2 m0     VO_TOPIC    People who are forced to leave their country because of war are called ______________.
+  t2 m1     VO_TOPIC    After the floods, hundreds of ______________ worked without pay to help clean the streets.
+  t2 m2     VO_TOPIC    Ali and his brother rarely ______________ when it comes to choosing a restaurant.
+  t2 m3     VO_TOPIC    Your kind assist-______________ helped us finish the project on time.
+  t2 m4     GR_PPERF    I ______________ you are right about the new timetable.
+  t2 m5     GR_PPERF    Noora ______________ Spanish for three years, and she can now hold a simple conversation.
+  t2 m6     GR_FUTCP    By 2030, Qatar ______________ many new solar power plants.
+  t2 r0     RD_MAIN     What is the text MAINLY about?
+  t2 r1     RD_DETAIL   Read the following from paragraph 3.
+  t2 r2     RD_DETAIL   Which of the following is NOT mentioned as a risk that divers faced?
+  t2 tf0    RD_TFNG     The captain of a pearl-diving boat was called the nokhada.
+  t2 tf1    RD_TFNG     Divers used oxygen tanks to stay underwater longer.
+  t2 tf2    RD_TFNG     Qatari pearls were more expensive than pearls from Bahrain.
+  t2 a0     VO_TOPIC    The travel agent sent us a detailed ______________ for our trip to Malaysia.
+  t2 a1     VO_TOPIC    Students on a small budget often stay in a youth ______________.
+  t2 a2     VO_TOPIC    Don't be ______________; listen to other people's opinions before you judge them.
+  t2 b0     VO_PREP     Salma applied ______________ a scholarship to study medicine abroad.
+  t2 b1     VO_PREP     You can always rely ______________ your parents for good advice.
+  t2 b2     VO_PREP     Ahmed is very interested ______________ Qatar's maritime history.
+  t2 vb0    GR_PAST     While we (have) ______________ dinner, the electricity suddenly went off.
+  t2 vb1    GR_FUTCP    Don't call me at 9 pm tomorrow. I (study) ______________ for my chemistry test.
+  t2 rep    GR_REPV     "I didn't take the money," the boy said. (denied)
+  t2 rw0    GR_USED     When she was younger, Maryam always walked to school, but now she takes the bus. (used to)
+  t2 rw1    GR_COND     Plants die when they don't get enough water. (If)
+  t2 q12b   RD_LIST     From paragraph (4), mention THREE things the crew did besides diving.
+  t2 q12c   RD_LIST     From paragraph (6), give THREE examples of how Qatar protects its pearl-diving heritage.
+  t2 writing: WR_COVER, WR_ADVDIS
+  t3 m0     VO_TOPIC    Thousands of ______________ from many countries work in Qatar but plan to return home one 
+  t3 m1     VO_TOPIC    The hospital thanked every blood ______________ who visited during the campaign.
+  t3 m2     VO_TOPIC    When his friends started gossiping, Saad decided to ______________ instead of joining in.
+  t3 m3     VO_TOPIC    Her kind-______________ towards the elderly made her popular in the neighbourhood.
+  t3 m4     GR_PPERF    This dictionary ______________ to my teacher, so please be careful with it.
+  t3 m5     GR_PPERF    It ______________ heavily since this morning, so the football match has been postponed.
+  t3 m6     GR_FUTCP    By the end of this year, my father ______________ for the same company for twenty years.
+  t3 r0     RD_MAIN     What is the text MAINLY about?
+  t3 r1     RD_DETAIL   Read the following from paragraph 2.
+  t3 r2     RD_DETAIL   Which of the following is NOT mentioned as a measure taken in Qatar?
+  t3 tf0    RD_TFNG     Single-use plastic bags were banned in Qatar in 2022.
+  t3 tf1    RD_TFNG     Plastic breaks down within a few months.
+  t3 tf2    RD_TFNG     Hessa wants to study marine biology at university.
+  t3 a0     VO_TOPIC    I prefer an ______________ seat on long flights so that I can stretch my legs.
+  t3 a1     VO_TOPIC    An ______________ person is happy to consider new ideas.
+  t3 a2     VO_TOPIC    The waiter was ______________ because he was rude to customers.
+  t3 b0     VO_PREP     The coach is responsible ______________ the players' safety.
+  t3 b1     VO_PREP     Many patients have recovered ______________ the illness thanks to the new treatment.
+  t3 b2     VO_PREP     Qatar is proud ______________ its athletes' achievements.
+  t3 vb0    GR_PAST     While the students (listen) ______________ to the lecture, the fire alarm rang.
+  t3 vb1    GR_FUTCP    At this time tomorrow, my family (fly) ______________ to Madinah.
+  t3 rep    GR_REPV     "I'm sorry I was late for the meeting," Hamad said. (apologised)
+  t3 rw0    GR_USED     My grandmother always made fresh bread every morning, but now she buys it. (used to)
+  t3 rw1    GR_COND     Ice melts when you leave it in the sun. (If)
+  t3 q12b   RD_LIST     From paragraph (2), mention THREE sea creatures that may mistake plastic for food. Creatur
+  t3 q12c   RD_LIST     From paragraph (5), give THREE examples of small changes individuals can make.
+  t3 writing: WR_COVER, WR_ADVDIS
+  t4 m0     VO_TOPIC    Her grandparents ______________ from Qatar to study in Britain in the 1970s and later retu
+  t4 m1     VO_TOPIC    The Red Crescent is a ______________ organisation that helps victims of wars and disasters
+  t4 m2     VO_TOPIC    Please don't ______________ into my private affairs. It's none of your business.
+  t4 m3     VO_TOPIC    The pollut-______________ in big cities is a danger to people's health.
+  t4 m4     GR_PPERF    Look at those dark clouds! It ______________ like it's going to rain.
+  t4 m5     GR_PPERF    The children ______________ video games for hours. They should go outside now.
+  t4 m6     GR_FUTCP    By next June, Hamad ______________ his engineering degree.
+  t4 r0     RD_MAIN     What is the text MAINLY about?
+  t4 r1     RD_DETAIL   Read the following from paragraph 3.
+  t4 r2     RD_DETAIL   Which of the following is NOT mentioned as a speciality of HMC hospitals?
+  t4 tf0    RD_TFNG     Hamad General Hospital opened in 1982.
+  t4 tf1    RD_TFNG     HMC emergency departments close at midnight.
+  t4 tf2    RD_TFNG     HMC employs more nurses than doctors.
+  t4 a0     VO_TOPIC    Qatar Airways operates both international and ______________ flights from its hub.
+  t4 a1     VO_TOPIC    The museum guide confirmed that the old sword was ______________.
+  t4 a2     VO_TOPIC    He is so ______________ that he never asks how other people are feeling.
+  t4 b0     VO_PREP     Your success depends ______________ how hard you work.
+  t4 b1     VO_PREP     She succeeded ______________ passing all her exams with high grades.
+  t4 b2     VO_PREP     The students are worried ______________ the final exam.
+  t4 vb0    GR_PAST     While I (walk) ______________ along the Corniche, I met my old teacher.
+  t4 vb1    GR_FUTCP    This time next month, my brother (work) ______________ in his new job in Ras Laffan.
+  t4 rep    GR_REPV     "Don't swim too far from the beach," the lifeguard said to us. (warned)
+  t4 rw0    GR_USED     People didn't care about recycling in the past, but now they do. (used to)
+  t4 rw1    GR_COND     Metal expands when it gets hot. (If)
+  t4 q12b   RD_LIST     From paragraph (4), mention THREE ways HMC supports education and research.
+  t4 q12c   RD_LIST     From paragraph (5), give THREE examples of HMC's awareness activities.
+  t4 writing: WR_COVER, WR_ADVDIS
+  t5 m0     VO_TOPIC    The ______________ of Qatar warmly welcomed visitors from around the world during the Worl
+  t5 m1     VO_TOPIC    A ______________ donated millions of riyals to build a new research centre.
+  t5 m2     VO_TOPIC    Mariam was going to give a speech, but she ______________ when she saw the huge audience.
+  t5 m3     VO_TOPIC    Good communic-______________ is essential in any successful team.
+  t5 m4     GR_PPERF    I ______________ this new phone. It's much faster than my old one.
+  t5 m5     GR_PPERF    My uncle ______________ in Dukhan for fifteen years.
+  t5 m6     GR_FUTCP    By the time you arrive, we ______________ all the preparations for the party.
+  t5 r0     RD_MAIN     What is the text MAINLY about?
+  t5 r1     RD_DETAIL   Read the following from paragraph 3.
+  t5 r2     RD_DETAIL   Which of the following is NOT mentioned as a country Pei visited?
+  t5 tf0    RD_TFNG     The Museum of Islamic Art opened in 2008.
+  t5 tf1    RD_TFNG     Pei travelled across the Islamic world for six years.
+  t5 tf2    RD_TFNG     The museum is free for all students.
+  t5 a0     VO_TOPIC    According to our ______________, we will visit the old souq on the second day.
+  t5 a1     VO_TOPIC    The flight attendant pushed the trolley down the ______________.
+  t5 a2     VO_TOPIC    It is ______________ to judge people only by their appearance.
+  t5 b0     VO_PREP     Khalid is very good ______________ solving maths problems.
+  t5 b1     VO_PREP     The teacher was pleased ______________ our presentation.
+  t5 b2     VO_PREP     Our school is famous ______________ its science club.
+  t5 vb0    GR_PAST     While the guests (arrive) ______________, the host was preparing Arabic coffee.
+  t5 vb1    GR_FUTCP    Next Friday at noon, we (pray) ______________ in the State Grand Mosque.
+  t5 rep    GR_REPV     "Let's visit the Museum of Islamic Art this weekend," Sara said. (suggested)
+  t5 rw0    GR_USED     Qatari families always travelled by camel in the past, but now they drive cars. (used to)
+  t5 rw1    GR_COND     When it doesn't rain for a long time, the desert plants dry up. (If)
+  t5 q12b   RD_LIST     From paragraph (4), mention THREE educational services the museum offers.
+  t5 q12c   RD_LIST     From paragraph (5), give THREE examples of how people use the museum park.
+  t5 writing: WR_COVER, WR_ADVDIS
+  t6 m0     VO_TOPIC    The government provides camps, food and medical care for ______________ escaping the confl
+  t6 m1     VO_TOPIC    Making a ______________ to charity is a good way to help people in need.
+  t6 m2     VO_TOPIC    I know you are angry, but try to ______________ during the meeting.
+  t6 m3     VO_TOPIC    The independ-______________ of the young volunteers impressed everyone.
+  t6 m4     GR_PPERF    This soup ______________ delicious. Can I have some more?
+  t6 m5     GR_PPERF    You look exhausted. ______________ you been running?
+  t6 m6     GR_FUTCP    By 2028, the company ______________ fifty new branches across the Gulf.
+  t6 r0     RD_MAIN     What is the text MAINLY about?
+  t6 r1     RD_DETAIL   Read the following from paragraph 2.
+  t6 r2     RD_DETAIL   Which of the following is NOT mentioned as a service of the Falcon Hospital?
+  t6 tf0    RD_TFNG     The Marmi Festival takes place at Sealine.
+  t6 tf1    RD_TFNG     Falcons are never allowed on aeroplanes.
+  t6 tf2    RD_TFNG     The most expensive falcon was sold for one million riyals.
+  t6 a0     VO_TOPIC    We stayed in a clean and cheap ______________ during our trip to Europe.
+  t6 a1     VO_TOPIC    Travelling makes people more ______________ and tolerant of other cultures.
+  t6 a2     VO_TOPIC    He was ______________ for stealing money from the company.
+  t6 b0     VO_PREP     The volunteers took part ______________ a campaign to clean the beach.
+  t6 b1     VO_PREP     Too much screen time can have a negative effect ______________ students' sleep.
+  t6 b2     VO_PREP     He is afraid ______________ heights, so he never goes to the top of tall towers.
+  t6 vb0    GR_PAST     While my mother (prepare) ______________ the iftar, my brother set the table.
+  t6 vb1    GR_FUTCP    Don't visit us at 8 tomorrow morning. We (travel) ______________ to the airport.
+  t6 rep    GR_REPV     "I will finish the report by Thursday," the employee said. (promised)
+  t6 rw0    GR_USED     When I was a child, I always slept in the afternoon, but now I don't. (used to)
+  t6 rw1    GR_COND     You press this button and the machine starts. (If)
+  t6 q12b   RD_LIST     From paragraph (2), mention THREE things falconers did to train a wild falcon.
+  t6 q12c   RD_LIST     From paragraph (5), give THREE examples of how falcons are protected today.
+  t6 writing: WR_COVER, WR_ADVDIS
+  t7 m0     VO_TOPIC    Many ______________ moved to the Gulf in the 1970s to work in the growing oil industry.
+  t7 m1     VO_TOPIC    She works as a ______________ at the hospital every weekend without receiving any money.
+  t7 m2     VO_TOPIC    The two engineers finally ______________ about the design of the new bridge.
+  t7 m3     VO_TOPIC    The develop-______________ of the new metro took several years.
+  t7 m4     GR_PPERF    This bag ______________ more than ten kilograms. It's too heavy for the cabin.
+  t7 m5     GR_PPERF    The workers ______________ the new stadium since January.
+  t7 m6     GR_FUTCP    By the end of the course, the students ______________ more than 500 new words.
+  t7 r0     RD_MAIN     What is the text MAINLY about?
+  t7 r1     RD_DETAIL   Read the following from paragraph 4.
+  t7 r2     RD_DETAIL   Which of the following is NOT mentioned as a place connected by the metro?
+  t7 tf0    RD_TFNG     The Doha Metro opened in 2019.
+  t7 tf1    RD_TFNG     Each metro train has a driver.
+  t7 tf2    RD_TFNG     A ticket on the Gold class costs twice as much as Standard.
+  t7 a0     VO_TOPIC    The restaurant serves ______________ Moroccan food prepared by chefs from Fez.
+  t7 a1     VO_TOPIC    Could I have an ______________ seat, please? I need to walk around during the flight.
+  t7 a2     VO_TOPIC    Our ______________ includes visits to the desert, the Inland Sea and the Zubarah Fort.
+  t7 b0     VO_PREP     This new app is capable ______________ translating speech instantly.
+  t7 b1     VO_PREP     Farmers in the region suffer ______________ a lack of water.
+  t7 b2     VO_PREP     Thank you ______________ your kind help during the event.
+  t7 vb0    GR_PAST     While the team (train) ______________ in the stadium, a sandstorm started.
+  t7 vb1    GR_FUTCP    This time next year, I (study) ______________ engineering at Qatar University.
+  t7 rep    GR_REPV     "You cheated in the test," the teacher said to Faisal. (accused)
+  t7 rw0    GR_USED     In the past, people always wrote letters to their relatives, but now they send messages. (
+  t7 rw1    GR_COND     When the temperature drops below 0°C, water freezes. (If)
+  t7 q12b   RD_LIST     From paragraph (1), mention THREE problems caused by traffic jams.
+  t7 q12c   RD_LIST     From paragraph (4), give THREE examples of features that make stations accessible.
+  t7 writing: WR_COVER, WR_ADVDIS
+  t8 m0     VO_TOPIC    Several ______________ from the village left to find work in the city and never came back.
+  t8 m1     VO_TOPIC    The charity relies on regular ______________ to fund its projects in poor countries.
+  t8 m2     VO_TOPIC    You shouldn't ______________ into other people's family problems.
+  t8 m3     VO_TOPIC    The popular-______________ of electric cars is growing in the Gulf.
+  t8 m4     GR_PPERF    We ______________ a new car at the moment, but we haven't found one we like.
+  t8 m5     GR_PPERF    How long ______________ you been waiting for the bus?
+  t8 m6     GR_FUTCP    By the time we get to the stadium, the match ______________.
+  t8 r0     RD_MAIN     What is the text MAINLY about?
+  t8 r1     RD_DETAIL   Read the following from paragraph 4.
+  t8 r2     RD_DETAIL   Which of the following sports is NOT mentioned as part of Aspire's training?
+  t8 tf0    RD_TFNG     Aspire Academy opened in 2004.
+  t8 tf1    RD_TFNG     Students at Aspire do not study school subjects.
+  t8 tf2    RD_TFNG     Aspire has more than 1,000 students.
+  t8 a0     VO_TOPIC    Many people prefer ______________ holidays because they are cheaper and closer to home.
+  t8 a1     VO_TOPIC    The company ______________ the driver after several serious accidents.
+  t8 a2     VO_TOPIC    People who refuse to learn about other cultures are often ______________.
+  t8 b0     VO_PREP     Please concentrate ______________ the road while you are driving.
+  t8 b1     VO_PREP     Qatar has invested heavily ______________ education and research.
+  t8 b2     VO_PREP     Athletes need to prepare ______________ the competition for many months.
+  t8 vb0    GR_PAST     While Hamad (read) ______________ the Qur'an, his little sister fell asleep.
+  t8 vb1    GR_FUTCP    At 10 o'clock tomorrow, the students (take) ______________ their physics exam.
+  t8 rep    GR_REPV     "You should drink more water in summer," the doctor said to me. (advised)
+  t8 rw0    GR_USED     My father always smoked when he was young, but now he doesn't. (used to)
+  t8 rw1    GR_COND     When you mix blue and yellow, you get green. (If)
+  t8 q12b   RD_LIST     From paragraph (3), mention THREE facilities found at Aspire.
+  t8 q12c   RD_LIST     From paragraph (5), give THREE examples of values students learn at Aspire.
+  t8 writing: WR_COVER, WR_ADVDIS
+  t9 m0     VO_TOPIC    Qatar hosts many ______________ from all over the world who come to work in its growing in
+  t9 m1     VO_TOPIC    The ______________ volunteers delivered food to families affected by the earthquake.
+  t9 m2     VO_TOPIC    Faisal had planned to climb the mountain, but he ______________ when he saw how steep it w
+  t9 m3     VO_TOPIC    The appear-______________ of the new building surprised everyone.
+  t9 m4     GR_PPERF    The old house ______________ to my grandfather before he gave it to my father.
+  t9 m5     GR_PPERF    Hessa ______________ her homework all afternoon and she's nearly finished.
+  t9 m6     GR_FUTCP    By this time next year, I ______________ from secondary school.
+  t9 r0     RD_MAIN     What is the text MAINLY about?
+  t9 r1     RD_DETAIL   Read the following from paragraph 4.
+  t9 r2     RD_DETAIL   Which of the following animals is NOT mentioned as living in or visiting the mangroves?
+  t9 tf0    RD_TFNG     Mangrove leaves can remove salt.
+  t9 tf1    RD_TFNG     Visitors can drive cars between the mangrove trees.
+  t9 tf2    RD_TFNG     Al Thakira is the largest mangrove forest in the Gulf.
+  t9 a0     VO_TOPIC    The tourists were looking for ______________ souvenirs, not cheap copies.
+  t9 a1     VO_TOPIC    My father checked the ______________ to see what time our flight to Istanbul was.
+  t9 a2     VO_TOPIC    Living abroad helped Salem become more ______________ and tolerant.
+  t9 b0     VO_PREP     The students benefited a lot ______________ the workshop on time management.
+  t9 b1     VO_PREP     Our family has always relied ______________ my uncle for advice.
+  t9 b2     VO_PREP     She is aware ______________ the dangers of using a phone while driving.
+  t9 vb0    GR_PAST     While I (wait) ______________ for the doctor, I read a magazine about Qatar's wildlife.
+  t9 vb1    GR_FUTCP    Call me after 6 pm. I (attend) ______________ a training course until then.
+  t9 rep    GR_REPV     "Yes, I will join the volunteer team," Noor said. (agreed)
+  t9 rw0    GR_USED     Ahmed always played football in the street when he was young, but now he plays in a club. 
+  t9 rw1    GR_COND     When people don't sleep enough, they feel tired. (If)
+  t9 q12b   RD_LIST     From paragraph (4), mention THREE ways mangroves are valuable for people.
+  t9 q12c   RD_LIST     From paragraph (5), give THREE examples of how the area is protected.
+  t9 writing: WR_COVER, WR_ADVDIS
+  t10 m0     VO_TOPIC    The new law helps ______________ adapt to life in their new country by offering free langu
+  t10 m1     VO_TOPIC    The hospital is looking for blood ______________ with rare blood types.
+  t10 m2     GR_PRES     My parents and I don't always ______________ about my choice of university.
+  t10 m3     VO_TOPIC    Graduating with honours was a great achieve-______________ for Khalid.
+  t10 m4     GR_PPERF    I ______________ what you mean, but I don't agree.
+  t10 m5     GR_PPERF    She ______________ for her keys for twenty minutes, but she still can't find them.
+  t10 m6     GR_FUTCP    By the end of the summer, we ______________ all the rooms in our new house.
+  t10 r0     RD_MAIN     What is the text MAINLY about?
+  t10 r1     RD_DETAIL   Read the following from paragraph 1.
+  t10 r2     RD_DETAIL   Which of the following is NOT mentioned as part of Darb Al Saai?
+  t10 tf0    RD_TFNG     Qatar National Day is celebrated on 18 December.
+  t10 tf1    RD_TFNG     The National Day parade takes place in Umm Salal.
+  t10 tf2    RD_TFNG     More than one million people watch the parade each year.
+  t10 a0     VO_TOPIC    He was ______________ after he shared confidential information with a competitor.
+  t10 a1     VO_TOPIC    A ______________ person always puts his own needs before everyone else's.
+  t10 a2     VO_TOPIC    I always choose the ______________ seat so that I can reach my bag easily.
+  t10 b0     VO_PREP     Young people today are capable ______________ learning new technology very quickly.
+  t10 b1     VO_PREP     You need to concentrate ______________ your weak points before the exam.
+  t10 b2     VO_PREP     Businesses can benefit ______________ using artificial intelligence.
+  t10 vb0    GR_PAST     While the family (watch) ______________ the National Day parade, it started to rain.
+  t10 vb1    GR_FUTCP    This time on Friday, we (camp) ______________ in the desert near Sealine.
+  t10 rep    GR_REPV     "I won't lend you my car again," my brother said. (refused)
+  t10 rw0    GR_USED     Students always used paper dictionaries in the past, but now they use apps. (used to)
+  t10 rw1    GR_COND     The alarm rings automatically when someone opens the door. (If)
+  t10 q12b   RD_LIST     From paragraph (2), mention THREE values that have shaped Qatar.
+  t10 q12c   RD_LIST     From paragraph (3), give THREE examples of how people prepare for National Day.
+  t10 writing: WR_COVER, WR_ADVDIS
+
+=== g12-module-tests.html (grade 12, 6 tests)
+  t1 m0     VO_TOPIC    My ______________ impression of the new school was very positive, and it has not changed s
+  t1 m1     VO_TOPIC    Every family in our neighbourhood has its own ______________ for welcoming guests during E
+  t1 m2     VO_TOPIC    You can tell that Mark is a ______________ from his accent; he comes from Australia.
+  t1 m3     VO_TOPIC    This restaurant only uses ______________ ingredients from local farms, so the food tastes 
+  t1 m4     GR_PPERF    Please be quiet. The baby ______________ in the next room.
+  t1 m5     GR_PPERF    This perfume ______________ wonderful. Where did you buy it?
+  t1 m6     VO_TOPIC    It is ______________ for the weather in Doha to reach 45°C in August; nobody is surprised.
+  t1 r0     RD_MAIN     What is the text MAINLY about?
+  t1 r1     RD_DETAIL   Read the following from paragraph 2.
+  t1 r2     RD_DETAIL   Which of the following is NOT mentioned as an activity at Darb Al Saai?
+  t1 tf0    RD_TFNG     Darb Al Saai takes place every December.
+  t1 tf1    RD_TFNG     Pearl divers usually started their training as adults.
+  t1 tf2    RD_TFNG     Entry to Darb Al Saai is free for all visitors.
+  t1 a0     VO_TOPIC    The falcon is a ______________ of Qatari heritage and pride.
+  t1 a1     VO_TOPIC    Many ______________ arrived in Qatar decades ago and have built successful lives here.
+  t1 a2     VO_TOPIC    Reading the newspaper with a cup of karak is part of my grandfather's morning ____________
+  t1 b0     VO_PREP     Volunteers work hard ______________ the common good of society.
+  t1 b1     VO_PREP     Hot, humid weather is typical ______________ summer in the Gulf.
+  t1 b2     VO_PREP     We visit our grandparents ______________ a regular basis, every Friday after prayer.
+  t1 vb0    GR_PRES     Look! The children (play) ______________ football in the yard again.
+  t1 vb1    GR_STAT     This new laptop (weigh) ______________ only one kilogram, so it is easy to carry.
+  t1 rep    VO_WF       Our trip to Al Zubarah Fort was truly ______________ ; I will never forget it. (memory)
+  t1 rw0    GR_STAT     Faisal has a small farm near Al Khor. (own)
+  t1 rw1    GR_PRES     My brother takes my charger without asking all the time, and it annoys me. (always)
+  t1 q12b   RD_LIST     From paragraph (3), mention THREE things visitors learn about pearl divers.
+  t1 q12c   RD_LIST     From paragraph (4), give THREE examples of what visitors can enjoy in the evening or at th
+  t1 writing: WR_IEMAIL, WR_NARR
+  t2 m0     VO_TOPIC    Wearing oversized hoodies is the latest fashion ______________ among teenagers.
+  t2 m1     VO_WF       The museum has received a ______________ number of visitors since it reopened.
+  t2 m2     VO_TOPIC    Don't accept rides from ______________ you meet online.
+  t2 m3     VO_TOPIC    A red flag on the beach is a ______________ that swimming is dangerous today.
+  t2 m4     GR_PRES     My cousin ______________ English at a university in Manchester this year.
+  t2 m5     GR_PPERF    I ______________ what you mean now. Thank you for explaining.
+  t2 m6     VO_TOPIC    Only club members can enter the ______________ lounge on the top floor.
+  t2 r0     RD_MAIN     What is the MAIN PURPOSE of the text?
+  t2 r1     RD_REF      Read the following from paragraph 2.
+  t2 r2     RD_DETAIL   Which of the following is TRUE about Ravi?
+  t2 tf0    RD_TFNG     Abdullah and Ravi worked for the same company.
+  t2 tf1    RD_TFNG     Ravi felt comfortable speaking in the majlis from the very first evening.
+  t2 tf2    RD_TFNG     Ravi's wife is also from India.
+  t2 a0     VO_TOPIC    Shaking hands with the right hand is one of the ______________ of our society.
+  t2 a1     VO_TOPIC    Every fingerprint is ______________; no two people have the same one.
+  t2 a2     VO_TOPIC    Thousands of ______________ visit the Museum of Islamic Art every month.
+  t2 b0     VO_PREP     The dove is a symbol ______________ peace in many cultures.
+  t2 b1     VO_PREP     Our teacher always pays attention ______________ small details.
+  t2 b2     VO_PREP     Many families gather ______________ Katara Cultural Village on Friday evenings.
+  t2 vb0    GR_STAT     That expensive watch (belong) ______________ to my uncle, not to me.
+  t2 vb1    GR_PRES     Be careful! The water (boil) ______________, so don't touch the kettle.
+  t2 rep    VO_WF       She was ______________ with emotion when she heard her exam results. (overwhelm)
+  t2 rw0    GR_PRES     Biting his nails is something Ali does often, and it is a bad habit. (habit)
+  t2 rw1    GR_STAT     In my opinion, this soup has a delicious taste. (taste)
+  t2 q12b   RD_LIST     From paragraph (4), mention THREE things Ravi does today.
+  t2 q12c   RD_LIST     From paragraphs (5) and (6), give THREE pieces of advice or benefits mentioned for immigra
+  t2 writing: WR_IEMAIL, WR_ADVDIS
+  t3 m0     VO_TOPIC    Hamad is a regular blood ______________ who gives blood every three months.
+  t3 m1     VO_WF       The ______________ between the two schools made the charity project a great success.
+  t3 m2     VO_WF       The documentary was very ______________; I learned a lot about life in refugee camps.
+  t3 m3     VO_TOPIC    A wealthy ______________ paid for the new wing of the children's hospital.
+  t3 m4     GR_PPERF    The volunteers ______________ food parcels since early this morning, and they are exhauste
+  t3 m5     VO_TOPIC    I ______________ my science project yet, so I can't go out tonight.
+  t3 m6     GR_PPERF    So far, our class ______________ more than 5,000 riyals for the orphanage.
+  t3 r0     RD_MAIN     What is the text MAINLY about?
+  t3 r1     RD_DETAIL   Read the following from paragraph 5.
+  t3 r2     RD_DETAIL   Why did Noora decide to organise a bake sale?
+  t3 tf0    RD_TFNG     The first bake sale raised 3,000 riyals.
+  t3 tf1    RD_TFNG     Noora has organised only one fundraiser since the bake sale.
+  t3 tf2    RD_TFNG     Noora wants to study medicine at university.
+  t3 a0     VO_TOPIC    The children live in an ______________ because they lost their parents in the war.
+  t3 a1     VO_TOPIC    Every ______________, big or small, makes a difference to families in need.
+  t3 a2     VO_TOPIC    Thank you for your kind ______________; I could not have finished without your help.
+  t3 b0     VO_PREP     The charity relies ______________ donations from the public.
+  t3 b1     VO_PREP     Small villages can benefit ______________ a clean water well.
+  t3 b2     VO_PREP     The two teams decided to cooperate ______________ each other on the project.
+  t3 vb0    GR_PPERF    Mona (volunteer) ______________ at the food bank for two years now.
+  t3 vb1    GR_PPERF    I (just / receive) ______________ a thank-you letter from the charity.
+  t3 rep    VO_WF       His ______________ towards the poor is well known in our neighbourhood. (generous)
+  t3 rw0    GR_PPERF    Khalid started giving money to the orphanage three years ago. (for)
+  t3 rw1    GR_COMP     I have never seen such a generous person. (most)
+  t3 q12b   RD_LIST     From paragraph (4), mention THREE activities of the volunteer club.
+  t3 q12c   RD_LIST     From paragraph (5), give THREE benefits of volunteering for young people.
+  t3 writing: WR_ADVDIS, WR_IEMAIL
+  t4 m0     VO_TOPIC    Modern smartphones are ______________ of taking excellent photos at night.
+  t4 m1     VO_WF       Regular ______________ helps students know their strengths and weaknesses.
+  t4 m2     VO_WF       Winning the science fair was a great ______________ for our team.
+  t4 m3     VO_WF       It was very ______________ of you to visit my grandfather in hospital.
+  t4 m4     GR_PPERF    Ahmed ______________ with his grandmother since he moved to Doha.
+  t4 m5     GR_PPERF    I'm so tired because I ______________ on this report all day.
+  t4 m6     VO_TOPIC    I have written more than half of my essay ______________.
+  t4 r0     RD_MAIN     What is the text MAINLY about?
+  t4 r1     RD_DETAIL   Read the following from paragraph 3.
+  t4 r2     RD_DETAIL   Which of the following is NOT mentioned as a problem of technology in education?
+  t4 tf0    RD_TFNG     Online learning became the only option for many students during the pandemic.
+  t4 tf1    RD_TFNG     According to the text, technology can completely replace teachers.
+  t4 tf2    RD_TFNG     Most schools in Qatar now teach all their lessons online.
+  t4 a0     VO_TOPIC    Please show your ______________ card before you enter the exam hall.
+  t4 a1     VO_TOPIC    Drinking plenty of water is an ______________ way to stay healthy in summer.
+  t4 a2     VO_TOPIC    Regular ______________ is necessary if you want to pass the course.
+  t4 b0     VO_PREP     He was absent ______________ school last week because he had a fever.
+  t4 b1     VO_PREP     You need to concentrate ______________ your studies, not your phone.
+  t4 b2     VO_PREP     I can't come to the match; I'm revising ______________ tomorrow's test.
+  t4 vb0    GR_PPERF    Salim (look) ______________ for his car keys for an hour, but he still can't find them.
+  t4 vb1    GR_PPERF    Huda and Noor (know) ______________ each other since primary school.
+  t4 rep    VO_WF       Please read the ______________ carefully before you start the experiment. (instruct)
+  t4 rw0    GR_PPERF    It is a long time since I last visited my cousins in Al Wakra. (for)
+  t4 rw1    GR_PPERF    When did you start learning to drive? (How long)
+  t4 q12b   RD_LIST     From paragraph (2), mention THREE things students can now do to find information.
+  t4 q12c   RD_LIST     From paragraph (5), give THREE problems of using technology in education.
+  t4 writing: WR_ADVDIS, WR_IEMAIL
+  t5 m0     VO_TOPIC    Mr. Faisal is a(n) ______________ manager; he always listens to new and creative ideas.
+  t5 m1     GR_REP      Sara planned to give a speech, but at the last minute she ______________ and asked her fri
+  t5 m2     VO_WF       Qatar Charity often organises ______________ events to collect money for families in need.
+  t5 m3     VO_WF       The ______________ of our community helped the new families feel welcome.
+  t5 m4     GR_PPERF    While Ali ______________ for his exam, his mother was preparing dinner.
+  t5 m5     GR_USED     When my grandfather was young, he ______________ walk five kilometres to school every day.
+  t5 m6     GR_PPERF    I ______________ my phone while I was running in the park.
+  t5 r0     RD_MAIN     What is the MAIN PURPOSE of the text?
+  t5 r1     RD_DETAIL   Read the following from paragraph 4.
+  t5 r2     RD_DETAIL   Which of the following is TRUE about Khalifa as a teenager?
+  t5 tf0    RD_TFNG     The lights went out during a sandstorm.
+  t5 tf1    RD_TFNG     The ambulance arrived a few minutes after Khalifa called.
+  t5 tf2    RD_TFNG     Khalifa's grandfather had a heart problem before that night.
+  t5 a0     VO_TOPIC    A ______________ person thinks only about himself and rarely helps others.
+  t5 a1     VO_TOPIC    Ahmad is a ______________ young man who always speaks politely to older people.
+  t5 a2     VO_TOPIC    My uncle is very ______________; he shouts at everyone when he is hungry.
+  t5 b0     VO_PREP     The teacher turned a blind eye ______________ the small mistakes in my essay.
+  t5 b1     VO_PREP     Please don't stick your nose ______________ my private business.
+  t5 b2     VO_PREP     When the fire alarm rang, my heart was ______________ my mouth.
+  t5 vb0    GR_PAST     While I (clean) ______________ my cupboard, I found some old family photos.
+  t5 vb1    GR_PAST     A man stopped me in the street and (ask) ______________ me the way to the metro station.
+  t5 rep    VO_WF       The family thanked the volunteers with tears of ______________ in their eyes. (grateful)
+  t5 rw0    GR_USED     Sara always ate junk food, but now she follows a healthy diet. (used to)
+  t5 rw1    GR_PAST     Rashid was sleeping. The phone rang. (while)
+  t5 q12b   RD_LIST     From paragraph (4), mention THREE things Khalifa did to help.
+  t5 q12c   RD_LIST     From paragraph (6), give THREE examples of how Khalifa's life is different today.
+  t5 writing: WR_NARR, WR_IEMAIL
+  t6 m0     VO_TOPIC    He never shares anything with his friends; he's so ______________.
+  t6 m1     VO_TOPIC    Since he won the prize, he has become ______________ and thinks he is better than everyone
+  t6 m2     VO_TOPIC    My brother and I never ______________ about football because we support different teams.
+  t6 m3     VO_TOPIC    My parents ______________ and said I couldn't travel alone until I was eighteen.
+  t6 m4     GR_USED     When I was a child, I ______________ like vegetables, but now I love them.
+  t6 m5     GR_PPERF    The students ______________ a video when the fire alarm suddenly rang.
+  t6 m6     VO_WF       Qatar Charity is a ______________ organisation that helps people in need in many countries
+  t6 r0     RD_MAIN     What is the text MAINLY about?
+  t6 r1     RD_DETAIL   Read the following from paragraph 5.
+  t6 r2     RD_DETAIL   What did the puller do?
+  t6 tf0    RD_TFNG     The pearl diving season lasted about four months.
+  t6 tf1    RD_TFNG     The divers had plenty of fresh water on the boats.
+  t6 tf2    RD_TFNG     Saleh later found a job in the oil industry.
+  t6 a0     VO_TOPIC    Being ______________, Tom refuses to listen to opinions that are different from his own.
+  t6 a1     VO_TOPIC    My grandmother is a bit ______________; she often forgets where she has put her glasses.
+  t6 a2     VO_TOPIC    A businessman made a generous ______________ of one million riyals to the hospital.
+  t6 b0     VO_PREP     The mosque appealed ______________ donations to help the flood victims.
+  t6 b1     VO_PREP     Many poor families depend ______________ public donations.
+  t6 b2     VO_PREP     We are very proud ______________ our school's volunteer team.
+  t6 vb0    GR_USED     My grandfather (would / tell) ______________ us stories about the sea every evening.
+  t6 vb1    GR_PAST     While we (drive) ______________ to Dukhan, we saw a herd of camels crossing the road.
+  t6 rep    VO_WF       The children were taken to an ______________ after the earthquake. (orphan)
+  t6 rw0    GR_USED     When I was a child, I did not like to eat fish. (use)
+  t6 rw1    GR_USED     In the past, people always ignored the impact of climate change, but now they don't. (used
+  t6 q12b   RD_LIST     From paragraph (3), mention THREE things a diver used or wore.
+  t6 q12c   RD_LIST     From paragraph (4), give THREE examples of the difficulties divers faced.
+  t6 writing: WR_NARR, WR_ADVDIS
+
+=== g12-mock-exam-3.html (grade 12, 1 tests)
+  t1 m0     VO_TOPIC    Every Ramadan, the children's hospital ______________ hundreds of toys and books from kind
+  t1 m1     VO_TOPIC    In many countries, a white dove is a ______________ of peace.
+  t1 m2     VO_TOPIC    The new shopping mall in Al Wakrah will create ______________ for more than 500 young peop
+  t1 m3     VO_TOPIC    My aunt took us to a small café in Souq Waqif that serves ______________ Moroccan tea, mad
+  t1 m4     GR_PRES     Please turn the TV down. Grandpa ______________ on the phone with his doctor.
+  t1 m5     VO_TOPIC    ______________ Nile is the longest river in Africa. It flows through eleven countries.
+  t1 m6     VO_TOPIC    If Maryam ______________ her homework early, she will join us at the park.
+  t1 r0     RD_MAIN     What is the text MAINLY about?
+  t1 r1     RD_DETAIL   Read the following from paragraph 1.
+  t1 r2     RD_DETAIL   Based on paragraph 1, what makes Layla Al-Mansouri special?
+  t1 tf0    RD_TFNG     Al-Mansouri won Wildlife Image of the Year at a competition in London.
+  t1 tf1    RD_TFNG     As a child, Al-Mansouri wanted to become a doctor.
+  t1 tf2    RD_TFNG     Al-Mansouri and Hayes dived under ice during their 2024 trip.
+  t1 a0     VO_TOPIC    Our new neighbour is a ______________ boy; he always says "please" and "thank you".
+  t1 a1     VO_TOPIC    The metro to Lusail leaves from ______________ 3, so we need to go downstairs.
+  t1 a2     VO_TOPIC    If you have a complaint about the service, please ask to speak to the hotel ______________
+  t1 b0     VO_PHR      My father dropped me ______________ at school before he went to work.
+  t1 b1     VO_PREP     It is hard to concentrate ______________ your homework when the TV is on.
+  t1 b2     VO_PREP     Many patients will benefit ______________ the new medicine.
+  t1 vb0    GR_FUT      "There's no milk left!" "Don't worry. I (buy) ______________ some on my way home."
+  t1 vb1    GR_PPERF    Ms Huda (teach) ______________ at this school since 2015.
+  t1 vb2    GR_STAT     That blue bicycle (belong) ______________ to my cousin Rashid.
+  t1 rep    VO_WF       Our science teacher showed us a very ______________ film about coral reefs. (inform)
+  t1 rw0    GR_REPV     "I will call you as soon as I land," Majid said to me. (promised)
+  t1 q12b   RD_LIST     From paragraph (2), mention THREE awards or prizes Al-Mansouri has won.
+  t1 q12c   RD_LIST     From paragraph (4), mention THREE reasons why Al-Mansouri deserves the name "the Sea's Amb
+  t1 writing: WR_COVER, WR_ADVDIS
+
+=== module-test-4.html (grade 12, 1 tests)
+  t1 m0     VO_TOPIC    You can only take one ___ with you into the plane’s cabin.
+  t1 m1     VO_TOPIC    On a plane, it’s always better to keep your seat belt on during the flight in case there i
+  t1 m2     VO_TOPIC    This time next Friday, Mr. Evans ___ to Doha to attend a business meeting.
+  t1 m3     VO_TOPIC    If I ___ enough time, I will attend the presentation.
+  t1 m4     VO_TOPIC    By next month, the bank ___ extra staff for its new branch.
+  t1 m5     VO_TOPIC    Unless you come early, you ___ the class.
+  t1 m6     VO_TOPIC    By the end of next summer, Saad ___ a course in project management.
+  t1 b0     VO_TOPIC    Time passed very fast on the plane as I was watching a/an ___ film.
+  t1 b1     VO_TOPIC    Jacklin went to the ticket office to ask about the right ___ number because she got confus
+  t1 b2     VO_TOPIC    Hassan usually takes a/an ___ seat when he travels by plane.
+  t1 b3     VO_TOPIC    Our flight won’t be a direct one. There is a/an ___ in London.
+  t1 b4     VO_TOPIC    The only scary thing for Sara on the plane is when there are some ___.
+  t1 p0     VO_PHR      You have to check ___ from the hotel at 1.00. A bus will take you to the airport.
+  t1 p1     VO_PHR      Can you please drop me ___ at the bus stop on your way to work?
+  t1 p2     VO_PHR      All events in London were called ___ because of the death of the queen.
+  t1 p3     VO_PHR      I can barely make ___ what you are saying as your English is not that perfect.
+  t1 p4     VO_PHR      I couldn’t make ___ what the student meant to say because of his bad handwriting.
+  t1 p5     VO_PHR      At this hotel, you must check ___ before 11 am.
+  t1 p6     VO_PHR      Can you drop me ___ at the train station, please?
+  t1 v0     GR_COND     We will finish by six o’clock if we start now.
+  t1 v1     GR_FUT      Don’t worry, I ___ (send) you the location of the event.
+  t1 v2     GR_COND     You should have EHTERAZ on your mobile, otherwise you won’t get into the mall.
+  t1 v3     GR_COND     Unless you keep your mask on, you ___ (catch) the virus.
+  t1 v4     GR_COND     If you exercise on a regular basis, you ___ (be) more active.
+  t1 v5     GR_FUT      I am really hungry, I think I ___ (order) some food.
+  t1 v6     GR_FUTCP    This time tomorrow, I won’t be able to answer your call because I ___ (drive), on my way t
+  t1 w0     GR_FUTCP    He started working in this company a long time ago. It will be his 10th year next year.
+  t1 w1     GR_COND     See a doctor in case of a severe headache.
+  t1 w2     GR_COND     The lights turn on automatically when someone enters the room.
+  t1 r0     RD_MAIN     What is the text mainly about?
+  t1 r1     RD_DETAIL   Read the following from paragraph 4: “When we leave the hospital late in the evening, we u
+  t1 r2     RD_DETAIL   Based on paragraph 3, which of the following would be useless in Lucy’s job?
+  t1 tf0    RD_TFNG     Lucy feels really pleased with her job.
+  t1 tf1    RD_TFNG     Lucy and her colleague Dr. Eddy get paid monthly.
+  t1 tf2    RD_TFNG     Lucy is the only clown in her family.
+  t1 q14    RD_LIST     
+  t1 q15    RD_LIST     
+  t1 writing: WR_ADVDIS
+
+=== mock-exam-2.html (grade 12, 1 tests)
+  t1 q0     VO_TOPIC    The newest fashion ______ among teenagers is wearing loose jackets.
+  t1 q1     VO_TOPIC    You may take one piece of ______ into the aircraft cabin.
+  t1 q2     VO_TOPIC    Omar welcomes new suggestions and listens to different opinions. He is ______.
+  t1 q3     VO_TOPIC    The company needs to ______ additional engineers for its new project.
+  t1 q4     GR_PPERF    Yusuf ______ with his grandfather since he moved to Doha in 2023.
+  t1 q5     GR_PAST     While Sara ______ her presentation, her sister knocked on the door.
+  t1 q6     GR_COND     Unless Abdullah leaves now, he ______ the beginning of the meeting.
+  t1 q7     VO_WF       Fill in: The school provided technical ______ to students using the new website.
+  t1 q8     VO_TOPIC    Fill in: Mariam works for a large engineering ______ in Doha.
+  t1 q9     VO_TOPIC    Fill in: The charity thanked the generous ______ for supporting families.
+  t1 q10    VO_PREP     Fill in: Yassin is capable ______ solving difficult problems.
+  t1 q11    VO_PHR      Fill in: Guests must check ______ of the hotel by noon.
+  t1 q12    VO_PREP     Fill in: Please pay attention ______ the safety signs.
+  t1 q13    GR_FUT      Complete: Don’t worry. I ______ (send) you the address right now.
+  t1 q14    GR_USED     Complete: When I was younger, I ______ (play) football every Friday.
+  t1 q15    GR_STAT     Complete: The soup ______ (smell) delicious.
+  t1 q16    VO_WF       Complete with the correct form: This explanation is very ______ (meaning).
+  t1 q17    GR_REP      Rewrite in reported speech. “I will update the timetable,” the manager said. Complete: The
+  t1 q18    RD_MAIN     What are the THREE texts mainly about?
+  t1 q19    RD_DETAIL   In Text A, what does “less expensive” mean?
+  t1 q20    RD_DETAIL   According to Text C, why do people choose wellness travel?
+  t1 q21    RD_DETAIL   Write T (True), F (False), or NG (Not Given): Weekend travel always requires a two-week ho
+  t1 q22    RD_DETAIL   Write T (True), F (False), or NG (Not Given): Employers normally cover local transport cos
+  t1 q23    RD_DETAIL   Write T (True), F (False), or NG (Not Given): The wellness centre in Text C opened in 2010
+  t1 q24    RD_DETAIL   Text A: Give ONE reason weekend travel is convenient for busy people.
+  t1 q25    RD_DETAIL   Text A: Give ONE reason weekend travel costs less.
+  t1 q26    RD_DETAIL   Text A: Name ONE group that weekend travel suits.
+  t1 q27    RD_DETAIL   Text B: Name ONE cost usually covered by employers.
+  t1 q28    RD_DETAIL   Text B: Name ANOTHER cost usually covered by employers.
+  t1 q29    RD_DETAIL   Text B: Name a THIRD cost usually covered by employers.
+  t1 writing: WR_COVER, WR_STORY
+
+=== g12-grammar.html (grade 12, 3 tests)
+  t1 m0     GR_PRES     Look! The children ____ in the garden.
+  t1 m1     GR_STAT     This perfume ____ wonderful. Where did you buy it?
+  t1 m2     GR_PRES     My father ____ to work by metro every day.
+  t1 m3     GR_PPERF    I ____ for my keys for twenty minutes, and I still can't find them.
+  t1 m4     GR_PPERF    Sara ____ three books this month.
+  t1 m5     GR_PPERF    We ____ in Doha since 2015.
+  t1 m6     GR_PAST     While I ____ dinner, the lights went out.
+  t1 m7     GR_PAST     Ali ____ his leg when he was playing football yesterday.
+  t1 m8     GR_PAST     When you called me, I ____ a shower, so I didn't answer.
+  t1 m9     GR_USED     My grandfather ____ live in a small house near the sea.
+  t1 m10    GR_USED     When we were children, we ____ go to the beach every Friday.
+  t1 m11    GR_USED     I'm new in Doha, but I'm slowly getting ____ the hot weather.
+  t1 m12    GR_FUT      "The phone is ringing." "I ____ answer it."
+  t1 m13    GR_FUT      Look at those black clouds! It ____ rain.
+  t1 m14    GR_FUT      According to the timetable, the train to Lusail ____ at 7:30 tomorrow morning.
+  t1 m15    GR_FUTCP    This time tomorrow, I ____ on the beach in Sealine.
+  t1 m16    GR_FUTCP    By the end of this year, Fatima ____ her degree.
+  t1 m17    GR_FUTCP    By June, my father ____ at the bank for twenty years.
+  t1 m18    GR_COMP     The Doha Metro is ____ than the bus.
+  t1 m19    GR_COMP     This is ____ museum I have ever visited.
+  t1 m20    GR_COMP     The more you read, ____ your English becomes.
+  t1 m21    GR_COND     If you heat ice, it ____.
+  t1 m22    GR_COND     If it rains tomorrow, we ____ the trip.
+  t1 m23    GR_COND     ____ you study hard, you won't pass the exam.
+  t1 m24    GR_REP      "I am tired," Noor said. → Noor said that she ____ tired.
+  t1 m25    GR_REP      "We will visit you," they told me. → They told me that they ____ visit me.
+  t1 m26    GR_REP      "Where do you live?" he asked me. → He asked me where ____.
+  t1 m27    GR_REPV     "I'll help you with your project," Ahmed said. → Ahmed ____ to help me with my project.
+  t1 m28    GR_REPV     "Let's go to Katara," said Mona. → Mona ____ going to Katara.
+  t1 m29    GR_REPV     "I didn't break the window," the boy said. → The boy ____ breaking the window.
+  t1 c0     GR_REP      "I am preparing the iftar," Mum said.
+  t1 c1     GR_REP      "Don't touch the oven," the chef told the boy.
+  t1 c2     GR_REP      "I will finish the report by Thursday," the employee said. (promised)
+  t1 c3     GR_REP      "You should drink more water," the doctor told me. (advised)
+  t1 v0     GR_PRES     Water ____ (boil) at 100 °C.
+  t1 v1     GR_PRES     Listen! Someone ____ (knock) on the door.
+  t1 v2     GR_STAT     I ____ (not / know) the answer to this question.
+  t1 v3     GR_PPERF    She ____ (work) in this school since 2019.
+  t1 v4     GR_PPERF    Oh no! I ____ (lose) my phone. I can't find it anywhere.
+  t1 v5     GR_PAST     While Hassan ____ (drive) to Al Khor, he saw a flock of flamingos.
+  t1 v6     GR_PAST     The plane ____ (land) at 6 a.m. yesterday.
+  t1 v7     GR_FUTCP    Don't phone me at 9 tonight. I ____ (study) for my test.
+  t1 v8     GR_FUTCP    By next summer, my brother ____ (save) enough money to buy a car.
+  t1 v9     GR_COND     If I ____ (have) time this evening, I will help you.
+  t1 v10    GR_FUT      I'm sure our team ____ (win) the match tomorrow.
+  t1 v11    GR_FUT      "I'm thirsty." "Wait, I ____ (get) you some water."
+  t1 r0     GR_USED     My father smoked when he was young, but he doesn't now.
+  t1 r1     GR_COND     When you mix red and white, you get pink.
+  t1 r2     GR_COND     Leave now or you will miss the bus.
+  t1 r3     GR_COMP     No building in Qatar is taller than this tower.
+  t1 writing: 
+  t2 m0     GR_PRES     Be quiet! The baby ____.
+  t2 m1     GR_STAT     I ____ what you mean now. Thanks for explaining.
+  t2 m2     GR_PRES     The sun ____ in the east.
+  t2 m3     GR_PPERF    She is tired because she ____ all morning.
+  t2 m4     GR_PPERF    I ____ this film before, so let's watch a different one.
+  t2 m5     GR_PPERF    How long ____ English?
+  t2 m6     GR_PAST     The students ____ quietly when the principal came in.
+  t2 m7     GR_PAST     I ____ my homework when my cousin arrived.
+  t2 m8     GR_PAST     Yesterday, Khalid ____ to the dentist after school.
+  t2 m9     GR_USED     There ____ a cinema in our village, but it closed years ago.
+  t2 m10    GR_USED     Saad doesn't mind the heat; he ____ living in the desert.
+  t2 m11    GR_USED     When we were young, my mother ____ make us fresh bread every morning.
+  t2 m12    GR_FUT      We have already bought the tickets. We ____ travel to Muscat next week.
+  t2 m13    GR_FUT      "I can't carry this box." "Don't worry, I ____ help you."
+  t2 m14    GR_FUT      Hurry up! The film ____ at 8 p.m. tonight.
+  t2 m15    GR_FUTCP    Don't call at 9 tomorrow; we ____ dinner then.
+  t2 m16    GR_FUTCP    By 10 p.m., all the guests ____ home, so the house will be quiet.
+  t2 m17    GR_FUTCP    By next month, Hamad ____ in this company for five years.
+  t2 m18    GR_COMP     Summer in Qatar is ____ than winter.
+  t2 m19    GR_COMP     Burj Khalifa is ____ building in the world.
+  t2 m20    GR_COMP     My phone is not as expensive ____ yours.
+  t2 m21    GR_COND     If you don't water plants, they ____.
+  t2 m22    GR_COND     You can borrow my laptop ____ you return it tomorrow.
+  t2 m23    GR_COND     Take an umbrella ____ it rains.
+  t2 m24    GR_REP      "I can swim," Ali said. → Ali said that he ____ swim.
+  t2 m25    GR_REP      "I have finished my homework," Sara said. → Sara said that she ____ her homework.
+  t2 m26    GR_REP      "Are you coming?" she asked me. → She asked me ____ coming.
+  t2 m27    GR_REPV     "Sorry, I'm late," Fahad said. → Fahad ____ for being late.
+  t2 m28    GR_REPV     "I won't lend you my car," my brother said. → My brother ____ to lend me his car.
+  t2 m29    GR_REPV     "Don't forget to bring your passport," Mum said to me. → Mum ____ me to bring my passport.
+  t2 c0     GR_REP      "I am studying for my exam," Hessa said.
+  t2 c1     GR_REP      "Please close the window," the teacher said to Ali. (asked)
+  t2 c2     GR_REP      "Let's visit the Museum of Islamic Art," Sara said. (suggested)
+  t2 c3     GR_REP      "I took the money," the boy said. (admitted)
+  t2 v0     GR_PRES     Hassan always ____ (pray) in the mosque near his house.
+  t2 v1     GR_PRES     Look! The bus ____ (come).
+  t2 v2     GR_STAT     This bag ____ (belong) to my sister.
+  t2 v3     GR_PPERF    They ____ (build) the new stadium for two years, and it isn't finished yet.
+  t2 v4     GR_PPERF    I ____ (never / visit) Japan.
+  t2 v5     GR_PAST     Hamad ____ (read) the Qur'an when his little sister fell asleep.
+  t2 v6     GR_PAST     My family ____ (move) to Al Wakra in 2018.
+  t2 v7     GR_FUTCP    At 10 a.m. tomorrow, the students ____ (take) their physics exam.
+  t2 v8     GR_FUTCP    By 2030, Qatar ____ (plant) millions of new trees.
+  t2 v9     GR_COND     If it ____ (not / rain), we will go to the beach.
+  t2 v10    GR_FUT      I think robots ____ (do) many of our jobs in the future.
+  t2 v11    GR_FUT      Ahmed's flight ____ (arrive) at 4 p.m. tomorrow.
+  t2 r0     GR_USED     Qatari families travelled by camel in the past, but now they drive cars.
+  t2 r1     GR_COND     Plants die when they don't get enough water.
+  t2 r2     GR_COND     You must study harder or you will fail.
+  t2 r3     GR_COMP     My brother is taller than all the other boys in his class.
+  t2 writing: 
+  t3 m0     GR_PRES     Hurry up! Everyone ____ for us.
+  t3 m1     GR_STAT     I ____ this new phone; it's much faster than my old one.
+  t3 m2     GR_PRES     Nurses ____ care of sick people.
+  t3 m3     GR_PPERF    My eyes are red because I ____ on the computer for hours.
+  t3 m4     GR_PPERF    Ali ____ his homework, so he can go out now.
+  t3 m5     GR_PPERF    They ____ each other since they were children.
+  t3 m6     GR_PAST     My friends ____ when I arrived, so I joined them on the dance floor.
+  t3 m7     GR_PAST     Last summer, we ____ to Türkiye for two weeks.
+  t3 m8     GR_PAST     While my mother ____ the iftar, my brother set the table.
+  t3 m9     GR_USED     My father ____ work in Ras Laffan, but now he is retired.
+  t3 m10    GR_USED     On Fridays, my grandmother ____ tell us stories after lunch when we were young.
+  t3 m11    GR_USED     It took me a long time to ____ driving on the right.
+  t3 m12    GR_FUT      I've made my decision: I ____ study medicine at university.
+  t3 m13    GR_FUT      "It's very hot in here." "OK, I ____ open the window."
+  t3 m14    GR_FUT      School ____ at 7 a.m. every day.
+  t3 m15    GR_FUTCP    This time next week, we ____ in the State Grand Mosque.
+  t3 m16    GR_FUTCP    By 2030, the workers ____ the new metro line.
+  t3 m17    GR_FUTCP    By the end of this term, I ____ English for ten years.
+  t3 m18    GR_COMP     Today is ____ day of the year so far.
+  t3 m19    GR_COMP     Travelling by plane is ____ than travelling by car.
+  t3 m20    GR_COMP     The ____ you leave, the earlier you will arrive.
+  t3 m21    GR_COND     If you press this button, the machine ____.
+  t3 m22    GR_COND     ____ you don't hurry, you will miss the bus.
+  t3 m23    GR_COND     I will lend you my car ____ you drive carefully.
+  t3 m24    GR_REP      "I am leaving tomorrow," he said. → He said that he was leaving ____.
+  t3 m25    GR_REP      "I bought a new car," Fahad said. → Fahad said that he ____ a new car.
+  t3 m26    GR_REP      "What time is it?" she asked. → She asked what time ____.
+  t3 m27    GR_REPV     "You should study harder," my teacher said to me. → My teacher ____ me to study harder.
+  t3 m28    GR_REPV     "I'll pay you back on Sunday," Khalid said. → Khalid ____ to pay me back on Sunday.
+  t3 m29    GR_REPV     "OK, I broke the vase," Ali said. → Ali ____ breaking the vase.
+  t3 c0     GR_REP      "I am reading a novel," Noura said.
+  t3 c1     GR_REP      "Don't be late," the coach told the players.
+  t3 c2     GR_REP      "I didn't cheat in the exam," Salem said. (denied)
+  t3 c3     GR_REP      "Can I help you with your bags?" the man said to me. (offered)
+  t3 v0     GR_PRES     My brother ____ (go) to the gym three times a week.
+  t3 v1     GR_PRES     Shh! I ____ (talk) on the phone.
+  t3 v2     GR_PRES     These shoes ____ (cost) 300 riyals.
+  t3 v3     GR_PPERF    We ____ (wait) here for an hour! Where is the bus?
+  t3 v4     GR_PPERF    Mariam ____ (just / finish) her project.
+  t3 v5     GR_PAST     While the guests ____ (arrive), the host was preparing Arabic coffee.
+  t3 v6     GR_PAST     Ibn Battuta ____ (travel) to many countries in the 14th century.
+  t3 v7     GR_FUTCP    This time on Friday, we ____ (camp) in the desert near Sealine.
+  t3 v8     GR_FUTCP    By the end of the year, I ____ (read) twenty books.
+  t3 v9     GR_COND     If you ____ (mix) blue and yellow, you get green.
+  t3 v10    GR_FUT      "Oh no, I've forgotten my wallet!" "Don't worry, I ____ (lend) you some money."
+  t3 v11    GR_COND     Unless you ____ (book) now, there won't be any seats.
+  t3 r0     GR_USED     People ignored the impact of climate change in the past, but now they don't.
+  t3 r1     GR_COND     When it doesn't rain for a long time, the desert plants dry up.
+  t3 r2     GR_COND     Be careful or you will hurt yourself.
+  t3 r3     GR_COMP     No city in Qatar is bigger than Doha.
+  t3 writing: 
+
+=== g12-vocabulary.html (grade 12, 3 tests)
+  t1 m0     VO_TOPIC    My ____ reaction to the news was shock, but later I felt happy.
+  t1 m1     VO_TOPIC    Our ____ goal this term is to improve our reading skills.
+  t1 m2     VO_TOPIC    The restaurant in Souq Waqif serves ____ Qatari dishes made with old family recipes.
+  t1 m3     VO_TOPIC    Shaking hands with the right hand is one of the ____ of many Arab societies.
+  t1 m4     VO_TOPIC    Biting your nails is a bad ____ that is hard to stop.
+  t1 m5     VO_TOPIC    My daily ____ starts with prayer, breakfast and a short walk.
+  t1 m6     VO_TOPIC    Wearing white trainers with formal clothes is the latest ____ among young people.
+  t1 m7     VO_TOPIC    Thousands of ____ visit Doha every winter to enjoy the warm weather and the museums.
+  t1 m8     VO_TOPIC    Children should never get into a car with a ____.
+  t1 m9     VO_TOPIC    ____ who escape from war often need food, shelter and medical care.
+  t1 m10    VO_TOPIC    Many ____ have lived and worked in Qatar for more than twenty years.
+  t1 m11    VO_TOPIC    The charity received a generous ____ of one million riyals.
+  t1 m12    VO_TOPIC    Ahmed is a regular blood ____; he gives blood every six months.
+  t1 m13    VO_TOPIC    A rich ____ paid for the new school and hospital in the village.
+  t1 m14    VO_TOPIC    Over 500 ____ helped to clean the beach without being paid.
+  t1 m15    VO_TOPIC    Qatar sent ____ aid, such as food and medicine, to the families affected by the earthquake
+  t1 m16    VO_TOPIC    Khalid never spends money on anyone; he is really ____.
+  t1 m17    VO_TOPIC    My grandmother is very ____; she always forgets where she put her glasses.
+  t1 m18    VO_TOPIC    Don't make him angry; he is very ____ in the morning.
+  t1 m19    VO_TOPIC    When the pilot announced an emergency landing, ____.
+  t1 m20    VO_TOPIC    Saad wanted to sing on stage, but at the last minute he ____ and stayed at home.
+  t1 m21    VO_TOPIC    The teacher saw the student using his phone but ____ it because it was the last day of ter
+  t1 m22    VO_TOPIC    Please put your bag in the ____ above your seat.
+  t1 m23    VO_TOPIC    The ____ checked our tickets as soon as the train left the station.
+  t1 m24    VO_TOPIC    After ten years in the company, Noura decided to ____ and start her own business.
+  t1 w0     VO_WF       The ____ (generous) of the people of Qatar is well known.
+  t1 w1     VO_WF       Children at the ____ (orphan) receive free education.
+  t1 w2     VO_WF       We are full of ____ (gratify) to the volunteers who helped us.
+  t1 w3     VO_WF       Her ____ (involve) in the school project was impressive.
+  t1 w4     VO_WF       The museum visit was very ____ (inform).
+  t1 w5     VO_WF       Ali is an ____ (ambition) student who wants to study medicine.
+  t1 w6     VO_WF       Thank you for your ____ (assist) with my homework.
+  t1 w7     VO_WF       It was a ____ (memory) trip that I will never forget.
+  t1 w8     VO_WF       Good ____ (cooperate) between students makes group work easier.
+  t1 w9     VO_WF       The final match was really ____ (excite).
+  t1 b0_0   VO_TOPIC    I always choose a seat next to the ____ so I can walk around easily.
+  t1 b0_1   VO_TOPIC    The train to Al Wakra leaves from ____ 3.
+  t1 b0_2   VO_TOPIC    The plane shook a lot because of strong ____.
+  t1 b0_3   VO_TOPIC    The taxi ____ from the airport to the hotel was 60 riyals.
+  t1 b0_4   VO_TOPIC    You can take one piece of ____ into the cabin.
+  t1 b1_0   VO_TOPIC    The new hospital ____ two hundred nurses last month.
+  t1 b1_1   VO_TOPIC    He was ____ because he was late for work every day.
+  t1 b1_2   VO_TOPIC    All ____ must wear their ID cards at work.
+  t1 b1_3   VO_TOPIC    My uncle works for a large engineering ____ in Lusail.
+  t1 b1_4   VO_TOPIC    After working hard all year, she asked her manager for a ____.
+  t1 p0     VO_PREP     Students can benefit ____ joining clubs at school.
+  t1 p1     VO_PREP     Please pay attention ____ the safety instructions.
+  t1 p2     VO_PREP     We need to concentrate ____ our studies before the exam.
+  t1 p3     VO_PREP     The two schools cooperated ____ each other to organise the event.
+  t1 p4     VO_PREP     Many charities depend ____ public donations.
+  t1 writing: 
+  t2 m0     VO_TOPIC    The ____ idea for the project came from a student, not from the teacher.
+  t2 m1     VO_TOPIC    My ____ impression of the new school was positive, and it has not changed.
+  t2 m2     VO_TOPIC    Safety is our ____ concern when we take students on a trip.
+  t2 m3     VO_TOPIC    Celebrating National Day together is one of the family ____ that we pass from generation t
+  t2 m4     VO_TOPIC    Checking social media every few minutes is an unhealthy ____.
+  t2 m5     VO_TOPIC    Electric cars are becoming a global ____.
+  t2 m6     VO_TOPIC    He is a ____; he comes from another country and speaks Arabic with an accent.
+  t2 m7     VO_TOPIC    After living in Canada for ten years, the ____ family became Canadian citizens.
+  t2 m8     VO_TOPIC    Every Ramadan, rich families give ____, such as food and money, to the poor.
+  t2 m9     VO_TOPIC    Everyone made a small ____ to buy a present for the retiring teacher.
+  t2 m10    VO_TOPIC    Organ ____ can save the lives of several patients.
+  t2 m11    VO_TOPIC    Sheikha is very ____; she gives money and time to anyone who needs help.
+  t2 m12    VO_TOPIC    A ____ person only thinks about himself.
+  t2 m13    VO_TOPIC    Fahad is so ____ that he thinks he is better than everyone in the class.
+  t2 m14    VO_TOPIC    People who are ____ listen to new ideas and respect different opinions.
+  t2 m15    VO_TOPIC    My father ____ and said I must finish my homework before playing.
+  t2 m16    VO_TOPIC    When the fire alarm rang, the teacher ____ and led the students outside calmly.
+  t2 m17    VO_TOPIC    My brother and I don't ____ about football; we support different teams.
+  t2 m18    VO_TOPIC    Please wait in the ____ until your flight is called.
+  t2 m19    VO_TOPIC    Put your ____ down so the flight attendant can serve your meal.
+  t2 m20    VO_TOPIC    If the cabin loses air pressure, put on your ____ first.
+  t2 m21    VO_TOPIC    We ____ for the airport at 4 a.m. to catch our early flight.
+  t2 m22    VO_TOPIC    The match was ____ because of the heavy rain.
+  t2 m23    VO_TOPIC    My uncle put us ____ for two nights when we visited Muscat.
+  t2 m24    VO_TOPIC    The company decided to ____ fifty new engineers for the project.
+  t2 w0     VO_WF       Qatar Charity does a lot of ____ (humanity) work around the world.
+  t2 w1     VO_WF       Her ____ (open) made the new students feel welcome.
+  t2 w2     VO_WF       The school organised a ____ (fundraise) to help the orphans.
+  t2 w3     VO_WF       ____ (punish) is not always the best way to change behaviour.
+  t2 w4     VO_WF       The ____ (present) about the Museum of Islamic Art was excellent.
+  t2 w5     VO_WF       Daily exercise has a ____ (consider) effect on your health.
+  t2 w6     VO_WF       She is a very ____ (decide) leader who never wastes time.
+  t2 w7     VO_WF       Winning the debate competition was a great ____ (achieve) for our school.
+  t2 w8     VO_WF       Regular ____ (attend) is important for success at school.
+  t2 w9     VO_WF       The new mall is very ____ (appeal) to young people.
+  t2 b0_0   VO_TOPIC    Put your heavy bags on a ____ and push it to the check-in desk.
+  t2 b0_1   VO_TOPIC    I am not coming back, so I only need a ____.
+  t2 b0_2   VO_TOPIC    An announcement was made over the ____: "The train is delayed."
+  t2 b0_3   VO_TOPIC    You can buy your tickets at the ____ next to the entrance.
+  t2 b0_4   VO_TOPIC    Our train arrived late, so we missed the ____ to Al Khor.
+  t2 b1_0   VO_TOPIC    The ____ gave millions of riyals to build hospitals in Africa.
+  t2 b1_1   VO_TOPIC    The war forced thousands of ____ to leave their homes.
+  t2 b1_2   VO_TOPIC    Many ____ from India and the Philippines work in Qatar.
+  t2 b1_3   VO_TOPIC    I want to ____ at the hospital during the summer holiday.
+  t2 b1_4   VO_TOPIC    The children at the ____ were happy with their new toys.
+  t2 p0     VO_PREP     You should revise ____ the exam every day.
+  t2 p1     VO_PREP     My friends and I are working ____ a science project.
+  t2 p2     VO_PREP     It is wrong to cheat ____ exams.
+  t2 p3     VO_PREP     Qatar Charity appealed ____ donations to help the flood victims.
+  t2 p4     VO_PREP     Many students rely ____ their phones for everything.
+  t2 writing: 
+  t3 m0     VO_TOPIC    The museum shows the ____ painting, not a copy.
+  t3 m1     VO_TOPIC    My ____ choice was to study engineering, but I changed my mind.
+  t3 m2     VO_TOPIC    The ____ source of income for Qatar is natural gas.
+  t3 m3     VO_TOPIC    It is a ____ in Qatar to offer guests Arabic coffee and dates.
+  t3 m4     VO_TOPIC    Getting up early is a healthy ____.
+  t3 m5     VO_TOPIC    Studying abroad for a year has become a popular ____ among university students.
+  t3 m6     VO_TOPIC    The ____ took photos of the Corniche and bought souvenirs.
+  t3 m7     VO_TOPIC    People who leave their own country to live permanently in another one are called ____.
+  t3 m8     VO_TOPIC    Volunteers handed out food and blankets to the ____ at the camp.
+  t3 m9     VO_TOPIC    Many people make a ____ to charity during Ramadan.
+  t3 m10    VO_TOPIC    Thank you for your generous ____ to our fundraising campaign.
+  t3 m11    VO_TOPIC    Visitors left ____ of food and flowers at the memorial.
+  t3 m12    VO_TOPIC    Dr Hamad treats poor patients for free because he is so ____.
+  t3 m13    VO_TOPIC    A ____ person always says "please" and "thank you".
+  t3 m14    VO_TOPIC    It is ____ to talk loudly on your phone in the mosque.
+  t3 m15    VO_TOPIC    My grandfather is quite ____; he refuses to accept any new ideas.
+  t3 m16    VO_TOPIC    Mind your own business! Don't ____ my private life.
+  t3 m17    VO_TOPIC    I wanted to argue with my boss, but I ____ and said nothing.
+  t3 m18    VO_TOPIC    When the plane started to shake, ____.
+  t3 m19    VO_TOPIC    The flight attendants pushed the food ____ along the aisle.
+  t3 m20    VO_TOPIC    There is a ____ under every seat in case the plane lands on water.
+  t3 m21    VO_TOPIC    We ____ in Istanbul for two nights on our way to London.
+  t3 m22    VO_TOPIC    We went to the airport to see our cousin ____.
+  t3 m23    VO_TOPIC    Guests must ____ of the hotel before 12 noon.
+  t3 m24    VO_TOPIC    The ____ asked all employees to attend a meeting at 9 a.m.
+  t3 w0     VO_WF       There was a lot of ____ (interact) between the teacher and the students.
+  t3 w1     VO_WF       The ____ (assess) will take place next week.
+  t3 w2     VO_WF       The gift was very ____ (meaning) to me.
+  t3 w3     VO_WF       It was a ____ (thought) idea to bring water for everyone.
+  t3 w4     VO_WF       Her ____ (appear) changed a lot after she cut her hair.
+  t3 w5     VO_WF       We had a ____ (please) evening with our relatives.
+  t3 w6     VO_WF       She is very ____ (observe); she notices every small detail.
+  t3 w7     VO_WF       He felt ____ (overwhelm) by all the messages he received.
+  t3 w8     VO_WF       ____ (kind) costs nothing but means a lot.
+  t3 w9     VO_WF       The noise from the street was a constant source of ____ (annoy).
+  t3 b0_0   VO_TOPIC    After twenty years at the bank, my father ____ and retired.
+  t3 b0_1   VO_TOPIC    Many young people find ____ in the energy sector.
+  t3 b0_2   VO_TOPIC    All hospital ____ must follow the safety rules.
+  t3 b0_3   VO_TOPIC    My ____ checks my work every afternoon before I go home.
+  t3 b0_4   VO_TOPIC    The workers were happy with the 10% ____ in their salaries.
+  t3 b1_0   VO_TOPIC    Visitors should learn about the local ____ before they travel.
+  t3 b1_1   VO_TOPIC    This shop sells ____ Qatari perfume, not cheap copies.
+  t3 b1_2   VO_TOPIC    Feeding the cat is part of my morning ____.
+  t3 b1_3   VO_TOPIC    Never share your password with ____ online.
+  t3 b1_4   VO_TOPIC    Many ____ from other countries work in Qatar's hospitals and schools.
+  t3 p0     VO_PREP     You will benefit ____ a good night's sleep before the exam.
+  t3 p1     VO_PREP     Pay attention ____ what the teacher says.
+  t3 p2     VO_PREP     Turn off the TV and concentrate ____ your homework.
+  t3 p3     VO_PREP     The police are cooperating ____ the school to keep students safe.
+  t3 p4     VO_PREP     Students who cheat ____ tests will get zero.
+  t3 writing: 
+
+=== irregular-verbs.html (grade all, 1 tests)
+  t1 writing: 
