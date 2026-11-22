@@ -254,6 +254,15 @@ function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a)
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
 const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
+// Grammar CR equivalence: retain grammatical order and tense; do NOT use unordered keyword matching.
+// Ignore punctuation/case, optional reporting 'that', and an optional introductory 'I think that'.
+function grammarCR(v,a){
+  if(!v||!String(v).trim())return false;
+  const normal=x=>norm(x).replace(/\b(said|told|explained|reported) that\b/g,'$1').replace(/^i think that /,'i think ').replace(/\s+/g,' ').trim();
+  const n=normal(v);
+  return variants(a).some(answer=>n===normal(answer));
+}
+
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 const S={};  // section scores
 const SELF={}; // self-marked items: id -> {pts, got:null|number}
@@ -272,7 +281,7 @@ function mark(){
   let g=0;T.q2.forEach((q,i)=>{const c=document.querySelector(`input[name="tf${i}"]:checked`);const ok=c&&c.value===q.a;if(ok)g++;fb('tf'+i,ok,q.a)});S.q2=[g,3];
   g=0;T.q8.forEach((q,i)=>{const el=$('#wf'+i);const ok=okAns(el.value,q.a);if(ok)g++;el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);fb('wf'+i,ok,esc(q.a))});S.q8=[g,5];
   // rewrite: auto if exact match, else self
-  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(okAns(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
+  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(grammarCR(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
   const ans=id=>$('#'+id).value.trim();
   ans('q3')?selfItem('q3',1,esc(T.q3.a),'Q3'):fb('q3',false,esc(T.q3.a));
   T.q4.forEach((r,i)=>ans('q4_'+i)?selfItem('q4_'+i,1,esc(r.a),'Q4.'+(i+1)):fb('q4_'+i,false,esc(r.a)));
