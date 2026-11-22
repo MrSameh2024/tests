@@ -263,8 +263,12 @@ function crMatch(v,model){
   if(!v||!v.trim())return false;
   if(okAns(v,model))return true;
   const n=norm(v),m=norm(model);
-  // Avoid automatically passing statements that reverse the model's meaning.
-  if(/\b(no|not|never|without|false|incorrect|neither)\b/.test(n)&&!/\b(no|not|never|without|false|incorrect|neither)\b/.test(m))return false;
+  // Contradictions must never pass merely because the nouns match.
+  const negative=/\b(no|not|never|without|false|incorrect|neither)\b/;
+  if(negative.test(n)!==negative.test(m))return false;
+  const reduceIntent=/\b(avoid|reduce|prevent|limit|stop|less|fewer|ban)\b/;
+  const reduceEquivalent=/\b(avoid|reduce|prevent|limit|stop|less|fewer|ban|decrease|cut down|not use|do not use)\b/;
+  if(reduceIntent.test(m)&&!reduceEquivalent.test(n))return false;
   const checks=variants(model);
   return checks.some(answer=>{
     const terms=[...new Set(crWords(answer))];
@@ -325,7 +329,7 @@ function mark(){
     });
     S.crAuto+=earned;
     if(earned===2){autoIds.add(k);fb(k,true,examples.map(esc).join(' / '))}
-    else if(values.some(Boolean)){teacherItem(k,2-earned,examples.map(esc).join(' / '),k.toUpperCase());SELF[k].got=0;SELF[k].autoEarned=earned;}
+    else if(values.some(Boolean)){teacherItem(k,2-earned,examples.map(esc).join(' / '),k.toUpperCase());SELF[k].autoEarned=earned;}
     else fb(k,false,examples.map(esc).join(' / '));
   });
   S.crAutoIds=autoIds;
