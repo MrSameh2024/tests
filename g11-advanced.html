@@ -257,6 +257,15 @@ function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a)
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
 const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
+// Grammar CR equivalence: retain grammatical order and tense; do NOT use unordered keyword matching.
+// Ignore punctuation/case, optional reporting 'that', and an optional introductory 'I think that'.
+function grammarCR(v,a){
+  if(!v||!String(v).trim())return false;
+  const normal=x=>norm(x).replace(/\b(said|told|explained|reported) that\b/g,'$1').replace(/^i think that /,'i think ').replace(/\s+/g,' ').trim();
+  const n=normal(v);
+  return variants(a).some(answer=>n===normal(answer));
+}
+
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 const S={};  // section scores
 const SELF={}; // self-marked items: id -> {pts, got:null|number}
@@ -294,11 +303,11 @@ function mark(){
   const ans=id=>$('#'+id).value.trim();
   if(CRX&&SSHCR.setLexicon)SSHCR.setLexicon(T.paras.concat([T.q3.a],T.q4.map(x=>x.a),T.q5.a,T.q6.a,T.q10.map(x=>x.a)));
   if(CRX){ // automatic checking; answers it cannot judge with confidence go to the teacher (no self-marking)
-    g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i),id='rw'+i;const r=okAns(el.value,q.a)?{state:'ok',got:1,pts:1,why:['','']}:SSHCR.rewrite(el.value,q,CRX[id]);if(r.state==='ok'){g++;el.classList.add('right');fb(id,true,'');CRR[id]=r;spell(id,r)}else{if(r.state==='no')el.classList.add('wrong');crFb(id,r,esc(q.a))}});S.q10auto=g;
+    g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i),id='rw'+i;const r=grammarCR(el.value,q.a)?{state:'ok',got:1,pts:1,why:['',''],code:'ok'}:SSHCR.rewrite(el.value,q,CRX[id]);if(r.state==='ok'){g++;el.classList.add('right');fb(id,true,'');CRR[id]=r;spell(id,r)}else{if(r.state==='no')el.classList.add('wrong');crFb(id,r,esc(q.a))}});S.q10auto=g;
     ['q3'].concat(T.q4.map((_,i)=>'q4_'+i)).forEach(id=>{const a=id==='q3'?T.q3.a:T.q4[+id.slice(3)].a;const r=SSHCR.reading1(ans(id),CRX[id]);r.state==='ok'?(fb(id,true,''),CRR[id]=r,spell(id,r)):crFb(id,r,esc(a))});
     ['q5','q6'].forEach(k=>{const model=T[k].a.map((x,j)=>(j+1)+'. '+esc(x)).join('<br>');const r=SSHCR.reading2(ans(k+'_0'),ans(k+'_1'),CRX[k]);r.state==='ok'?(fb(k,true,''),CRR[k]=r,spell(k,r)):crFb(k,r,model)});
   }else{
-  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(okAns(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
+  g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(grammarCR(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
   ans('q3')?selfItem('q3',1,esc(T.q3.a),'Q3'):fb('q3',false,esc(T.q3.a));
   T.q4.forEach((r,i)=>ans('q4_'+i)?selfItem('q4_'+i,1,esc(r.a),'Q4.'+(i+1)):fb('q4_'+i,false,esc(r.a)));
   ['q5','q6'].forEach(k=>{const has=ans(k+'_0')||ans(k+'_1');const model=T[k].a.map((x,j)=>(j+1)+'. '+esc(x)).join('<br>');has?selfItem(k,2,model,k.toUpperCase()):fb(k,false,model)});
@@ -353,7 +362,7 @@ document.addEventListener('click',e=>{
      ans.push('Q7: '+rad('v',T.q7));
      ans.push('Q8: '+T.q8.map((q,i)=>(i+1)+') '+($('#wf'+i).value.trim()||'-')+(CRR['wf'+i]&&CRR['wf'+i].state==='review'?' [TEACHER REVIEW: '+why(CRR['wf'+i])+' · key '+q.a+']':(CRR['wf'+i]?CRR['wf'+i].state==='ok':okAns($('#wf'+i).value,q.a))?' ✓':' ✗ (key '+q.a+')')).join(' | '));
      ans.push('Q9: '+rad('g',T.q9));
-     T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(CRR['rw'+i]?sm('rw'+i):okAns(v,q.a)?' ✓ auto':sm('rw'+i)))});
+     T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(CRR['rw'+i]?sm('rw'+i):grammarCR(v,q.a)?' ✓ auto':sm('rw'+i)))});
      e.target.disabled=true;sent=true;
      sshSend($('#result'),{test:'Grade 11 Advanced Test '+t,name:$('#sshName').value.trim(),cls:$('#sshClass').value.trim(),score:x.total,max:34,percent:Math.round(x.total/34*100),
        breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10'+(Object.keys(SELF).length?'; self-marked items '+x.selfGot+' pts':'')+'; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)'+(x.selfPending?'; '+x.selfPending+' answer(s) not self-marked: teacher to mark':'')+(x.reviewN?'; TEACHER REVIEW: '+x.reviewN+' answer(s), up to +'+x.reviewPts+' pts (score shown excludes them)':''),
