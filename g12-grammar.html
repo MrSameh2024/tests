@@ -238,6 +238,15 @@ function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a)
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
 const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
+// Grammar CR equivalence: retain grammatical order and tense; do NOT use unordered keyword matching.
+// Ignore punctuation/case, optional reporting 'that', and an optional introductory 'I think that'.
+function grammarCR(v,a){
+  if(!v||!String(v).trim())return false;
+  const normal=x=>norm(x).replace(/\b(said|told|explained|reported) that\b/g,'$1').replace(/^i think that /,'i think ').replace(/\s+/g,' ').trim();
+  const n=normal(v);
+  return variants(a).some(answer=>n===normal(answer));
+}
+
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 
 const S={},SELF={},miss={};let sent=false;
@@ -252,7 +261,7 @@ function mark(){
   radios('m',T.mcq,'a',true);radios('c',T.rep,'c',false);T.rep.forEach((q,i)=>{const c=document.querySelector(`input[name="c${i}"]:checked`);if(!c||+c.value!==q.a)addMiss('G9')});
   let g=0;T.vf.forEach((q,i)=>{const el=$('#v'+i);const ok=okAns(el.value,q.a);if(ok)g++;else addMiss(q.t);el.classList.toggle('right',ok);el.classList.toggle('wrong',!ok);
     $('#v'+i+'fb').innerHTML=(ok?'<div class="fb ok">✓ Correct':`<div class="fb no">Correct answer: <b>${esc(q.a.split(' / ')[0])}</b>`)+` · <span class="mute">${esc(TOP[q.t][0])}</span></div>`});S.b=g;
-  g=0;T.rw.forEach((q,i)=>{const el=$('#r'+i);const v=el.value.trim();if(okAns(v,q.a)){g++;el.classList.add('right');fb('r'+i,true,'')}else if(v&&norm(v)!==norm(q.start))selfItem('r'+i,esc(q.a.split(' / ')[0]));else{fb('r'+i,false,esc(q.a.split(' / ')[0]));addMiss(['G4','G8','G8','G7'][i])}});S.dAuto=g;
+  g=0;T.rw.forEach((q,i)=>{const el=$('#r'+i);const v=el.value.trim();if(grammarCR(v,q.a)){g++;el.classList.add('right');fb('r'+i,true,'')}else if(v&&norm(v)!==norm(q.start))selfItem('r'+i,esc(q.a.split(' / ')[0]));else{fb('r'+i,false,esc(q.a.split(' / ')[0]));addMiss(['G4','G8','G8','G7'][i])}});S.dAuto=g;
 }
 function totals(){const selfGot=Object.values(SELF).reduce((a,s)=>a+(s.got||0),0);const d=S.dAuto+selfGot;return {d,total:S.a+S.b+S.c+d,pending:Object.values(SELF).filter(s=>s.got===null).length}}
 function render(){
