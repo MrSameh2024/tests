@@ -117,6 +117,7 @@
     else if (P.mods) bits.push('this test covers Modules ' + esc(P.mods));
     var h = '<div class="sshp-ref">' + bits.join(' · ') + '</div>';
     if (mi.lesson) h += '<div class="sshp-ref">Lesson · الدرس: <b>' + esc(mi.lesson) + '</b></div>';
+    if (mi.bk) h += '<div class="sshp-ref">Revision Booklet · ملزمة المراجعة: <b>p.' + esc(mi.bk) + '</b> — ' + esc(mi.bks) + '</div>';
     if (mi.sb) h += '<div class="sshp-ref">Student\'s Book · كتاب الطالب: <b>' + esc(mi.sb) + '</b> <span class="sshp-tag">from SSH mapping</span> · Workbook page: <span class="sshp-tag nym">' + NYM + '</span></div>';
     else h += '<div class="sshp-ref">' + (mi.mod ? '' : 'Module, ') + 'lesson and book pages · الوحدة والدرس وصفحات الكتاب: <span class="sshp-tag nym">' + NYM + '</span></div>';
     return h;
@@ -124,7 +125,10 @@
   function itemModule(id, s) {
     var m = (T.imod && T.imod[id]) || T.mod || null, sb = T.isb && T.isb[id];
     if (!m && !sb) return '';
-    return '<div class="sshp-ref">This question · هذا السؤال: ' + (m ? 'Module ' + m : '') + (sb ? ' · Student\'s Book ' + esc(sb) : '') + ' <span class="sshp-tag">from the test\'s own mapping</span></div>';
+    var bm = m && s.area === 'Vocabulary' && P.bmod && P.bmod[String(m)];
+    if (bm && !sb) sb = bm[1];
+    return '<div class="sshp-ref">This question · هذا السؤال: ' + (m ? 'Module ' + m : '') + (sb ? ' · Student\'s Book ' + esc(sb) : '') +
+      (bm ? ' · Revision Booklet p.' + esc(bm[0]) : '') + ' <span class="sshp-tag">from SSH mapping</span></div>';
   }
   function similarLink(sk, exceptId) {
     var list = (P.similar && P.similar[sk]) || [];
@@ -141,7 +145,7 @@
     var want = lv === 'foundation' ? ['remedial', 'all', 'core'] : lv === 'core' ? ['core', 'all', 'remedial'] : ['enrichment', 'core', 'all'];
     R.sort(function (a, b) {
       if (a.k === 'rule') return -1; if (b.k === 'rule') return 1;
-      return want.indexOf(a.lv) - want.indexOf(b.lv);
+      var ia = want.indexOf(a.lv), ib = want.indexOf(b.lv); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
     });
     return R.slice(0, max || 5);
   }
@@ -150,7 +154,7 @@
     var u = r.url;
     if (r.k === 'rule') u = 'my-revision-plan.html?g=' + encodeURIComponent(grade || '') + '#skill=' + sk;
     return '<a class="k-' + r.k + '" href="' + esc(u) + '" target="_blank" rel="noopener" data-sk="' + sk + '" data-res="' + esc(r.url) + '">' + (LABEL[r.k] || '') + ' ' + esc(r.en) +
-      (r.ar ? '<small dir="rtl">' + esc(r.ar) + '</small>' : '') + (r.k === 'pdf' ? '<small>Page: Not Yet Mapped · الصفحة: لم تُربط بعد</small>' : '') + '</a>';
+      (r.ar ? '<small dir="rtl">' + esc(r.ar) + '</small>' : '') + (r.k === 'pdf' ? (r.page ? '<small>Booklet page' + (/[–,]/.test(r.page) ? 's' : '') + ' ' + esc(r.page) + ' · صفحات الملزمة</small>' : '<small>Whole file · الملف كاملًا</small>') : '') + '</a>';
   }
 
   /* ---------------- the per-question card ---------------- */

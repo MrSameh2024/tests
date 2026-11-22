@@ -554,3 +554,83 @@ SKILLS = {
   'Plan, write, check.', 'خطط، اكتب، راجع.',
   'Swap essays with a partner and give two strengths and one target using the marking guide.'),
 }
+
+# --------------------------------------------------------------------------
+# Revision Booklets (SSH, on Google Drive, read 22 Nov 2026 via the Drive connector)
+# pages = booklet pages. G12 pages are printed in the booklet ("Page N").
+# G10/G11 booklets print no page numbers: pages counted from the PDF's page breaks.
+# sb = Student's Book page as printed in the booklet.
+# --------------------------------------------------------------------------
+BOOKLET = {
+ '10': {
+  'VO_WF':     dict(pages='2–3', sec='1 · Vocabulary — Module 3: Word formation (verb → noun)', mod=3),
+  'VO_TOPIC':  dict(pages='2–9', sec='Vocabulary — Modules 3–5 (places, jobs and money, personality, communication)'),
+  'VO_COLL':   dict(pages='4–5, 8', sec='Vocabulary — make or do (Module 4) · say or tell (Module 5)'),
+  'GR_PPERF':  dict(pages='10–11', sec='4 · Grammar — Present perfect simple'),
+  'GR_COMP':   dict(pages='12–13', sec='5 · Grammar — Comparatives and superlatives'),
+  'GR_MOD_OBL': dict(pages='14–16', sec='6 · Grammar — Modal verbs'),
+  'GR_MOD_ADV': dict(pages='14–16', sec='6 · Grammar — Modal verbs'),
+  'GR_MOD_DED': dict(pages='14–16', sec='6 · Grammar — Modal verbs'),
+  'GR_MOD_OFF': dict(pages='14–16', sec='6 · Grammar — Modal verbs'),
+  'GR_REL':    dict(pages='17–18', sec='7 · Grammar — Relative pronouns'),
+  'GR_PASS':   dict(pages='19–20', sec='8 · Grammar — Passive voice'),
+  'RD_*':      dict(pages='21', sec='9 · Reading skills'),
+  'WR_ARTICLE': dict(pages='21', sec='10 · Writing — Article describing a place', mod=3, sb='p.42–43'),
+  'WR_FEMAIL': dict(pages='21', sec='10 · Writing — Formal email', mod=4, sb='p.54–55'),
+  'WR_FORUM':  dict(pages='21', sec='10 · Writing — Forum post', mod=5, sb='p.63'),
+ },
+ '11': {
+  'VO_PHR':    dict(pages='3–4', sec='1 · Vocabulary — Module 3: Phrasal verbs with get, take and look', mod=3, sb='p.40–41'),
+  'VO_TOPIC':  dict(pages='2–5', sec='Vocabulary — Module 3 (on / in expressions, p.40) · Module 4 (the natural world, p.54)'),
+  'VO_COLL':   dict(pages='2–10', sec='Vocabulary — Modules 3–5'),
+  'VO_PREP':   dict(pages='5–6', sec='2 · Vocabulary — Module 4: Nouns + prepositions', mod=4, sb='p.54'),
+  'VO_PREF':   dict(pages='7', sec='2 · Vocabulary — Module 4: Prefixes over- and under-', mod=4, sb='p.55'),
+  'VO_EDING':  dict(pages='8', sec='3 · Vocabulary — Module 5: -ed and -ing adjectives', mod=5, sb='p.70'),
+  'VO_WF':     dict(pages='9–10', sec='3 · Vocabulary — Module 5: Forming nouns and adjectives', mod=5, sb='p.70 and p.76'),
+  'GR_PAST':   dict(pages='11–12', sec='4 · Grammar — Past simple and past continuous'),
+  'GR_USED':   dict(pages='13–14', sec='5 · Grammar — used to · would · be / get used to · was going to'),
+  'GR_FUT':    dict(pages='13–14', sec='5 · Grammar — … was going to'),
+  'GR_PASTPERF': dict(pages='15–16', sec='6 · Grammar — Past perfect'),
+  'GR_CONTR':  dict(pages='17–18', sec='7 · Grammar — Clauses of reason, concession, result and purpose'),
+  'GR_PURP':   dict(pages='17–18', sec='7 · Grammar — Clauses of reason, concession, result and purpose'),
+  'GR_CAUSE':  dict(pages='17–18', sec='7 · Grammar — Clauses of reason, concession, result and purpose'),
+  'GR_SOSUCH': dict(pages='17–18', sec='7 · Grammar — Clauses of reason, concession, result and purpose'),
+  'GR_MOD_OBL': dict(pages='19–20', sec='8 · Grammar — Modal verbs'),
+  'GR_MOD_ADV': dict(pages='19–20', sec='8 · Grammar — Modal verbs'),
+  'GR_MOD_DED': dict(pages='19–20', sec='8 · Grammar — Modal verbs'),
+  'GR_MOD_OFF': dict(pages='19–20', sec='8 · Grammar — Modal verbs'),
+  'RD_*':      dict(pages='21', sec='9 · Reading skills'),
+  'WR_STORY':  dict(pages='22', sec='10 · Writing A — A story', mod=3, sb='p.48–49'),
+  'WR_CAUSE':  dict(pages='23', sec='10 · Writing B — A cause and effect essay', mod=4, sb='p.62–63'),
+  'WR_DISCUSS': dict(pages='24', sec='10 · Writing C — A discussion essay', mod=5, sb='p.78–79'),
+ },
+ '12': {
+  'VO_TOPIC':  dict(pages='3–14', sec='Part 2 · Vocabulary — Modules 1–5'),
+  'VO_WF':     dict(pages='6–7', sec='Part 2 · Module 2 — Word formation: suffixes', mod=2, sb='p.10 and p.30'),
+  'VO_PREP':   dict(pages='8', sec='Part 2 · Module 2 — Dependent prepositions', mod=2, sb='p.30'),
+  'VO_PHR':    dict(pages='12', sec='Part 2 · Module 4 — Travel and travel phrasal verbs (4B)', mod=4, sb='p.60'),
+  'GR_PRES':   dict(pages='15–16', sec='Part 3 · Grammar 1 — Present simple, present progressive, stative verbs'),
+  'GR_STAT':   dict(pages='15–16', sec='Part 3 · Grammar 1 — Present simple, present progressive, stative verbs'),
+  'GR_PPERF':  dict(pages='17–18', sec='Part 3 · Grammar 2 — Present perfect simple and continuous'),
+  'GR_PAST':   dict(pages='19–20', sec='Part 3 · Grammar 3 — Past simple and past continuous'),
+  'GR_USED':   dict(pages='21–22', sec='Part 3 · Grammar 4 — Used to and would'),
+  'GR_FUT':    dict(pages='23–24', sec='Part 3 · Grammar 5 — Future forms'),
+  'GR_FUTCP':  dict(pages='25–26', sec='Part 3 · Grammar 6 — Future progressive, future perfect'),
+  'GR_COMP':   dict(pages='27–28', sec='Part 3 · Grammar 7 — Comparatives and superlatives'),
+  'GR_COND':   dict(pages='29–30', sec='Part 3 · Grammar 8 — Conditionals and conditional expressions'),
+  'GR_REP':    dict(pages='31–32', sec='Part 3 · Grammar 9 — Reported speech'),
+  'GR_REPV':   dict(pages='33–34', sec='Part 3 · Grammar 10 — Reporting verbs'),
+  'RD_*':      dict(pages='35', sec='Part 4 · Reading — how to answer every official question'),
+  'WR_COVER':  dict(pages='36–37', sec='Part 5 · Writing A — The cover letter (job application)'),
+  'WR_ADVDIS': dict(pages='38', sec='Part 5 · Writing B — The advantages-and-disadvantages essay'),
+  'WR_IEMAIL': dict(pages='39', sec='Part 5 · Writing C — Informal email about a cultural event'),
+  'WR_NARR':   dict(pages='40–41', sec='Part 5 · Writing D/E — Personal narratives'),
+  'WR_STORY':  dict(pages='40–41', sec='Part 5 · Writing D/E — Personal narratives'),
+ },
+}
+# G12 vocabulary by module (booklet pages and Student's Book pages printed in the booklet)
+BOOKLET_MOD = {'12': {1: ('3–5', 'p.11, p.16'), 2: ('6–8', 'p.10, p.30'), 3: ('9–11', 'p.46'), 4: ('12', 'p.60'), 5: ('13–14', 'p.76')}}
+
+def booklet(grade, sk):
+    B = BOOKLET.get(grade, {})
+    return B.get(sk) or (B.get('RD_*') if sk.startswith('RD_') else None)
