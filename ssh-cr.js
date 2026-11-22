@@ -167,7 +167,7 @@
     noIdea: ['Your answer does not contain the information the question asks for. Find the key words of the question in the text and read that sentence again.', 'إجابتك لا تتضمن المعلومة المطلوبة. ابحث عن الكلمات المفتاحية للسؤال في النص واقرأ الجملة مرة أخرى.'],
     negated: ['Your answer uses the right words but says the opposite (for example with "not" or "never"). Read the sentence in the text again and check what it really says.', 'إجابتك تستخدم الكلمات الصحيحة لكنها تقول العكس (مثلًا باستخدام not أو never). اقرأ الجملة في النص مرة أخرى وتأكد مما تقوله فعلًا.'],
     contra: ['Your answer gives information that is different from the text.', 'إجابتك تذكر معلومة مختلفة عمّا ورد في النص.'],
-    review: ['⏳ Your teacher will check this answer.', 'سيراجع معلمك هذه الإجابة.'],
+    review: ['⏳ Your teacher will check this answer. Different wording does not mean it is wrong.', 'سيراجع معلمك هذه الإجابة. اختلاف الصياغة لا يعني أنها خاطئة.'],
     revPart: ['Your answer has part of the idea, or uses different words from the model.', 'إجابتك تحتوي على جزء من الفكرة أو تستخدم كلمات مختلفة عن النموذج.'],
     revLong: ['Your answer is very long. Answer only what the question asks; do not copy whole sentences.', 'إجابتك طويلة جدًا. أجب عن المطلوب فقط ولا تنسخ جملًا كاملة.'],
     same: ['Both points give the same idea. Write two DIFFERENT points.', 'النقطتان تعطيان الفكرة نفسها. اكتب نقطتين مختلفتين.'],

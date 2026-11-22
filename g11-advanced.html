@@ -329,7 +329,7 @@ function renderScore(){
   const x=totals();const pct=Math.round(x.total/34*100);
   const rows=[['Reading',x.reading,14],['Vocabulary',x.vocab,10],['Grammar',x.grammar,10]];
   $('#result').classList.remove('hidden');
-  $('#result').innerHTML=`<h2>Your result · نتيجتك</h2><div class="big">${x.total} / 34</div><div>${pct}% · Writing (10 marks) will be marked by your teacher.</div>
+  $('#result').innerHTML=`<h2>${x.reviewN||x.selfPending?'Provisional score · درجة مبدئية':'Your result · نتيجتك'}</h2><div class="big">${x.total} / 34</div><div>${pct}% · Writing (10 marks) will be marked by your teacher.${x.reviewN?' Answers waiting for your teacher are not counted yet, so this is not your final result. · الإجابات التي تنتظر المعلم لم تُحتسب بعد، لذلك هذه ليست النتيجة النهائية.':''}</div>
   <div class="bars">${rows.map(([l,g,m])=>`<div class="bar"><span>${l}</span><div class="track"><i style="width:${g/m*100}%"></i></div><b>${g}/${m}</b></div>`).join('')}</div>
   ${x.reviewN?`<p class="mute" style="color:#26357a"><b>⏳ ${x.reviewN} answer(s) will be checked by your teacher</b> (up to ${x.reviewPts} more mark(s)). They are not counted yet. · <span dir="rtl">${x.reviewN} إجابة سيراجعها معلمك (حتى ${x.reviewPts} درجة إضافية)، ولم تُحتسب بعد.</span></p>`:''}
   ${Object.keys(SELF).length?`<p class="mute">${x.selfPending?`<b style="color:#b3261e">${x.selfPending} answer(s) still need your self-mark.</b> Scroll up and compare each answer with the model, then tap ✓ or ✗. · `:''}Some answers (${Object.keys(SELF).length}) are self-marked: be honest — your teacher can see them.</p>`:''}
