@@ -343,6 +343,8 @@ WRITING_RES = {
 G12_GRAMMAR_SKILLS = set(G12G.values()) | {'GR_STAT'}
 PAST_FORMS = {'GR_PAST', 'GR_PASTPERF', 'GR_PPERF', 'GR_PASS', 'GR_IRREG'}
 
+CARDS12 = json.load(open(os.path.join(REPO, 'pdf', 'cards', 'cards.json'), encoding='utf-8')) if os.path.exists(os.path.join(REPO, 'pdf', 'cards', 'cards.json')) else []
+
 def resources(grade, sk):
     """ordered list of verified resources for one skill in one grade"""
     R = []
@@ -370,6 +372,10 @@ def resources(grade, sk):
         w = WRITING_RES.get(grade, {}).get(sk)
         if w: R.append(dict(k='lesson', en='Open the writing lesson · ' + w[1], ar='افتح درس الكتابة · ' + w[2], url=w[0], lv='core'))
         R.append(dict(k='practice', en='Writing Coach (check your draft)', ar='مدرب الكتابة (راجع مسودتك)', url='writing-coach.html', lv='all'))
+    if grade == '12':
+        for cd in [c for c in CARDS12 if sk in c['sk']][:2]:
+            R.append(dict(k='pdf', en='Remedial & Enrichment Card · ' + cd['en'], ar='بطاقة علاجية وإثرائية · ' + cd['ar'],
+                          url='open.html?f=g12-card-' + cd['id'][4:], page='1–2', sec='Revision card + remedial (p.1) · enrichment + key (p.2)', lv='remedial'))
     if grade in PDF and area != 'Writing':
         f = PDF[grade]
         b = booklet(grade, sk)

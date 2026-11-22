@@ -1,0 +1,299 @@
+[
+ {
+  "id": "g12-m1-vocabulary",
+  "n": 1,
+  "mod": 1,
+  "en": "Confusing words: people, customs and originals",
+  "ar": "كلمات متشابهة: الأشخاص والعادات والأصالة",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "p.10, p.16",
+  "pages": 2,
+  "file": "pdf/cards/g12-m1-vocabulary.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m1-word-formation",
+  "n": 2,
+  "mod": 1,
+  "en": "Word formation: building adjectives",
+  "ar": "تكوين الكلمات: اشتقاق الصفات",
+  "sk": [
+   "VO_WF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m1-word-formation.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m1-present-tenses",
+  "n": 3,
+  "mod": 1,
+  "en": "Present simple and present continuous",
+  "ar": "المضارع البسيط والمضارع المستمر",
+  "sk": [
+   "GR_PRES"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m1-present-tenses.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m1-stative-verbs",
+  "n": 4,
+  "mod": 1,
+  "en": "Stative verbs (and verbs with two meanings)",
+  "ar": "أفعال الحالة والأفعال ذات المعنيين",
+  "sk": [
+   "GR_STAT"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m1-stative-verbs.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m2-prepositions",
+  "n": 5,
+  "mod": 2,
+  "en": "Dependent prepositions",
+  "ar": "حروف الجر الملازمة",
+  "sk": [
+   "VO_PREP"
+  ],
+  "sb": "p.30",
+  "pages": 2,
+  "file": "pdf/cards/g12-m2-prepositions.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m2-noun-suffixes",
+  "n": 6,
+  "mod": 2,
+  "en": "Word formation: nouns with -ion, -ation, -ment, -ance",
+  "ar": "تكوين الأسماء: tion و ation و ment و ance",
+  "sk": [
+   "VO_WF"
+  ],
+  "sb": "p.30",
+  "pages": 2,
+  "file": "pdf/cards/g12-m2-noun-suffixes.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m2-present-perfect",
+  "n": 7,
+  "mod": 2,
+  "en": "Present perfect simple and continuous",
+  "ar": "المضارع التام والمضارع التام المستمر",
+  "sk": [
+   "GR_PPERF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m2-present-perfect.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m2-comparatives",
+  "n": 8,
+  "mod": 2,
+  "en": "Comparatives and superlatives",
+  "ar": "المقارنة والتفضيل",
+  "sk": [
+   "GR_COMP"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m2-comparatives.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m3-charity-vocabulary",
+  "n": 9,
+  "mod": 3,
+  "en": "Charity and giving: words and word families",
+  "ar": "مفردات العمل الخيري واشتقاقاتها",
+  "sk": [
+   "VO_TOPIC",
+   "VO_WF"
+  ],
+  "sb": "p.40",
+  "pages": 2,
+  "file": "pdf/cards/g12-m3-charity-vocabulary.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m3-personality-idioms",
+  "n": 10,
+  "mod": 3,
+  "en": "Compound adjectives and idioms for personality",
+  "ar": "الصفات المركبة والتعابير الاصطلاحية للشخصية",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "p.46",
+  "pages": 2,
+  "file": "pdf/cards/g12-m3-personality-idioms.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m3-past-tenses",
+  "n": 11,
+  "mod": 3,
+  "en": "Past simple and past continuous (when / while / as)",
+  "ar": "الماضي البسيط والماضي المستمر",
+  "sk": [
+   "GR_PAST"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m3-past-tenses.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m3-used-to-would",
+  "n": 12,
+  "mod": 3,
+  "en": "used to and would for past habits",
+  "ar": "used to و would للعادات الماضية",
+  "sk": [
+   "GR_USED"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m3-used-to-would.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m4-travel-phrasal-verbs",
+  "n": 13,
+  "mod": 4,
+  "en": "Travel phrasal verbs and travel vocabulary",
+  "ar": "الأفعال المركبة ومفردات السفر",
+  "sk": [
+   "VO_PHR",
+   "VO_TOPIC"
+  ],
+  "sb": "p.60",
+  "pages": 2,
+  "file": "pdf/cards/g12-m4-travel-phrasal-verbs.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m4-future-forms",
+  "n": 14,
+  "mod": 4,
+  "en": "Future forms: will, going to, present continuous, present simple",
+  "ar": "صيغ المستقبل",
+  "sk": [
+   "GR_FUT"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m4-future-forms.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m4-future-continuous-perfect",
+  "n": 15,
+  "mod": 4,
+  "en": "Future continuous and future perfect",
+  "ar": "المستقبل المستمر والمستقبل التام",
+  "sk": [
+   "GR_FUTCP"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m4-future-continuous-perfect.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m4-conditionals",
+  "n": 16,
+  "mod": 4,
+  "en": "Conditionals and alternatives to if",
+  "ar": "الجمل الشرطية وبدائل if",
+  "sk": [
+   "GR_COND"
+  ],
+  "sb": "p.60–61",
+  "pages": 2,
+  "file": "pdf/cards/g12-m4-conditionals.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-writing-informal-email",
+  "n": 17,
+  "mod": 0,
+  "en": "Informal email describing an event",
+  "ar": "بريد إلكتروني غير رسمي لوصف حدث",
+  "sk": [
+   "WR_IEMAIL"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-writing-informal-email.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g12-writing-cover-letter",
+  "n": 18,
+  "mod": 0,
+  "en": "Cover letter (job application)",
+  "ar": "خطاب التقديم لوظيفة",
+  "sk": [
+   "WR_COVER"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-writing-cover-letter.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g12-writing-personal-narrative",
+  "n": 19,
+  "mod": 0,
+  "en": "Personal narrative (story)",
+  "ar": "القصة الشخصية",
+  "sk": [
+   "WR_NARR",
+   "WR_STORY"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-writing-personal-narrative.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g12-writing-advantages-disadvantages",
+  "n": 20,
+  "mod": 0,
+  "en": "Advantages and disadvantages essay",
+  "ar": "مقال المزايا والعيوب",
+  "sk": [
+   "WR_ADVDIS"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-writing-advantages-disadvantages.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g12-writing-procedural-text",
+  "n": 21,
+  "mod": 0,
+  "en": "Procedural text (how to …)",
+  "ar": "النص الإجرائي (كيف تفعل …)",
+  "sk": [
+   "WR_GENERAL"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-writing-procedural-text.pdf",
+  "kind": "writing"
+ }
+]

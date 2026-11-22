@@ -154,7 +154,7 @@
     var u = r.url;
     if (r.k === 'rule') u = 'my-revision-plan.html?g=' + encodeURIComponent(grade || '') + '#skill=' + sk;
     return '<a class="k-' + r.k + '" href="' + esc(u) + '" target="_blank" rel="noopener" data-sk="' + sk + '" data-res="' + esc(r.url) + '">' + (LABEL[r.k] || '') + ' ' + esc(r.en) +
-      (r.ar ? '<small dir="rtl">' + esc(r.ar) + '</small>' : '') + (r.k === 'pdf' ? (r.page ? '<small>Booklet page' + (/[–,]/.test(r.page) ? 's' : '') + ' ' + esc(r.page) + ' · صفحات الملزمة</small>' : '<small>Whole file · الملف كاملًا</small>') : '') + '</a>';
+      (r.ar ? '<small dir="rtl">' + esc(r.ar) + '</small>' : '') + (r.k === 'pdf' ? (r.page ? '<small>Page' + (/[–,]/.test(r.page) ? 's' : '') + ' ' + esc(r.page) + ' · الصفحات</small>' : '<small>Whole file · الملف كاملًا</small>') : '') + '</a>';
   }
 
   /* ---------------- the per-question card ---------------- */
