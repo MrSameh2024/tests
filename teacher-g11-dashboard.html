@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Grade 11 Progress Dashboard (prototype) · لوحة متابعة الصف الحادي عشر</title>
+<style>
+:root{--ink:#1d2433;--mute:#5b6577;--line:#e3e8f0;--bg:#f6f8fb;--card:#fff;--brand:#26357a;--ok:#1d7a3a;--amber:#b26b00;--bad:#b3261e;--blue:#2f6fd6}
+*{box-sizing:border-box}body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:var(--brand);color:#fff;padding:14px 18px}header h1{margin:0;font-size:1.2rem}header p{margin:4px 0 0;opacity:.85;font-size:.85rem}
+.ar{direction:rtl;font-family:Tahoma,"Segoe UI",Arial,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+label{font-size:.85rem;color:var(--mute)}select,input[type=number],input[type=file]{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+button{font:inherit;padding:7px 12px;border-radius:8px;border:1px solid var(--brand);background:var(--brand);color:#fff;cursor:pointer}button.ghost{background:#fff;color:var(--brand)}
+.banner{border-radius:10px;padding:8px 12px;font-size:.9rem;margin-bottom:12px}.demo{background:#fff4d6;border:1px solid #f0d58a}.live{background:#e6f4ea;border:1px solid #b9dcbf}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.kpi b{display:block;font-size:1.5rem}.kpi span{font-size:.8rem;color:var(--mute)}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}nav.tabs button{background:#fff;color:var(--brand)}nav.tabs button[aria-selected=true]{background:var(--brand);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mute);font-weight:600;position:sticky;top:0;background:#fff}
+.num{text-align:right;font-variant-numeric:tabular-nums}.pill{display:inline-block;border-radius:999px;padding:1px 8px;font-size:.78rem;margin:1px}
+.g{background:#e6f4ea;color:var(--ok)}.a{background:#fff1d6;color:var(--amber)}.r{background:#fde8e6;color:var(--bad)}.n{background:#eef1f6;color:var(--mute)}
+.bar{display:grid;grid-template-columns:150px 1fr 60px;gap:8px;align-items:center;margin:5px 0;font-size:.88rem}.track{position:relative;height:14px;background:#eef1f6;border-radius:7px;overflow:hidden}.track i{display:block;height:100%;border-radius:7px}.track .tgt{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--ink)}
+.mute{color:var(--mute);font-size:.85rem}.scroll{overflow:auto;max-height:560px}
+h2{font-size:1.05rem;margin:0 0 8px}h3{font-size:.95rem;margin:12px 0 6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:820px){.two{grid-template-columns:1fr}.bar{grid-template-columns:110px 1fr 50px}}
+.skill{border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:6px 0}.skill .ar{display:block;color:#33415c;margin-top:3px}
+#report{background:#fff}.hidden{display:none}
+@media print{header,nav.tabs,.noprint,#kpis,.banner.demo~.noprint{display:none!important}body{background:#fff}main{padding:0}.card{border:none;padding:0}.tab{display:none!important}#tab-report{display:block!important}.pbreak{page-break-before:always}.two{grid-template-columns:1fr 1fr}svg{max-height:170px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Grade 11 Progress Dashboard · لوحة متابعة تقدّم الصف الحادي عشر <span style="font-weight:400;font-size:.8rem">(prototype)</span></h1>
+  <p>Reads a CSV export of the <b>Submissions</b> sheet on this device only. Nothing is uploaded or sent. · تُقرأ البيانات على هذا الجهاز فقط ولا تُرسل إلى أي مكان.</p>
+</header>
+<main>
+  <section class="card noprint">
+    <div class="row">
+      <label>Data · البيانات <input type="file" id="file" accept=".csv,text/csv"></label>
+      <button class="ghost" id="demoBtn" type="button">Use demo data (fictitious)</button>
+      <label>Class · الصف <select id="cls"></select></label>
+      <label>Target % <input type="number" id="target" value="70" min="1" max="100" style="width:70px"></label>
+      <label>Students in class <input type="number" id="size" placeholder="e.g. 26" min="1" style="width:80px"></label>
+    </div>
+    <p class="mute" style="margin:8px 0 0">In the Google Sheet: open <b>Submissions</b> → File → Download → Comma-separated values (.csv). Only Grade 11 Advanced Test rows are used.</p>
+  </section>
+  <div id="srcBanner"></div>
+  <div id="app" class="hidden">
+    <div class="kpis" id="kpis"></div>
+    <nav class="tabs noprint" role="tablist">
+      <button role="tab" data-tab="overview" aria-selected="true">Class · الصف</button>
+      <button role="tab" data-tab="students">Students · الطلاب</button>
+      <button role="tab" data-tab="items">Skills &amp; questions · المهارات والأسئلة</button>
+      <button role="tab" data-tab="research">Pre / post &amp; action research · البحث الإجرائي</button>
+      <button role="tab" data-tab="report">Student report · تقرير الطالب</button>
+    </nav>
+    <section class="card tab" id="tab-overview"></section>
+    <section class="card tab hidden" id="tab-students"></section>
+    <section class="card tab hidden" id="tab-items"></section>
+    <section class="card tab hidden" id="tab-research"></section>
+    <section class="card tab hidden" id="tab-report"></section>
+  </div>
+</main>
+<script src="pathways/skills.js"></script>
+<script src="pathways/g11-advanced.js"></script>
+<script src="ssh-g11-analytics.js"></script>
+<script>
+(function(){
+'use strict';
+const A=window.SSHG11A, SK=window.SSH_PATH_SKILLS||{}, PG=(window.SSH_PATH_PAGE||{}).tests||{};
+const SMAP={};Object.keys(PG).forEach(t=>SMAP[t]=PG[t].items);
+const $=s=>document.querySelector(s), esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pct=v=>v==null?'—':Math.round(v)+'%', sgn=v=>v==null?'—':(v>0?'+':'')+Math.round(v)+' pts';
+const SEC=[['reading','Reading','القراءة'],['vocabulary','Vocabulary','المفردات'],['grammar','Grammar','القواعد'],['listening','Listening','الاستماع'],['writing','Writing','الكتابة']];
+let ALL=[],SRC=null,state={tab:'overview',student:null,pre:'first',post:'latest'};
+const target=()=>+$('#target').value||70;
+const band=v=>v==null?'n':v>=target()?'g':v>=target()-15?'a':'r';
+function bar(label,v,extra){return `<div class="bar"><span>${label}</span><div class="track"><i style="width:${v==null?0:Math.max(2,Math.min(100,v))}%;background:${v==null?'#ccd':{g:'#3a9a5b',a:'#e0a33a',r:'#d1453b',n:'#ccd'}[band(v)]}"></i><span class="tgt" style="left:${target()}%" title="target"></span></div><b class="num">${v==null?'no data':pct(v)}</b></div>${extra||''}`}
+function skillName(k){return SK[k]?SK[k].en:k}
+function load(text,src){
+  ALL=A.records(A.parseCSV(text),{g11Only:true});SRC=src;
+  const classes=[...new Set(ALL.map(r=>r.cls).filter(Boolean))].sort();
+  $('#cls').innerHTML='<option value="">All classes</option>'+classes.map(c=>`<option ${c==='11/7'?'selected':''}>${esc(c)}</option>`).join('');
+  $('#srcBanner').innerHTML=src==='demo'?'<div class="banner demo"><b>DEMO DATA — fictitious students.</b> Numbers on this screen are not real results and must not be reported. · بيانات تجريبية لطلاب غير حقيقيين.</div>'
+    :`<div class="banner live">Loaded ${ALL.length} Grade 11 Advanced Test result(s) from <b>${esc(src)}</b>. Data stays on this device.</div>`;
+  $('#app').classList.toggle('hidden',!ALL.length);
+  if(!ALL.length)$('#srcBanner').innerHTML+='<div class="banner demo">No Grade 11 Advanced Test rows found in this file. Check that it is the Submissions sheet.</div>';
+  render();
+}
+function view(){const c=$('#cls').value;const recs=ALL.filter(r=>!c||r.cls===c);return {recs,studs:A.students(recs,SMAP)}}
+function render(){
+  if(!ALL.length)return;
+  const {recs,studs}=view(), T=target();
+  const latest=studs.filter(s=>s.latest).map(s=>s.latest.pct);
+  const atT=latest.filter(v=>v>=T).length, size=+$('#size').value||null;
+  const pend=studs.reduce((n,s)=>n+s.pendingReview,0), wpend=studs.reduce((n,s)=>n+s.writingPending,0);
+  const risk=studs.filter(s=>A.flags(s,T).length);
+  $('#kpis').innerHTML=[
+    [studs.length+(size?' / '+size:''),'students with a result'+(size?' · participation '+Math.round(studs.length/size*100)+'%':'')],
+    [recs.length,'results received'],
+    [pct(A.mean(latest)),'class average (latest attempt)'],
+    [latest.length?Math.round(atT/latest.length*100)+'%':'—',`students at or above ${T}% (latest)`],
+    [risk.length,'students needing support'],
+    [pend,'answers awaiting teacher review'],
+    [wpend,'essays without a recorded writing mark']
+  ].map(k=>`<div class="kpi"><b>${k[0]}</b><span>${k[1]}</span></div>`).join('');
+  overview(recs,studs);students(studs);items(recs,studs);research(studs);report(studs);
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===state.tab));
+  document.querySelectorAll('.tab').forEach(s=>s.classList.toggle('hidden',s.id!=='tab-'+state.tab));
+}
+function overview(recs,studs){
+  const sec={};SEC.forEach(([k])=>{const v=studs.map(s=>s.sections[k]).filter(x=>x!=null);sec[k]=v.length?A.mean(v):null});
+  const tests=[...new Set(recs.map(r=>r.g11))].sort((a,b)=>a-b);
+  const byTest=tests.map(t=>{const r=recs.filter(x=>x.g11===t);return [t,r.length,A.mean(r.map(x=>x.pct))]});
+  $('#tab-overview').innerHTML=`<div class="two"><div><h2>Performance by skill area · الأداء حسب المهارة</h2>
+    ${SEC.map(([k,en,ar])=>bar(`${en} · <span class="ar">${ar}</span>`,sec[k])).join('')}
+    <p class="mute">Average of each student's marks in that section across all attempts; the black line is the ${target()}% target. Listening is not assessed in the Grade 11 Advanced Tests, so it shows "no data". Writing appears only when a teacher mark such as "Writing 7/10" is recorded in Teacher feedback.</p></div>
+    <div><h2>Results by test · النتائج حسب الاختبار</h2><table><tr><th>Test</th><th class="num">Results</th><th class="num">Average</th></tr>
+    ${byTest.map(([t,n,m])=>`<tr><td>Test ${t} · ${esc(window.SSH_PATH_PAGE&&PG[t]?'':'')}</td><td class="num">${n}</td><td class="num"><span class="pill ${band(m)}">${pct(m)}</span></td></tr>`).join('')}</table>
+    <h3>Score distribution (latest attempt)</h3>${dist(studs.filter(s=>s.latest).map(s=>s.latest.pct))}</div></div>`;
+}
+function dist(v){const b=[0,0,0,0,0];v.forEach(x=>b[Math.min(4,Math.floor(x/20))]++);const mx=Math.max(1,...b);
+  return `<svg viewBox="0 0 300 120" width="100%" role="img" aria-label="score distribution">${b.map((n,i)=>`<rect x="${10+i*58}" y="${100-n/mx*80}" width="46" height="${n/mx*80}" rx="4" fill="${i*20+20<=target()-15?'#d1453b':i*20+20<=target()?'#e0a33a':'#3a9a5b'}"/><text x="${33+i*58}" y="${96-n/mx*80}" font-size="11" text-anchor="middle">${n}</text><text x="${33+i*58}" y="114" font-size="10" text-anchor="middle" fill="#5b6577">${i*20}–${i*20+20}%</text>`).join('')}</svg>`}
+function students(studs){
+  const T=target();const rows=studs.slice().sort((a,b)=>(a.latest?a.latest.pct:0)-(b.latest?b.latest.pct:0));
+  $('#tab-students').innerHTML=`<h2>Students · الطلاب <span class="mute">(lowest latest score first)</span></h2><div class="scroll"><table>
+  <tr><th>Student</th><th>Class</th><th class="num">Attempts</th><th class="num">First</th><th class="num">Latest</th><th class="num">Change</th>${SEC.slice(0,3).map(s=>`<th class="num">${s[1]}</th>`).join('')}<th>Needs</th><th></th></tr>
+  ${rows.map(s=>{const f=A.flags(s,T);return `<tr><td>${esc(s.name)}</td><td>${esc(s.cls)}</td><td class="num">${s.attempts.length}</td><td class="num">${pct(s.first&&s.first.pct)}</td>
+  <td class="num"><span class="pill ${band(s.latest&&s.latest.pct)}">${pct(s.latest&&s.latest.pct)}</span></td><td class="num">${sgn(s.change)}</td>
+  ${SEC.slice(0,3).map(([k])=>`<td class="num">${pct(s.sections[k])}</td>`).join('')}
+  <td>${f.length?f.map(x=>`<span class="pill r">${esc(x.replace(/^weak: (.*)$/,(m,k)=>'weak: '+skillName(k)))}</span>`).join(''):'<span class="pill g">on track</span>'}</td>
+  <td><button class="ghost" data-open="${esc(s.name)}" type="button">Report</button></td></tr>`}).join('')}</table></div>
+  <p class="mute">"Needs support" = latest below 50%, or below target and not improving, or a skill below 40% over 5+ answers, or only one attempt — always only for students below the target. These are prompts for the teacher, not diagnoses.</p>`;
+}
+function items(recs,studs){
+  const it=A.items(recs,SMAP).filter(o=>o.n>=3).sort((a,b)=>a.facility-b.facility);
+  const sk={};studs.forEach(s=>Object.entries(s.skills).forEach(([k,o])=>{const x=sk[k]=sk[k]||{ok:0,partial:0,no:0,review:0};['ok','partial','no','review'].forEach(f=>x[f]+=o[f]||0)}));
+  const skl=Object.entries(sk).map(([k,o])=>{const n=o.ok+o.partial+o.no;return {k,n,review:o.review,pct:n?(o.ok+o.partial*.5)/n*100:null}}).sort((a,b)=>a.pct-b.pct);
+  $('#tab-items').innerHTML=`<div class="two"><div><h2>Skill mastery · إتقان المهارات</h2>${skl.map(s=>bar(esc(skillName(s.k)),s.pct,`<div class="mute" style="margin:-3px 0 4px 158px">${s.n} answers${s.review?' · '+s.review+' awaiting review (not counted)':''}</div>`)).join('')}</div>
+  <div><h2>Most-missed questions · الأسئلة الأكثر خطأ</h2><table><tr><th>Test · item</th><th>Skill</th><th class="num">Correct</th><th class="num">n</th></tr>
+  ${it.slice(0,15).map(o=>`<tr><td>T${o.test} · ${esc(o.item)}</td><td>${esc(skillName(o.skill))}</td><td class="num"><span class="pill ${band(o.facility)}">${pct(o.facility)}</span></td><td class="num">${o.n}</td></tr>`).join('')}</table>
+  <p class="mute">Correct = share of answers marked correct (partial = half). Answers awaiting teacher review are left out until marked.</p></div></div>`;
+}
+function attemptsOf(s,which){const sc=s.attempts.filter(a=>a.pct!=null);if(!sc.length)return null;if(which==='first')return sc[0];if(which==='latest')return sc[sc.length-1];return sc.find(a=>String(a.g11)===which)||null}
+function research(studs){
+  const tests=[...new Set(ALL.map(r=>r.g11))].sort((a,b)=>a-b);
+  const opt=(id,v)=>`<select id="${id}"><option value="first" ${v==='first'?'selected':''}>Each student's first attempt</option><option value="latest" ${v==='latest'?'selected':''}>Each student's latest attempt</option>${tests.map(t=>`<option value="${t}" ${v===String(t)?'selected':''}>Test ${t}</option>`).join('')}</select>`;
+  const pre=a=>a===attemptsOf(studsByName[a.name.toLowerCase()],state.pre), post=a=>a===attemptsOf(studsByName[a.name.toLowerCase()],state.post);
+  const studsByName={};studs.forEach(s=>studsByName[s.name.toLowerCase()]=s);
+  const pp=A.prePost(studs,pre,post), T=target(), low=A.lowAchievers(studs,null);
+  const lowNames=new Set(low.list.map(s=>s.name));const lpp=A.prePost(studs.filter(s=>lowNames.has(s.name)),pre,post);
+  const size=+$('#size').value||null, act=studs.reduce((n,s)=>n+s.attempts.length,0);
+  const reviewed=studs.reduce((n,s)=>n+s.attempts.reduce((m,a)=>m+Object.values(a.items).filter(v=>v).length,0),0);
+  const w=studs.map(s=>s.sections.writing).filter(x=>x!=null);
+  const IND=[
+   ['Engagement','Students with ≥1 result'+(size?' / class size':''),studs.length+(size?' / '+size+' ('+Math.round(studs.length/size*100)+'%)':''),'Submissions sheet'],
+   ['Engagement','Results per student (mean)',studs.length?(act/studs.length).toFixed(1):'—','Submissions sheet'],
+   ['Engagement','Students with 2+ attempts',studs.filter(s=>s.attempts.length>1).length,'Submissions sheet'],
+   ['Learning improvement','Paired students (pre and post recorded)',pp.n,'Selected pre / post'],
+   ['Learning improvement','Mean pre → post',pp.n?pct(pp.preMean)+' → '+pct(pp.postMean):'—','Auto-marked 34 marks'],
+   ['Learning improvement','Mean change (SD)',pp.n?sgn(pp.meanDiff)+(pp.sdDiff!=null?' (SD '+pp.sdDiff.toFixed(1)+')':''):'—',''],
+   ['Learning improvement','Students who improved',pp.n?pp.improved+' / '+pp.n:'—',''],
+   ['Learning improvement','Paired effect size dz',pp.dz!=null?pp.dz.toFixed(2):'—','mean change ÷ SD of change'],
+   ['Target',`Students ≥ ${T}% at post`,pp.n?pp.pairs.filter(p=>p.post>=T).length+' / '+pp.n:'—',''],
+   ['Low achievers',`Baseline at or below ${pct(low.cut)} (bottom quarter)`,low.list.length,'First attempt'],
+   ['Low achievers','Their mean change',lpp.n?sgn(lpp.meanDiff)+' (n='+lpp.n+')':'—',''],
+   ['Diagnostic feedback','Item results with automatic feedback',reviewed,'Answers column'],
+   ['Diagnostic feedback','Answers awaiting teacher review',studs.reduce((n,s)=>n+s.pendingReview,0),''],
+   ['Writing','Recorded writing marks (mean)',w.length?pct(A.mean(w))+' (n='+studs.filter(s=>s.sections.writing!=null).length+' students)':'none recorded','Teacher feedback "Writing x/10"'],
+  ];
+  $('#tab-research').innerHTML=`<h2>Pre / post comparison · مقارنة قبلي / بعدي</h2>
+  <div class="row noprint"><label>Pre (baseline) ${opt('preSel',state.pre)}</label><label>Post ${opt('postSel',state.post)}</label><button class="ghost" id="csvInd" type="button">Download indicators (CSV)</button></div>
+  <div class="two" style="margin-top:10px"><div>${pairsChart(pp)}</div><div><table><tr><th>Area</th><th>Indicator</th><th class="num">Value</th><th>Source</th></tr>${IND.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td class="mute">${r[3]}</td></tr>`).join('')}</table></div></div>
+  <p class="mute"><b>How to read this.</b> These are descriptive results from recorded attempts only. Different tests are not equated, so a change can reflect test difficulty as well as learning. Without a comparison group or control for other teaching, the platform cannot be said to have <i>caused</i> the change. Use a fixed baseline test and keep this file's export as evidence. · هذه نتائج وصفية من محاولات مسجلة فقط، ولا تثبت وحدها أن المنصة سببت التحسن.</p>`;
+  $('#preSel').onchange=e=>{state.pre=e.target.value;render()};$('#postSel').onchange=e=>{state.post=e.target.value;render()};
+  $('#csvInd').onclick=()=>download('g11-indicators.csv',[['area','indicator','value','source']].concat(IND).concat([[],['student','pre %','post %','change']]).concat(pp.pairs.map(p=>[p.name,Math.round(p.pre),Math.round(p.post),Math.round(p.diff)])));
+}
+function pairsChart(pp){if(!pp.n)return '<p class="mute">No student has both a pre and a post result for this choice.</p>';
+  const h=24+pp.n*16, T=target(), x=v=>40+v*2.4;
+  return `<svg viewBox="0 0 300 ${h}" width="100%" role="img" aria-label="pre and post scores per student"><line x1="${x(T)}" y1="10" x2="${x(T)}" y2="${h-4}" stroke="#1d2433" stroke-dasharray="3 3"/><text x="${x(T)+3}" y="12" font-size="9">${T}%</text>
+  ${pp.pairs.slice().sort((a,b)=>a.pre-b.pre).map((p,i)=>`<g><text x="0" y="${26+i*16}" font-size="8" fill="#5b6577">${esc(p.name.slice(-12))}</text><line x1="${x(p.pre)}" y1="${23+i*16}" x2="${x(p.post)}" y2="${23+i*16}" stroke="${p.diff>=0?'#3a9a5b':'#d1453b'}" stroke-width="2"/><circle cx="${x(p.pre)}" cy="${23+i*16}" r="3" fill="#9aa5b8"/><circle cx="${x(p.post)}" cy="${23+i*16}" r="3.5" fill="${p.diff>=0?'#3a9a5b':'#d1453b'}"/></g>`).join('')}</svg><p class="mute">Grey dot = pre, coloured dot = post.</p>`}
+function report(studs){
+  const names=studs.map(s=>s.name).sort();if(!state.student||!names.includes(state.student))state.student=names[0];
+  const s=studs.find(x=>x.name===state.student);if(!s){$('#tab-report').innerHTML='';return}
+  const T=target();const sk=Object.entries(s.skills).filter(([,o])=>o.n>=2).sort((a,b)=>a[1].pct-b[1].pct);
+  const weak=sk.filter(([,o])=>o.pct<T).slice(0,3), strong=sk.filter(([,o])=>o.pct>=80).slice(-3).reverse();
+  const res=k=>((SK[k]&&SK[k].res&&SK[k].res['11'])||[]).filter(r=>r.k!=='rule').slice(0,2);
+  $('#tab-report').innerHTML=`<div class="row noprint"><label>Student <select id="stuSel">${names.map(n=>`<option ${n===s.name?'selected':''}>${esc(n)}</option>`).join('')}</select></label><button id="pdfBtn" type="button">Download PDF · تنزيل PDF</button></div>
+  <div id="report"><h2 style="margin-top:10px">${esc(s.name)} · ${esc(s.cls)} — Grade 11 progress report · تقرير تقدّم</h2>
+  ${SRC==='demo'?'<p class="pill a">Demo data — fictitious student</p>':''}<p class="mute">Prepared ${new Date().toLocaleDateString('en-GB')} · ${s.attempts.length} attempt(s) · target ${T}%</p>
+  <div class="two"><div><h3>Scores over time · الدرجات عبر الوقت</h3>${history(s)}</div><div><h3>Skill areas · مجالات المهارات</h3>${SEC.map(([k,en,ar])=>bar(`${en} · <span class="ar">${ar}</span>`,s.sections[k])).join('')}</div></div>
+  <h3>Strengths · نقاط القوة</h3>${strong.length?strong.map(([k,o])=>`<span class="pill g">${esc(skillName(k))} ${pct(o.pct)}</span>`).join(' '):'<p class="mute">Not enough answers yet.</p>'}
+  <h3>Priorities and feedback · الأولويات والتغذية الراجعة</h3>
+  ${weak.length?weak.map(([k,o])=>{const x=SK[k]||{};return `<div class="skill"><b>${esc(skillName(k))}</b> · ${pct(o.pct)} correct (${o.n} answers)
+    <div>${esc(x.rule_en||'')}</div><span class="ar">${esc(x.rule_ar||'')}</span>
+    <div style="margin-top:4px"><b>Remedial step:</b> ${esc(x.simple_en||'')}<span class="ar">${esc(x.simple_ar||'')}</span></div>
+    ${x.mis_en?`<div class="mute">Common mistake: ${esc(x.mis_en)}</div>`:''}
+    ${res(k).length?`<div class="mute">Practise: ${res(k).map(r=>`<a href="${esc(r.url)}">${esc(r.en)}</a>`).join(' · ')}</div>`:''}</div>`}).join(''):'<p class="mute">No skill below the target with enough answers.</p>'}
+  <h3>Enrichment · إثراء</h3>${strong.length?strong.slice(0,2).map(([k])=>`<div class="skill">${esc(skillName(k))}: ${esc((SK[k]||{}).challenge||'')}</div>`).join(''):'<p class="mute">Enrichment is suggested once a skill reaches 80%.</p>'}
+  ${s.pendingReview||s.writingPending?`<p class="mute">Still to be marked by the teacher: ${s.pendingReview} answer(s)${s.writingPending?' · '+s.writingPending+' essay(s)':''}. These are not included in the scores above.</p>`:''}
+  </div>`;
+  $('#stuSel').onchange=e=>{state.student=e.target.value;render()};$('#pdfBtn').onclick=()=>{state.tab='report';render();window.print()};
+}
+function history(s){const p=s.attempts.filter(a=>a.pct!=null);if(!p.length)return '<p class="mute">No scored attempts.</p>';
+  const W=300,H=130,x=i=>30+(p.length<2?120:i*(W-50)/(p.length-1)),y=v=>110-v;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="scores over time"><line x1="30" y1="${y(target())}" x2="${W-10}" y2="${y(target())}" stroke="#1d2433" stroke-dasharray="3 3"/><text x="${W-10}" y="${y(target())-3}" font-size="9" text-anchor="end">${target()}%</text>
+  <polyline fill="none" stroke="#2f6fd6" stroke-width="2" points="${p.map((a,i)=>x(i)+','+y(a.pct)).join(' ')}"/>${p.map((a,i)=>`<circle cx="${x(i)}" cy="${y(a.pct)}" r="3.5" fill="#2f6fd6"/><text x="${x(i)}" y="${y(a.pct)-7}" font-size="9" text-anchor="middle">${Math.round(a.pct)}%</text><text x="${x(i)}" y="124" font-size="8" text-anchor="middle" fill="#5b6577">T${a.g11}${a.time?' · '+a.time.toLocaleDateString('en-GB',{day:'numeric',month:'short'}):''}</text>`).join('')}</svg>`}
+function download(name,rows){const csv='﻿'+rows.map(r=>r.map(v=>{v=String(v==null?'':v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=name;document.body.appendChild(a);a.click();a.remove()}
+document.addEventListener('click',e=>{const t=e.target;if(t.dataset&&t.dataset.tab){state.tab=t.dataset.tab;render()}if(t.dataset&&t.dataset.open){state.student=t.dataset.open;state.tab='report';render()}});
+$('#file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>load(r.result,f.name);r.readAsText(f)});
+$('#demoBtn').addEventListener('click',()=>fetch('dashboards/demo/g11-demo-submissions.csv').then(r=>r.text()).then(t=>load(t,'demo')));
+['#cls','#target','#size'].forEach(s=>$(s).addEventListener('change',render));
+window.SSH_DASH={load,render,state};
+})();
+</script>
+</body>
+</html>
