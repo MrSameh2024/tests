@@ -4,16 +4,22 @@
 Insert it on the Grade 12 page (ID 250) after the "1b All resources list" section, ONLY after approval."""
 import json, os, html
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-meta = json.load(open(os.path.join(REPO, 'pdf', 'cards', 'cards.json'), encoding='utf-8'))
+import sys
+GRADE = sys.argv[1] if len(sys.argv) > 1 else '12'
+meta = [m for m in json.load(open(os.path.join(REPO, 'pdf', 'cards', 'cards.json'), encoding='utf-8')) if m.get('grade', '12') == GRADE]
 GATE = 'https://mrsameh2024.github.io/tests/open.html?f='
-COL = {1: '#1e6fd9', 2: '#5b2a86', 3: '#00796b', 4: '#b4530a', 0: '#8c2f52'}
-ICON = {1: '🌍', 2: '📚', 3: '🤝', 4: '✈️', 0: '✍️'}
-GROUPS = [(1, 'Module 1 · Window on the World', 'الوحدة 1'), (2, 'Module 2 · A Thirst for Knowledge', 'الوحدة 2'),
-          (3, 'Module 3 · Human Nature', 'الوحدة 3'), (4, 'Module 4 · Pack Your Bags', 'الوحدة 4'), (0, 'Writing', 'الكتابة')]
+COL = {1: '#1e6fd9', 2: '#5b2a86', 3: '#00796b', 4: '#b4530a', 5: '#3949ab', 6: '#0f4c5c', 7: '#a8471f', 0: '#8c2f52'}
+ICON = {1: '🌍', 2: '📚', 3: '🤝', 4: '✈️', 5: '💼', 6: '📖', 7: '⚙️', 0: '✍️'}
+T12 = {1: 'Window on the World', 2: 'A Thirst for Knowledge', 3: 'Human Nature', 4: 'Pack Your Bags', 5: 'Just the Job'}
+AR = {1: 'الوحدة 1', 2: 'الوحدة 2', 3: 'الوحدة 3', 4: 'الوحدة 4', 5: 'الوحدة 5'}
+mods = sorted({m['mod'] for m in meta if 1 <= m['mod'] <= 5})
+GROUPS = [(k, 'Module %d · %s' % (k, T12[k]) if GRADE == '12' else 'Module %d · Vocabulary' % k, AR[k] + ('' if GRADE == '12' else ' · المفردات')) for k in mods]
+GROUPS += [(7, 'Grammar', 'القواعد'), (6, 'Reading', 'القراءة'), (0, 'Writing', 'الكتابة')]
+GROUPS = [g for g in GROUPS if any(m['mod'] == g[0] for m in meta)]
 e = html.escape
 
 def tile(m):
-    c = COL[m['mod']]; key = 'g12-card-' + m['id'][4:]
+    c = COL[m['mod']]; key = 'g%s-card-' % GRADE + m['id'][4:]
     return f'''<!-- wp:group {{"style":{{"spacing":{{"padding":{{"top":"12px","bottom":"12px","left":"12px","right":"12px"}},"blockGap":"8px"}},"border":{{"radius":"16px"}},"color":{{"background":"{c}","text":"#ffffff"}}}},"layout":{{"type":"flex","orientation":"vertical","justifyContent":"stretch","verticalAlignment":"space-between"}}}} -->
 <div class="wp-block-group has-text-color has-background" style="border-radius:16px;color:#ffffff;background-color:{c};padding-top:12px;padding-right:12px;padding-bottom:12px;padding-left:12px"><!-- wp:paragraph {{"style":{{"typography":{{"lineHeight":"1.3"}}}}}} -->
 <p style="line-height:1.3"><small style="display:inline-block;background:rgba(255,255,255,.22);border-radius:20px;padding:1px 8px;font-size:.72rem;font-weight:700">Card {m['n']:02d} · بطاقة</small><br><span style="font-size:1.45rem">{ICON[m['mod']]}</span> <strong style="font-size:1rem">{e(m['en'])}</strong><br><strong dir="rtl" style="display:block;text-align:right;font-size:1rem">{e(m['ar'])}</strong></p>
@@ -40,9 +46,9 @@ for mod, en, ar in GROUPS:
                  '\n\n'.join(tile(m) for m in meta if m['mod'] == mod) + '</div>\n<!-- /wp:group -->')
 parts.append('''<!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"}} -->
 <div class="wp-block-buttons"><!-- wp:button {"linkTarget":"_blank","rel":"noreferrer noopener","style":{"color":{"background":"#14244a","text":"#ffffff"},"border":{"radius":"10px"},"typography":{"fontWeight":"800"}}} -->
-<div class="wp-block-button"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://mrsameh2024.github.io/tests/open.html?f=g12-cards-all" style="border-radius:10px;color:#ffffff;background-color:#14244a;font-weight:800" target="_blank" rel="noreferrer noopener">📥 All 21 cards in one PDF · كل البطاقات في ملف واحد</a></div>
+<div class="wp-block-button"><a class="wp-block-button__link has-text-color has-background wp-element-button" href="https://mrsameh2024.github.io/tests/open.html?f=g__GRADE__-cards-all" style="border-radius:10px;color:#ffffff;background-color:#14244a;font-weight:800" target="_blank" rel="noreferrer noopener">📥 All __N__ cards in one PDF · كل البطاقات في ملف واحد</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></section>
 <!-- /wp:group -->''')
-open(os.path.join(os.path.dirname(__file__), 'wp-section-g12.html'), 'w', encoding='utf-8').write('\n\n'.join(parts) + '\n')
+open(os.path.join(os.path.dirname(__file__), 'wp-section-g%s.html' % GRADE), 'w', encoding='utf-8').write(('\n\n'.join(parts) + '\n').replace('__GRADE__', GRADE).replace('__N__', str(len(meta))))
 print('tiles', len(meta))

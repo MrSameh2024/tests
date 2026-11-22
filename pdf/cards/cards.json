@@ -1,8 +1,528 @@
 [
  {
+  "id": "g10-m3-word-formation",
+  "grade": "10",
+  "n": 1,
+  "mod": 3,
+  "module": null,
+  "en": "Word formation: verb → noun",
+  "ar": "تكوين الكلمات: من الفعل إلى الاسم",
+  "sk": [
+   "VO_WF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-m3-word-formation.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-m3-places-past",
+  "grade": "10",
+  "n": 2,
+  "mod": 3,
+  "module": null,
+  "en": "Places and the past: vocabulary",
+  "ar": "مفردات الأماكن والماضي",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-m3-places-past.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-m4-make-do",
+  "grade": "10",
+  "n": 3,
+  "mod": 4,
+  "module": null,
+  "en": "make or do?",
+  "ar": "make أم do؟",
+  "sk": [
+   "VO_COLL"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-m4-make-do.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-m4-jobs-personality",
+  "grade": "10",
+  "n": 4,
+  "mod": 4,
+  "module": null,
+  "en": "Jobs, money and personality",
+  "ar": "الوظائف والمال والصفات الشخصية",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-m4-jobs-personality.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-m5-say-tell-communication",
+  "grade": "10",
+  "n": 5,
+  "mod": 5,
+  "module": null,
+  "en": "say or tell? Communication verbs",
+  "ar": "say أم tell؟ وأفعال التواصل",
+  "sk": [
+   "VO_COLL",
+   "VO_TOPIC"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-m5-say-tell-communication.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-present-perfect",
+  "grade": "10",
+  "n": 6,
+  "mod": 7,
+  "module": null,
+  "en": "Present perfect simple",
+  "ar": "المضارع التام",
+  "sk": [
+   "GR_PPERF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-present-perfect.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-comparatives",
+  "grade": "10",
+  "n": 7,
+  "mod": 7,
+  "module": null,
+  "en": "Comparatives and superlatives",
+  "ar": "المقارنة والتفضيل",
+  "sk": [
+   "GR_COMP"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-comparatives.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-modals-obligation-advice",
+  "grade": "10",
+  "n": 8,
+  "mod": 7,
+  "module": null,
+  "en": "Modal verbs 1: obligation, prohibition, no necessity, advice",
+  "ar": "الأفعال الناقصة 1: الإلزام والمنع وعدم الضرورة والنصيحة",
+  "sk": [
+   "GR_MOD_OBL",
+   "GR_MOD_ADV"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-modals-obligation-advice.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-modals-possibility-offers",
+  "grade": "10",
+  "n": 9,
+  "mod": 7,
+  "module": null,
+  "en": "Modal verbs 2: possibility, ability, offers, permission, certainty",
+  "ar": "الأفعال الناقصة 2: الاحتمال والقدرة والعرض والاستئذان والاستنتاج",
+  "sk": [
+   "GR_MOD_DED",
+   "GR_MOD_OFF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-modals-possibility-offers.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-relative-pronouns",
+  "grade": "10",
+  "n": 10,
+  "mod": 7,
+  "module": null,
+  "en": "Relative pronouns",
+  "ar": "ضمائر الوصل",
+  "sk": [
+   "GR_REL"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-relative-pronouns.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-passive-voice",
+  "grade": "10",
+  "n": 11,
+  "mod": 7,
+  "module": null,
+  "en": "The passive voice (present and past simple)",
+  "ar": "المبني للمجهول (المضارع والماضي البسيط)",
+  "sk": [
+   "GR_PASS"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-passive-voice.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g10-reading-skills",
+  "grade": "10",
+  "n": 12,
+  "mod": 6,
+  "module": null,
+  "en": "Reading skills",
+  "ar": "مهارات القراءة",
+  "sk": [
+   "RD_MAIN",
+   "RD_DETAIL",
+   "RD_VOCAB",
+   "RD_INFER",
+   "RD_REF",
+   "RD_TFNG",
+   "RD_LIST"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g10-reading-skills.pdf",
+  "kind": "reading"
+ },
+ {
+  "id": "g10-writing-article",
+  "grade": "10",
+  "n": 13,
+  "mod": 0,
+  "module": 3,
+  "en": "Article describing a place",
+  "ar": "مقال يصف مكانًا",
+  "sk": [
+   "WR_ARTICLE"
+  ],
+  "sb": "p.42–43",
+  "pages": 2,
+  "file": "pdf/cards/g10-writing-article.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g10-writing-formal-email",
+  "grade": "10",
+  "n": 14,
+  "mod": 0,
+  "module": 4,
+  "en": "Formal email asking for / giving information",
+  "ar": "بريد إلكتروني رسمي لطلب المعلومات أو تقديمها",
+  "sk": [
+   "WR_FEMAIL"
+  ],
+  "sb": "p.54–55",
+  "pages": 2,
+  "file": "pdf/cards/g10-writing-formal-email.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g10-writing-forum-post",
+  "grade": "10",
+  "n": 15,
+  "mod": 0,
+  "module": 5,
+  "en": "Forum post",
+  "ar": "منشور في منتدى",
+  "sk": [
+   "WR_FORUM"
+  ],
+  "sb": "p.63",
+  "pages": 2,
+  "file": "pdf/cards/g10-writing-forum-post.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g11-m3-on-in-expressions",
+  "grade": "11",
+  "n": 1,
+  "mod": 3,
+  "module": null,
+  "en": "Expressions with on and in",
+  "ar": "تعبيرات مع on و in",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "p.40",
+  "pages": 2,
+  "file": "pdf/cards/g11-m3-on-in-expressions.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-m3-phrasal-verbs",
+  "grade": "11",
+  "n": 2,
+  "mod": 3,
+  "module": null,
+  "en": "Phrasal verbs with get, take and look",
+  "ar": "الأفعال المركبة مع get و take و look",
+  "sk": [
+   "VO_PHR"
+  ],
+  "sb": "p.40–41",
+  "pages": 2,
+  "file": "pdf/cards/g11-m3-phrasal-verbs.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-m4-natural-world",
+  "grade": "11",
+  "n": 3,
+  "mod": 4,
+  "module": null,
+  "en": "The natural world and nouns + prepositions",
+  "ar": "عالم الطبيعة والأسماء مع حروف الجر",
+  "sk": [
+   "VO_TOPIC",
+   "VO_PREP"
+  ],
+  "sb": "p.54",
+  "pages": 2,
+  "file": "pdf/cards/g11-m4-natural-world.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-m4-over-under",
+  "grade": "11",
+  "n": 4,
+  "mod": 4,
+  "module": null,
+  "en": "Prefixes over- and under-",
+  "ar": "البادئتان over و under",
+  "sk": [
+   "VO_PREF"
+  ],
+  "sb": "p.55",
+  "pages": 2,
+  "file": "pdf/cards/g11-m4-over-under.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-m5-ed-ing-adjectives",
+  "grade": "11",
+  "n": 5,
+  "mod": 5,
+  "module": null,
+  "en": "-ed and -ing adjectives",
+  "ar": "الصفات المنتهية بـ ed و ing",
+  "sk": [
+   "VO_EDING"
+  ],
+  "sb": "p.70",
+  "pages": 2,
+  "file": "pdf/cards/g11-m5-ed-ing-adjectives.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-m5-nouns-adjectives",
+  "grade": "11",
+  "n": 6,
+  "mod": 5,
+  "module": null,
+  "en": "Forming nouns and adjectives",
+  "ar": "تكوين الأسماء والصفات",
+  "sk": [
+   "VO_WF"
+  ],
+  "sb": "p.70, p.76",
+  "pages": 2,
+  "file": "pdf/cards/g11-m5-nouns-adjectives.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-past-simple-continuous",
+  "grade": "11",
+  "n": 7,
+  "mod": 7,
+  "module": null,
+  "en": "Past simple and past continuous",
+  "ar": "الماضي البسيط والماضي المستمر",
+  "sk": [
+   "GR_PAST"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-past-simple-continuous.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-used-to-would",
+  "grade": "11",
+  "n": 8,
+  "mod": 7,
+  "module": null,
+  "en": "used to · would · be / get used to · was going to",
+  "ar": "used to و would و be/get used to و was going to",
+  "sk": [
+   "GR_USED",
+   "GR_FUT"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-used-to-would.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-past-perfect",
+  "grade": "11",
+  "n": 9,
+  "mod": 7,
+  "module": null,
+  "en": "Past perfect",
+  "ar": "الماضي التام",
+  "sk": [
+   "GR_PASTPERF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-past-perfect.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-reason-concession",
+  "grade": "11",
+  "n": 10,
+  "mod": 7,
+  "module": null,
+  "en": "Clauses of reason and concession",
+  "ar": "جمل السبب والتضاد",
+  "sk": [
+   "GR_CAUSE",
+   "GR_CONTR"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-reason-concession.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-result-purpose",
+  "grade": "11",
+  "n": 11,
+  "mod": 7,
+  "module": null,
+  "en": "Clauses of result and purpose",
+  "ar": "جمل النتيجة والغرض",
+  "sk": [
+   "GR_SOSUCH",
+   "GR_PURP"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-result-purpose.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-modal-verbs",
+  "grade": "11",
+  "n": 12,
+  "mod": 7,
+  "module": null,
+  "en": "Modal verbs",
+  "ar": "الأفعال الناقصة",
+  "sk": [
+   "GR_MOD_OBL",
+   "GR_MOD_ADV",
+   "GR_MOD_DED",
+   "GR_MOD_OFF"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-modal-verbs.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g11-reading-skills",
+  "grade": "11",
+  "n": 13,
+  "mod": 6,
+  "module": null,
+  "en": "Reading skills",
+  "ar": "مهارات القراءة",
+  "sk": [
+   "RD_MAIN",
+   "RD_DETAIL",
+   "RD_VOCAB",
+   "RD_INFER",
+   "RD_REF",
+   "RD_TFNG",
+   "RD_LIST"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g11-reading-skills.pdf",
+  "kind": "reading"
+ },
+ {
+  "id": "g11-writing-story",
+  "grade": "11",
+  "n": 14,
+  "mod": 0,
+  "module": 3,
+  "en": "A story",
+  "ar": "كتابة قصة",
+  "sk": [
+   "WR_STORY"
+  ],
+  "sb": "p.48–49",
+  "pages": 2,
+  "file": "pdf/cards/g11-writing-story.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g11-writing-cause-effect",
+  "grade": "11",
+  "n": 15,
+  "mod": 0,
+  "module": 4,
+  "en": "Cause and effect essay",
+  "ar": "مقال السبب والنتيجة",
+  "sk": [
+   "WR_CAUSE"
+  ],
+  "sb": "p.62–63",
+  "pages": 2,
+  "file": "pdf/cards/g11-writing-cause-effect.pdf",
+  "kind": "writing"
+ },
+ {
+  "id": "g11-writing-discussion",
+  "grade": "11",
+  "n": 16,
+  "mod": 0,
+  "module": 5,
+  "en": "Discussion essay (for and against)",
+  "ar": "مقال المناقشة (مع وضد)",
+  "sk": [
+   "WR_DISCUSS"
+  ],
+  "sb": "p.78–79",
+  "pages": 2,
+  "file": "pdf/cards/g11-writing-discussion.pdf",
+  "kind": "writing"
+ },
+ {
   "id": "g12-m1-vocabulary",
+  "grade": "12",
   "n": 1,
   "mod": 1,
+  "module": null,
   "en": "Confusing words: people, customs and originals",
   "ar": "كلمات متشابهة: الأشخاص والعادات والأصالة",
   "sk": [
@@ -15,8 +535,10 @@
  },
  {
   "id": "g12-m1-word-formation",
+  "grade": "12",
   "n": 2,
   "mod": 1,
+  "module": null,
   "en": "Word formation: building adjectives",
   "ar": "تكوين الكلمات: اشتقاق الصفات",
   "sk": [
@@ -29,8 +551,10 @@
  },
  {
   "id": "g12-m1-present-tenses",
+  "grade": "12",
   "n": 3,
   "mod": 1,
+  "module": null,
   "en": "Present simple and present continuous",
   "ar": "المضارع البسيط والمضارع المستمر",
   "sk": [
@@ -43,8 +567,10 @@
  },
  {
   "id": "g12-m1-stative-verbs",
+  "grade": "12",
   "n": 4,
   "mod": 1,
+  "module": null,
   "en": "Stative verbs (and verbs with two meanings)",
   "ar": "أفعال الحالة والأفعال ذات المعنيين",
   "sk": [
@@ -57,8 +583,10 @@
  },
  {
   "id": "g12-m2-prepositions",
+  "grade": "12",
   "n": 5,
   "mod": 2,
+  "module": null,
   "en": "Dependent prepositions",
   "ar": "حروف الجر الملازمة",
   "sk": [
@@ -71,8 +599,10 @@
  },
  {
   "id": "g12-m2-noun-suffixes",
+  "grade": "12",
   "n": 6,
   "mod": 2,
+  "module": null,
   "en": "Word formation: nouns with -ion, -ation, -ment, -ance",
   "ar": "تكوين الأسماء: tion و ation و ment و ance",
   "sk": [
@@ -85,8 +615,10 @@
  },
  {
   "id": "g12-m2-present-perfect",
+  "grade": "12",
   "n": 7,
   "mod": 2,
+  "module": null,
   "en": "Present perfect simple and continuous",
   "ar": "المضارع التام والمضارع التام المستمر",
   "sk": [
@@ -99,8 +631,10 @@
  },
  {
   "id": "g12-m2-comparatives",
+  "grade": "12",
   "n": 8,
   "mod": 2,
+  "module": null,
   "en": "Comparatives and superlatives",
   "ar": "المقارنة والتفضيل",
   "sk": [
@@ -113,8 +647,10 @@
  },
  {
   "id": "g12-m3-charity-vocabulary",
+  "grade": "12",
   "n": 9,
   "mod": 3,
+  "module": null,
   "en": "Charity and giving: words and word families",
   "ar": "مفردات العمل الخيري واشتقاقاتها",
   "sk": [
@@ -128,8 +664,10 @@
  },
  {
   "id": "g12-m3-personality-idioms",
+  "grade": "12",
   "n": 10,
   "mod": 3,
+  "module": null,
   "en": "Compound adjectives and idioms for personality",
   "ar": "الصفات المركبة والتعابير الاصطلاحية للشخصية",
   "sk": [
@@ -142,8 +680,10 @@
  },
  {
   "id": "g12-m3-past-tenses",
+  "grade": "12",
   "n": 11,
   "mod": 3,
+  "module": null,
   "en": "Past simple and past continuous (when / while / as)",
   "ar": "الماضي البسيط والماضي المستمر",
   "sk": [
@@ -156,8 +696,10 @@
  },
  {
   "id": "g12-m3-used-to-would",
+  "grade": "12",
   "n": 12,
   "mod": 3,
+  "module": null,
   "en": "used to and would for past habits",
   "ar": "used to و would للعادات الماضية",
   "sk": [
@@ -170,8 +712,10 @@
  },
  {
   "id": "g12-m4-travel-phrasal-verbs",
+  "grade": "12",
   "n": 13,
   "mod": 4,
+  "module": null,
   "en": "Travel phrasal verbs and travel vocabulary",
   "ar": "الأفعال المركبة ومفردات السفر",
   "sk": [
@@ -185,8 +729,10 @@
  },
  {
   "id": "g12-m4-future-forms",
+  "grade": "12",
   "n": 14,
   "mod": 4,
+  "module": null,
   "en": "Future forms: will, going to, present continuous, present simple",
   "ar": "صيغ المستقبل",
   "sk": [
@@ -199,8 +745,10 @@
  },
  {
   "id": "g12-m4-future-continuous-perfect",
+  "grade": "12",
   "n": 15,
   "mod": 4,
+  "module": null,
   "en": "Future continuous and future perfect",
   "ar": "المستقبل المستمر والمستقبل التام",
   "sk": [
@@ -213,8 +761,10 @@
  },
  {
   "id": "g12-m4-conditionals",
+  "grade": "12",
   "n": 16,
   "mod": 4,
+  "module": null,
   "en": "Conditionals and alternatives to if",
   "ar": "الجمل الشرطية وبدائل if",
   "sk": [
@@ -226,9 +776,81 @@
   "kind": "language"
  },
  {
-  "id": "g12-writing-informal-email",
+  "id": "g12-m5-world-of-work",
+  "grade": "12",
   "n": 17,
+  "mod": 5,
+  "module": null,
+  "en": "The world of work: jobs and employment",
+  "ar": "عالم العمل: الوظائف والتوظيف",
+  "sk": [
+   "VO_TOPIC"
+  ],
+  "sb": "p.76",
+  "pages": 2,
+  "file": "pdf/cards/g12-m5-world-of-work.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-m5-reported-speech",
+  "grade": "12",
+  "n": 18,
+  "mod": 5,
+  "module": null,
+  "en": "Reported speech",
+  "ar": "الكلام المنقول",
+  "sk": [
+   "GR_REP"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-m5-reported-speech.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-reporting-verbs",
+  "grade": "12",
+  "n": 19,
+  "mod": 7,
+  "module": null,
+  "en": "Reporting verbs",
+  "ar": "أفعال النقل",
+  "sk": [
+   "GR_REPV"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-reporting-verbs.pdf",
+  "kind": "language"
+ },
+ {
+  "id": "g12-reading-skills",
+  "grade": "12",
+  "n": 20,
+  "mod": 6,
+  "module": null,
+  "en": "Reading skills for the official exam",
+  "ar": "مهارات القراءة لأسئلة الاختبار",
+  "sk": [
+   "RD_MAIN",
+   "RD_DETAIL",
+   "RD_VOCAB",
+   "RD_INFER",
+   "RD_REF",
+   "RD_TFNG",
+   "RD_LIST"
+  ],
+  "sb": "",
+  "pages": 2,
+  "file": "pdf/cards/g12-reading-skills.pdf",
+  "kind": "reading"
+ },
+ {
+  "id": "g12-writing-informal-email",
+  "grade": "12",
+  "n": 21,
   "mod": 0,
+  "module": null,
   "en": "Informal email describing an event",
   "ar": "بريد إلكتروني غير رسمي لوصف حدث",
   "sk": [
@@ -241,8 +863,10 @@
  },
  {
   "id": "g12-writing-cover-letter",
-  "n": 18,
+  "grade": "12",
+  "n": 22,
   "mod": 0,
+  "module": null,
   "en": "Cover letter (job application)",
   "ar": "خطاب التقديم لوظيفة",
   "sk": [
@@ -255,8 +879,10 @@
  },
  {
   "id": "g12-writing-personal-narrative",
-  "n": 19,
+  "grade": "12",
+  "n": 23,
   "mod": 0,
+  "module": null,
   "en": "Personal narrative (story)",
   "ar": "القصة الشخصية",
   "sk": [
@@ -270,8 +896,10 @@
  },
  {
   "id": "g12-writing-advantages-disadvantages",
-  "n": 20,
+  "grade": "12",
+  "n": 24,
   "mod": 0,
+  "module": null,
   "en": "Advantages and disadvantages essay",
   "ar": "مقال المزايا والعيوب",
   "sk": [
@@ -284,8 +912,10 @@
  },
  {
   "id": "g12-writing-procedural-text",
-  "n": 21,
+  "grade": "12",
+  "n": 25,
   "mod": 0,
+  "module": null,
   "en": "Procedural text (how to …)",
   "ar": "النص الإجرائي (كيف تفعل …)",
   "sk": [
