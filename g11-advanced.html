@@ -351,7 +351,7 @@ document.addEventListener('click',e=>{
      T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(CRR['rw'+i]?sm('rw'+i):okAns(v,q.a)?' ✓ auto':sm('rw'+i)))});
      e.target.disabled=true;sent=true;
      sshSend($('#result'),{test:'Grade 11 Advanced Test '+t,name:$('#sshName').value.trim(),cls:$('#sshClass').value.trim(),score:x.total,max:34,percent:Math.round(x.total/34*100),
-       breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10; self-marked items '+x.selfGot+' pts; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)'+(x.selfPending?'; '+x.selfPending+' answer(s) not self-marked: teacher to mark':'')+(x.reviewN?'; TEACHER REVIEW: '+x.reviewN+' answer(s), up to +'+x.reviewPts+' pts (score shown excludes them)':''),
+       breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10'+(Object.keys(SELF).length?'; self-marked items '+x.selfGot+' pts':'')+'; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)'+(x.selfPending?'; '+x.selfPending+' answer(s) not self-marked: teacher to mark':'')+(x.reviewN?'; TEACHER REVIEW: '+x.reviewN+' answer(s), up to +'+x.reviewPts+' pts (score shown excludes them)':''),
        topic:T.w.title.replace(/\s*\(.*$/,'')+': '+T.title,essay:essay.value.trim(),answers:ans.join('\n')});
      e.target.remove();}
 });
