@@ -95,6 +95,7 @@ def run(mobile, fail_first):
         res = pg.inner_text('#result')
         # expected: reading 4+3 + q3 1 + q4 1 + q5 2 + q6 2 = 13 ; vocab 5 + 3 = 8 ; grammar 6 + 3 = 9 → 30
         check(f'[{tag}] score total and section scores', '30 / 34' in res and '13/14' in res and '8/10' in res and '9/10' in res, res[:200])
+        check(f'[{tag}] provisional heading while answers await the teacher', 'Provisional score' in res, res[:80])
         check(f'[{tag}] pending teacher review shown separately (not counted)', '1 answer(s) will be checked by your teacher' in res, res)
         check(f'[{tag}] writing shown as teacher-marked (14)', 'Writing (10 marks) will be marked by your teacher' in res)
         check(f'[{tag}] answers locked after checking', pg.is_disabled('#q3'))

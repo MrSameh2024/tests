@@ -58,6 +58,39 @@ def difficulty(id, sk):
     if id.startswith('q4') or id == 'q3': return 'I'
     return 'I'
 
+# ---------- verified against the SSH Grade 11 Term 1 Revision Booklet (Drive 1BMiS4hS55KvdODUkYb2I27A6luSDrvbS, read 22 Nov 2026) ----------
+# The booklet is teacher-made (not an official document). It states "Modules 3, 4 and 5" and cites Student's Book
+# pages for each vocabulary topic and writing genre. Grammar and reading topics carry NO module or page in the booklet.
+BK_SRC = "SSH G11 Term 1 Revision Booklet 2025-26"
+BK_TOPICS = [  # (module, SB page as cited by the booklet, topic, words/keys listed in the booklet)
+ (3, 'p.40', 'Expressions with on and in', {'on behalf of','on display','on fire','on good terms','on holiday','on purpose','on sale','on second thoughts','on the phone','on the run','on the verge of','on tour','in a hurry','in a mess','in cash','in charge','in debt','in particular','in public','in tears','in the long run','in the future','in the meantime','in the mood','in trouble'}),
+ (3, 'p.40-41', 'Phrasal verbs with get, take and look', {'get away','get around to','take over','get along with','get over','got over','take on','get by','take after','took after','look for','get through to','take off','took off','take down'}),
+ (4, 'p.54', 'The natural world', {'marine','biodiversity','ecosystem','food chain','delicate','predator','predators','pose','prey'}),
+ (4, 'p.54', 'Nouns + prepositions', {'advantage of','impact on','damage to','importance of','effect on','solution to','decrease in','feed on','threat to','increase in','need for','reason for'}),
+ (4, 'p.55', 'Prefixes over- and under-', {'overachieve','underachieve','undercharge','overcook','overcharge','underestimate','overpay','underpay','overrate','overrated','underrate','overuse','overused','undercook','overestimate','underuse','overfeed','underfeed'}),
+ (5, 'p.70', '-ed and -ing adjectives', {'appalled','appalling','pleased','pleasing','disgusted','disgusting','alarmed','alarming','disappointed','disappointing','embarrassed','embarrassing','confused','confusing','depressed','depressing'}),
+ (5, 'p.70 and p.76', 'Forming nouns and adjectives', {'disappointment','connection','cancellation','achievement','prevention','imagination','development','motivation','inspiration','decision','introduction','description','explanation','application','satisfaction','beneficial','intensive','healthy','spacious','accessible','financial','decisive','dirty','adventurous','predictable','educational','cooperative','risky','humorous','reusable','global','protective','dusty','furious','advisable'}),
+]
+BK_GRAMMAR = {'GR_PAST': 'Past simple and past continuous', 'GR_USED': 'used to · would · be / get used to · was going to', 'GR_FUT': 'used to · would · be / get used to · was going to',
+              'GR_PASTPERF': 'Past perfect', 'GR_CAUSE': 'Clauses of reason, concession, result and purpose', 'GR_CONTR': 'Clauses of reason, concession, result and purpose',
+              'GR_PURP': 'Clauses of reason, concession, result and purpose', 'GR_SOSUCH': 'Clauses of reason, concession, result and purpose',
+              'GR_MOD_ADV': 'Modal verbs', 'GR_MOD_OBL': 'Modal verbs'}
+def booklet_match(key, stem, sk):
+    """-> (verification, module, sb_page, topic)"""
+    k = key.lower().strip(); s = stem.lower()
+    cands = {k}
+    m = re.search(r'_{3,}\s+([a-z]+(?:\s+[a-z]+)?)', s); after = m.group(1).split() if m else []
+    b = re.search(r'([a-z]+)\s+_{3,}', s); before = b.group(1) if b else ''
+    if after: cands |= {k + ' ' + after[0], k + ' ' + ' '.join(after[:2])}
+    if before: cands.add(before + ' ' + k)
+    if k == 'long': cands.add('in the long run')
+    for mod, pg, topic, words in BK_TOPICS:
+        if cands & words: return ('VERIFIED against SSH Revision Booklet (booklet cites SB ' + pg + ')', 'Module %d' % mod, pg + ' (as cited in the SSH booklet)', topic)
+    if sk in BK_GRAMMAR: return ('PARTLY VERIFIED: topic is in the booklet (Term 1, Modules 3-5) but the booklet gives no module or page', PEND, PEND, BK_GRAMMAR[sk])
+    if sk and sk.startswith('RD_'): return ('PARTLY VERIFIED: reading skill in the booklet (section 9); no module or page', PEND, PEND, 'Reading skills')
+    if sk == 'GR_PASS': return ('NOT IN BOOKLET: the passive is not a Term 1 booklet topic; check the specification', PEND, PEND, '')
+    return ('NOT FOUND in booklet word lists: needs Student\'s Book check', PEND, PEND, '')
+
 items = []
 for T in DATA:
     t = T['n']; tags = PG['tests'][str(t)]['items']
@@ -79,6 +112,11 @@ for T in DATA:
             booklet=(f"Revision Booklet p.{mi['bk']} · {mi.get('bks','')}" if mi.get('bk') else PEND),
             resources=' ; '.join(r['url'] for r in res) or PEND,
             difficulty=difficulty(id, sk)))
+        bv = booklet_match(key, stem, sk)
+        it = items[-1]; it['verification'] = bv[0]; it['booklet_topic'] = bv[3]
+        it['module'] = bv[1] if bv[1] != PEND else it['module'] if 'Module' in it['module'] and not bv[0].startswith(('NOT', 'PARTLY')) else PEND
+        it['sb_page'] = bv[2]
+        it['term'] = 'Term 1 (VERIFIED against SSH booklet: "End of Term 1, Modules 3, 4 and 5")'
 
 # ---------- automated checks ----------
 stems = defaultdict(list)
@@ -122,7 +160,7 @@ for it in items:
     it['status'] = 'needs teacher decision' if f and f[0] in ('high', 'medium') and 'Fixed in' not in f[3] else ('fixed (pending approval)' if f and 'Fixed in' in f[3] else 'ok')
 
 # ---------- write ----------
-mapcols = ['test', 'title', 'item', 'section', 'type', 'marks', 'grade', 'term', 'module', 'lesson', 'skill', 'skill_en', 'skill_ar', 'objective', 'difficulty', 'standard', 'sb_page', 'wb_page', 'booklet', 'resources', 'stem', 'key']
+mapcols = ['test', 'title', 'item', 'section', 'type', 'marks', 'grade', 'term', 'verification', 'booklet_topic', 'module', 'lesson', 'skill', 'skill_en', 'skill_ar', 'objective', 'difficulty', 'standard', 'sb_page', 'wb_page', 'booklet', 'resources', 'stem', 'key']
 with open(os.path.join(ROOT, 'curriculum/g11-advanced-map.csv'), 'w', newline='', encoding='utf-8-sig') as fh:
     w = csv.DictWriter(fh, fieldnames=mapcols, extrasaction='ignore'); w.writeheader(); w.writerows(items)
 json.dump([{k: it[k] for k in mapcols} for it in items], open(os.path.join(ROOT, 'curriculum/g11-advanced-map.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
@@ -140,6 +178,7 @@ summary = dict(items=len(items), marks_auto_per_test=sum(x['marks'] for x in ite
     auto_flags=sum(1 for x in items if x['auto_checks'] != 'pass'),
     auto_flag_types=Counter(re.sub(r'(T\d+ \w+(, )?)+', '…', c.split(':')[0]) for x in items for c in x['auto_checks'].split(' ; ') if c != 'pass'),
     difficulty_pct_of_34_auto_marks=dist,
+    verification=Counter(x['verification'].split(':')[0].split(' (')[0] for x in items),
     curriculum_fields={k: Counter('verified-or-sourced' if PEND not in str(x[k]) else 'pending' for x in items) for k in ('module', 'lesson', 'sb_page', 'wb_page', 'standard', 'booklet', 'resources')})
 json.dump(summary, open(os.path.join(OUT, 'g11-qa-summary.json'), 'w'), indent=1, default=dict)
 print(json.dumps(summary, indent=1, default=dict))
