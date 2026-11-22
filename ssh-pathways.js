@@ -73,6 +73,7 @@
     var el = document.getElementById(id + 'fb');
     if (!el) return null;
     if (el.querySelector('.fb.ok')) return 'ok';
+    if (el.querySelector('.fb.review')) return 'review';
     if (el.querySelector('.fb.no')) return 'no';
     if (el.querySelector('.fb.model')) {
       var on = document.querySelector('.self button.on[data-id="' + id + '"]');
@@ -191,7 +192,8 @@
   function evaluate() {
     var res = collect(), ids = Object.keys(res);
     if (!ids.length) { $$('.sshp-chip').forEach(function (x) { x.remove(); }); var pl = $('#sshPlan'); if (pl) pl.remove(); lastKey = ''; return; }
-    var marked = ids.filter(function (i) { return res[i].s !== 'pending'; });
+    var marked = ids.filter(function (i) { return res[i].s !== 'pending' && res[i].s !== 'review'; });
+    var nPend = ids.filter(function (i) { return res[i].s === 'pending'; }).length, nRev = ids.filter(function (i) { return res[i].s === 'review'; }).length;
     var ok = marked.filter(function (i) { return res[i].s === 'ok'; }).length;
     var pct = marked.length ? Math.round(100 * ok / marked.length) : 0;
     var lv = level(pct);
@@ -217,9 +219,9 @@
     }
     // per-skill totals
     var per = {};
-    ids.forEach(function (id) { var r = res[id]; if (r.s === 'pending' || !r.sk) return; per[r.sk] = per[r.sk] || [0, 0]; per[r.sk][1]++; if (r.s === 'ok') per[r.sk][0]++; });
-    plan(per, pct, lv, marked.length, ids.length - marked.length);
-    record(per, pct, lv, ids.length - marked.length);
+    ids.forEach(function (id) { var r = res[id]; if (r.s === 'pending' || r.s === 'review' || !r.sk) return; per[r.sk] = per[r.sk] || [0, 0]; per[r.sk][1]++; if (r.s === 'ok') per[r.sk][0]++; });
+    plan(per, pct, lv, marked.length, nPend, nRev);
+    record(per, pct, lv, nPend);
   }
   function gaps(per) {
     return Object.keys(per).filter(function (k) { return per[k][0] < per[k][1]; }).sort(function (a, b) {
@@ -227,7 +229,7 @@
       return ra - rb || (per[b][1] - per[b][0]) - (per[a][1] - per[a][0]);
     });
   }
-  function plan(per, pct, lv, n, pending) {
+  function plan(per, pct, lv, n, pending, review) {
     var g = gaps(per).slice(0, 3);
     var box = $('#sshPlan');
     if (!box) {
@@ -239,6 +241,7 @@
     var h = '<div class="row"><div><h2>My Revision Plan · خطتي للمراجعة</h2><div class="lvl">Your pathway from this test: ' + LV[lv][0] + ' · <span dir="rtl">' + LV[lv][1] + '</span> (' + pct + '% of ' + n + ' marked answers)</div></div>' +
       '<label class="sw"><input type="checkbox" id="sshpSimple"' + (simple() ? ' checked' : '') + '> Simpler view · عرض مبسّط</label></div>';
     if (pending) h += '<p class="sshp-ref">' + pending + ' answer(s) still need your self-mark; the plan updates when you mark them. · بعض الإجابات تحتاج إلى تقييمك الذاتي.</p>';
+    if (review) h += '<p class="sshp-ref">⏳ ' + review + ' answer(s) are waiting for your teacher\'s review and are not included in this plan yet. · <span dir="rtl">' + review + ' إجابة بانتظار مراجعة المعلم ولم تُحتسب في الخطة بعد.</span></p>';
     if (!g.length) h += '<p>✅ No gaps found in the marked questions. Try the enrichment tasks or a harder test. · لا توجد فجوات؛ جرّب مهام الإثراء أو اختبارًا أصعب.</p>';
     else {
       h += '<p>Start with these ' + g.length + ' skill(s), most important first: · ابدأ بهذه المهارات بالترتيب:</p><ol>';
