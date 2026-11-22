@@ -254,10 +254,42 @@ function variants(a){let out=[];const parts=(/\.\s+\/\s+/.test(a)||!/\./.test(a)
     alts.forEach(x=>{out.push(x);if(/\([^)]*\)/.test(x)){out.push(x.replace(/\s*\([^)]*\)/g,''));out.push(x.replace(/[()]/g,''))}})});
   return out.map(norm)}
 const okAns=(v,a)=>{const n=norm(v);return !!n&&variants(a).includes(n)};
+// CR reading: accept key ideas in any word order, not only an exact model string.
+// Conservative cases remain pending for a teacher; keywords are not proof of meaning.
+const CR_STOP=new Set('a an the and or of for from in on at to with by as that this these those it they their them he she we you your our its is are was were be been being can could should would may might have has had do does did some when while into than then first time one two how what which who there they'.split(' '));
+const CR_EQ={plastics:'plastic',microplastics:'microplastic',planktons:'plankton',fishes:'fish',particles:'particle',fabrics:'fabric',fibres:'fibre',fibers:'fibre',fiber:'fibre',washed:'wash',washing:'wash',washes:'wash',clothes:'clothe',larger:'large',predators:'predator',scientists:'scientist',discovered:'discover',found:'discover',finding:'discover',discovery:'discover',beads:'bead',microbeads:'microbead',bags:'bag',bottles:'bottle',ship:'ship',ships:'ship',lifeboats:'lifeboat',spaceships:'spaceship',astronauts:'astronaut',sank:'sink',sinking:'sink',sunk:'sink',hit:'hit',struck:'hit',spotted:'spot',located:'locate',radio:'radio',communications:'communication',dehydrated:'dehydrate',recycling:'recycle',recycled:'recycle',protecting:'protect',less:'less',avoiding:'avoid',avoided:'avoid',maximum:'maximum',biggest:'maximum',largest:'maximum'};
+function crWords(v){return norm(v).split(' ').filter(w=>w&&!CR_STOP.has(w)).map(w=>CR_EQ[w]||w).filter(w=>w.length>2||/^[0-9]+$/.test(w))}
+function crMatch(v,model){
+  if(!v||!v.trim())return false;
+  if(okAns(v,model))return true;
+  const n=norm(v),m=norm(model);
+  // Avoid automatically passing statements that reverse the model's meaning.
+  if(/\b(no|not|never|without|false|incorrect|neither)\b/.test(n)&&!/\b(no|not|never|without|false|incorrect|neither)\b/.test(m))return false;
+  const checks=variants(model);
+  return checks.some(answer=>{
+    const terms=[...new Set(crWords(answer))];
+    const response=new Set(crWords(v));
+    const numeric=terms.filter(x=>/^[0-9]+$/.test(x));
+    if(numeric.some(x=>!response.has(x)))return false;
+    // Require at least two meaningful keywords; longer models require stronger evidence.
+    const matching=terms.filter(x=>response.has(x)).length;
+    const needed=Math.min(terms.length,Math.max(2,Math.ceil(terms.length*0.60)));
+    return matching>=needed && matching>=2;
+  });
+}
+function crPart(v,model){
+  // For a model with alternatives, either alternative may earn credit.
+  return String(model).split(/\s+\/\s+/).some(part=>crMatch(v,part))||crMatch(v,model);
+}
 const fb=(id,ok,right)=>{$('#'+id+'fb').innerHTML=ok?'<div class="fb ok">✓ Correct</div>':`<div class="fb no">Correct answer: <b>${right}</b></div>`};
 const S={};  // section scores
 const SELF={}; // self-marked items: id -> {pts, got:null|number}
 function radios(id,arr,key){let g=0;arr.forEach((q,i)=>{const c=document.querySelector(`input[name="${id}${i}"]:checked`);const v=c?+c.value:-1;const ok=v===q.a;if(ok)g++;q.o.forEach((_,j)=>{const el=$(`#${id}${i}o${j}`);el.classList.toggle('right',j===q.a);el.classList.toggle('wrong',j===v&&!ok)});fb(id+i,ok,L[q.a]+') '+esc(q.o[q.a]))});S[key]=[g,arr.length]}
+function teacherItem(id,pts,model,label){
+  SELF[id]={pts,got:null,label,teacherReview:true};
+  $('#'+id+'fb').innerHTML='<div class="fb model"><b>Pending teacher review · في انتظار مراجعة المعلم</b>. Your answer has been saved; different wording does not mean it is wrong.</div>';
+  const box=$('#'+id+'self');box.classList.add('hidden');box.innerHTML='';
+}
 function selfItem(id,pts,model,label){
   SELF[id]={pts,got:null,label};
   $('#'+id+'fb').innerHTML=`<div class="fb model">Model answer: <b>${model}</b></div>`;
@@ -274,9 +306,29 @@ function mark(){
   // rewrite: auto if exact match, else self
   g=0;T.q10.forEach((q,i)=>{const el=$('#rw'+i);if(okAns(el.value,q.a)){g++;el.classList.add('right');fb('rw'+i,true,'')}else{el.value.trim()?selfItem('rw'+i,1,esc(q.a),'Q10.'+(i+1)):(fb('rw'+i,false,esc(q.a)))}});S.q10auto=g;
   const ans=id=>$('#'+id).value.trim();
-  ans('q3')?selfItem('q3',1,esc(T.q3.a),'Q3'):fb('q3',false,esc(T.q3.a));
-  T.q4.forEach((r,i)=>ans('q4_'+i)?selfItem('q4_'+i,1,esc(r.a),'Q4.'+(i+1)):fb('q4_'+i,false,esc(r.a)));
-  ['q5','q6'].forEach(k=>{const has=ans(k+'_0')||ans(k+'_1');const model=T[k].a.map((x,j)=>(j+1)+'. '+esc(x)).join('<br>');has?selfItem(k,2,model,k.toUpperCase()):fb(k,false,model)});
+  S.crAuto=0;const autoIds=new Set();
+  const crSingle=(id,model,label)=>{
+    const value=ans(id);
+    if(!value){fb(id,false,esc(model));return}
+    if(crPart(value,model)){S.crAuto++;autoIds.add(id);fb(id,true,esc(model))}
+    else teacherItem(id,1,esc(model),label);
+  };
+  crSingle('q3',T.q3.a,'Q3');
+  T.q4.forEach((r,i)=>crSingle('q4_'+i,r.a,'Q4.'+(i+1)));
+  ['q5','q6'].forEach(k=>{
+    const examples=T[k].a, values=[ans(k+'_0'),ans(k+'_1')];
+    let earned=0,used=new Set();
+    values.forEach(v=>{
+      if(!v)return;
+      const index=examples.findIndex((ex,j)=>!used.has(j)&&crPart(v,ex));
+      if(index>=0){earned++;used.add(index)}
+    });
+    S.crAuto+=earned;
+    if(earned===2){autoIds.add(k);fb(k,true,examples.map(esc).join(' / '))}
+    else if(values.some(Boolean)){teacherItem(k,2-earned,examples.map(esc).join(' / '),k.toUpperCase());SELF[k].got=0;SELF[k].autoEarned=earned;}
+    else fb(k,false,examples.map(esc).join(' / '));
+  });
+  S.crAutoIds=autoIds;
   $('#modelbox').innerHTML=T.w.model?`<div class="fb model" style="margin-top:10px"><b>Model opening:</b> ${esc(T.w.model)}</div>`:'';
 }
 function totals(){
@@ -284,21 +336,21 @@ function totals(){
   const selfPending=Object.values(SELF).filter(s=>s.got===null).length;
   const readSelf=['q3','q4_0','q4_1','q5','q6'].reduce((a,k)=>a+((SELF[k]&&SELF[k].got)||0),0);
   const rwSelf=[0,1,2,3].reduce((a,i)=>a+((SELF['rw'+i]&&SELF['rw'+i].got)||0),0);
-  const reading=S.q1[0]+S.q2[0]+readSelf, vocab=S.q7[0]+S.q8[0], grammar=S.q9[0]+S.q10auto+rwSelf;
+  const reading=S.q1[0]+S.q2[0]+(S.crAuto||0)+readSelf, vocab=S.q7[0]+S.q8[0], grammar=S.q9[0]+S.q10auto+rwSelf;
   return {reading,vocab,grammar,total:reading+vocab+grammar,selfGot,selfPending};
 }
 function renderScore(){
   const x=totals();const pct=Math.round(x.total/34*100);
   const rows=[['Reading',x.reading,14],['Vocabulary',x.vocab,10],['Grammar',x.grammar,10]];
   $('#result').classList.remove('hidden');
-  $('#result').innerHTML=`<h2>Your result · نتيجتك</h2><div class="big">${x.total} / 34</div><div>${pct}% · Writing (10 marks) will be marked by your teacher.</div>
+  $('#result').innerHTML=`<h2>${x.selfPending?'Provisional score · درجة مبدئية':'Your result · نتيجتك'}</h2><div class="big">${x.total} / 34</div><div>${pct}% · ${x.selfPending?'Reading answers await teacher review; this is not your final result. · إجابات القراءة قيد المراجعة، وليست هذه الدرجة النهائية.':'Writing (10 marks) is assessed separately.'}</div>
   <div class="bars">${rows.map(([l,g,m])=>`<div class="bar"><span>${l}</span><div class="track"><i style="width:${g/m*100}%"></i></div><b>${g}/${m}</b></div>`).join('')}</div>
-  <p class="mute">${x.selfPending?`<b style="color:#b3261e">${x.selfPending} answer(s) still need your self-mark.</b> Scroll up and compare each answer with the model, then tap ✓ or ✗. · `:''}Some answers (${Object.keys(SELF).length}) are self-marked: be honest — your teacher can see them.</p>
+  <p class="mute">${x.selfPending?`<b style="color:#1e6fd9">${x.selfPending} answer(s) need review. Open-ended reading answers are not considered incorrect simply because they use different wording. · الإجابات المفتوحة لا تُعتبر خاطئة لاختلاف الصياغة.</b>`:''} Teacher reviews any uncertain answers.</p>
   <div id="sendWrap"></div>`;
   if(!$('#sendBtn')){}
   const w=$('#sendWrap');
   if(sent){w.innerHTML='';return}
-  w.innerHTML=`<button class="btn" type="button" id="sendBtn" data-pending="${x.selfPending||0}">Send my results and writing to my teacher · أرسل لمعلمي</button>${x.selfPending?'<p class="mute" style="margin-top:6px">Your result is sent to your teacher automatically when you finish self-marking. You can also send it now. · تُرسل نتيجتك إلى معلمك تلقائيًا عند انتهائك من التصحيح الذاتي، ويمكنك إرسالها الآن.</p>':''}`;
+  w.innerHTML=`<button class="btn" type="button" id="sendBtn" data-pending="${x.selfPending||0}">Send my results and writing to my teacher · أرسل لمعلمي</button>${x.selfPending?'<p class="mute" style="margin-top:6px">Submit your provisional result now. The teacher will review any remaining open responses. · أرسل الدرجة المبدئية وسيُراجع المعلم الإجابات المفتوحة.</p>':''}`;
 }
 let sent=false;
 function lockAll(){locked=true;document.querySelectorAll('#test input,#test textarea').forEach(el=>el.disabled=true)}
@@ -311,11 +363,11 @@ document.addEventListener('click',e=>{
   if(id==='noBtn')setActions('start');
   if(id==='yesBtn'){mark();lockAll();sshLock(true);$('#sshName').disabled=true;$('#sshClass').disabled=true;checked=true;renderScore();setActions('done');
      const first=document.querySelector('.self:not(.hidden)');(first||$('#result')).scrollIntoView({block:'center',behavior:'smooth'})}
-  if(id==='sendBtn'){if(+e.target.dataset.pending>0&&!window.SSH_AUTO_SEND&&!confirm(e.target.dataset.pending+' answer(s) are not self-marked yet. Send now? Your teacher will mark them. · '+e.target.dataset.pending+' إجابة لم تُصحَّح ذاتيًا بعد. هل ترسل الآن؟ سيصححها معلمك.'))return;const x=totals();const ans=[];
+  if(id==='sendBtn'){if(+e.target.dataset.pending>0&&!window.SSH_AUTO_SEND&&!confirm(e.target.dataset.pending+' answer(s) await teacher review. Send now? · '+e.target.dataset.pending+' إجابة لم تُصحَّح ذاتيًا بعد. هل ترسل الآن؟ سيصححها معلمك.'))return;const x=totals();const ans=[];
      const rad=(p,arr)=>arr.map((q,i)=>{const c=document.querySelector(`input[name="${p}${i}"]:checked`);const v=c?+c.value:-1;return (i+1)+') '+(v<0?'-':L[v])+(v===q.a?' ✓':' ✗ (key '+L[q.a]+')')}).join(' | ');
      ans.push('Q1: '+rad('a',T.q1));
      ans.push('Q2: '+T.q2.map((q,i)=>{const c=document.querySelector(`input[name="tf${i}"]:checked`);return 'ABC'[i]+') '+(c?c.value:'-')+(c&&c.value===q.a?' ✓':' ✗ (key '+q.a+')')}).join(' | '));
-     const sm=k=>SELF[k]?(SELF[k].got===null?' [not self-marked: teacher to mark]':' [self: '+SELF[k].got+'/'+SELF[k].pts+']'):' [blank]';
+     const sm=k=>(S.crAutoIds&&S.crAutoIds.has(k))?' ✓ auto (key concepts)':SELF[k]?(SELF[k].teacherReview?' [pending teacher review]':(SELF[k].got===null?' [pending teacher review]':' [self: '+SELF[k].got+'/'+SELF[k].pts+']')):' [blank]';
      ans.push('Q3: '+($('#q3').value.trim()||'-')+sm('q3'));
      T.q4.forEach((r,i)=>ans.push('Q4 '+r.t+': '+($('#q4_'+i).value.trim()||'-')+sm('q4_'+i)));
      ['q5','q6'].forEach(k=>ans.push(k.toUpperCase()+': 1) '+($('#'+k+'_0').value.trim()||'-')+' 2) '+($('#'+k+'_1').value.trim()||'-')+sm(k)));
@@ -325,7 +377,7 @@ document.addEventListener('click',e=>{
      T.q10.forEach((q,i)=>{const v=$('#rw'+i).value.trim();ans.push('Q10.'+(i+1)+': '+(v||'-')+(okAns(v,q.a)?' ✓ auto':sm('rw'+i)))});
      e.target.disabled=true;sent=true;
      sshSend($('#result'),{test:'Grade 11 Advanced Test '+t,name:$('#sshName').value.trim(),cls:$('#sshClass').value.trim(),score:x.total,max:34,percent:Math.round(x.total/34*100),
-       breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10; self-marked items '+x.selfGot+' pts; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)'+(x.selfPending?'; '+x.selfPending+' answer(s) not self-marked: teacher to mark':''),
+       breakdown:'Reading '+x.reading+'/14; Vocabulary '+x.vocab+'/10; Grammar '+x.grammar+'/10; reading CR automatically credited '+(S.crAuto||0)+' pts; manually marked '+x.selfGot+' pts; Writing /10 by teacher (Content 4 · Organisation 2 · Language 2 · Accuracy 2)'+(x.selfPending?'; '+x.selfPending+' answer(s) pending teacher review':''),
        topic:T.w.title.replace(/\s*\(.*$/,'')+': '+T.title,essay:essay.value.trim(),answers:ans.join('\n')});
      e.target.remove();}
 });
