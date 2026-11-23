@@ -18,7 +18,7 @@ function Sheet(name, rows) {
   return s;
 }
 function run(csvPath) {
-  const rows = RC.parseCSV(fs.readFileSync(csvPath, 'utf8')).map(r => r.map(x => /^\d+$/.test(x) ? Number(x) : x));
+  const rows = RC.parseCSV(fs.readFileSync(csvPath, 'utf8')).map(r => r.map(x => /^\d+$/.test(x) ? Number(x) : (process.env.NUMPCT && /^\d+%$/.test(x) ? Number(x.slice(0, -1)) : x)));
   const ss = { _sheets: [Sheet('Submissions', rows)], getSheetByName: n => ss._sheets.find(s => s.name === n) || null,
     insertSheet: n => { const s = Sheet(n, []); ss._sheets.push(s); return s; }, getSpreadsheetTimeZone: () => 'Asia/Qatar' };
   const msgs = [];
@@ -56,7 +56,7 @@ log.rows.slice(1).forEach(l => {
   const r = sub.rows[l[3] - 1];
   assert.strictEqual(r[ci('Score')], l[6] + l[5]); added += l[5];
   assert.ok(r[ci('Score')] <= r[ci('Max')]);
-  assert.strictEqual(r[ci('Percent')], Math.round(r[ci('Score')] / r[ci('Max')] * 100) + '%');
+  const want = Math.round(r[ci('Score')] / r[ci('Max')] * 100); assert.ok(r[ci('Percent')] === want + '%' || r[ci('Percent')] === want, 'percent kept in the same form: ' + r[ci('Percent')]);
   const rd = /Reading (\d+)\/14/.exec(r[ci('Section breakdown')]); assert.ok(!rd || +rd[1] <= 14);
   assert.ok(/re-check 23 Nov 2026, approved by teacher/.test(r[ci('Answers')]));
   assert.ok(/re-check \(23 Nov 2026, approved\)/.test(r[ci('Teacher feedback')]));

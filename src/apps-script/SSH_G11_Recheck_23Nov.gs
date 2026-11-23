@@ -90,7 +90,8 @@ function g11Recheck_2_ApplyApproved() {
       if (!bad && (isNaN(score) || score > max)) bad = 'score would exceed Max';
       if (bad) { ok.forEach(function (x) { rev.getRange(x.revRow, 10).setValue('Skipped: ' + bad); }); skipped += ok.length; return; }
       bd = bd.replace(/(\d+) answer\(s\) not self-marked: teacher to mark/, function (m0, n) { var k = Number(n) - ok.length; return k > 0 ? k + ' answer(s) not self-marked: teacher to mark' : 'written answers re-checked 23 Nov'; });
-      var pct = typeof old.pct === 'number' ? score / max : Math.round(score / max * 100) + '%';
+      // Percent in Submissions is a whole number shown with the format 0"%" (e.g. 74 → "74%"); keep the same kind of value
+      var pct = typeof old.pct === 'number' ? (old.pct > 1 ? Math.round(score / max * 100) : score / max) : Math.round(score / max * 100) + '%';
       var note = 'Reading/grammar re-check (23 Nov 2026, approved): +' + total + ' point(s) for ' + items.join(', ') + '.';
       var fb = old.fb ? old.fb + ' | ' + note : note;
       sub.getRange(r, C['Score'] + 1).setValue(score);
@@ -126,6 +127,24 @@ function g11Recheck_Undo() {
     if (rev && rev.getLastRow() > 1) rev.getRange(2, 10, rev.getLastRow() - 1, 1).clearContent();
     g11rcSay_('Undone: ' + n + ' submission row(s) restored to their values before the re-check.');
   } finally { lock.releaseLock(); }
+}
+
+/** One-off repair (23 Nov): Percent was written as a fraction (0.94 → shown "1%") in rows changed by the re-check.
+ *  Rewrites Percent = round(Score / Max × 100) for those rows only, and records it in the audit log. */
+function g11Recheck_FixPercent() {
+  var ss = SpreadsheetApp.getActive(), log = ss.getSheetByName(G11RC.LOG_TAB), sub = ss.getSheetByName(G11RC.SUBMISSIONS);
+  if (!log) { g11rcSay_('No audit log.'); return; }
+  var idx = g11rcIndex_(sub), C = idx.col, lv = log.getDataRange().getValues(), n = 0;
+  for (var i = 1; i < lv.length; i++) {
+    if (lv[i][14] !== 'applied') continue;
+    var r = idx.byRef[lv[i][2]]; if (!r) continue;
+    var cell = sub.getRange(r, C['Percent'] + 1), v = cell.getValue();
+    if (typeof v !== 'number' || v > 1) continue;            // already a whole-number percent
+    var score = Number(sub.getRange(r, C['Score'] + 1).getValue()), max = Number(sub.getRange(r, C['Max'] + 1).getValue());
+    var p = Math.round(score / max * 100);
+    cell.setValue(p); log.getRange(i + 1, 10).setValue(p); n++;
+  }
+  g11rcSay_('Percent repaired in ' + n + ' row(s).');
 }
 
 function g11rcLine_(answers, d) {   // the exported line: same start, same length, still waiting for the teacher
