@@ -53,7 +53,7 @@ function g11Recheck_2_ApplyApproved() {
     var backup = sub.copyTo(ss).setName('Submissions backup ' + stamp); backup.hideSheet();
     var log = ss.getSheetByName(G11RC.LOG_TAB) || g11rcNewLog_(ss);
     var idx = g11rcIndex_(sub), C = idx.col, rv = rev.getDataRange().getValues();
-    var user = (Session.getActiveUser() && Session.getActiveUser().getEmail()) || 'unknown';
+    var user = 'sheet owner (Apps Script editor)';   // no extra Google permission needed
     // group APPROVE rows by Reference
     var groups = {}, byKey = {};
     G11RC.DATA.forEach(function (d) { byKey[d[0] + '|' + g11rcItemName_(d[2])] = d; });
