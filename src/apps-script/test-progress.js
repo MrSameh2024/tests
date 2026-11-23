@@ -13,7 +13,8 @@ function Sheet(name, g) { const sh = { name, cells: {}, g,
   getRange: (a, b, c, d) => { if (typeof a === 'string') { const m = /^([A-Z])(\d+):([A-Z])(\d+)$/.exec(a); return Range(sh, +m[2], m[1].charCodeAt(0) - 64, +m[4] - +m[2] + 1, 1); } return Range(sh, a, b, c, d); },
   clear: () => { sh.cells = {}; }, clearConditionalFormatRules() {}, setFrozenRows() {}, setColumnWidth() {} }; return sh; }
 const sub = Sheet('Submissions', grid);
-const ss = { getSheetByName: n => n === 'Submissions' ? sub : tabs[n] || null, insertSheet: n => (tabs[n] = Sheet(n, [])) };
+const roster = process.env.ROSTER ? Sheet('G11-7 Research Roster', RC.parseCSV(fs.readFileSync(process.env.ROSTER, 'utf8'))) : null;
+const ss = { getSheetByName: n => n === 'Submissions' ? sub : n === 'G11-7 Research Roster' ? roster : tabs[n] || null, insertSheet: n => (tabs[n] = Sheet(n, [])) };
 const ctx = { SpreadsheetApp: { getActive: () => ss }, Session: { getScriptTimeZone: () => 'Asia/Qatar' }, Utilities: { formatDate: () => '23 Nov 2026 10:00' } };
 ctx.globalThis = ctx; vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(__dirname, 'SSH_G11_Progress.gs'), 'utf8'), ctx);

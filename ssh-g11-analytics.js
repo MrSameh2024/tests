@@ -86,7 +86,7 @@
         row: i + 2, time: parseDate(pick(r, ['timestamp', 'time', 'date'])), ref: pick(r, ['reference', 'sid']),
         test: test, g11: m ? +m[1] : null, name: pick(r, ['student name', 'name']).trim(), cls: normClass(pick(r, ['class', 'cls'])),
         score: isNaN(score) ? null : score, max: isNaN(max) ? null : max, pct: (!isNaN(score) && max > 0) ? score / max * 100 : null,
-        sections: sec, items: parseItems(pick(r, ['answers'])), feedback: pick(r, ['feedback status']), essay: pick(r, ['essay']),
+        sections: sec, items: parseItems(pick(r, ['answers'])), feedback: pick(r, ['feedback status']), teacherFeedback: pick(r, ['teacher feedback']), essay: pick(r, ['essay']),
         writingPending: !!pick(r, ['essay']) && !w
       };
     }).filter(function (x) { return x.name && (!opts.g11Only || x.g11); });
