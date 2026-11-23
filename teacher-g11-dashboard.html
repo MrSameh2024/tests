@@ -81,11 +81,11 @@ const band=v=>v==null?'n':v>=target()?'g':v>=target()-15?'a':'r';
 function bar(label,v,extra){return `<div class="bar"><span>${label}</span><div class="track"><i style="width:${v==null?0:Math.max(2,Math.min(100,v))}%;background:${v==null?'#ccd':{g:'#3a9a5b',a:'#e0a33a',r:'#d1453b',n:'#ccd'}[band(v)]}"></i><span class="tgt" style="left:${target()}%" title="target"></span></div><b class="num">${v==null?'no data':pct(v)}</b></div>${extra||''}`}
 function skillName(k){return SK[k]?SK[k].en:k}
 function load(text,src){
-  ALL=A.records(A.parseCSV(text),{g11Only:true});SRC=src;
+  const all=A.records(A.parseCSV(text),{g11Only:true});ALL=all.filter(r=>!/^teacher$/i.test(r.cls));const skipped=all.length-ALL.length;SRC=src;
   const classes=[...new Set(ALL.map(r=>r.cls).filter(Boolean))].sort();
   $('#cls').innerHTML='<option value="">All classes</option>'+classes.map(c=>`<option ${c==='11/7'?'selected':''}>${esc(c)}</option>`).join('');
   $('#srcBanner').innerHTML=src==='demo'?'<div class="banner demo"><b>DEMO DATA — fictitious students.</b> Numbers on this screen are not real results and must not be reported. · بيانات تجريبية لطلاب غير حقيقيين.</div>'
-    :`<div class="banner live">Loaded ${ALL.length} Grade 11 Advanced Test result(s) from <b>${esc(src)}</b>. Data stays on this device.</div>`;
+    :`<div class="banner live">Loaded ${ALL.length} Grade 11 Advanced Test result(s) from <b>${esc(src)}</b>${skipped?` (${skipped} teacher test row(s) left out)`:''}. Data stays on this device.</div>`;
   $('#app').classList.toggle('hidden',!ALL.length);
   if(!ALL.length)$('#srcBanner').innerHTML+='<div class="banner demo">No Grade 11 Advanced Test rows found in this file. Check that it is the Submissions sheet.</div>';
   render();

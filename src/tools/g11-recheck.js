@@ -95,7 +95,7 @@ function run(file, prefix) {
   const rows = parseCSV(raw.toString('utf8'));
   const head = rows[0].map(h => h.toLowerCase().trim());
   const col = re => head.findIndex(h => re.test(h));
-  const C = { ans: col(/answers/), test: col(/^test|test$|exam/), name: col(/name/), cls: col(/^cls$|class/), sid: col(/^sid$|submission/), score: col(/^score$/), time: col(/time|date/) };
+  const C = { ans: col(/answers/), test: col(/^test|test$|exam/), name: col(/name/), cls: col(/^cls$|class/), sid: col(/^sid$|submission|^reference$/), score: col(/^score$/), time: col(/time|date/), fb: col(/teacher feedback/) };
   if (C.ans < 0 || C.test < 0) throw new Error('The CSV needs an "answers" column and a "test" column. Headers found: ' + head.join(', '));
   const props = [], sum = { input: path.basename(file), input_sha256: sha, rows: rows.length - 1, g11_rows: 0, items_checked: 0, would_gain: 0, would_lose: 0, now_review: 0, by_test: {}, generated: new Date().toISOString(), engine_version: CR.version };
   rows.slice(1).forEach((r, ri) => {
@@ -115,13 +115,14 @@ function run(file, prefix) {
       if (change === 'would_gain') { sum.would_gain++; sum.by_test[t].gain++; }
       if (change === 'would_lose') { sum.would_lose++; sum.by_test[t].lose++; }
       if (change === 'now_needs_review') { sum.now_review++; sum.by_test[t].review++; }
-      props.push({ row: ri + 2, sid: C.sid >= 0 ? r[C.sid] : '', time: C.time >= 0 ? r[C.time] : '', test: t, name: C.name >= 0 ? r[C.name] : '', cls: C.cls >= 0 ? r[C.cls] : '',
+      const prior = C.fb >= 0 && /CR review|Audit correction|re-?mark/i.test(r[C.fb] || '') ? (r[C.fb].match(/(Reading CR review[^;.]*|Audit correction[^;.]*)/i) || [''])[0].slice(0, 80) : '';
+      props.push({ prior_review: prior, row: ri + 2, sid: C.sid >= 0 ? r[C.sid] : '', time: C.time >= 0 ? r[C.time] : '', test: t, name: C.name >= 0 ? r[C.name] : '', cls: C.cls >= 0 ? r[C.cls] : '',
         item: id, answer: Array.isArray(A[id].a) ? '1) ' + A[id].a[0] + ' 2) ' + A[id].a[1] : A[id].a,
         original: (o.kind || '') + (o.got == null ? '' : ' ' + o.got + '/' + (o.pts || n.pts)), proposed: n.state + ' ' + n.got + '/' + n.pts,
         change, reason_code: n.code || '', reason_en: (n.why || [''])[0], reason_ar: (n.why || ['', ''])[1], teacher_decision: '' });
     });
   });
-  const cols = ['row', 'sid', 'time', 'test', 'name', 'cls', 'item', 'answer', 'original', 'proposed', 'change', 'reason_code', 'reason_en', 'reason_ar', 'teacher_decision'];
+  const cols = ['row', 'prior_review', 'sid', 'time', 'test', 'name', 'cls', 'item', 'answer', 'original', 'proposed', 'change', 'reason_code', 'reason_en', 'reason_ar', 'teacher_decision'];
   const csv = '﻿' + cols.join(',') + '\n' + props.map(p => cols.map(c => csvCell(p[c])).join(',')).join('\n') + '\n';
   fs.writeFileSync(prefix + '-proposals.csv', csv);
   fs.writeFileSync(prefix + '-summary.json', JSON.stringify(sum, null, 2));
