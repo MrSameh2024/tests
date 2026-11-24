@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grade 11 Vocabulary Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Cairo:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>/*
+VOICE: a calm, encouraging coach — clear rules, short steps, instant feedback.
+IDEA: a revision booklet that answers back: rule card, then the sheet's own questions, then a personal plan.
+PICTURE: grammar = a tense timeline; vocabulary = a live word-builder (root + suffix = new word).
+COLOUR and TYPE: Smart Students Hub navy #14244A, blue #1E6FD9, gold #E8A317, green #22A06B on light #F3F7FC; Lexend + Cairo for Arabic.
+LAYOUT: navy hero with the picture, question-type trainer, sticky topic row, one band per topic, plan at the end.
+*/
+:root{color-scheme:light dark;
+--bg:light-dark(#F3F7FC,#0d1630);--card:light-dark(#ffffff,#152246);--ink:light-dark(#14244A,#e8eefb);--mut:light-dark(#46536E,#a8b4cd);
+--blue:light-dark(#1E6FD9,#76abff);--gold:#E8A317;--green:light-dark(#178a5a,#45d095);--red:light-dark(#c4362b,#ff8a7d);
+--line:light-dark(#DCE4F0,#2a3a68);--soft:light-dark(#eaf1fc,#1b2b57);--okbg:light-dark(#e6f6ee,#123a2c);--nobg:light-dark(#fdecea,#3d1c1f);--shbg:light-dark(#fff5df,#3a2f12);
+--navy:#14244A}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Lexend,system-ui,sans-serif;overflow-x:clip}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+.ar{font-family:Cairo,'Noto Naskh Arabic',sans-serif;direction:rtl;unicode-bidi:isolate}
+.wrap{max-width:1100px;margin:0 auto}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+h1,h2,h3{line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(32px,5vw,50px);font-weight:700}
+h2{font-size:clamp(24px,3vw,32px);font-weight:700}
+h3{font-size:18px;font-weight:600}
+button,input{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff}
+:root[data-theme=dark] .hero{background:#0a1228}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,48px);align-items:center}
+.eyebrow{font-weight:600;color:var(--gold);margin:0 0 10px}
+.hero p.lead{color:#cfd8ea;font-size:17px;max-width:56ch;margin:14px 0 0}
+.hero .ar.sub{color:#ffd98a;font-size:19px;margin-top:8px}
+.stats{display:flex;flex-wrap:wrap;gap:14px;margin-top:22px;align-items:center}
+.ring{--p:0;width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),#2b3d6b 0);display:grid;place-items:center;flex:none}
+.ring span{width:58px;height:58px;border-radius:50%;background:var(--navy);display:grid;place-items:center;font-weight:700;font-size:17px}
+:root[data-theme=dark] .ring span{background:#0a1228}
+.stats .t{font-size:15px;color:#cfd8ea}.stats .t b{color:#fff;font-size:18px;display:block}
+.hbtn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:10px;background:var(--gold);color:#14244A;font-weight:700;text-decoration:none;border:0}
+.hbtn.ghost{background:transparent;color:#fff;border:1.5px solid #4a5d8c}
+.pic{background:#1b2f5e;border-radius:18px;padding:clamp(12px,2vw,22px)}
+:root[data-theme=dark] .pic{background:#12204a}
+.pic svg{display:block;width:100%;height:auto}
+
+/* trainer */
+.trainer{background:var(--card);border-bottom:1px solid var(--line)}
+.trainer .wrap{display:grid;gap:14px}
+.tt{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tt .lab{font-weight:600;margin-right:6px}
+.fbtn{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-weight:500}
+.fbtn[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme=dark] .fbtn[aria-pressed=true]{color:#0d1630}
+.strat{background:var(--soft);border-radius:14px;padding:14px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 18px}
+.strat ol{margin:6px 0 0;padding-left:20px}.strat li{margin:2px 0}
+.strat .ar{color:var(--mut);font-size:15px}
+@media(max-width:700px){.strat{grid-template-columns:1fr}}
+
+/* sticky nav */
+.nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .scroll{display:flex;gap:6px;padding:8px max(5vw,16px);max-width:calc(1100px + 10vw);margin:0 auto;scrollbar-width:thin}
+.scroll{overflow-x:auto}.scroll a{flex:none}
+.nav a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:10px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap}
+.nav a:hover{background:var(--soft)}
+.nav a small{font-size:12px;color:var(--mut);font-weight:600}
+.nav a.done small{color:var(--green)}
+
+/* topic */
+.topic{border-bottom:1px solid var(--line)}
+.topic:nth-of-type(even){background:var(--card)}
+.th{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 16px;align-items:center;margin-bottom:20px}
+.num{width:48px;height:48px;border-radius:12px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:20px}
+:root[data-theme=dark] .num{background:#22356a}
+.th .ar{color:var(--blue);font-size:17px;margin-top:4px;text-align:start;direction:rtl}
+.th .ar{direction:rtl;text-align:left}
+.ref{font-size:13px;font-weight:600;color:var(--mut);background:var(--soft);padding:4px 10px;border-radius:999px;white-space:nowrap}
+.meter{grid-column:2/4;height:8px;border-radius:9px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--green);border-radius:9px;transition:width .5s}
+.meter+.sc{grid-column:1/-1}
+.sc{font-size:13px;color:var(--mut)}
+
+.learn{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px;margin-bottom:26px}
+@media(max-width:820px){.learn{grid-template-columns:1fr}}
+.rule,.tip{border-radius:16px;padding:18px 20px}
+.rule{background:var(--card);border:1px solid var(--line)}
+.topic:nth-of-type(even) .rule{background:var(--bg)}
+.rule h3,.tip h3{margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.tip{background:var(--shbg);border:1px solid color-mix(in srgb,var(--gold) 45%,transparent)}
+.tip p{margin:6px 0}
+.tip .ar{font-size:16px;margin-top:8px;color:var(--ink)}
+.f{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.f .who{font-weight:700;min-width:9em}
+.chip{background:var(--soft);border-radius:8px;padding:3px 10px;font-size:14.5px}
+.key{background:var(--blue);color:#fff;border-radius:8px;padding:3px 12px;font-weight:700}
+:root[data-theme=dark] .key{color:#0d1630}
+.arw{color:var(--gold);font-weight:700}
+.kw{margin:12px 0 0}.kw b{background:var(--shbg);padding:1px 7px;border-radius:6px;white-space:nowrap}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-weight:600;color:var(--mut);font-size:13.5px}
+td .ar{font-size:15px}
+.suf{color:var(--blue);font-weight:700}
+.wf{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px}
+.wf div{background:var(--soft);border-radius:12px;padding:10px 12px}
+.wf h4{margin:0 0 6px;font-size:19px}.wf h4 span{font-size:12px;color:var(--mut);font-weight:500;margin-left:6px}
+.wf p{margin:2px 0;font-size:14.5px}
+@media(max-width:600px){.wf{grid-template-columns:repeat(2,minmax(0,1fr))}.wf p{font-size:13.5px}}
+
+/* groups & items */
+.grp{margin:0 0 26px}
+.gh{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:12px}
+.gh h3{font-size:17px}
+.qt{font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--blue)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;width:100%}
+.wb{min-height:40px;padding:0 14px;border-radius:10px;border:1.5px dashed var(--blue);background:transparent;color:var(--ink);font-weight:600}
+.wb.used{opacity:.45;text-decoration:line-through}
+.items{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.item{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s,background .2s}
+.topic:nth-of-type(even) .item{background:var(--bg)}
+.item .n{width:30px;height:30px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:700;font-size:14px;color:var(--blue)}
+.item.ok{border-color:var(--green)}.item.ok .n{background:var(--green);color:#fff}
+.item.no{border-color:var(--red)}
+.item.shown{border-color:var(--gold)}.item.shown .n{background:var(--gold);color:#14244A}
+.q{margin:2px 0 8px;font-size:16.5px}
+.q u{text-decoration-color:var(--gold);text-decoration-thickness:2px;text-underline-offset:3px}
+.blank{display:inline-block;min-width:5em;border-bottom:2px solid var(--blue);color:transparent;line-height:1}
+.kwd{display:inline-block;background:var(--navy);color:var(--gold);font-weight:700;border-radius:8px;padding:1px 10px;font-size:14.5px;white-space:nowrap}
+:root[data-theme=dark] .kwd{background:#22356a}
+.inp{font-size:16px;min-height:40px;padding:4px 10px;border:1.5px solid var(--line);border-bottom:2px solid var(--blue);border-radius:8px;background:var(--bg);color:var(--ink);width:12em;max-width:100%}
+.topic:nth-of-type(even) .inp{background:var(--card)}
+.inp.wide{width:100%;min-height:46px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.row .inp.wide{flex:1 1 260px}
+.btn{min-height:44px;padding:0 18px;border-radius:10px;border:0;background:var(--blue);color:#fff;font-weight:600}
+:root[data-theme=dark] .btn{color:#0d1630}
+.btn.alt{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+.btn.sm{min-height:38px;padding:0 14px;font-size:14.5px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;min-height:46px;padding:6px 12px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.topic:nth-of-type(even) .opt{background:var(--card)}
+.opt b{width:26px;height:26px;border-radius:7px;background:var(--soft);display:grid;place-items:center;font-size:13px;flex:none;color:var(--blue)}
+.opt:hover{border-color:var(--blue)}
+.opt.right{border-color:var(--green);background:var(--okbg)}.opt.right b{background:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--nobg)}.opt.wrong b{background:var(--red);color:#fff}
+.fb:empty{display:none}
+.fb{margin-top:10px;border-radius:10px;padding:10px 14px;font-size:15px}
+.fb p{margin:0 0 6px}.fb p:last-child{margin:0}
+.item.ok .fb{background:var(--okbg)}.item.no .fb{background:var(--nobg)}.item.shown .fb{background:var(--shbg)}
+.fb .model{font-weight:600}
+.fb .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.item[hidden],.grp[hidden],.topic[hidden]{display:none}
+
+/* plan */
+.plan{background:var(--navy);color:#fff}
+:root[data-theme=dark] .plan{background:#0a1228}
+.plan .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px)}
+@media(max-width:820px){.plan .wrap,.hero .wrap{grid-template-columns:1fr}}
+.plan p{color:#cfd8ea}
+.pl{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pl li{background:#1b2f5e;border-radius:12px;padding:12px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+:root[data-theme=dark] .pl li{background:#14214a}
+.pl .lv{font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.lv.r{background:#ff8a7d;color:#3a0d08}.lv.a{background:var(--gold);color:#14244A}.lv.g{background:#45d095;color:#06301f}.lv.u{background:#33467a;color:#dfe6f5}
+.pl a{color:#ffd98a;font-size:14.5px}
+.pl .acts{grid-column:1/-1;display:flex;gap:14px;flex-wrap:wrap}
+.pl button{background:none;border:0;color:#9cc2ff;text-decoration:underline;padding:0;font-size:14.5px;min-height:32px}
+.reset{margin-top:18px}
+footer{padding:22px max(5vw,16px);font-size:14px;color:var(--mut);text-align:center}
+footer a{color:var(--blue)}
+@media(max-width:600px){.th{grid-template-columns:auto minmax(0,1fr)}.ref{grid-column:1/-1;justify-self:start}.meter{grid-column:1/-1}.f .who{min-width:0;width:100%}}
+.plan .ar.sub{text-align:left}
+.hero .ar.sub{text-align:left}
+@media(max-width:600px){.pic{overflow-x:auto;scrollbar-width:thin}.pic svg{min-width:540px}}
+
+.learn.full{grid-template-columns:1fr}
+.learn.full .tip{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:4px 24px}.learn.full .tip h3{grid-column:1/-1}
+.wft{border-collapse:collapse;width:100%;min-width:640px;font-size:16.5px;border:1.5px solid var(--ink)}
+.wft th,.wft td{border:1.5px solid var(--ink);padding:10px 14px}
+.wft tr.sh th{background:light-dark(#F6CDB0,#5a3a26);text-align:center;font-size:19px;color:var(--ink);padding:8px}
+.wft mark{background:#FFF200;color:#14244A;padding:0 4px;font-weight:700}
+.wft small{font-size:12.5px;font-weight:500;color:var(--mut);margin-left:6px}
+.wft td{background:light-dark(#E3EFDA,#1f3a2a)}
+.wft td{white-space:nowrap}
+.wft .w1{display:inline-block;min-width:6.2em}
+.ar2{color:light-dark(#1E3F99,#8fb4ff);font-weight:700;margin:0 10px;font-size:20px;line-height:1}
+.wft b{font-weight:800}
+.vt{border:1.5px solid var(--ink)}
+.vt th,.vt td{border:1.5px solid var(--ink)}
+.vt thead th{background:light-dark(#F6CDB0,#5a3a26);color:var(--ink);font-size:15px}
+.vt tbody td{background:light-dark(#E3EFDA,#1f3a2a)}
+@media(max-width:600px){.vt.stack tr{border:1.5px solid var(--ink);margin-bottom:6px}.vt.stack td{border:0}}
+@media(max-width:600px){.vt.stack{border:0}.vt.stack tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.vt.stack td{padding-inline-start:10px}.vt.stack td::before{display:none}}
+
+.wft{min-width:760px}
+.wft td{white-space:nowrap}
+.wft .w1{min-width:5.6em}
+.wft .tr{font-family:Cairo,sans-serif;font-size:15px;color:light-dark(#9a2a1e,#ffb3a6);font-weight:700;margin-left:10px;unicode-bidi:isolate}
+
+.strat.vis{display:block;background:transparent;padding:0}
+.strat .vsteps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:s}
+.vsteps li{position:relative}
+.vsteps li:not(:last-child)::after{content:"";position:absolute;right:-11px;top:44px;width:10px;height:10px;border-top:3px solid var(--gold);border-right:3px solid var(--gold);transform:rotate(45deg)}
+.vs{display:grid;justify-items:center;text-align:center;gap:2px;background:var(--soft);border-radius:16px;padding:16px 10px 14px;height:100%;color:var(--ink);text-decoration:none}
+a.vs{background:var(--navy);color:#fff}a.vs .vsub{color:#cfd8ea}a.vs .va{color:#ffd98a}a.vs .vi{background:var(--gold);color:#14244A}
+.vi{position:relative;width:60px;height:60px;border-radius:50%;background:var(--card);color:var(--blue);display:grid;place-items:center;margin-bottom:6px}
+.vi svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.vi b{position:absolute;top:-4px;right:-6px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:#14244A;font-size:13px;display:grid;place-items:center}
+a.vs .vi b{background:#fff}
+.ve{font-weight:700;font-size:18px}
+.vsub{font-size:14px;color:var(--mut);display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap;justify-content:center}
+.va{font-size:15px;color:var(--blue);font-weight:700}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-left:6px}.dot.g{background:var(--green)}.dot.r{background:var(--red)}
+@media(max-width:700px){.vsteps{grid-template-columns:repeat(2,minmax(0,1fr))}.vsteps li::after{display:none}}
+
+.result{margin-top:8px;border:2px solid var(--navy);border-radius:18px;padding:18px 20px;background:var(--card)}
+:root[data-theme=dark] .result{border-color:#3a4f88}
+.topic:nth-of-type(even) .result{background:var(--bg)}
+.result h3{display:flex;gap:10px;align-items:baseline;margin-bottom:12px}.result h3 .ar{color:var(--blue);font-size:16px}
+.rhead{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;margin-bottom:10px}
+.rhead p{margin:2px 0}.rhead b{font-size:19px}.rhead .ar{font-size:15px}
+.rbig{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;font-size:30px;font-weight:700;color:#fff;line-height:1}
+.rbig small{font-size:15px;opacity:.9;display:block;text-align:center}
+.rbig{align-content:center}
+.rbig.g{background:var(--green)}.rbig.a{background:var(--gold);color:#14244A}.rbig.r{background:var(--red)}.rbig.wait{background:var(--soft);color:var(--ink)}
+.kg{margin:8px 0}.kt{font-size:14px;font-weight:600;color:var(--mut);margin:6px 0}
+.akey{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:6px}
+.akey li{display:grid;grid-template-columns:30px minmax(0,1fr) minmax(0,1.2fr);gap:10px;align-items:center;padding:7px 12px;border-radius:10px;background:var(--soft);font-size:15px}
+.akey .kn{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;background:var(--card)}
+.akey .ka{font-weight:700}.akey .ky{font-size:14px}
+.akey li.ok{background:var(--okbg)}.akey li.ok .ky{color:var(--green)}
+.akey li.mid{background:var(--shbg)}
+.akey li.no{background:var(--nobg)}.akey li.no .ky{color:var(--red)}
+.akey li.na .ka{color:var(--mut);font-weight:400}
+@media(max-width:600px){.akey li{grid-template-columns:30px minmax(0,1fr)}.akey .ky{grid-column:2}.rbig{width:76px;height:76px;font-size:26px}}
+.rhead .ar,.result .ar{text-align:left}
+.result.small{border:0;background:transparent!important;padding:0;margin-top:4px}
+.mini{display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--soft);border-radius:999px;padding:6px 16px}
+.mk{font-size:15px}.mk b{font-size:17px}
+
+.rbar{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.25fr) minmax(0,1.15fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);margin-bottom:22px;font-size:15px}
+.topic:nth-of-type(even) .rbar{background:var(--bg)}
+.bc{padding:12px 16px}.bc+.bc{border-inline-start:1px solid var(--line)}
+.bc.ar{background:var(--shbg);border-inline-start:0;border-inline-end:1px solid var(--line)}
+.bh{margin:0 0 8px;font-size:12.5px;font-weight:700;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bc.ar .bh{font-size:14px;color:var(--ink)}
+.br{margin:0 0 7px;line-height:1.7}.br.sm{font-size:13.5px;color:var(--mut)}.br.sm b{color:var(--ink)}
+.bx{margin:0 0 6px;line-height:1.75}
+.bc ul{margin:0;padding:0 18px 0 0}.bc li{margin:0 0 4px;font-size:15.5px;line-height:1.6}
+.bc.ar b{font-family:Lexend,sans-serif;font-size:14px;unicode-bidi:isolate}
+.hk{background:light-dark(#FFE58A,#6b5410);border-radius:5px;padding:1px 5px;font-weight:700;font-style:normal}
+.hv{background:light-dark(#D3E4FF,#1d3f7a);color:light-dark(#0f4fb0,#bcd6ff);border-radius:5px;padding:1px 5px;font-weight:700;font-style:normal}
+.h2{background:light-dark(#D4F2E2,#174a33);color:light-dark(#0e6b43,#a6f0c9);border-radius:5px;padding:1px 5px;font-weight:700}
+.hn{border-bottom:2px dashed var(--blue)}
+.lg{font-weight:500;display:inline-flex;gap:6px}.lg i{font-size:11.5px}
+@media(max-width:860px){.rbar{grid-template-columns:1fr}.bc+.bc{border-inline-start:0;border-top:1px solid var(--line)}.bc.ar{border-inline-end:0}}
+.bc.ar b.en{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:Lexend,sans-serif;font-size:14px;font-weight:700;color:var(--blue)}
+.hk,.hv,.h2{white-space:nowrap}.hn{-webkit-box-decoration-break:clone;box-decoration-break:clone}
+/* colour-coded grammar marks: keyword = yellow highlighter, handwritten; verb form = solid blue tag; V2 = green underline; noun = purple dashed box */
+.hk{font-family:'Patrick Hand',Lexend,cursive;font-size:1.18em;font-weight:400;background:linear-gradient(transparent 12%,light-dark(#FFE066,#8a6d00) 12%,light-dark(#FFE066,#8a6d00) 88%,transparent 88%);color:light-dark(#3b2a00,#fff6d6);padding:0 6px;border-radius:3px}
+.hv{background:light-dark(#1E6FD9,#4f8ff0);color:#fff;border-radius:6px;padding:1px 7px;font-weight:700;letter-spacing:.2px}
+.h2{background:none;color:light-dark(#0b7a48,#5ee0a0);font-weight:800;padding:0 1px;border-radius:0;border-bottom:3px solid currentColor}
+.hn{border:2px dashed light-dark(#7b3fe4,#b592ff);border-radius:6px;padding:0 4px;color:light-dark(#5a22c4,#d6c2ff);font-style:italic;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lg i.hk{font-size:14px}
+.lg .hn{font-size:11.5px}
+.bc.ar b.en{color:light-dark(#b42318,#ffb4a8);background:light-dark(#fff,#3a1f12);border:1px solid light-dark(#f3c3b8,#6b3524);border-radius:6px;padding:0 6px;margin:1px 2px}
+.bc.ar{font-size:16px}
+.bc.ar .bh{font-family:Cairo,sans-serif;font-size:16px;color:light-dark(#b42318,#ffb4a8)}
+
+.bc ul.tl{list-style:none;padding:0;display:grid;gap:8px}
+.tl li{display:flex;direction:ltr;flex-wrap:wrap-reverse;justify-content:flex-end;align-items:center;gap:6px;margin:0}
+.ta{direction:ltr;font-family:Lexend,sans-serif;font-weight:700;font-size:14px;color:light-dark(#b42318,#ffb4a8);background:light-dark(#fff,#3a1f12);border:1.5px solid light-dark(#e8a091,#6b3524);border-radius:6px;padding:1px 8px}
+.tarr{font-family:Lexend,sans-serif;font-weight:800;font-size:20px;color:light-dark(#b42318,#ffb4a8);line-height:1}
+.tdots{font-family:Lexend,sans-serif;font-weight:800;letter-spacing:2px;color:var(--ink)}
+.tc{font-size:15.5px}
+.tc b.en{border:0!important;background:none!important;padding:0!important;margin:0!important;color:light-dark(#0f4fb0,#9cc2ff)!important;font-size:13.5px!important}
+
+.tl li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px;align-items:center;direction:ltr}
+.tg{display:flex;justify-content:flex-end;align-items:center;gap:6px}
+.ta{text-align:center}
+.tc{text-align:right;direction:rtl}
+.tdots{white-space:nowrap}
+.rbar{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr)}
+.bc.ar{grid-column:1/-1;border-inline-end:0;border-top:1px solid var(--line)}
+.bc+.bc.ar{border-inline-start:0}
+.tl li{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);max-width:860px;margin-inline-start:auto}
+.tl{padding:0!important}
+@media(max-width:600px){.tl li{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr)}}
+.tl li{display:flex;justify-content:flex-end;align-items:center;gap:6px;max-width:none}
+.tg{flex:0 1 auto;max-width:48%}
+.tc{flex:0 1 auto}
+.tg{max-width:none;flex:none}
+.tl li{flex-wrap:nowrap}
+@media(max-width:860px){.rbar{grid-template-columns:1fr}.bc+.bc{border-inline-start:0;border-top:1px solid var(--line)}}
+@media(max-width:600px){.tg{flex:0 1 auto;max-width:46%}.tc{flex:1 1 0;min-width:0}.ta{font-size:13px}}
+
+.regbar:empty{display:none}
+.regbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px;background:#23407e;border-radius:12px;padding:8px 14px;color:#fff;font-size:15px}
+.regbar b{color:#ffd98a}.regbar .fin{background:#45d095;color:#06301f;border-radius:999px;padding:2px 10px;font-weight:700;font-size:13.5px}
+.regbar button{background:transparent;border:1.5px solid #8fa3cf;color:#fff;border-radius:8px;min-height:34px;padding:0 10px;font-size:14px}
+#regGate{position:fixed;inset:0;z-index:50;background:rgba(10,18,40,.82);display:grid;place-items:center;padding:16px;overflow:auto}
+#regGate[hidden]{display:none}
+body.gated{overflow:hidden}
+.rgbox{background:var(--card);color:var(--ink);border-radius:20px;padding:clamp(20px,4vw,32px);width:min(460px,100%);border-top:8px solid var(--gold);display:grid;gap:12px}
+.rgbox h2{font-size:26px}.rgbox h2 .ar{font-size:20px;color:var(--blue)}
+.rgbox p{margin:0;font-size:15px}.rgbox .eyebrow{margin:0}
+.rgbox label{display:grid;gap:4px;font-weight:600;font-size:15px}
+.rgbox input{font:inherit;font-size:16px;min-height:46px;padding:6px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.gerr{color:var(--red);font-weight:600;min-height:1em}.gnote{font-size:13px!important;color:var(--mut)}
+.rgbox .btn{min-height:50px;font-size:17px}
+#dlplan[hidden]{display:none}
+.vt tr.vg th{background:light-dark(#F6CDB0,#5a3a26);text-align:center;font-size:16px}
+.vt mark{background:#FFF200;color:#14244A;padding:0 6px;font-weight:700}
+.wbld{color:#fff;text-align:center;padding:clamp(10px,2vw,22px) 4px}
+.wrow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px}
+.tile{display:inline-block;padding:14px 18px;border-radius:14px;font-size:clamp(20px,3vw,28px);font-weight:700;transition:opacity .35s,transform .35s}
+.tile.root{background:#23407e}.tile.sfx{background:#E8A317;color:#14244A}.tile.res{background:#fff;color:#14244A;box-shadow:0 6px 0 #0b1633}
+.op{font-size:28px;color:#8fbaff;font-weight:700}
+.wtype{margin:18px 0 6px;font-size:17px;color:#ffd98a;font-weight:600}
+.wcap{color:#a8b8dc;font-size:14px;margin:14px 0 0}
+.wdots{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.wdots button{width:12px;height:12px;border-radius:50%;border:0;background:#3b5190;padding:0;min-height:0}
+.wdots button.on{background:#E8A317}
+.fade .tile{opacity:.15;transform:translateY(4px)}</style><style id="ssh-submit">
+.ssh-det{border:2px solid #1e6fd9;background:#f3f7fc;border-radius:14px;padding:16px;margin:12px 0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#14244a}
+.ssh-det h3{margin:0 0 4px;font-size:1.05rem}
+.ssh-det .ar{direction:rtl;text-align:right}
+.ssh-det .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:10px}
+.ssh-det label.f{display:grid;gap:4px;font-size:.85rem;font-weight:600;color:#14244a}
+.ssh-det input[type=text],.ssh-det input[type=email],.ssh-det input[type=tel]{font:inherit;font-weight:400;padding:9px 10px;border:1.5px solid #b8c9d9;border-radius:8px;width:100%;background:#fff;color:#14244a}
+.ssh-det input.bad{border-color:#b3261e;background:#fbe8e6}
+.ssh-det .or{font-size:.82rem;color:#46536e;margin:6px 0 0}
+.ssh-det .cons{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-size:.88rem;background:#fff;border:1px solid #dce4f0;border-radius:10px;padding:10px}
+.ssh-det .cons input{margin-top:3px;width:18px;height:18px;flex:none}
+.ssh-det .err{color:#b3261e;font-weight:700;font-size:.9rem;margin-top:8px}
+.ssh-det .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.ssh-status{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;border-radius:12px;padding:14px 16px;margin:14px 0;border:2px solid #1e6fd9;background:#e6effb;color:#14244a}
+.ssh-status.ok{border-color:#1a7f4b;background:#e3f4ec}
+.ssh-status.no{border-color:#b3261e;background:#fbe8e6}
+.ssh-status b.ref{font-size:1.2rem;letter-spacing:.04em}
+.ssh-status button{margin-top:8px;font:inherit;font-weight:700;border-radius:10px;padding:8px 16px;border:0;background:#1e6fd9;color:#fff;cursor:pointer}
+.ssh-status .ar{direction:rtl;text-align:right;display:block}
+</style><style>
+.gate{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#f7d774 0%,#e8a317 55%,#c98a0b 100%);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.gate[hidden]{display:none}.gbox{background:#14244a;border:3px solid #14244a;border-radius:18px;max-width:460px;width:100%;padding:0;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);color:#14244a}
+.gbox h2{margin:0 0 2px;font-size:1.3rem}.gbox .ar{direction:rtl;text-align:right}.gbox p{margin:4px 0}
+.gbox label.l{display:block;font-weight:600;font-size:.92rem}.gbox input[type=text],.gbox input[type=email],.gbox input[type=tel]{display:block;width:100%;margin-top:4px;font:inherit;border:1.5px solid #b8c9d9;border-radius:10px;padding:10px;background:#fff}
+.groles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}.groles label{cursor:pointer}.groles input{position:absolute;opacity:0}
+.groles span{display:block;text-align:center;background:#fff;border:1.5px solid #b8c9d9;border-radius:12px;padding:10px 4px;font-weight:700;font-size:.9rem;line-height:1.3}.groles span i{display:block;font-style:normal;font-size:1.4rem}
+.groles input:checked+span{background:#1e6fd9;border-color:#1e6fd9;color:#fff}.groles input:focus-visible+span{outline:3px solid #e8a317}
+.gbox .ok{display:flex;gap:8px;align-items:flex-start;font-size:.8rem;margin-top:12px;color:#46536e}.gbox .ok input{margin-top:3px}
+.gbox button{width:100%;margin-top:14px;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#14244a;color:#f7d774;cursor:pointer;font-size:1rem}.gbox button[disabled]{opacity:.6}
+.gmsg{min-height:1.2em;margin-top:8px;font-weight:600;color:#b3261e;font-size:.9rem}.gbox .hp{position:absolute;left:-9999px}
+body.gated{overflow:hidden}
+.gb{padding:12px 16px;color:#fff}.gb .l small{font-weight:600;opacity:.85}.gb .l,.gb label.l{display:block;font-weight:700;font-size:.92rem;margin:0 0 2px;color:#fff}.gb h2{color:#f7d774}
+.gb1{background:#14244a}.gb2{background:#0f5f73}.gb3{background:#5b2a86}.gb4{background:#1a6b3c}.gb5{background:#7a1f3d}
+.gbox .gb .ok{color:#fde7ef;margin-top:0}.gb5 button{background:#e8a317;color:#14244a}.gb5 .gmsg{color:#ffd5d5}
+.groles span{color:#14244a}@media print{.gate{display:none!important}}
+</style><style>#detailsBand{padding-top:18px;padding-bottom:6px}#detailsBand .card{background:transparent;border:0;padding:0}.sendbox:empty{display:none}.ssh-ready{max-width:1100px}</style>
+</head><body>
+<header class="band hero"><div class="wrap"><div>
+<p class="eyebrow">Grade 11 · End of Semester 1 · Remedial plan</p>
+<h1>Vocabulary revision</h1><p class="ar sub" dir="rtl">مراجعة المفردات – الوحدات الثالثة والرابعة والخامسة</p>
+<p class="ar" dir="rtl" style="color:#fff;font-size:16px;margin:8px 0 0;text-align:left;background:#23407e;display:inline-block;padding:4px 12px;border-radius:8px">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p>
+<p class="lead">Units 3, 4 and 5 from Worksheet 2: word formation, prepositional phrases, phrasal verbs with get and food-chain words. Learn the words, practise each question type, then follow your personal plan.</p>
+<div class="regbar" id="regbar"></div>
+<div class="stats"><div class="ring" id="ring"><span id="ringv">0%</span></div><div class="t"><b id="okc">0</b>questions correct</div>
+<a class="hbtn" href="#topics">Start revising</a><a class="hbtn ghost" href="#plan">My plan</a></div>
+</div><div class="pic"><div class="wbld" aria-live="off">
+<div class="wrow"><span class="tile root" id="wr">achieve</span><span class="op">+</span><span class="tile sfx" id="ws">-ment</span><span class="op">=</span><span class="tile res" id="wn">achievement</span></div>
+<p class="wtype" id="wt">noun · <span class="ar" dir="rtl">اسم</span></p>
+<div class="wdots" id="wd"></div>
+<p class="wcap">Root + suffix = a new word. Nouns: -ment, -ion, -ation · Adjectives: -al, -ive, -y</p></div></div></div></header>
+<section class="band" id="detailsBand"><div class="wrap"><section class="card" id="detailsCard"><div class="ssh-det" id="sshDet"><h3>Your details · بياناتك</h3>
+<p style="margin:0;font-size:.9rem">Your teacher needs these to follow your remedial revision. Fields marked * are required.</p>
+<p class="ar" style="margin:2px 0 0;font-size:.9rem">يحتاجها المعلم لمتابعة مراجعتك العلاجية. الحقول المعلَّمة بـ * إلزامية.</p>
+<div class="g"><label class="f" for="sshName">Name · الاسم *<input type="text" id="sshName" autocomplete="name" required></label>
+<label class="f" for="sshClass">Class · الصف/الشعبة *<input type="text" id="sshClass" placeholder="e.g. 11-3" required></label>
+<label class="f" for="sshEmail">Email · البريد الإلكتروني<input type="email" id="sshEmail" autocomplete="email" placeholder="name@example.com" inputmode="email"></label>
+<label class="f" for="sshPhone">Mobile / WhatsApp · الجوال / واتساب<input type="tel" id="sshPhone" autocomplete="tel" placeholder="+974 5xxx xxxx" inputmode="tel"></label></div>
+<p class="or">* Give at least ONE: email or mobile. · أدخل واحدًا على الأقل: البريد أو الجوال.</p>
+<div class="hp" aria-hidden="true"><label>Website<input type="text" id="sshWebsite" tabindex="-1" autocomplete="off"></label></div>
+<label class="cons"><input type="checkbox" id="sshConsent"><span>I agree to send my name, class, contact details, answers and writing to my teacher, Mr Sameh Soliman (Smart Students Hub), for marking and feedback. They are kept private and never published or shared. *<span class="ar" style="display:block;margin-top:4px">أوافق على إرسال اسمي وصفي وبيانات التواصل وإجاباتي وكتابتي إلى معلمي أ. سامح سليمان (Smart Students Hub) للتصحيح والتغذية الراجعة. تبقى البيانات خاصة ولا تُنشر ولا تُشارك مع أحد.</span></span></label>
+<p class="auto" style="margin:10px 0 0;font-size:.88rem;font-weight:700;color:#1a6b3c">📨 When you finish each section, your result is sent to your teacher automatically. <span class="ar" style="display:block">📨 عند إنهاء كل قسم تُرسل نتيجتك إلى معلمك تلقائيًا.</span></p>
+<div class="err" id="sshErr" role="alert"></div></div></section></div></section>
+<section class="band trainer" aria-label="Question type trainer"><div class="wrap"><div class="tt" id="ftabs"></div><div class="strat" id="strat"></div></div></section>
+<nav class="nav" aria-label="Topics"><div class="scroll" id="navrow"></div></nav>
+<main id="topics"></main>
+<section class="band plan" id="plan"><div class="wrap"><div><h2>My remedial plan</h2><p class="ar sub" dir="rtl" style="color:#ffd98a">خطتي العلاجية</p>
+<p>This list updates as you answer. Topics with mistakes come first. Read the rule again, then redo only those questions.</p>
+<p>Your answers stay saved on this device, so you can come back later.</p>
+<button class="hbtn" id="dlplan" hidden>Download my plan to print</button> <p id="dlmsg" style="font-size:14px"></p>
+<button class="hbtn ghost reset" id="reset">Start again (clear my answers)</button></div>
+<ol class="pl" id="plist"></ol></div></section>
+<footer>Smart Students Hub · Grade 11 English · Semester 1 revision, based on the school worksheets. <a href="g11-revision-grammar.html">Go to the Grammar revision →</a> · <a href="index.html">All tests · كل الاختبارات</a></footer>
+<script>window.SSH_SITE=true;window.HDR='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCACMBIcDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7+ooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiisDW/FVlomv6bplwRuvCxLH+BRxn8z+hoKhCU3aKN+ijqMiuU8a+KBoWmtFbr5k7LlxiUbEPGdyA7T9SKB06bqSUYm9f6tpmlqp1C+htt3TzGwT9B+FTwXVtcjME8cnyqxCnJAYZBI7ZFfMuveKdR123hhvpWmNuzeVK7ZcI3VScDd0HJ560aL4q1DSvEkGqyu12ElMrQyMQrNjGe+DjGDjjFTzHq/2RLkvfU+oKKy/D+u2XiPQotUsWJjfKsp6qw6itSqPIlFxbi9wooooEFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUU1pI0YK8iqSCQCccDqaAHUUisroHRgykZBByDSO6IAXdVycDccZPpQA6imo6OCUdWAODtOcH0p1ABRRRQAUUU1nRCod1UscKCcZPoKAHUUUhIVSSQAOSTQAtFMWWJ2CpKjEqGADA8Hv9KfQAUUUUAFFFFABRTXdI0LyOqqOSzHAFO7UAFFFME0JYKJoySxUDcOo6j60APooooAKKKKACiiigAooprOiY3uq5OBk4yfSgB1FNR0kBKOrAHBKnPPpTqACiml0V1RnUM33QTy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QZmRPoiveB4mCRMfmX0+lakUUcEKxRKFUdBT6KSSQ7hXP694bTUj9ptCkdz/ABZ4Dj39/eugopjhNwd0Z2kaRb6TZ+XH80rcySEcsf8ACr0sUc8LRSqGU9RT6KBSk5O7MiDRFS8LysHiHKj1+ta/QYFFFJJIG7nP694bTUj9ptCkdz/FngOPf396v6RpFvpNn5cfzStzJIRyx/wrRoplurJx5W9AqG5torqAxSjI7HuDU1FBmZVjpAgnMs5Vyp+QDp9a1aKKSVht3AgEEEZB7GuVvvB6TaqstrKIrZzmRO6/7v8AniuqoplQqShrEhtraCztUt7eMJGgwAKZe2Ud5Btbhx91vSrNFBN3e5nadpa2p82bDS9sdFrRIBBBGQexoopJWE3c5W+8HpNqqy2soitnOZE7r/u/54rpLa2gs7VLe3jCRoMACpqKZpKpKSSbCqWoael5HuXCyjo3r7GrtFJq5mUtP09LOPc2GlI5b09hV2iihKwBRRRTAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA//Z';window.DATA={id:'vocab',gapKind:'form',
+filters:['all','form','box','mcq','verb','rewrite'],
+strategies:{
+ all:{title:'How to use this page',visual:[
+  {ic:'read',en:'Read',sub:'the word card',ar:'اقرأ البطاقة'},
+  {ic:'write',en:'Answer',sub:'Word box? Tap a word.',ar:'أجب عن الأسئلة'},
+  {ic:'check',en:'Check',sub:'<i class="dot g"></i>right <i class="dot r"></i>try again',ar:'اضغط Check'},
+  {ic:'plan',en:'My plan',sub:'see what to revise',ar:'خطتي العلاجية',href:'#plan'}]},
+ form:{title:'Word form questions (correct form of the word in brackets)',steps:['Look at the word <b>before</b> the gap: <b>a / an / the / my</b> → you need a <b>noun</b> (-ment, -ion, -ation).','Before a noun, or after <b>is / was / very</b> → you need an <b>adjective</b> (-al, -ive, -y).','Watch the spelling: imagine → imagin<b>ation</b>, benefit → bene<b>ficial</b>, cancel → cancel<b>lation</b>.'],ar:'قبل الفراغ أداة (a / the) ← اسم. قبل اسم أو بعد is ← صفة. انتبه للإملاء.'},
+ box:{title:'Word box questions (fill in the gaps)',steps:['Read all the sentences first.','Use the preposition after the gap as a clue: effect <b>on</b>, need <b>for</b>, decrease <b>in</b>, advantage <b>of</b>.','Do the easy ones first. Used words are crossed out for you.','The box may have an extra word you do not need.'],ar:'حرف الجر بعد الفراغ هو مفتاحك، وقد توجد كلمة زائدة في الصندوق.'},
+ verb:{title:'Verb form questions (grammar on this sheet)',steps:['Underline the keyword: <b>while, after, by the time</b>.','Decide the tense: while → was / were + ing; first action → had + V3; later action → V2.','Check the subject: I / he / she → was; we / they → were.'],ar:'ابحث عن الكلمة الدالة ← حدّد الزمن ← انتبه للفاعل.'},
+ rewrite:{title:'Rewrite questions (use the word in brackets)',steps:['Use the word in brackets in the right place.','After <b>used to</b> use the base verb: visited → visit.','Copy the rest of the sentence and keep the meaning.'],ar:'استخدم الكلمة بين القوسين وحافظ على المعنى.'},
+ mcq:{title:'Choose the answer that BEST fits',steps:['Read the whole sentence and find the meaning clue.','Check the small words around the gap: <b>on ___ of</b>, <b>in ___</b>, <b>___ after</b>.','Cross out options with the wrong meaning, then choose.'],ar:'ابحث عن دليل المعنى، وانتبه للكلمات الصغيرة حول الفراغ.'}
+},
+sections:[
+{id:'v1',num:1,short:'Word formation',title:'Word formation',ar:'اشتقاق الكلمة',ref:'SB pages 70 & 76',
+ ruleTitle:'Word formation <span class="ar" dir="rtl" style="font-weight:500;color:var(--mut)">اشتقاق الكلمة</span>',
+ wide:true,
+ rule:`<div class="scroll"><table class="wft"><tr class="sh"><th><mark>-ment</mark> <small>noun</small></th><th><mark>-ion</mark> <small>noun</small></th><th><mark>-ation</mark> <small>noun</small></th></tr><tr><td><span class="w1">achieve</span><span class="ar2">⟶</span><span class="w2">achieve<b>ment</b></span><span class="tr" dir="rtl">إنجاز</span></td><td><span class="w1">connect</span><span class="ar2">⟶</span><span class="w2">connect<b>ion</b></span><span class="tr" dir="rtl">اتصال</span></td><td><span class="w1">explain</span><span class="ar2">⟶</span><span class="w2">explan<b>ation</b></span><span class="tr" dir="rtl">شرح – تفسير</span></td></tr><tr><td><span class="w1">disappoint</span><span class="ar2">⟶</span><span class="w2">disappoint<b>ment</b></span><span class="tr" dir="rtl">خيبة أمل</span></td><td><span class="w1">prevent</span><span class="ar2">⟶</span><span class="w2">prevent<b>ion</b></span><span class="tr" dir="rtl">وقاية – منع</span></td><td><span class="w1">cancel</span><span class="ar2">⟶</span><span class="w2">cancel<b>lation</b></span><span class="tr" dir="rtl">إلغاء</span></td></tr><tr><td><span class="w1">announce</span><span class="ar2">⟶</span><span class="w2">announce<b>ment</b></span><span class="tr" dir="rtl">إعلان</span></td><td><span class="w1">motivate</span><span class="ar2">⟶</span><span class="w2">motivat<b>ion</b></span><span class="tr" dir="rtl">تحفيز</span></td><td><span class="w1">imagine</span><span class="ar2">⟶</span><span class="w2">imagin<b>ation</b></span><span class="tr" dir="rtl">خيال</span></td></tr><tr class="sh"><th><mark>-al</mark> <small>adjective</small></th><th><mark>-ive</mark> <small>adjective</small></th><th><mark>-y</mark> <small>adjective</small></th></tr><tr><td><span class="w1">globe</span><span class="ar2">⟶</span><span class="w2">glob<b>al</b></span><span class="tr" dir="rtl">عالمي</span></td><td><span class="w1">protect</span><span class="ar2">⟶</span><span class="w2">protect<b>ive</b></span><span class="tr" dir="rtl">وقائي – حامٍ</span></td><td><span class="w1">risk</span><span class="ar2">⟶</span><span class="w2">risk<b>y</b></span><span class="tr" dir="rtl">خَطِر – فيه مخاطرة</span></td></tr><tr><td><span class="w1">benefit</span><span class="ar2">⟶</span><span class="w2">benefi<b>cial</b></span><span class="tr" dir="rtl">مفيد</span></td><td><span class="w1">intense</span><span class="ar2">⟶</span><span class="w2">intens<b>ive</b></span><span class="tr" dir="rtl">مكثّف</span></td><td><span class="w1">health</span><span class="ar2">⟶</span><span class="w2">health<b>y</b></span><span class="tr" dir="rtl">صحي</span></td></tr><tr><td><span class="w1">education</span><span class="ar2">⟶</span><span class="w2">education<b>al</b></span><span class="tr" dir="rtl">تعليمي</span></td><td><span class="w1">predict</span><span class="ar2">⟶</span><span class="w2">predict<b>ive</b></span><span class="tr" dir="rtl">تنبُّئي</span></td><td><span class="w1">dust</span><span class="ar2">⟶</span><span class="w2">dust<b>y</b></span><span class="tr" dir="rtl">مُغبَرّ</span></td></tr></table></div>`,
+ tip:`<p><b>-ment, -ion, -ation</b> make <b>nouns</b> (names of things or ideas).</p><p><b>-al, -ive, -y</b> make <b>adjectives</b> (they describe a noun).</p><p>Clue: <i>an <u>announcement</u></i> (after <i>an</i> → noun); <i>a <u>dusty</u> book</i> (before a noun → adjective).</p><p class="ar" dir="rtl">اسم: <bdi dir="ltr">-ment / -ion / -ation</bdi><br>صفة: <bdi dir="ltr">-al / -ive / -y</bdi></p>`,
+ hint:'After a / an / the / my → noun (-ment, -ion, -ation). Before a noun or after is / was → adjective (-al, -ive, -y).',
+ groups:[{title:'Complete with the correct form of the words in brackets.',items:[
+  {q:'Is it my ___, or does it feel colder inside than outside today? <b>(imagine)</b>',a:['imagination'],why:'After <i>my</i> → noun: imagine → <b>imagination</b> (drop the e).'},
+  {q:'The ___ warming is a common topic nowadays. <b>(globe)</b>',a:['global'],why:'Before the noun <i>warming</i> → adjective: <b>global</b>.'},
+  {q:'___ is the action of stopping something from happening or arising. <b>(prevent)</b>',a:['prevention'],why:'The subject of the sentence is a noun → <b>Prevention</b>.'},
+  {q:"It's ___ to buy a car without Mr. Muhanad's precious advice. <b>(risk)</b>",a:['risky'],why:'After <i>It\'s</i> → adjective: <b>risky</b>.'},
+  {q:'Last weekend I found a ___ old book about Arab inventors in my grandfather\'s library. <b>(dust)</b>',a:['dusty'],why:'Describes the book → adjective: <b>dusty</b>.'},
+  {q:'The museum offered an ___ program about ancient civilizations. <b>(education)</b>',a:['educational'],why:'Before the noun <i>program</i> → adjective: <b>educational</b>. (an + vowel sound)'},
+  {q:'The principal made an ___ about the upcoming school talent show. <b>(announce)</b>',a:['announcement'],why:'After <i>made an</i> → noun: <b>announcement</b>.'}]}]},
+
+{id:'v2',num:2,short:'Noun + preposition',title:'Prepositional phrases: noun + preposition',ar:'الأسماء وحروف الجر',ref:'SB page 54',
+ ruleTitle:'Learn them as pairs',
+ rule:`<table class="stack vt"><thead><tr><th>Phrase</th><th>Meaning</th><th>Phrase</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><b>advantage of</b></td><td class="ar" dir="rtl">ميزة – يستفيد من</td><td><b>impact on</b></td><td class="ar" dir="rtl">تأثير على</td></tr>
+<tr><td><b>importance of</b></td><td class="ar" dir="rtl">أهمية</td><td><b>effect on</b></td><td class="ar" dir="rtl">يؤثر على</td></tr>
+<tr><td><b>decrease in</b></td><td class="ar" dir="rtl">انخفاض في</td><td><b>feed on</b></td><td class="ar" dir="rtl">يتغذى على</td></tr>
+<tr><td><b>increase in</b></td><td class="ar" dir="rtl">ازدياد في</td><td><b>need for</b></td><td class="ar" dir="rtl">يحتاج إلى</td></tr>
+<tr><td><b>damage to</b></td><td class="ar" dir="rtl">ضرر</td><td><b>solution to</b></td><td class="ar" dir="rtl">حل</td></tr>
+<tr><td><b>threat to</b></td><td class="ar" dir="rtl">خطر على</td><td><b>reason for</b></td><td class="ar" dir="rtl">السبب في</td></tr></tbody></table>`,
+ tip:`<p>Group them by preposition — it is easier to remember:</p><p><b>of</b>: advantage, importance</p><p><b>on</b>: impact, effect, feed</p><p><b>in</b>: decrease, increase</p><p><b>to</b>: damage, solution, threat</p><p><b>for</b>: need, reason</p><p>In the exam, the preposition after the gap tells you the word.</p>`,
+ hint:'Look at the preposition after the gap: effect on, need for, decrease in, advantage of.',
+ groups:[{title:'Complete with the words in the box.',bank:['need','decrease','effect','advantage'],items:[
+  {q:'The lecture was about the ___ pollution has <u><b>on</b></u> our lives.',a:['effect'],why:'<b>effect on</b> = تأثير على.'},
+  {q:"People keep telling me there's a(n) ___ <u><b>for</b></u> change, but I think everything is fine just the way it is.",a:['need'],why:'<b>need for</b>.'},
+  {q:'There has been a(n) ___ <u><b>in</b></u> the number of people using their cars to get to work.',a:['decrease'],why:'<b>decrease in</b> the number of…'},
+  {q:"My house has the ___ <u><b>of</b></u> being close to the station. It's very convenient.",a:['advantage'],why:'<b>advantage of</b> — "very convenient" is the clue.'}]}]},
+
+{id:'v3',num:3,short:'in / on phrases',title:'Prepositional phrases with in / on',ar:'تعبيرات مع in و on',ref:'SB page 40',
+ ruleTitle:'Phrases to know',
+ rule:`<table class="vt"><thead><tr><th>Phrase</th><th>Meaning</th></tr></thead><tbody><tr class="vg"><th colspan="2"><mark>in</mark></th></tr><tr><td><b>in a hurry</b></td><td class="ar" dir="rtl">على عجلة</td></tr><tr><td><b>in a mess</b></td><td class="ar" dir="rtl">في فوضى</td></tr><tr><td><b>in trouble</b></td><td class="ar" dir="rtl">في مشكلة</td></tr><tr><td><b>in the future</b></td><td class="ar" dir="rtl">في المستقبل</td></tr><tr class="vg"><th colspan="2"><mark>on</mark></th></tr><tr><td><b>on behalf of</b></td><td class="ar" dir="rtl">نيابةً عن</td></tr><tr><td><b>on fire</b></td><td class="ar" dir="rtl">مشتعل</td></tr><tr><td><b>on purpose</b></td><td class="ar" dir="rtl">عن قصد</td></tr><tr><td><b>on the phone</b></td><td class="ar" dir="rtl">على الهاتف</td></tr></tbody></table>`,
+ tip:`<p>Remember <b>a</b> in <b>in a hurry</b> and <b>in a mess</b>.</p><p><b>on purpose</b> is the opposite of <i>by accident</i>.</p><p><b>On behalf of</b> is used in speeches: <i>On behalf of the class, I would like to thank you.</i></p>`,
+ hint:'Read the clue in the sentence: an accident? a fire? an untidy house? a problem?',
+ groups:[{title:'Complete with the words in the box.',bank:['trouble','mess','fire','purpose'],items:[
+  {q:"I think I'm <b>in</b> ___ with Saad because I took his car yesterday.",a:['trouble'],why:'<b>in trouble</b> = in a difficult situation.'},
+  {q:'He is reporting there are still buildings <b>on</b> ___ .',a:['fire'],why:'<b>on fire</b> = burning.'},
+  {q:"Ali's house is always <b>in</b> a ___ .",a:['mess'],why:'<b>in a mess</b> = very untidy.'},
+  {q:"I didn't do it <b>on</b> ___, it was an accident.",a:['purpose'],why:'<b>on purpose</b> is the opposite of an accident.'}]}]},
+
+{id:'v4',num:4,short:'Phrasal verbs: get',title:'Phrasal verbs with get',ar:'أفعال مركبة مع get',ref:'SB page 41',
+ ruleTitle:'Phrasal verbs and meanings',
+ rule:`<table class="vt"><thead><tr><th>Phrasal verb</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><b>get by</b></td><td>to manage to live</td></tr>
+<tr><td><b>get along with</b></td><td>to have a good relationship with someone</td></tr>
+<tr><td><b>get away</b></td><td>to take a break or relax</td></tr></tbody></table>`,
+ tip:`<p>Quick clues:</p><p><b>money</b>, just enough → <b>get by</b></p><p><b>people</b>, friendly → <b>get along with</b></p><p><b>holiday</b>, relaxation → <b>get away</b></p><p class="ar" dir="rtl"><bdi dir="ltr">get by</bdi>: يتدبّر أمره<br><bdi dir="ltr">get along with</bdi>: على وفاق مع<br><bdi dir="ltr">get away</bdi>: يأخذ استراحة</p>`,
+ hint:'Money → get by. People → get along with. Holiday / relax → get away.',
+ groups:[{title:'Read the following and choose the correct answer.',type:'mcq',items:[
+  {q:"We're planning to ___ to the mountains this weekend for some relaxation.",o:['get away','get along with','get by','get up'],a:0,why:'"relaxation" → <b>get away</b>.'},
+  {q:'Even with his part-time job, he hardly makes enough money to ___ .',o:['get away','get along with','get by','get up'],a:2,why:'"enough money" → <b>get by</b> (manage to live).'},
+  {q:"She's very friendly and seems to ___ everyone she meets.",o:['get away','get along with','get by','get up'],a:1,why:'"friendly… everyone" → <b>get along with</b>.'}]}]},
+
+{id:'v5',num:5,short:'Food chain words',title:'Nature words: the food chain',ar:'السلسلة الغذائية',ref:'SB page 54',
+ ruleTitle:'Words to know',
+ rule:`<table class="vt"><thead><tr><th>Word</th><th>Meaning help</th></tr></thead><tbody>
+<tr><td><b>prey</b></td><td>an animal that is hunted and eaten <span class="ar" dir="rtl">(فريسة)</span></td></tr>
+<tr><td><b>predator</b></td><td>an animal that hunts others <span class="ar" dir="rtl">(مفترس)</span></td></tr>
+<tr><td><b>marine</b></td><td>about the sea <span class="ar" dir="rtl">(بحري)</span></td></tr>
+<tr><td><b>food chain</b></td><td>who eats whom in nature <span class="ar" dir="rtl">(سلسلة غذائية)</span></td></tr></tbody></table>`,
+ tip:`<p>Think of the hawk and the rabbit:</p><p>the hawk hunts → <b>predator</b></p><p>the rabbit is hunted → <b>prey</b></p><p>Sea animals and plants → <b>marine</b> life.</p>`,
+ hint:'Who hunts (predator)? Who is hunted (prey)? Sea (marine)? Who eats whom (food chain)?',
+ groups:[{title:'Complete the sentences with the suitable words below.',bank:['prey','predator','marine','chain'],items:[
+  {q:'The rabbit became easy ___ for the hawk in the open field.',a:['prey'],why:'The rabbit is hunted → <b>prey</b>.'},
+  {q:'Sharks are among the top ___ in the ocean.',a:['predators','predator'],why:'Sharks hunt → <b>predators</b> (plural after "among the top").'},
+  {q:'A healthy food ___ ensures the stability of the ecosystem.',a:['chain'],why:'<b>food chain</b>.'},
+  {q:'Pollution causes a significant threat to ___ life.',a:['marine'],why:'Sea life → <b>marine</b> life.'}]}]},
+
+{id:'v6',num:6,short:'Exam practice',title:'Exam-style practice (mixed)',ar:'تدريب على نمط الاختبار',exam:true,
+ intro:`<p style="margin:0 0 22px;max-width:70ch">These questions mix all the topics, just like the final exam. Try to remember the word card first. Every answer tells you which topic it tests.</p>`,
+ groups:[
+ {title:'Which of the following BEST fits the gap?',type:'mcq',items:[
+  {q:"Many people love that restaurant, but I think it's highly ___ .",o:['overrated','underrated','overachieved','underachieved'],a:0,topic:'v6',why:'<b>overrated</b> = people think it is better than it really is. "but" shows the contrast. (<i>underrated</i> = better than people think.)'},
+  {q:"I am awfully sorry because I didn't answer your call. I was ___ . I had an important interview.",o:['on fire','in debt','in a hurry','on display'],a:2,topic:'v3',why:'Rushing to an interview → <b>in a hurry</b>. Topic: in / on phrases.'}]},
+ {title:'Put the words between brackets in the correct form.',kind:'form',items:[
+  {q:'He made an ___ about the holiday. <b>(announce)</b>',a:['announcement'],topic:'v1',why:'After <i>made an</i> → noun: <b>announcement</b>.'},
+  {q:'The old bookshelf was covered in a thick, ___ layer. <b>(dust)</b>',a:['dusty'],topic:'v1',why:'Describes the noun <i>layer</i> → adjective: <b>dusty</b>.'},
+  {q:'The internet ___ was slow this morning. <b>(connect)</b>',a:['connection'],topic:'v1',why:'A noun is needed as the subject → <b>connection</b>.'}]},
+ {title:'Fill in the gaps with the suitable words from the box.',bank:['prey','effect','overcook','importance'],note:'One word is extra.',items:[
+  {q:'His words had a deep ___ on her decision.',a:['effect'],topic:'v2',why:'<b>effect on</b>. Topic: noun + preposition.'},
+  {q:'Lions hunt their ___ in the open grasslands.',a:['prey'],topic:'v5',why:'Animals that lions hunt → <b>prey</b>.'},
+  {q:'The ___ of eating healthy food was explained to the children.',a:['importance'],topic:'v2',why:'<b>importance of</b>. (<i>overcook</i> was the extra word.)'}]},
+ {title:'Which of the following BEST fits the gap?',type:'mcq',items:[
+  {q:'I was in such ___ to prepare the meal, so that the meat was undercooked.',o:['a hurry','particular','public','a mess'],a:0,topic:'v3',why:'Rushing → undercooked meat → <b>in such a hurry</b>.'},
+  {q:'On ___ of the English department, I would like to thank you all.',o:['fire','tour','sale','behalf'],a:3,topic:'v3',why:'Speaking for a group → <b>on behalf of</b>.'},
+  {q:'My family wants to ___ and enjoy a peaceful holiday.',o:['get by','get away','get along with','get through to'],a:1,topic:'v4',why:'Holiday / relax → <b>get away</b>.'},
+  {q:"Your daughter doesn't ___ after you at all. She has a different personality.",o:['get','take','make','bring'],a:1,topic:'v6',why:'<b>take after</b> = to look or behave like your parent <span class="ar" dir="rtl">(يشبه)</span>.'},
+  {q:"My house has the ___ of being close to the station. It's very convenient.",o:['threat','decrease','reason','advantage'],a:3,topic:'v2',why:'"very convenient" is positive → <b>advantage of</b>.'},
+  {q:'I think this movie is ___ because it is not as interesting as people say.',o:['underrated','overrated','overpaid','underpaid'],a:1,topic:'v6',why:'Not as good as people say → <b>overrated</b>.'},
+  {q:'On ___ of the English department, I would like to thank you all.',o:['fire','sale','tour','behalf'],a:3,topic:'v3',why:'<b>on behalf of</b> — same phrase, different option order. Read the options carefully!'},
+  {q:'The eagle is a skilled ___ that catches small animals.',o:['prey','predator','food chain','biodiversity'],a:1,topic:'v5',why:'It catches (hunts) animals → <b>predator</b>.'}]},
+ {title:'Complete the sentence with the correct form of the verb in brackets.',kind:'verb',note:'Grammar questions from this sheet',items:[
+  {q:'While I ___ <b>(wait)</b> at the bus stop, three buses went by in the opposite direction.',a:['was waiting'],topic:'v6',h:'While + the long action → was / were + ing. The subject is I.',why:'While + long action; I → <b>was waiting</b>. (Grammar: past progressive.)'}]},
+ {title:'Rewrite the sentence using the word in brackets.',type:'rewrite',note:'Grammar question from this sheet',items:[
+  {q:'I always visited my friend every weekend when I lived in the city.',kw:'used to',start:'I',topic:'v6',a:['I used to visit my friend every weekend when I lived in the city.','I always used to visit my friend every weekend when I lived in the city.'],why:'used to + base verb: visited → <b>used to visit</b>. (Grammar: used to.)'}]},
+ {title:'Complete the following sentences with the correct form of the verb in brackets.',kind:'verb',note:'Grammar questions from this sheet',items:[
+  {q:'<u>After</u> Jameel had learnt to drive, he ___ <b>(buy)</b> a car.',a:['bought'],topic:'v6',h:'After + had V3, … V2.',why:'After + had V3, … V2 → <b>bought</b>. (Grammar: past perfect.)'},
+  {q:'The train ___ <b>(leave)</b> <u>by the time</u> Mr. Brown arrived at the station.',a:['had left'],topic:'v6',h:'By the time + V2, … had + V3. Which action happened first?',why:'The train left first → <b>had left</b>. (Grammar: past perfect.)'}]}]}
+]};
+window.DATA.after=function(){
+const W=[['achieve','-ment','achievement','n'],['connect','-ion','connection','n'],['explain','-ation','explanation','n'],['disappoint','-ment','disappointment','n'],['prevent','-ion','prevention','n'],['imagine','-ation','imagination','n'],['globe','-al','global','a'],['protect','-ive','protective','a'],['risk','-y','risky','a'],['benefit','-al','beneficial','a'],['intense','-ive','intensive','a'],['health','-y','healthy','a']];
+const T={n:'noun · <span class="ar" dir="rtl">اسم</span>',a:'adjective · <span class="ar" dir="rtl">صفة</span>'};
+const box=document.querySelector('.wbld'),dots=document.getElementById('wd');let i=0,tm=null;
+dots.innerHTML=W.map((w,k)=>`<button aria-label="${w[2]}"></button>`).join('');
+function show(k){i=(k+W.length)%W.length;const w=W[i];box.classList.add('fade');setTimeout(()=>{document.getElementById('wr').textContent=w[0];document.getElementById('ws').textContent=w[1];document.getElementById('wn').textContent=w[2];document.getElementById('wt').innerHTML=T[w[3]];box.classList.remove('fade')},300);[...dots.children].forEach((d,j)=>d.classList.toggle('on',j===i))}
+dots.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;clearInterval(tm);show([...dots.children].indexOf(b))});
+show(0);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)tm=setInterval(()=>show(i+1),2600);
+};;window.DATA.name='Vocabulary';</script><script>{
+const D=window.DATA,SITE=!!window.SSH_SITE;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const KEY='ssh-g11-s1-'+D.id;
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){S={}}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const MK=KEY+'-meta';let M={};try{M=JSON.parse(localStorage.getItem(MK)||'{}')||{}}catch(e){M={}}
+const saveM=()=>{try{localStorage.setItem(MK,JSON.stringify(M))}catch(e){}};
+const fmtD=t=>new Date(t).toLocaleDateString('en-GB');
+const who=()=>SITE?{name:(document.getElementById('sshName')||{}).value||'',cls:(document.getElementById('sshClass')||{}).value||''}:{name:M.name||'',cls:M.cls||''};
+const ready=()=>SITE?(typeof window.sshValidate!=='function'||window.sshValidate('sshName','sshClass')):!!M.name;
+const IT={},ORDER=[];
+D.sections.forEach(sec=>sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{
+  it.id=sec.id+'-'+gi+'-'+ii;it.sec=sec.id;it.topic=it.topic||sec.id;it.g=g;
+  it.t=g.type==='mcq'?'mcq':g.type==='rewrite'?'rewrite':(g.bank?'box':(g.kind||D.gapKind));
+  IT[it.id]=it;ORDER.push(it.id)})));
+const SEC=Object.fromEntries(D.sections.map(s=>[s.id,s]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>(' '+s+' ').toLowerCase().replace(/[’‘`´]/g,"'")
+  .replace(/\bwon't\b/g,'will not').replace(/\bcan't\b/g,'can not').replace(/\bcannot\b/g,'can not').replace(/n't\b/g,' not')
+  .replace(/\b(it|he|she|that)'s\b/g,'$1 is').replace(/\bi'm\b/g,'i am').replace(/\b(they|we|you)'re\b/g,'$1 are')
+  .replace(/\b(i|you|he|she|we|they)'ll\b/g,'$1 will').replace(/\b(i|you|he|she|we|they)'d\b/g,'$1 would')
+  .replace(/[.,!?;:"()…]/g,' ').replace(/\s+/g,' ').trim();
+const GOOD=['Correct!','Well done!','Excellent!','Spot on!','Great job!'];
+const LET='ABCD';
+const ICONS={read:'<svg viewBox="0 0 48 48"><path d="M6 10h14a6 6 0 0 1 4 2v28a5 5 0 0 0-4-2H6z"/><path d="M42 10H28a6 6 0 0 0-4 2v28a5 5 0 0 1 4-2h14z"/></svg>',write:'<svg viewBox="0 0 48 48"><path d="M30 8l10 10-22 22H8V30z"/><path d="M26 12l10 10"/></svg>',check:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M15 25l6 6 12-13"/></svg>',plan:'<svg viewBox="0 0 48 48"><path d="M12 42V7"/><path d="M12 9h24l-5 8 5 8H12"/></svg>'};
+
+const ansText=it=>it.t==='mcq'?LET[it.a]+'. '+it.o[it.a]:it.a[0];
+
+/* ---------- render ---------- */
+const blank='<span class="blank" aria-label="gap">____</span>';
+function itemHTML(it,n){
+  let b;
+  if(it.t==='mcq')b=`<p class="q">${it.q.replace('___',blank)}</p><div class="opts">${it.o.map((o,k)=>`<button class="opt" data-k="${k}"><b>${LET[k]}</b><span>${o}</span></button>`).join('')}</div>`;
+  else if(it.t==='rewrite')b=`<p class="q">${it.q} <span class="kwd">${it.kw}</span></p><div class="row"><input class="inp wide" aria-label="Rewrite sentence ${n}" placeholder="${it.start?it.start+' …':'Write the full sentence…'}" autocomplete="off" autocapitalize="sentences" spellcheck="false"><button class="btn chk">Check</button></div>`;
+  else b=`<p class="q">${it.q.replace('___',`<input class="inp" aria-label="Answer for question ${n}" autocomplete="off" autocapitalize="off" spellcheck="false">`)}</p><div class="row"><button class="btn sm chk">Check</button></div>`;
+  return `<li class="item" data-id="${it.id}" data-t="${it.t}"><span class="n">${n}</span><div>${b}<div class="fb" aria-live="polite"></div></div></li>`;
+}
+const QT={verb:'Verb form',rewrite:'Rewrite',mcq:'Choose the best answer',box:'Word box',form:'Word form'};
+function secHTML(sec,si){
+  const groups=sec.groups.map((g,gi)=>{
+    const items=g.items.map((it,ii)=>itemHTML(it,ii+1)).join('');
+    const t=g.items[0].t;
+    const bank=g.bank?`<div class="bank" aria-label="Word box">${g.bank.map(w=>`<button class="wb" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div>`:'';
+    return `<div class="grp" data-g="${sec.id}-${gi}"><div class="gh"><h3>${g.title}</h3><span class="qt">${QT[t]}</span>${g.note?`<span class="sc">${g.note}</span>`:''}${bank}</div><ol class="items">${items}</ol></div>`;
+  }).join('');
+  const bar=sec.bar?`<div class="rbar"><div class="bc"><p class="bh">The rule</p>${sec.bar.rule}</div><div class="bc"><p class="bh">Examples <span class="lg"><i class="hk">keyword</i> <i class="hv">verb form</i> <i class="h2">V2</i> <i class="hn">noun</i></span></p>${sec.bar.ex.map(x=>`<p class="bx">${x}</p>`).join('')}</div><div class="bc ar" dir="rtl"><p class="bh">Helping tips – إرشادات مساعدة</p><ul class="tl">${sec.bar.ar.map(x=>`<li><span class="tg"><span class="ta">${x[0]}</span><span class="tarr">→</span></span><span class="tc" dir="rtl">${x[1]} <span class="tdots">......</span></span></li>`).join('')}</ul></div></div>`:'';
+  const learn=bar||(sec.rule?`<div class="learn${sec.wide?' full':''}"><div class="rule"><h3>${sec.ruleTitle||'The rule'}</h3>${sec.rule}</div><div class="tip"><h3>Smart tip</h3>${sec.tip}</div></div>`:(sec.intro||''));
+  return `<section class="band topic" id="${sec.id}"><div class="wrap"><header class="th"><span class="num">${sec.num}</span><div><h2>${sec.title}</h2>${sec.ar?`<div class="ar" dir="rtl">${sec.ar}</div>`:''}</div>${sec.ref?`<span class="ref">${sec.ref}</span>`:'<span></span>'}<div class="meter"><i></i></div><span class="sc"></span></header>${learn}${groups}<div class="result" id="r-${sec.id}"></div></div></section>`;
+}
+$('#topics').innerHTML=D.sections.map(secHTML).join('');
+$('#navrow').innerHTML=D.sections.map(s=>`<a href="#${s.id}" data-s="${s.id}">${s.short} <small></small></a>`).join('')+'<a href="#plan">My plan</a>';
+
+/* ---------- paint ---------- */
+function paint(id){
+  const it=IT[id],li=$(`.item[data-id="${id}"]`),st=S[id]||{},fb=$('.fb',li);
+  li.classList.toggle('ok',st.r==='ok');li.classList.toggle('no',st.r==='no');li.classList.toggle('shown',st.r==='shown');
+  const inp=$('.inp',li);if(inp&&st.v!=null&&inp.value!==st.v)inp.value=st.v;
+  if(it.t==='mcq')$$('.opt',li).forEach((b,k)=>{b.classList.toggle('right',(st.r==='ok'&&st.v===k)||(st.r==='shown'&&k===it.a));b.classList.toggle('wrong',st.r==='no'&&st.v===k)});
+  if(!st.r){fb.innerHTML='';return}
+  if(st.r==='ok')fb.innerHTML=`<p><b>${GOOD[ORDER.indexOf(id)%GOOD.length]}</b> ${it.why}</p>`;
+  else if(st.r==='shown')fb.innerHTML=`<p class="model">Answer: ${esc(ansText(it))}</p><p>${it.why}</p>`;
+  else if(it.t==='rewrite')fb.innerHTML=`<p><b>Not quite.</b> Compare with the model answer:</p><p class="model">${esc(it.a[0])}</p><p>${it.why}</p><div class="acts"><button class="btn sm" data-act="self">My answer means the same</button><button class="btn sm alt" data-act="retry">Try again</button></div>`;
+  else fb.innerHTML=`<p><b>Not yet — try again.</b> Hint: ${it.h||SEC[it.topic].hint}</p><div class="acts"><button class="btn sm alt" data-act="show">Show the answer</button></div>`;
+}
+function setState(id,patch){S[id]={...(S[id]||{}),...patch};save();paint(id);
+  if(!M.start)M.start=Date.now();
+  const all=ORDER.every(i=>(S[i]||{}).r);
+  if(all&&!M.done)M.done=Date.now();if(!all)M.done=null;saveM();score()}
+
+/* ---------- checking ---------- */
+function check(li){
+  const id=li.dataset.id,it=IT[id],inp=$('.inp',li),v=inp.value.trim();
+  if(!v){inp.focus();inp.placeholder=it.t==='rewrite'?'Write your sentence first…':'type here';return}
+  const ok=it.a.some(a=>norm(a)===norm(v));
+  const st=S[id]||{};
+  setState(id,Object.assign(ok?{r:'ok',v}:{r:'no',v,miss:true,tries:(st.tries||0)+1},st.first==null?{first:v}:{}));
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  const li=b.closest('.item');
+  if(li&&!ready()){if(!SITE)showGate();return}
+  if(b.classList.contains('chk'))return check(li);
+  if(b.classList.contains('opt')){
+    const id=li.dataset.id,it=IT[id],k=+b.dataset.k,st=S[id]||{};
+    if(st.r==='ok'||st.r==='shown')return;
+    return setState(id,Object.assign(k===it.a?{r:'ok',v:k}:{r:'no',v:k,miss:true},st.first==null?{first:k}:{}));
+  }
+  if(b.dataset.act==='show')return setState(li.dataset.id,{r:'shown'});
+  if(b.dataset.act==='self')return setState(li.dataset.id,{r:'ok',miss:((S[li.dataset.id]||{}).tries||0)>1});
+  if(b.dataset.act==='retry'){const i=$('.inp',li);i.value='';setState(li.dataset.id,{r:null,v:''});return i.focus()}
+  if(b.classList.contains('wb')){
+    const g=b.closest('.grp');let t=g._last;
+    if(!t||!g.contains(t))t=$$('.inp',g).find(i=>!i.value.trim());
+    if(t){t.value=b.dataset.w;t.focus();bankUse(g)}
+    return;
+  }
+  if(b.dataset.f)return filter(b.dataset.f);
+  if(b.dataset.retry){
+    const tp=b.dataset.retry;
+    ORDER.filter(i=>(b.dataset.sec?IT[i].sec:IT[i].topic)===tp&&((S[i]||{}).r!=='ok'||(S[i]||{}).miss)).forEach(i=>{delete S[i];const inp=$('.inp',$(`.item[data-id="${i}"]`));if(inp)inp.value='';paint(i)});
+    save();score();filter('all');document.getElementById(tp).scrollIntoView();return;
+  }
+  if(b.id==='reset'){
+    if(b.dataset.arm!=='1'){b.dataset.arm='1';b.textContent='Tap again to clear all answers';setTimeout(()=>{b.dataset.arm='';b.textContent='Start again (clear my answers)'},4000);return}
+    S={};save();M.start=null;M.done=null;M.sent={};saveM();$$('.inp').forEach(i=>i.value='');ORDER.forEach(paint);score();b.dataset.arm='';b.textContent='Start again (clear my answers)';window.scrollTo(0,0);
+  }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('inp')){e.preventDefault();check(e.target.closest('.item'))}});
+document.addEventListener('focusin',e=>{if(e.target.classList.contains('inp')){const g=e.target.closest('.grp');if(g)g._last=e.target}});
+document.addEventListener('input',e=>{if(e.target.classList.contains('inp')){const g=e.target.closest('.grp');if(g)bankUse(g)}});
+function bankUse(g){const vals=$$('.inp',g).map(i=>norm(i.value));$$('.wb',g).forEach(w=>w.classList.toggle('used',vals.includes(norm(w.dataset.w))))}
+
+/* ---------- filter by question type ---------- */
+function filter(f){
+  $$('[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));
+  $$('.item').forEach(li=>li.hidden=f!=='all'&&li.dataset.t!==f);
+  $$('.grp').forEach(g=>g.hidden=!$$('.item',g).some(li=>!li.hidden));
+  $$('.topic').forEach(t=>t.hidden=!$$('.item',t).some(li=>!li.hidden));
+  const s=D.strategies[f];
+  const strat=$('#strat');strat.classList.toggle('vis',!!s.visual);
+  strat.innerHTML=s.visual?`<ol class="vsteps">${s.visual.map((v,k)=>`<li><${v.href?`a href="${v.href}"`:'div'} class="vs"><span class="vi">${ICONS[v.ic]}<b>${k+1}</b></span><span class="ve">${v.en}</span><span class="vsub">${v.sub}</span><span class="ar va" dir="rtl">${v.ar}</span></${v.href?'a':'div'}></li>`).join('')}</ol>`
+   :`<div><h3>${s.title}</h3><ol>${s.steps.map(x=>`<li>${x}</li>`).join('')}</ol></div><div class="ar" dir="rtl">${s.ar}</div>`;
+  const n=$$('.item').filter(li=>!li.hidden).length;
+  $('#fcount').textContent=f==='all'?`All ${n} questions`:`${n} questions of this type`;
+}
+
+
+function resultHTML(sec){
+  const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length;
+  const st=i=>S[i]||{},answered=ids.filter(i=>st(i).r),left=N-answered.length;
+  const mark=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
+  if(left)return `<div class="mini"><span class="mk">Mark: <b>?/${N}</b></span><span class="sc">${left} left · <span class="ar" dir="rtl">الدرجة</span></span></div>`;
+  let head;
+  if(left){head=`<div class="rbig wait">?<small>/${N}</small></div><div><b>Keep going!</b><p>Answer ${left} more question${left>1?'s':''} to get your mark.</p><p class="ar" dir="rtl">أجب عن ${left} ${left>1?'أسئلة':'سؤال'} لتحصل على درجتك.</p></div>`}
+  else{
+    const p=mark/N;let L;
+    if(p>=.9)L=['g','Excellent!','ممتاز!','You are ready for this topic.','أنت جاهز لهذا الدرس.'];
+    else if(p>=.7)L=['g','Very good!','جيد جدًا!','Look at your red answers below and remember the correct ones.','راجع الإجابات الحمراء وتذكّر الصحيحة.'];
+    else if(p>=.5)L=['a','Good.','جيد.','Read the rule card again, then try the wrong ones again.','اقرأ القاعدة مرة أخرى ثم أعد الأسئلة الخاطئة.'];
+    else L=['r','Needs more practice.','تحتاج إلى مزيد من التدريب.','Read the rule card and the smart tip, then try again.','اقرأ القاعدة والنصيحة ثم حاول مرة أخرى.'];
+    head=`<div class="rbig ${L[0]}">${mark}<small>/${N}</small></div><div><b>${L[1]}</b> <span class="ar" dir="rtl">${L[2]}</span><p>${L[3]}</p><p class="ar" dir="rtl">${L[4]}</p></div>`;
+  }
+  const key=sec.groups.map((g,gi)=>`<div class="kg"><p class="kt">${g.title}</p><ol class="akey">${g.items.map((it,ii)=>{
+    const s=st(it.id);let cls='na',you='';
+    if(s.r==='ok'&&!s.miss){cls='ok';you='✓ Right first time'}
+    else if(s.r==='ok'){cls='mid';you='✓ Right after a retry'}
+    else if(s.r==='no'){cls='no';you='✗ Your answer: '+esc(it.t==='mcq'?it.o[s.v]:s.v||'')}
+    else if(s.r==='shown'){cls='no';you='✗ You showed the answer'}
+    return `<li class="${cls}"><span class="kn">${ii+1}</span><span class="ka">${s.r?esc(ansText(it)):'<i>Answer first</i>'}</span><span class="ky">${you}</span></li>`}).join('')}</ol></div>`).join('');
+  const wrong=ids.some(i=>st(i).r&&(st(i).r!=='ok'||st(i).miss));
+  return `<h3>Your result <span class="ar" dir="rtl">نتيجتك</span></h3><div class="rhead">${head}</div><p class="sc">Mark = answers right the first time. Correct answers:</p>${key}${wrong?`<button class="btn alt sm" data-retry="${sec.id}" data-sec="1">Try the wrong ones again</button>`:''}`;
+}
+
+/* ---------- score + plan ---------- */
+function score(){
+  if(typeof regBar==='function')try{regBar()}catch(e){}
+  const tot=ORDER.length,ok=ORDER.filter(i=>(S[i]||{}).r==='ok').length,pct=Math.round(ok/tot*100);
+  $('#ring').style.setProperty('--p',pct);$('#ringv').textContent=pct+'%';$('#okc').textContent=`${ok} of ${tot}`;
+  D.sections.forEach(sec=>{
+    const ids=ORDER.filter(i=>IT[i].sec===sec.id),k=ids.filter(i=>(S[i]||{}).r==='ok').length;
+    const el=document.getElementById(sec.id);$('.meter i',el).style.width=(k/ids.length*100)+'%';
+    $('.th .sc',el).textContent=`${k} of ${ids.length} correct`;
+    {const r=document.getElementById('r-'+sec.id);r.innerHTML=resultHTML(sec);r.classList.toggle('small',!!r.querySelector('.mini'))}
+    if(SITE)sendSec(sec,ids);
+    const a=$(`#navrow a[data-s="${sec.id}"]`);$('small',a).textContent=k+'/'+ids.length;a.classList.toggle('done',k===ids.length);
+  });
+  const rows=D.sections.filter(s=>!s.exam).map(sec=>{
+    const ids=ORDER.filter(i=>IT[i].topic===sec.id),done=ids.filter(i=>['ok','shown'].includes((S[i]||{}).r)).length;
+    const miss=ids.filter(i=>(S[i]||{}).miss||(S[i]||{}).r==='shown').length;
+    let lv,c;
+    if(done<ids.length&&!miss){lv='Not finished';c='u'}
+    else if(!miss){lv='Ready';c='g'}
+    else if(miss/ids.length<=.34){lv='Review';c='a'}
+    else{lv='Revise again';c='r'}
+    return {sec,ids,done,miss,lv,c,rank:{r:0,a:1,u:2,g:3}[c]};
+  }).sort((a,b)=>a.rank-b.rank||b.miss-a.miss);
+  $('#plist').innerHTML=rows.map(r=>`<li><div><b>${r.sec.title}</b><div style="font-size:14px;color:#cfd8ea">${r.done} of ${r.ids.length} answered${r.miss?` · ${r.miss} mistake${r.miss>1?'s':''}`:''}</div></div><span class="lv ${r.c}">${r.lv}</span>${r.miss?`<div class="acts"><a href="#${r.sec.id}">Read the rule again</a><button data-retry="${r.sec.id}">Redo these questions</button></div>`:''}</li>`).join('');
+}
+
+
+
+/* ---------- site: send each finished section to the teacher (same system as the mock tests) ---------- */
+function sendSec(sec,ids){
+  M.sent=M.sent||{};if(M.sent[sec.id]||typeof window.sshSend!=='function')return;
+  const st=i=>S[i]||{};if(!ids.every(i=>st(i).r))return;
+  M.sent[sec.id]=Date.now();saveM();
+  const N=ids.length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length,retry=ids.filter(i=>st(i).r==='ok'&&st(i).miss).length,shown=ids.filter(i=>st(i).r==='shown').length;
+  const lines=[];let n=0;sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{n++;const s=st(it.id);
+    const first=s.first!=null?(it.t==='mcq'?it.o[s.first]:s.first):(it.t==='mcq'?it.o[s.v]:s.v);
+    lines.push('Q'+n+': '+strip(it.q).replace(/___/g,'____')+' | first answer: '+(first==null||first===''?'-':first)+(s.r==='ok'&&!s.miss?' ✓':' ✗ (key '+ansText(it)+')')+(s.r==='shown'?' [answer shown]':s.miss&&s.r==='ok'?' [right after retry]':''))}));
+  const w=who();
+  let box=document.getElementById('send-'+sec.id);
+  if(!box){box=document.createElement('div');box.id='send-'+sec.id;box.className='sendbox';document.getElementById('r-'+sec.id).after(box)}
+  window.sshSend(box,{test:'G11 S1 Remedial Revision – '+D.name+': '+sec.num+' '+sec.title,name:w.name.trim(),cls:w.cls.trim(),score:m,max:N,percent:Math.round(m/N*100),
+    breakdown:'Right first time '+m+'/'+N+'; right after a retry '+retry+'; answer shown '+shown+'. Remedial revision worksheet (Units 3–5).',
+    topic:'Remedial plan – '+D.name+' revision',essay:'',answers:lines.join('\n')});
+}
+
+/* ---------- printable plan (download) ---------- */
+const strip=h=>{const t=document.createElement('div');t.innerHTML=h;return t.textContent.replace(/\s+/g,' ').trim()};
+const lvl=p=>p>=.9?['Excellent','ممتاز','#178a5a']:p>=.7?['Very good','جيد جدًا','#178a5a']:p>=.5?['Good','جيد','#b07a00']:['Needs more practice','يحتاج إلى تدريب','#c4362b'];
+function planDoc(){
+  const st=i=>S[i]||{};
+  let totM=0,totN=0;
+  const rows=D.sections.map(sec=>{
+    const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length,ans=ids.filter(i=>st(i).r).length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
+    totM+=m;totN+=N;const L=lvl(m/N);
+    return `<tr><td>${esc(sec.title)}<div class="a">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b>${ans<N?`<div class="s">${N-ans} not answered</div>`:''}</td><td class="c" style="color:${L[2]}"><b>${ans<N?'—':L[0]}</b><div class="a">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and redo the wrong questions'}</td></tr>`}).join('');
+  const wrong=ORDER.filter(i=>{const s=st(i);return s.r&&(s.r!=='ok'||s.miss)});
+  const wl=wrong.map((i,k)=>{const it=IT[i],s=st(i);const you=s.r==='shown'?'(answer shown)':s.r==='ok'?'right after a retry':esc(it.t==='mcq'?it.o[s.v]:(s.v||''));
+    return `<tr><td class="c">${k+1}</td><td>${esc(SEC[it.sec].short)}</td><td>${esc(strip(it.q).replace(/___/g,'______'))}${it.kw?` (${esc(it.kw)})`:''}</td><td class="x">${you}</td><td class="o">${esc(ansText(it))}</td></tr>`}).join('');
+  const today=new Date().toLocaleDateString('en-GB');
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remedial plan – ${esc(D.name)}</title><style>
+@page{size:A4;margin:12mm}body{font:13px/1.45 Arial,sans-serif;color:#14244A;margin:0 auto;max-width:190mm}
+.hdr{width:100%;display:block}h1{font-size:20px;margin:6px 0 2px;text-align:center}.sub{text-align:center;margin:0 0 10px;color:#46536E}
+.a{font-family:Arial,sans-serif;direction:rtl;color:#46536E;font-size:12px}.s{font-size:11px;color:#c4362b}
+.info{display:flex;gap:16px;margin:10px 0 12px}.info div{flex:1;border-bottom:1px solid #14244A;padding:14px 0 2px}
+table{width:100%;border-collapse:collapse;margin:6px 0 14px}th,td{border:1px solid #9aa6bd;padding:5px 7px;vertical-align:top;text-align:left}
+th{background:#F3F7FC}td.c{text-align:center}td.x{color:#c4362b}td.o{color:#178a5a;font-weight:bold}
+.tot{display:flex;justify-content:space-between;align-items:center;border:2px solid #14244A;border-radius:8px;padding:8px 14px;margin:8px 0}
+.tot b{font-size:22px}h2{font-size:15px;margin:14px 0 4px}
+.sig{display:flex;gap:30px;margin-top:22px}.sig div{flex:1;border-top:1px solid #14244A;padding-top:4px;text-align:center}
+.pb{display:block;margin:12px auto;padding:10px 22px;font-size:15px;background:#1E6FD9;color:#fff;border:0;border-radius:8px;cursor:pointer}
+@media print{.pb{display:none}}</style></head><body>
+<img class="hdr" src="${window.HDR||''}" alt="">
+<h1>Remedial Plan – ${esc(D.name)} <span class="a" style="font-size:16px">الخطة العلاجية</span></h1>
+<p class="sub a" style="font-size:15px;color:#14244A;font-weight:bold;text-align:center;margin:2px 0">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p><p class="sub">Grade 11 English · End of Semester 1 · Smart Students Hub</p>
+<div class="info"><div>Student name / اسم الطالب: <b>${esc(who().name)}</b></div><div>Class / الصف: <b>${esc(who().cls)}</b></div><div>${M.done?`Finished on / تاريخ الإنجاز: <b>${fmtD(M.done)}</b>`:`Not finished yet / لم يكتمل بعد<br><small>Started: ${M.start?fmtD(M.start):"—"} · Printed: ${today}</small>`}</div></div>
+<div class="tot"><span>Total mark (right the first time) / الدرجة الكلية</span><b>${totM} / ${totN}</b></div>
+<h2>1. Result by topic / النتيجة حسب الموضوع</h2>
+<table><tr><th>Topic</th><th>Mark</th><th>Result</th><th>What to do next</th></tr>${rows}</table>
+<h2>2. Questions to revise / أسئلة للمراجعة</h2>
+${wl?`<table><tr><th>#</th><th>Topic</th><th>Question</th><th>Your answer</th><th>Correct answer</th></tr>${wl}</table>`:'<p>No mistakes so far. Well done! / لا توجد أخطاء. أحسنت!</p>'}
+<div class="sig"><div>Student / الطالب</div><div>Teacher / المعلم</div><div>Parent / ولي الأمر</div></div>
+<button class="pb" onclick="window.print()">Print / طباعة</button>
+<script>window.onload=()=>setTimeout(()=>window.print(),400)<\/script></body></html>`;
+}
+(async()=>{
+  const btn=$('#dlplan'),msg=$('#dlmsg');if(!btn)return;
+  if(SITE){btn.hidden=false;btn.textContent='Print my plan · اطبع خطتي';btn.addEventListener('click',()=>{
+    let f=document.getElementById('pframe');if(f)f.remove();f=document.createElement('iframe');f.id='pframe';f.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0';
+    document.body.appendChild(f);f.srcdoc=planDoc();msg.textContent='The print window opens. Choose "Save as PDF" or your printer. · تفتح نافذة الطباعة: اختر الحفظ PDF أو الطابعة.'});return}
+  let dl=null;try{dl=window.claude&&await window.claude.use('downloads')}catch(e){dl=null}
+  if(!dl){msg.textContent='Printing is available when this page is opened from Claude.';return}
+  btn.hidden=false;
+  btn.addEventListener('click',async()=>{
+    try{await dl.save({filename:`Remedial-plan-${D.id}-grade11.html`,data:new Blob([planDoc()],{type:'text/html'})});msg.textContent='Saved. Open the file — it prints on A4 with the school header.'}
+    catch(e){msg.textContent='The file was not saved. Please try again.'}
+  });
+})();
+
+
+/* ---------- registration (name + class) ---------- */
+function regBar(){
+  const b=$('#regbar');if(!b||SITE)return;
+  b.innerHTML=M.name?`<span>Student · الطالب: <b>${esc(M.name)}</b> · Class · الصف: <b>${esc(M.cls)}</b></span>${M.done?` <span class="fin">✓ Finished ${fmtD(M.done)}</span>`:''} <button type="button" id="regedit">Edit · تعديل</button>`:'';
+  const e=$('#regedit');if(e)e.onclick=showGate;
+}
+function showGate(){
+  let g=$('#regGate');
+  if(!g){g=document.createElement('div');g.id='regGate';g.setAttribute('role','dialog');g.setAttribute('aria-modal','true');
+    g.innerHTML=`<form class="rgbox" id="gform" novalidate><p class="eyebrow">Grade 11 · Remedial revision · الخطة العلاجية</p><h2>Register to start<br><span class="ar" dir="rtl">سجّل لتبدأ المراجعة</span></h2>
+    <p>Write your name and class. They appear on your printed remedial plan with the date you finish.<span class="ar" dir="rtl" style="display:block">اكتب اسمك وصفك، وسيظهران في خطتك العلاجية المطبوعة مع تاريخ إنهاء المراجعة.</span></p>
+    <label>Full name · الاسم الكامل<input id="gname" autocomplete="name" required maxlength="60"></label>
+    <label>Class · الصف والشعبة<input id="gcls" placeholder="e.g. 11-3" required maxlength="12"></label>
+    <p class="gerr" id="gerr" role="alert"></p><button class="btn" type="submit">Start · ابدأ</button>
+    <p class="gnote">Your answers stay on this device only. · تبقى إجاباتك على هذا الجهاز فقط.</p></form>`;
+    document.body.appendChild(g);
+    $('#gform').addEventListener('submit',ev=>{ev.preventDefault();
+      const n=$('#gname').value.trim().replace(/\s+/g,' '),c=$('#gcls').value.trim();
+      if(n.replace(/[^\p{L}]/gu,'').length<2){$('#gerr').textContent='Please write your name. · اكتب اسمك.';return $('#gname').focus()}
+      if(!c){$('#gerr').textContent='Please write your class. · اكتب صفك.';return $('#gcls').focus()}
+      M.name=n;M.cls=c;if(!M.reg)M.reg=Date.now();saveM();g.hidden=true;document.body.classList.remove('gated');regBar();});
+  }
+  $('#gname').value=M.name||'';$('#gcls').value=M.cls||'';$('#gerr').textContent='';
+  g.hidden=false;document.body.classList.add('gated');setTimeout(()=>$('#gname').focus(),50);
+}
+
+/* ---------- start ---------- */
+$('#ftabs').innerHTML='<span class="lab">Train by question type:</span>'+D.filters.map(f=>`<button class="fbtn" data-f="${f}" aria-pressed="false">${f==='all'?'All questions':QT[f]}</button>`).join('')+'<span class="sc" id="fcount"></span>';
+ORDER.forEach(paint);filter('all');score();if(!SITE){regBar();if(!M.name)showGate();}
+if(D.after)D.after();
+}
+</script>
+<script id="ssh-submit-js">
+(function(){
+const ENDPOINT="https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec";
+const $=id=>document.getElementById(id);
+const FAKE=/^(test|asdf|aaa+|abc|example|qwerty|none|no|x+)@|@(test|example|mail)\.(com|net)$/i;
+function cleanPhone(p){return String(p||'').replace(/[\s\-()]/g,'')}
+function phoneOk(p){p=cleanPhone(p);return /^(\+|00)?\d{8,15}$/.test(p)}
+function emailOk(e){e=String(e||'').trim();return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e)&&!FAKE.test(e)}
+window.sshValidate=function(nameId,classId){
+  const n=$(nameId),c=$(classId),em=$('sshEmail'),ph=$('sshPhone'),cs=$('sshConsent'),err=$('sshErr');const msgs=[];
+  [n,c,em,ph].forEach(x=>x&&x.classList.remove('bad'));
+  const words=(n.value.trim().match(/[^\s]+/g)||[]).filter(w=>/[A-Za-z\u0600-\u06FF]/.test(w));
+  if(words.length<1){n.classList.add('bad');msgs.push('Write your name. · اكتب اسمك.')}
+  if(!c.value.trim()){c.classList.add('bad');msgs.push('Write your class. · اكتب صفك.')}
+  const e=em.value.trim(),p=ph.value.trim();
+  if(e&&!emailOk(e)){em.classList.add('bad');msgs.push('Check your email address. · تحقق من البريد الإلكتروني.')}
+  if(p&&!phoneOk(p)){ph.classList.add('bad');msgs.push('Check your mobile number (8 digits for Qatar). · تحقق من رقم الجوال.')}
+  if(!e&&!p){em.classList.add('bad');ph.classList.add('bad');msgs.push('Give your email or mobile number. · أدخل البريد أو رقم الجوال.')}
+  if(!cs.checked)msgs.push('Tick the agreement box. · ضع علامة على الموافقة.');
+  err.innerHTML=msgs.join('<br>');
+  if(msgs.length){$('sshDet').scrollIntoView({block:'center'});return false}
+  return true;
+};
+window.sshLock=function(on){['sshEmail','sshPhone','sshConsent'].forEach(id=>{const x=$(id);if(x)x.disabled=on})};
+window.sshSend=function(holder,payload){
+  const box=document.createElement('div');box.className='ssh-status';holder.prepend(box);
+  const em=$('sshEmail').value.trim(),ph=$('sshPhone').value.trim();
+  const body=Object.assign({type:'submission',page:location.pathname.split('/').pop()||''},payload,{email:emailOk(em)?em:'',phone:phoneOk(ph)?cleanPhone(ph):'',consent:$('sshConsent').checked===true,website:$('sshWebsite').value});
+  body.sid=body.sid||('S'+Date.now().toString(36)+Math.random().toString(36).slice(2,7));
+  const PK='ssh-pending';
+  const pend=(add)=>{try{let L=JSON.parse(localStorage.getItem(PK)||'[]').filter(x=>x&&x.body&&x.body.sid!==body.sid&&Date.now()-x.t<14*864e5);if(add)L.push({t:Date.now(),url:location.pathname,body:body});localStorage.setItem(PK,JSON.stringify(L))}catch(e){}};
+  let tries=0,busy=false,done=false,timer=null;const WAIT=[3,10,30];
+  const fail=(msg,auto)=>{box.className='ssh-status no';box.innerHTML=msg+(auto?'':'<button type="button">Try again · أعد المحاولة</button>');const b=box.querySelector('button');if(b)b.onclick=()=>{tries=0;go()}};
+  const go=()=>{
+    clearTimeout(timer);if(busy||done)return;
+    if(!ENDPOINT){box.className='ssh-status no';box.innerHTML='<b>Sending is not switched on yet.</b> Print your report and give it to your teacher.<span class="ar">الإرسال غير مفعّل بعد. اطبع تقريرك وسلّمه لمعلمك.</span>';return}
+    busy=true;tries++;
+    box.className='ssh-status';box.innerHTML='<b>Sending your results to your teacher…</b>'+(tries>1?' (attempt '+tries+')':'')+' Keep this page open.<span class="ar">جارٍ إرسال نتيجتك إلى المعلم… لا تغلق الصفحة.</span>';
+    const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),60000);
+    fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),signal:ctl.signal,redirect:'follow'})
+     .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(d=>{clearTimeout(t);busy=false;
+       if(d&&d.ok){done=true;pend(false);box.className='ssh-status ok';box.innerHTML='✅ <b>Sent to your teacher.</b> Your reference number: <b class="ref">'+d.ref+'</b> Keep this number.<span class="ar">✅ تم الإرسال إلى المعلم. رقمك المرجعي: '+d.ref+' — احتفظ به.</span>'}
+       else{const e=new Error(String(d&&d.error||'not accepted'));e.server=true;throw e}})
+     .catch(err=>{clearTimeout(t);busy=false;
+       if(err&&err.server){pend(true);fail('<b>Your teacher\'s sheet did not save the result</b> ('+String(err.message).replace(/[<>&]/g,'')+'). Press “Try again”. If it keeps happening, take a screenshot of this page and send it to your teacher.<span class="ar">لم يتم حفظ النتيجة في سجل المعلم. اضغط «أعد المحاولة»، وإن تكرر ذلك أرسل صورة لهذه الصفحة إلى معلمك.</span>');return}
+       pend(true);
+       if(tries<=WAIT.length){let s=WAIT[tries-1];const tick=()=>{if(done||busy)return;if(s<=0)return go();fail('<b>The connection is slow or lost.</b> Trying again automatically in '+s+' s… Keep this page open.<span class="ar">الاتصال ضعيف أو منقطع. ستتم إعادة المحاولة تلقائيًا خلال '+s+' ثانية… لا تغلق الصفحة.</span>',true);s--;timer=setTimeout(tick,1000)};tick();return}
+       fail('<b>Could not send yet.</b> Your result is <b>saved on this device</b>. It will be sent automatically when the internet works again (or the next time you open this test on this device), and your certificate will appear then. You can also press “Try again”.<span class="ar">تعذّر الإرسال حاليًا، لكن نتيجتك محفوظة على هذا الجهاز وستُرسل تلقائيًا عند عودة الإنترنت (أو عند فتح هذا الاختبار مرة أخرى على الجهاز نفسه)، وستظهر شهادتك عندها. يمكنك أيضًا الضغط على «أعد المحاولة».</span>');
+     });
+  };
+  window.addEventListener('online',()=>{if(!done){tries=0;go()}});
+  go();
+};
+/* Results that could not be sent earlier on this device are sent again when the page opens (the certificate then appears). */
+(function(){if(!ENDPOINT)return;let L=[];try{L=JSON.parse(localStorage.getItem('ssh-pending')||'[]')}catch(e){}
+ L=L.filter(x=>x&&x.body&&x.url===location.pathname&&Date.now()-x.t<14*864e5);if(!L.length)return;
+ const flush=()=>L.forEach(x=>{fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(x.body),redirect:'follow'}).then(r=>r.json()).then(d=>{if(!d||!d.ok)return;
+   try{localStorage.setItem('ssh-pending',JSON.stringify(JSON.parse(localStorage.getItem('ssh-pending')||'[]').filter(y=>!(y&&y.body&&y.body.sid===x.body.sid))))}catch(e){}
+   const n=document.createElement('div');n.className='ssh-status ok';n.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;max-width:640px;margin:0 auto;box-shadow:0 6px 24px rgba(0,0,0,.2)';
+   n.innerHTML='✅ <b>Your earlier result'+(x.body.test?' ('+String(x.body.test).replace(/[<>&]/g,'')+')':'')+' has now been sent to your teacher.</b> Reference: <b class="ref">'+String(d.ref||'').replace(/[<>&]/g,'')+'</b><span class="ar">✅ تم الآن إرسال نتيجتك السابقة إلى المعلم.</span><button type="button">OK</button>';
+   n.querySelector('button').onclick=()=>n.remove();document.body.appendChild(n)}).catch(()=>{})});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',flush);else flush();})();
+// Auto-send: results go to the teacher as soon as the test is checked (details + consent are required before Check).
+// If some answers still wait for the student's self-mark, we wait while they mark, but the result is never lost:
+// it is sent when the last answer is marked, after 3 minutes without marking, or when the student leaves the page.
+(function(){const WAIT=180000;let timer=null,queued=false,lastB=null,lastP=null;
+ const btn=()=>{const b=document.getElementById('sendBtn');return b&&document.body.contains(b)&&!b.disabled?b:null};
+ const pend=b=>+(b.dataset.pending||0);
+ const fire=force=>{const b=btn();if(!b)return;if(!force&&pend(b)>0)return;clearTimeout(timer);timer=null;window.SSH_AUTO_SEND=true;try{b.click()}finally{window.SSH_AUTO_SEND=false}};
+ const check=()=>{const b=btn();if(!b){clearTimeout(timer);timer=null;lastB=null;return}
+  const p=pend(b);if(b===lastB&&p===lastP)return;lastB=b;lastP=p;
+  if(p>0){clearTimeout(timer);timer=setTimeout(()=>fire(true),WAIT)}
+  else if(!queued){queued=true;setTimeout(()=>{queued=false;fire(false)},300)}};
+ new MutationObserver(check).observe(document.documentElement,{childList:true,subtree:true});
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')fire(true)});
+ window.addEventListener('pagehide',()=>fire(true));
+})();
+})();
+</script>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden><div class="gbox">
+<div class="gb gb1"><h2 id="gTitle">Welcome to Smart Students Hub 👋</h2><p class="ar"><b>مرحبًا بك في منصة Smart Students Hub</b></p>
+<p style="font-size:.88rem">Please register once to open the free resources. It takes 20 seconds. · <bdi dir="rtl">سجّل مرة واحدة لفتح الموارد المجانية، يستغرق ذلك 20 ثانية.</bdi></p></div>
+<div class="gb gb2"><label class="l" for="gName">Your full name · اسمك الكامل</label><input type="text" id="gName" autocomplete="name" maxlength="80"></div>
+<div class="gb gb3"><span class="l">I am a… · أنا</span>
+<div class="groles" role="radiogroup" aria-label="I am a"><label><input type="radio" name="gRole" value="Teacher"><span><i>👩‍🏫</i>Teacher<br>معلم</span></label><label><input type="radio" name="gRole" value="Student"><span><i>🎓</i>Student<br>طالب</span></label><label><input type="radio" name="gRole" value="Parent"><span><i>👨‍👩‍👧</i>Parent<br>ولي أمر</span></label></div><div id="gClassBox" hidden><label class="l" for="gClass" style="margin-top:8px">Class · الصف <small>(any form, e.g. 12-3 · بأي صيغة)</small></label><input type="text" id="gClass" maxlength="30" placeholder="12-3"></div></div>
+<div class="gb gb4"><label class="l" for="gEmail">Email or mobile · البريد الإلكتروني أو الجوال</label><input type="text" id="gEmail" autocomplete="email" maxlength="120" placeholder="name@example.com  ·  +974 5xxx xxxx"><small style="display:block;margin-top:4px">Write one of them only. · اكتب أحدهما فقط.</small></div>
+<input type="text" class="hp" id="gWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="gb gb5"><div class="ok"><span><b>By pressing Enter, you agree to receive updates about new resources, and to Smart Students Hub recording which tools you use.</b><b dir="rtl" style="display:block;text-align:right">بالضغط على «دخول» توافق على إرسال تحديثات الموارد لك، وعلى تسجيل المنصة للأدوات التي تستخدمها.</b><small style="display:block;margin-top:4px">Your details stay private and are used only to document how our free resources are used. To stop updates, message us on <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small><small dir="rtl" style="display:block;text-align:right">بياناتك محفوظة بخصوصية، وتُستخدم فقط لتوثيق الاستفادة من مواردنا المجانية. ولإيقاف التحديثات راسلنا على واتساب: <a href="https://wa.me/97450406473?text=%D8%A5%D9%8A%D9%82%D8%A7%D9%81%20%D8%A7%D9%84%D8%AA%D8%AD%D8%AF%D9%8A%D8%AB%D8%A7%D8%AA%20%C2%B7%20Stop%20updates" target="_blank" rel="noopener" style="color:#7CFC9A;font-weight:700;text-decoration:underline"><bdi dir="ltr">💬 WhatsApp +974 5040 6473</bdi></a></small></span></div>
+<button type="button" id="gSend">Enter · دخول</button><div class="gmsg" id="gMsg" aria-live="polite"></div></div></div></div><script>(function(){const EP='https://script.google.com/macros/s/AKfycbwXKby0ftvHXqoNyYouxh4vStgiiCWyZ52CWmexbtyLoDfPSok7HcYDTa41PWIbVXoJ_A/exec',PAGE='g11-revision-vocabulary',$=s=>document.getElementById(s);
+const EOK=e=>/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(e||''),POK=p=>/^\+?[0-9 ]{8,16}$/.test(p||'');
+let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
+let reg=false;try{reg=localStorage.getItem('ssh_registered')==='1'}catch(e){}try{if(sessionStorage.getItem('ssh_registered')==='1')reg=true}catch(e){}
+if(reg&&!EOK(r.email)&&!POK(r.phone))reg=false; // email is now required: ask older registrations once more
+const pre=()=>{[['sshName',r.name],['sshEmail',r.email],['sshPhone',r.phone]].forEach(([id,v])=>{const el=$(id);if(el&&v&&!el.value){el.value=v;el.dispatchEvent(new Event('input',{bubbles:true}))}})};
+const logUse=()=>{try{const d=new Date().toISOString().slice(0,10),k='ssh_use_'+PAGE;if(localStorage.getItem(k)===d)return;localStorage.setItem(k,d)}catch(e){}
+ try{fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'use',name:r.name||'',role:r.role||'',email:r.email||'',phone:r.phone||'',page:PAGE,ref:location.pathname.split('/').pop()}),keepalive:true}).catch(()=>{})}catch(e){}};
+const after=()=>{pre();logUse();if(typeof window.SSH_AFTER_GATE==='function')window.SSH_AFTER_GATE()};
+if(reg){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',after);else after();return}
+const g=$('gate');g.hidden=false;document.body.classList.add('gated');
+if(r.name)$('gName').value=r.name;if(r.email||r.phone)$('gEmail').value=r.email||r.phone;if(r.cls)$('gClass').value=r.cls;const syncCls=()=>{$('gClassBox').hidden=(document.querySelector('input[name=gRole]:checked')||{}).value!=='Student'};document.querySelectorAll('input[name=gRole]').forEach(x=>x.addEventListener('change',syncCls));syncCls();if(r.role){const x=document.querySelector('input[name=gRole][value="'+r.role+'"]');if(x)x.checked=true}
+setTimeout(()=>(r.name?$('gEmail'):$('gName')).focus(),50);
+const open=()=>{try{localStorage.setItem('ssh_registered','1');localStorage.setItem('ssh_reg',JSON.stringify(r))}catch(e){}try{sessionStorage.setItem('ssh_registered','1')}catch(e){}g.hidden=true;document.body.classList.remove('gated');after()};
+const msg=t=>{$('gMsg').textContent=t};
+$('gSend').onclick=()=>{const name=$('gName').value.trim().replace(/\s+/g,' '),role=(document.querySelector('input[name=gRole]:checked')||{}).value,c=$('gEmail').value.trim(),email=EOK(c)?c.toLowerCase():'',phone=email?'':c.replace(/[^0-9+ ]/g,'').trim(),cls=role==='Student'?$('gClass').value.trim():'';
+ if(name.length<2)return msg('Please write your name. · اكتب اسمك.');if(!role)return msg('Choose: teacher, student or parent. · اختر: معلم أو طالب أو ولي أمر.');
+ if(!email&&!POK(phone))return msg('Write your email or mobile number. · اكتب بريدك الإلكتروني أو رقم جوالك.');if(role==='Student'&&!cls)return msg('Write your class. · اكتب صفك.');
+ 
+ 
+ r={name,role,email,phone,cls};try{if(cls)localStorage.setItem('ssh_class',cls);localStorage.setItem('ssh_name',name)}catch(e){}$('gSend').disabled=true;msg('');$('gSend').textContent='… ';
+ const ctl=new AbortController();setTimeout(()=>ctl.abort(),12000);
+ fetch(EP,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({type:'register',name,role,email,phone,consent:true,page:PAGE,website:$('gWeb').value}),redirect:'follow',signal:ctl.signal})
+  .then(x=>x.json()).then(d=>{if(d&&d.ok)open();else{$('gSend').disabled=false;$('gSend').textContent='Enter · دخول';msg('Please check your details. · راجع بياناتك من فضلك.')}})
+  .catch(()=>open()); // never lock visitors out if the connection fails
+};})();</script><script src="ssh-quickstart.js?v=5"></script>
+</body></html>
