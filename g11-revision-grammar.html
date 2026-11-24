@@ -317,6 +317,9 @@ body.gated{overflow:hidden}
 #dlplan[hidden]{display:none}
 .vt tr.vg th{background:light-dark(#F6CDB0,#5a3a26);text-align:center;font-size:16px}
 .vt mark{background:#FFF200;color:#14244A;padding:0 6px;font-weight:700}
+.bc.bt{grid-column:1/-1;border-inline-start:0!important;border-top:1px solid var(--line)}
+.bt .vt,.bt .wft{margin:0}
+@media(max-width:600px){.tl li{flex-direction:column;align-items:flex-end;gap:3px;padding-bottom:6px;border-bottom:1px dashed color-mix(in srgb,var(--gold) 45%,transparent)}.tl li:last-child{border-bottom:0}.tc{order:1;flex:none;width:100%}.tg{order:2;max-width:100%;flex:none}.tarr{display:inline-block;transform:rotate(-90deg)}.ta{font-size:13.5px}}
 </style><style id="ssh-submit">
 .ssh-det{border:2px solid #1e6fd9;background:#f3f7fc;border-radius:14px;padding:16px;margin:12px 0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#14244a}
 .ssh-det h3{margin:0 0 4px;font-size:1.05rem}
@@ -578,7 +581,7 @@ function secHTML(sec,si){
     const bank=g.bank?`<div class="bank" aria-label="Word box">${g.bank.map(w=>`<button class="wb" data-w="${esc(w)}">${esc(w)}</button>`).join('')}</div>`:'';
     return `<div class="grp" data-g="${sec.id}-${gi}"><div class="gh"><h3>${g.title}</h3><span class="qt">${QT[t]}</span>${g.note?`<span class="sc">${g.note}</span>`:''}${bank}</div><ol class="items">${items}</ol></div>`;
   }).join('');
-  const bar=sec.bar?`<div class="rbar"><div class="bc"><p class="bh">The rule</p>${sec.bar.rule}</div><div class="bc"><p class="bh">Examples <span class="lg"><i class="hk">keyword</i> <i class="hv">verb form</i> <i class="h2">V2</i> <i class="hn">noun</i></span></p>${sec.bar.ex.map(x=>`<p class="bx">${x}</p>`).join('')}</div><div class="bc ar" dir="rtl"><p class="bh">Helping tips – إرشادات مساعدة</p><ul class="tl">${sec.bar.ar.map(x=>`<li><span class="tg"><span class="ta">${x[0]}</span><span class="tarr">→</span></span><span class="tc" dir="rtl">${x[1]} <span class="tdots">......</span></span></li>`).join('')}</ul></div></div>`:'';
+  const bar=sec.bar?`<div class="rbar"><div class="bc"><p class="bh">The rule</p>${sec.bar.rule}</div><div class="bc"><p class="bh">Examples <span class="lg">${(sec.bar.lg||[["hk","keyword"],["hv","verb form"],["h2","V2"],["hn","noun"]]).map(x=>`<i class="${x[0]}">${x[1]}</i>`).join(" ")}</span></p>${sec.bar.ex.map(x=>`<p class="bx">${x}</p>`).join('')}</div>${sec.bar.table?`<div class="bc bt">${sec.bar.table}</div>`:""}<div class="bc ar" dir="rtl"><p class="bh">Helping tips – إرشادات مساعدة</p><ul class="tl">${sec.bar.ar.map(x=>`<li><span class="tg"><span class="ta">${x[0]}</span><span class="tarr">→</span></span><span class="tc" dir="rtl">${x[1]} <span class="tdots">......</span></span></li>`).join('')}</ul></div></div>`:'';
   const learn=bar||(sec.rule?`<div class="learn${sec.wide?' full':''}"><div class="rule"><h3>${sec.ruleTitle||'The rule'}</h3>${sec.rule}</div><div class="tip"><h3>Smart tip</h3>${sec.tip}</div></div>`:(sec.intro||''));
   return `<section class="band topic" id="${sec.id}"><div class="wrap"><header class="th"><span class="num">${sec.num}</span><div><h2>${sec.title}</h2>${sec.ar?`<div class="ar" dir="rtl">${sec.ar}</div>`:''}</div>${sec.ref?`<span class="ref">${sec.ref}</span>`:'<span></span>'}<div class="meter"><i></i></div><span class="sc"></span></header>${learn}${groups}<div class="result" id="r-${sec.id}"></div></div></section>`;
 }
@@ -740,27 +743,37 @@ function planDoc(){
   const rows=D.sections.map(sec=>{
     const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length,ans=ids.filter(i=>st(i).r).length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
     totM+=m;totN+=N;const L=lvl(m/N);
-    return `<tr><td>${esc(sec.title)}<div class="a">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b>${ans<N?`<div class="s">${N-ans} not answered</div>`:''}</td><td class="c" style="color:${L[2]}"><b>${ans<N?'—':L[0]}</b><div class="a">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and redo the wrong questions'}</td></tr>`}).join('');
+    return `<tr><td>${esc(sec.title)}<div class="a">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b>${ans<N?`<div class="s">${N-ans} not answered</div>`:''}</td><td class="c" ><b>${ans<N?'—':L[0]}</b><div class="a">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and redo the wrong questions'}</td></tr>`}).join('');
   const wrong=ORDER.filter(i=>{const s=st(i);return s.r&&(s.r!=='ok'||s.miss)});
   const wl=wrong.map((i,k)=>{const it=IT[i],s=st(i);const you=s.r==='shown'?'(answer shown)':s.r==='ok'?'right after a retry':esc(it.t==='mcq'?it.o[s.v]:(s.v||''));
     return `<tr><td class="c">${k+1}</td><td>${esc(SEC[it.sec].short)}</td><td>${esc(strip(it.q).replace(/___/g,'______'))}${it.kw?` (${esc(it.kw)})`:''}</td><td class="x">${you}</td><td class="o">${esc(ansText(it))}</td></tr>`}).join('');
   const today=new Date().toLocaleDateString('en-GB');
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remedial plan – ${esc(D.name)}</title><style>
-@page{size:A4;margin:12mm}body{font:13px/1.45 Arial,sans-serif;color:#14244A;margin:0 auto;max-width:190mm}
-.hdr{width:100%;display:block}h1{font-size:20px;margin:6px 0 2px;text-align:center}.sub{text-align:center;margin:0 0 10px;color:#46536E}
-.a{font-family:Arial,sans-serif;direction:rtl;color:#46536E;font-size:12px}.s{font-size:11px;color:#c4362b}
-.info{display:flex;gap:16px;margin:10px 0 12px}.info div{flex:1;border-bottom:1px solid #14244A;padding:14px 0 2px}
-table{width:100%;border-collapse:collapse;margin:6px 0 14px}th,td{border:1px solid #9aa6bd;padding:5px 7px;vertical-align:top;text-align:left}
-th{background:#F3F7FC}td.c{text-align:center}td.x{color:#c4362b}td.o{color:#178a5a;font-weight:bold}
-.tot{display:flex;justify-content:space-between;align-items:center;border:2px solid #14244A;border-radius:8px;padding:8px 14px;margin:8px 0}
-.tot b{font-size:22px}h2{font-size:15px;margin:14px 0 4px}
-.sig{display:flex;gap:30px;margin-top:22px}.sig div{flex:1;border-top:1px solid #14244A;padding-top:4px;text-align:center}
-.pb{display:block;margin:12px auto;padding:10px 22px;font-size:15px;background:#1E6FD9;color:#fff;border:0;border-radius:8px;cursor:pointer}
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remedial plan – ${esc(D.name)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Cairo:wght@500;700&display=swap" rel="stylesheet"><style>
+@page{size:A4;margin:12mm}*{box-sizing:border-box}
+body{font:12.5px/1.5 Lexend,Arial,sans-serif;color:#14244A;background:#fff;margin:0 auto;max-width:186mm}
+.hdr{width:100%;display:block;margin-bottom:4px}
+h1{font-size:19px;margin:6px 0 0;text-align:center;font-weight:700}
+.a{font-family:Cairo,Arial,sans-serif;direction:rtl;font-weight:600}
+td .a,th .a{display:block;font-size:11px;color:#46536E;font-weight:500}
+.sub{text-align:center;margin:2px 0;color:#46536E;font-size:12px}
+.sub.a{font-size:14px;color:#14244A}
+.s{font-size:10.5px;color:#46536E}
+.info{display:flex;gap:18px;margin:14px 0 10px}.info div{flex:1;border-bottom:1px solid #14244A;padding:12px 0 3px}
+table{width:100%;border-collapse:collapse;margin:4px 0 12px}
+th,td{border-bottom:1px solid #c9d2e0;padding:5px 6px;vertical-align:top;text-align:left}
+th{font-size:11px;color:#46536E;font-weight:600;border-bottom:1.5px solid #14244A}
+td.c{text-align:center}td.x{color:#b42318;text-decoration:line-through}td.o{color:#0b7a48;font-weight:700}
+.tot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #14244A;border-bottom:1.5px solid #14244A;padding:6px 2px;margin:8px 0}
+.tot b{font-size:20px}
+h2{font-size:13.5px;margin:14px 0 2px;font-weight:700}
+.sig{display:flex;gap:26px;margin-top:26px}.sig div{flex:1;border-top:1px solid #14244A;padding-top:4px;text-align:center;font-size:11.5px}
+.pb{display:block;margin:12px auto;padding:9px 22px;font:600 14px Lexend,sans-serif;background:#1E6FD9;color:#fff;border:0;border-radius:8px;cursor:pointer}
 @media print{.pb{display:none}}</style></head><body>
 <img class="hdr" src="${window.HDR||''}" alt="">
-<h1>Remedial Plan – ${esc(D.name)} <span class="a" style="font-size:16px">الخطة العلاجية</span></h1>
-<p class="sub a" style="font-size:15px;color:#14244A;font-weight:bold;text-align:center;margin:2px 0">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p><p class="sub">Grade 11 English · End of Semester 1 · Smart Students Hub</p>
-<div class="info"><div>Student name / اسم الطالب: <b>${esc(who().name)}</b></div><div>Class / الصف: <b>${esc(who().cls)}</b></div><div>${M.done?`Finished on / تاريخ الإنجاز: <b>${fmtD(M.done)}</b>`:`Not finished yet / لم يكتمل بعد<br><small>Started: ${M.start?fmtD(M.start):"—"} · Printed: ${today}</small>`}</div></div>
+<h1>Remedial Plan – ${esc(D.name)} · <span class="a">الخطة العلاجية</span></h1>
+<p class="sub a">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p><p class="sub">Grade 11 English · End of Semester 1 · Smart Students Hub</p>
+<div class="info"><div>Student name / اسم الطالب: <b><bdi>${esc(who().name)}</bdi></b></div><div>Class / الصف: <b><bdi dir="ltr">${esc(who().cls)}</bdi></b></div><div>${M.done?`Finished on / تاريخ الإنجاز: <b>${fmtD(M.done)}</b>`:`Not finished yet / لم يكتمل بعد<br><small>Started: ${M.start?fmtD(M.start):"—"} · Printed: ${today}</small>`}</div></div>
 <div class="tot"><span>Total mark (right the first time) / الدرجة الكلية</span><b>${totM} / ${totN}</b></div>
 <h2>1. Result by topic / النتيجة حسب الموضوع</h2>
 <table><tr><th>Topic</th><th>Mark</th><th>Result</th><th>What to do next</th></tr>${rows}</table>
