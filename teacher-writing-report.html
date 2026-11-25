@@ -119,6 +119,11 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 <label for="q" id="qLabel">Find a student · ابحث عن طالب</label>
 <div class="row"><input type="text" id="q" placeholder="Name, email or class · الاسم أو البريد أو الصف"><button id="go">🔎 Search · بحث</button></div>
 <p class="mute" style="margin:6px 0 0">If the same student used more than one email or mobile, tick all their entries to combine them in one report. · إذا استخدم الطالب أكثر من بريد أو جوال، حدّد كل سجلاته لدمجها في تقرير واحد.</p>
+<div data-for="remedial" class="csvbox" style="margin:10px 0 0;padding:10px 12px;border:1.5px dashed #b8c9d9;border-radius:10px">
+<label for="csvFile" style="margin:0 0 4px">Or load the Google sheet (CSV) · أو حمّل ملف الجدول (CSV)</label>
+<p class="mute" style="margin:0 0 6px">Google sheet → tab <b>Submissions</b> → File → Download → CSV. Use this when a student does not appear in the search. Today's results are also saved online so they appear in the search afterwards. · من جدول Google: ورقة <b>Submissions</b> ← ملف ← تنزيل ← CSV. استخدمه إذا لم يظهر الطالب في البحث.</p>
+<input type="file" id="csvFile" accept=".csv,text/csv">
+</div>
 <div class="msg" id="sMsg" role="status"></div>
 <ul class="students" id="students"></ul>
 <div id="optsBox" hidden>
@@ -203,24 +208,90 @@ if (tkey()) unlock(tkey(), true);
 
 /* ---------- search ---------- */
 var found = [];
+function showFound(list) {
+  found = list;
+  var unit = TYPE === 'writing' ? ' course(s) · ' : TYPE === 'workshops' ? ' workshop(s)/check(s) · ' : TYPE === 'remedial' ? ' section(s) · ' : ' test(s) · ';
+  $('students').innerHTML = found.map(function (s, i) {
+    return '<li><input type="checkbox" id="s' + i + '" data-i="' + i + '"><label for="s' + i + '" style="margin:0;font-weight:500"><b>' + esc(s.name) + '</b> · ' + esc(s.cls || '') +
+      (s.csv ? ' <span style="color:#0b6b8a">(sheet file · من ملف الجدول)</span>' : '') +
+      '<small>' + (s.email ? esc(s.email) + ' · ' : 'mobile on file · ') + s.courses + unit + s.rows + ' submissions · last ' + new Date(s.last).toLocaleDateString('en-GB') + '</small></label></li>';
+  }).join('');
+  $('sMsg').className = 'msg ' + (found.length ? 'ok' : 'no');
+  $('sMsg').textContent = found.length ? 'Tick the ' + TYPES[TYPE].who + ', then press Build report. · حدّد الاسم ثم اضغط «إنشاء التقرير».' : 'No records found for this report. · لا توجد سجلات لهذا التقرير.';
+  $('optsBox').hidden = !found.length;
+}
+
 $('go').onclick = function () {
   var q = $('q').value.trim(); if (q.length < 2) return;
   $('go').disabled = true; $('sMsg').textContent = '';
   call({ p_key: tkey(), p_query: q }).then(function (d) {
     if (!d || !d.ok) { $('sMsg').className = 'msg no'; $('sMsg').textContent = ERR[d && d.error] || 'Search failed. · فشل البحث.'; return; }
-    found = d.students || [];
-    var unit = TYPE === 'writing' ? ' course(s) · ' : TYPE === 'workshops' ? ' workshop(s)/check(s) · ' : ' test(s) · ';
-    $('students').innerHTML = found.map(function (s, i) {
-      return '<li><input type="checkbox" id="s' + i + '" data-i="' + i + '"><label for="s' + i + '" style="margin:0;font-weight:500"><b>' + esc(s.name) + '</b> · ' + esc(s.cls || '') +
-        '<small>' + (s.email ? esc(s.email) + ' · ' : 'mobile on file · ') + s.courses + unit + s.rows + ' submissions · last ' + new Date(s.last).toLocaleDateString('en-GB') + '</small></label></li>';
-    }).join('');
-    $('sMsg').className = 'msg ' + (found.length ? 'ok' : 'no');
-    $('sMsg').textContent = found.length ? 'Tick the ' + TYPES[TYPE].who + ', then press Build report. · حدّد الاسم ثم اضغط «إنشاء التقرير».' : 'No records found for this report. · لا توجد سجلات لهذا التقرير.';
-    $('optsBox').hidden = !found.length;
+    showFound(d.students || []);
   }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
     .then(function () { $('go').disabled = false; });
 };
 $('q').onkeydown = function (e) { if (e.key === 'Enter') $('go').click(); };
+
+/* ---------- Remedial tab: load the Google sheet export (CSV) ---------- */
+function csvRows(text) {
+  var rows = [], row = [], f = '', q = false; text = text.replace(/^\uFEFF/, '');
+  for (var i = 0; i < text.length; i++) { var c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; } else if (c !== '\r') f += c; }
+  if (f !== '' || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+function sheetDate(s) {
+  var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})[ T]+(\d{1,2}):(\d{2})(?::(\d{2}))?/.exec(String(s || '').trim());
+  if (m) return new Date(Date.UTC(+m[3], +m[2] - 1, +m[1], +m[4] - 3, +m[5], +(m[6] || 0))).toISOString(); /* sheet times are Qatar time (UTC+3) */
+  var d = new Date(s); return isNaN(d) ? null : d.toISOString();
+}
+$('csvFile').onchange = function () {
+  var file = this.files && this.files[0]; if (!file) return;
+  var rd = new FileReader();
+  rd.onload = function () {
+    var R = csvRows(String(rd.result)); if (R.length < 2) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'This file is empty. · الملف فارغ.'; return; }
+    var H = R[0].map(function (h) { return h.trim().toLowerCase(); }), col = function (names) { for (var i = 0; i < names.length; i++) { var j = H.indexOf(names[i]); if (j >= 0) return j; } return -1; };
+    var C = { ts: col(['timestamp']), ref: col(['reference', 'ref']), test: col(['test']), name: col(['student name', 'name']), cls: col(['class']), email: col(['email']), phone: col(['phone']),
+      score: col(['score']), max: col(['max']), percent: col(['percent']), breakdown: col(['section breakdown', 'breakdown']), topic: col(['writing topic', 'topic']), answers: col(['answers']) };
+    var v = function (r, k) { return C[k] >= 0 ? String(r[C[k]] == null ? '' : r[C[k]]).trim() : ''; };
+    var groups = {}, order = [];
+    R.slice(1).forEach(function (r) {
+      var test = v(r, 'test'); if (!REM_RE.test(test)) return;
+      var email = v(r, 'email').toLowerCase(), phone = v(r, 'phone').replace(/[^0-9+]/g, ''), name = v(r, 'name').replace(/\s+/g, ' ');
+      var key = email || phone.replace(/\D/g, '') || name.toLowerCase(); if (!key) return;
+      var row = { ref: v(r, 'ref'), ts: sheetDate(v(r, 'ts')), test: test, name: name, cls: v(r, 'cls'), email: email, phone: phone, kind: 'submission',
+        score: v(r, 'score') === '' ? null : +v(r, 'score'), max: v(r, 'max') === '' ? null : +v(r, 'max'), percent: v(r, 'percent').replace('%', ''),
+        topic: v(r, 'topic'), breakdown: v(r, 'breakdown'), answers: v(r, 'answers'), essay: '' };
+      if (!row.ts) return;
+      if (!groups[key]) { groups[key] = []; order.push(key); }
+      groups[key].push(row);
+    });
+    if (!order.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'No remedial revision results in this file. Download the Submissions tab. · لا توجد نتائج للمراجعة العلاجية في الملف.'; return; }
+    var list = [], firsts = [];
+    order.forEach(function (k) {
+      var rows = groups[k].sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); }), secs = {};
+      rows.forEach(function (r) { var m = r.test.match(REM_RE), sk = m[1].toLowerCase() + m[2]; if (!secs[sk]) { secs[sk] = 1; firsts.push(r); } });
+      var shown = rows.map(function (r) { var c = {}; for (var x in r) if (x !== 'phone') c[x] = r[x]; return c; });
+      list.push({ id: 'csv:' + k, csv: shown, name: longestName(rows), cls: rows[rows.length - 1].cls, email: rows.filter(function (r) { return r.email; }).map(function (r) { return r.email; })[0] || '',
+        rows: rows.length, courses: Object.keys(secs).length, last: rows[rows.length - 1].ts });
+    });
+    var q = $('q').value.trim().toLowerCase();
+    if (q.length > 1) list = list.filter(function (s) { return s.name.toLowerCase().indexOf(q) >= 0 || (s.cls || '').toLowerCase().indexOf(q) === 0 || s.email.indexOf(q) >= 0; });
+    list.sort(function (a, b) { return (a.cls || '').localeCompare(b.cls || '', undefined, { numeric: true }) || a.name.localeCompare(b.name); });
+    showFound(list);
+    /* keep today's first attempts online too (the store accepts results from the last day only) */
+    var day = Date.now() - 864e5, keep = firsts.filter(function (r) { return /^SSH-\d{6}-\d{4}$/.test(r.ref) && new Date(r.ts).getTime() > day; }), saved = 0;
+    if (keep.length) Promise.all(keep.map(function (r) {
+      return fetch(RPC.replace(/teacher_report$/, 'record_result'), { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY },
+        body: JSON.stringify({ p: { ref: r.ref, test: r.test, name: r.name, cls: r.cls, email: r.email, phone: r.phone, score: r.score, max: r.max, percent: r.percent, cert_kind: '', topic: r.topic, essay: '', answers: r.answers, breakdown: r.breakdown } }) })
+        .then(function (x) { return x.json(); }).then(function (d) { if (d && d.ok) saved++; }).catch(function () {});
+    })).then(function () { if (saved) { $('sMsg').className = 'msg ok'; $('sMsg').textContent += ' · ' + saved + ' result(s) from the last day saved online. · تم حفظ ' + saved + ' نتيجة على الإنترنت.'; } });
+  };
+  rd.readAsText(file, 'utf-8');
+  this.value = '';
+};
+
 
 /* ---------- course data ---------- */
 var COURSES = {
@@ -268,12 +339,15 @@ function pctTxt(p) { return p == null ? '—' : p + '%'; }
 
 /* ---------- build ---------- */
 $('build').onclick = function () {
-  var ids = [].slice.call(document.querySelectorAll('#students input:checked')).map(function (x) { return found[+x.dataset.i].id; });
-  if (!ids.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Tick a student first. · حدّد طالبًا أولًا.'; return; }
+  var picked = [].slice.call(document.querySelectorAll('#students input:checked')).map(function (x) { return found[+x.dataset.i]; });
+  var ids = picked.filter(function (s) { return !s.csv; }).map(function (s) { return s.id; });
+  var local = []; picked.forEach(function (s) { if (s.csv) local = local.concat(s.csv); });
+  if (!picked.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Tick a student first. · حدّد طالبًا أولًا.'; return; }
   $('build').disabled = true;
   Promise.all(ids.map(function (id) { return call({ p_key: tkey(), p_student: id }); })).then(function (res) {
-    var rows = [];
-    res.forEach(function (d) { if (d && d.ok) rows = rows.concat(d.rows || []); });
+    var rows = local.slice(), seen = {};
+    rows.forEach(function (r) { seen[r.ref] = 1; });
+    res.forEach(function (d) { if (d && d.ok) (d.rows || []).forEach(function (r) { if (!seen[r.ref]) rows.push(r); }); });
     if (!rows.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'No writing work found. · لا توجد أعمال.'; return; }
     rows.sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); });
     if (TYPE === 'writing') render(rows.map(parseRow));
