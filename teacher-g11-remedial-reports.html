@@ -219,9 +219,9 @@ function sel(){const n=document.querySelectorAll('.pick:checked').length;$('#pse
 ['#fcls','#fst','#fq'].forEach(id=>$(id).addEventListener('input',render));
 $('#all').addEventListener('change',e=>{document.querySelectorAll('.pick').forEach(c=>c.checked=e.target.checked);sel()});
 $('#rows').addEventListener('change',e=>{if(e.target.classList.contains('pick'))sel()});
-$('#rows').addEventListener('click',e=>{const b=e.target.closest('.one');if(b)print([STU[+b.dataset.i]])});
-$('#psel').addEventListener('click',()=>print([...document.querySelectorAll('.pick:checked')].map(c=>STU[+c.dataset.i])));
-$('#pall').addEventListener('click',()=>print(shown()));
+$('#rows').addEventListener('click',e=>{const b=e.target.closest('.one');if(b)printReports([STU[+b.dataset.i]])});
+$('#psel').addEventListener('click',()=>printReports([...document.querySelectorAll('.pick:checked')].map(c=>STU[+c.dataset.i])));
+$('#pall').addEventListener('click',()=>printReports(shown()));
 
 /* one report per student */
 function wrongLines(rec){return String(rec.answers||'').split('\n').map(l=>{const m=/^Q\d+:\s*(.*?)\s*\|\s*first answer:\s*(.*?)\s*✗\s*\(key\s*(.*?)\)/.exec(l);return m?{q:m[1],you:m[2],key:m[3]}:null}).filter(Boolean)}
@@ -248,7 +248,10 @@ ${W.length?`<h2>Questions answered wrong the first time · أسئلة أخطأ �
 <div class="two" style="margin-top:12px"><div class="stamp">School stamp · ختم المدرسة</div><div class="stamp">Date received · تاريخ الاستلام</div></div>
 <p class="foot">Smart Students Hub · Results from the online remedial revision (first attempt of each section).</p></div></section>`;
 }
-function print(list){if(!list.length)return;$('#print').innerHTML=list.map(report).join('');setTimeout(()=>window.print(),300)}
+function printReports(list){if(!list.length)return;$('#print').innerHTML=list.map(report).join('');
+  const cls=[...new Set(list.map(s=>s.cls))];
+  const name=(list.length===1?['Remedial plan report',list[0].name,list[0].cls]:['Remedial plan reports',cls.length===1?'Class '+cls[0]:list.length+' students',new Date().toLocaleDateString('en-GB').replace(/\//g,'-')]).join(' - ').replace(/[\\/:*?"<>|]+/g,'-');
+  const old=document.title;document.title=name;window.addEventListener('afterprint',()=>{document.title=old},{once:true});setTimeout(()=>window.print(),300)}
 
 /* sample data (fictitious) */
 $('#demo').addEventListener('click',()=>{
