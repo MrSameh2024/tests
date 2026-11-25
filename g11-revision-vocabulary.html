@@ -555,7 +555,8 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 const MK=KEY+'-meta';let M={};try{M=JSON.parse(localStorage.getItem(MK)||'{}')||{}}catch(e){M={}}
 const saveM=()=>{try{localStorage.setItem(MK,JSON.stringify(M))}catch(e){}};
 const fmtD=t=>new Date(t).toLocaleDateString('en-GB');
-const who=()=>SITE?{name:(document.getElementById('sshName')||{}).value||'',cls:(document.getElementById('sshClass')||{}).value||''}:{name:M.name||'',cls:M.cls||''};
+const regI=()=>{try{return JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){return {}}};
+const who=()=>SITE?{name:(document.getElementById('sshName')||{}).value||regI().name||'',cls:(document.getElementById('sshClass')||{}).value||regI().cls||''}:{name:M.name||'',cls:M.cls||''};
 const ready=()=>SITE?(typeof window.sshValidate!=='function'||window.sshValidate('sshName','sshClass')):!!M.name;
 const IT={},ORDER=[];
 D.sections.forEach(sec=>sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{
@@ -667,7 +668,7 @@ document.addEventListener('click',e=>{
   }
   if(b.id==='reset'){
     if(b.dataset.arm!=='1'){b.dataset.arm='1';b.textContent='Tap again to clear all answers';setTimeout(()=>{b.dataset.arm='';b.textContent='Start again (clear my answers)'},4000);return}
-    S={};save();M.start=null;M.done=null;M.sent={};saveM();$$('.inp').forEach(i=>i.value='');ORDER.forEach(paint);score();b.dataset.arm='';b.textContent='Start again (clear my answers)';window.scrollTo(0,0);
+    S={};save();M.start=null;M.done=null;M.sent={};M.sb={};saveM();$$('.inp').forEach(i=>i.value='');ORDER.forEach(paint);score();b.dataset.arm='';b.textContent='Start again (clear my answers)';window.scrollTo(0,0);
   }
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('inp')){e.preventDefault();const all=$$('.inp').filter(x=>!x.readOnly&&x.offsetParent);const n=all[all.indexOf(e.target)+1];if(n)n.focus()}});
@@ -743,32 +744,47 @@ function score(){
 
 
 
-/* ---------- site: also keep each result in the teachers' report store (same as ssh-cert.js keepOnline, no certificate) ---------- */
-if(SITE&&window.fetch&&!window.__sshRemWrap){window.__sshRemWrap=1;const of=window.fetch;
-  window.fetch=function(url,opt){const p=of.apply(this,arguments);
-    try{const u=String(url&&url.url||url);const b=opt&&typeof opt.body==='string'&&/script\.google\.com\/macros\//.test(u)?JSON.parse(opt.body):null;
-      if(b&&b.type==='submission'&&/^G11 S1 Remedial Revision/.test(b.test||''))p.then(r=>r.clone().json()).then(d=>{
-        if(!d||!d.ok||!/^SSH-\d{6}-\d{4}$/.test(d.ref||''))return;
-        of.call(window,'https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/record_result',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json',apikey:'sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_'},
-          body:JSON.stringify({p:{ref:d.ref,test:b.test,name:b.name,cls:b.cls,email:b.email,phone:b.phone,score:b.score,max:b.max,percent:b.percent,cert_kind:'',topic:b.topic||'',essay:'',answers:b.answers||'',breakdown:b.breakdown||''}})}).catch(()=>{});
-      }).catch(()=>{});}catch(e){}
-    return p};
+/* ---------- site: send each finished section to the teacher ----------
+   1) straight to the teachers' report store (Supabase), with a reference made here, so the
+      "Remedial plan" tab of the teacher report tool never depends on the Google-sheet reply;
+   2) to the teacher's Google sheet (same system as the mock tests).
+   Sections already sent from this device but never stored online are sent again when the page opens. */
+const SB='https://jstszuaxqpyaubatjqav.supabase.co/rest/v1/rpc/record_result',SBK='sb_publishable_53u5Doc-GwQJS88zM1IpzA_P58NZv6_';
+function contact(){
+  let r={};try{r=JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){}
+  const v=id=>{const x=document.getElementById(id);return x?String(x.value||'').trim():''};
+  const em=v('sshEmail')||r.email||'',ph=(v('sshPhone')||r.phone||'').replace(/[^0-9+]/g,'');
+  return {email:/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(em)?em.toLowerCase():'',phone:ph.replace(/\D/g,'').length>=8?ph:''};
 }
-/* ---------- site: send each finished section to the teacher (same system as the mock tests) ---------- */
-function sendSec(sec,ids){
-  M.sent=M.sent||{};if(M.sent[sec.id]||typeof window.sshSend!=='function')return;
-  const st=i=>S[i]||{};if(!ids.every(i=>st(i).r))return;
-  M.sent[sec.id]=Date.now();saveM();
+function secPayload(sec,ids){
+  const st=i=>S[i]||{};
   const N=ids.length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
-  const lines=[];let n=0;sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{n++;const s=st(it.id);
+  const lines=[];let n=0;sec.groups.forEach(g=>g.items.forEach(it=>{n++;const s=st(it.id);
     const first=s.first!=null?(it.t==='mcq'?it.o[s.first]:s.first):(it.t==='mcq'?it.o[s.v]:s.v);
     lines.push('Q'+n+': '+strip(it.q).replace(/___/g,'____')+' | first answer: '+(first==null||first===''?'-':first)+(s.r==='ok'&&!s.miss?' ✓':' ✗ (key '+ansText(it)+')'))}));
   const w=who();
+  return {test:'G11 S1 Remedial Revision – '+D.name+': '+sec.num+' '+sec.title,name:w.name.trim(),cls:w.cls.trim(),score:m,max:N,percent:Math.round(m/N*100),
+    breakdown:'Right at the first check '+m+'/'+N+'; wrong '+(N-m)+' (the student then corrects them on the page). Remedial revision worksheet (Units 3–5).',
+    topic:'Remedial plan – '+D.name+' revision',essay:'',answers:lines.join('\n')};
+}
+function keepOnline(sec,ids){
+  M.sb=M.sb||{};if(M.sb[sec.id]||!window.fetch)return;
+  const b=secPayload(sec,ids),c=contact();if(!b.name||(!c.email&&!c.phone))return;
+  const day=new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Qatar'}).replace(/-/g,'').slice(2);
+  const ref='SSH-'+day+'-'+String(1000+Math.floor(Math.random()*9000));
+  fetch(SB,{method:'POST',headers:{'Content-Type':'application/json',apikey:SBK},
+    body:JSON.stringify({p:{ref,test:b.test,name:b.name,cls:b.cls,email:c.email,phone:c.phone,score:b.score,max:b.max,percent:b.percent,cert_kind:'',topic:b.topic,essay:'',answers:b.answers,breakdown:b.breakdown}})})
+   .then(r=>r.json()).then(d=>{if(d&&d.ok){M.sb[sec.id]=ref;saveM()}}).catch(()=>{});
+}
+if(SITE)window.addEventListener('load',()=>setTimeout(()=>D.sections.forEach(sec=>sendSec(sec,ORDER.filter(i=>IT[i].sec===sec.id))),2500));
+function sendSec(sec,ids){
+  const st=i=>S[i]||{};if(!ids.every(i=>st(i).r))return;
+  keepOnline(sec,ids);
+  M.sent=M.sent||{};if(M.sent[sec.id]||typeof window.sshSend!=='function')return;
+  M.sent[sec.id]=Date.now();saveM();
   let box=document.getElementById('send-'+sec.id);
   if(!box){box=document.createElement('div');box.id='send-'+sec.id;box.className='sendbox';document.getElementById('r-'+sec.id).after(box)}
-  window.sshSend(box,{test:'G11 S1 Remedial Revision – '+D.name+': '+sec.num+' '+sec.title,name:w.name.trim(),cls:w.cls.trim(),score:m,max:N,percent:Math.round(m/N*100),
-    breakdown:'Right at the first check '+m+'/'+N+'; wrong '+(N-m)+' (the student then corrects them on the page). Remedial revision worksheet (Units 3–5).',
-    topic:'Remedial plan – '+D.name+' revision',essay:'',answers:lines.join('\n')});
+  window.sshSend(box,secPayload(sec,ids));
 }
 
 /* ---------- printable plan (download) ---------- */
