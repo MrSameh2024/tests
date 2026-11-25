@@ -74,7 +74,7 @@ ul.students small{display:block;color:#5b6780}
 table.st{width:100%;border-collapse:collapse;font-size:9pt;margin:4px 0}
 table.st th{background:var(--navy);color:#fff;padding:4px 5px;text-align:left;font-weight:700}
 table.st td{border-bottom:1px solid var(--line);padding:4px 5px;vertical-align:top}
-table.st td:nth-child(2){white-space:nowrap}
+table.st:not([style]) td:nth-child(2){white-space:nowrap}
 table.st tr:nth-child(even) td{background:#fafbfd}
 .up{color:var(--ok);font-weight:700}.pend{color:var(--warn);font-weight:600}
 .chart{margin:6px 0}
@@ -103,7 +103,7 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 <main class="tool">
 <div class="card">
 <header class="top"><img src="ssh-logo.png" alt=""><div><b>SMART STUDENTS HUB · TEACHER TOOL</b><h1 id="toolTitle">Writing Progress Report · <span class="ar" style="display:inline">تقرير تقدم الطالب في الكتابة</span></h1></div></header>
-<div class="tabs" id="tabs" role="tablist"><button type="button" data-t="writing">✍️ Writing · الكتابة</button><button type="button" data-t="exams">📝 Exams · الاختبارات</button><button type="button" data-t="ielts">🎓 IELTS</button><button type="button" data-t="workshops">👩‍🏫 Workshops · الورش</button></div>
+<div class="tabs" id="tabs" role="tablist"><button type="button" data-t="writing">✍️ Writing · الكتابة</button><button type="button" data-t="exams">📝 Exams · الاختبارات</button><button type="button" data-t="ielts">🎓 IELTS</button><button type="button" data-t="remedial">📘 Remedial plan · الخطة العلاجية</button><button type="button" data-t="workshops">👩‍🏫 Workshops · الورش</button></div>
 <p class="mute" style="margin:8px 0 0" id="toolIntro"></p>
 </div>
 
@@ -129,6 +129,7 @@ table.st tr:nth-child(even) td{background:#fafbfd}
 <div class="opts">
 <label><input type="checkbox" id="optEmail" checked> Show the student's email · إظهار بريد الطالب</label>
 <label data-for="writing"><input type="checkbox" id="optShort" checked> Include short answers (words, verbs, linkers) · إظهار الإجابات القصيرة</label>
+<label data-for="remedial"><input type="checkbox" id="optRemAll"> Include every question, not only the mistakes · إظهار كل الأسئلة وليس الأخطاء فقط</label>
 <label data-for="exams ielts workshops"><input type="checkbox" id="optSheets"> Include answer sheets (best attempt) · إرفاق ورقة الإجابات (أفضل محاولة)</label>
 <label data-for="writing"><input type="checkbox" id="optAll"> Include every attempt, not only the best · إظهار كل المحاولات</label>
 </div>
@@ -159,10 +160,12 @@ var TYPES = {
     intro: 'All tests and mock exams: attempts, first and best scores, skills breakdown and areas to develop. · كل الاختبارات: المحاولات وأول وأفضل درجة وتحليل المهارات.' },
   ielts: { en: 'IELTS Progress Report', ar: 'تقرير تقدم الطالب في IELTS', who: 'learner',
     intro: 'IELTS modules, diagnostics and mock tests, with the CEFR placement level as a baseline. · وحدات IELTS والاختبارات التشخيصية والتجريبية مع مستوى تحديد المستوى كنقطة بداية.' },
+  remedial: { en: 'Remedial Plan Report', ar: 'تقرير الخطة العلاجية', who: 'student',
+    intro: 'Grade 11 Semester 1 remedial revision (Grammar and Vocabulary, Units 3–5): mark for every topic, mistakes with the correct answers, comment and signatures. · مراجعة الخطة العلاجية للصف 11 (القواعد والمفردات): درجة كل موضوع والأخطاء مع الإجابات الصحيحة والتعليق والتوقيعات.' },
   workshops: { en: 'Professional Development Record', ar: 'سجل التطوير المهني للمعلم', who: 'teacher',
     intro: 'Workshops attended, quiz results, reflections, action plans, trainer feedback and self-checks. · الورش المحضورة ونتائج الاختبارات والتأملات وخطط العمل وملاحظات المدرب.' }
 };
-var TYPE = (location.search.match(/[?&]type=(writing|exams|ielts|workshops)/) || [])[1] || 'writing';
+var TYPE = (location.search.match(/[?&]type=(writing|exams|ielts|remedial|workshops)/) || [])[1] || 'writing';
 function setType(t) {
   TYPE = t; var T = TYPES[t];
   [].forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.className = b.dataset.t === t ? 'on' : ''; b.setAttribute('aria-selected', b.dataset.t === t); });
@@ -176,7 +179,7 @@ function setType(t) {
 }
 [].forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.onclick = function () { setType(b.dataset.t); if ($('q').value.trim().length > 1 && !$('searchCard').hidden) $('go').click(); }; });
 function call(args) {
-  args.p_type = TYPE;
+  args.p_type = TYPE === 'remedial' ? 'exams' : TYPE;
   return fetch(RPC, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY }, body: JSON.stringify(args) })
     .then(function (r) { return r.json(); });
 }
@@ -275,6 +278,7 @@ $('build').onclick = function () {
     rows.sort(function (a, b) { return new Date(a.ts) - new Date(b.ts); });
     if (TYPE === 'writing') render(rows.map(parseRow));
     else if (TYPE === 'workshops') renderWorkshops(rows);
+    else if (TYPE === 'remedial') renderRemedial(rows);
     else renderExams(rows, TYPE === 'ielts');
   }).catch(function () { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'Could not connect. · تعذّر الاتصال.'; })
     .then(function () { $('build').disabled = false; });
@@ -399,6 +403,54 @@ function render(R) {
   window.scrollTo(0, 0);
 }
 
+
+/* ======================= Grade 11 remedial plan report (revision pages g11-revision-*.html) ======================= */
+var REM_RE = /^G11 S1 Remedial Revision\s*[–-]\s*(Grammar|Vocabulary):\s*(\d+)\s+(.*)$/i;
+var REM = {
+  Grammar: [['Past simple & past progressive', 'الماضي البسيط والمستمر'], ['used to / would', 'العادات في الماضي'], ['was / were going to', 'خطة في الماضي لم تتحقق'], ['Future forms', 'أزمنة المستقبل'], ['Modal verbs', 'الأفعال الناقصة'], ['Conjunctions', 'أدوات الربط'], ['Past perfect', 'الماضي التام'], ['Exam-style practice (mixed)', 'تدريب على نمط الاختبار']],
+  Vocabulary: [['Word formation', 'اشتقاق الكلمة'], ['Prepositional phrases: noun + preposition', 'الأسماء وحروف الجر'], ['Prepositional phrases with in / on', 'تعبيرات مع in و on'], ['Phrasal verbs with get', 'أفعال مركبة مع get'], ['Nature words: the food chain', 'السلسلة الغذائية'], ['Exam-style practice (mixed)', 'تدريب على نمط الاختبار']]
+};
+function remLevel(p) { return p == null ? ['—', ''] : p >= 90 ? ['Excellent', 'ممتاز'] : p >= 70 ? ['Very good', 'جيد جدًا'] : p >= 50 ? ['Good', 'جيد'] : ['Needs more practice', 'يحتاج إلى تدريب']; }
+function remLines(a) {
+  return String(a || '').split('\n').map(function (l) {
+    var m = l.match(/^Q(\d+):\s*(.*?)\s*\|\s*first answer:\s*(.*?)\s*(✓|✗)(?:\s*\(key\s*(.*?)\))?\s*$/);
+    return m ? { n: +m[1], q: m[2], you: m[3], ok: m[4] === '✓', key: m[5] || '' } : null;
+  }).filter(Boolean);
+}
+function renderRemedial(rows) {
+  var R = rows.filter(function (r) { return REM_RE.test(r.test || ''); });
+  if (!R.length) { $('sMsg').className = 'msg no'; $('sMsg').textContent = 'No remedial revision results for this student yet. · لا توجد نتائج للمراجعة العلاجية لهذا الطالب بعد.'; return; }
+  var sec = { Grammar: {}, Vocabulary: {} }, last = null;
+  R.forEach(function (r) { var m = r.test.match(REM_RE), pg = m[1][0].toUpperCase() + m[1].slice(1).toLowerCase(), n = +m[2];
+    if (!sec[pg][n]) sec[pg][n] = r; /* rows come oldest first: keep the first attempt */
+    if (!last || new Date(r.ts) > new Date(last)) last = r.ts; });
+  var all = $('optRemAll').checked, tot = 0, mx = 0, done = 0, weak = [];
+  var pages = ['Grammar', 'Vocabulary'].map(function (pg) {
+    var ps = 0, pm = 0, body = '', mistakes = '';
+    REM[pg].forEach(function (t, i) {
+      var r = sec[pg][i + 1], p = r ? pctOf(r) : null, L = remLevel(p);
+      if (r) { ps += +r.score || 0; pm += +r.max || 0; done++; if (p < 70) weak.push(t[0]); } else weak.push(t[0] + ' (not done)');
+      body += '<tr><td>' + (i + 1) + '. ' + esc(t[0]) + ' <span class="ar" style="display:block;font-size:8.5pt;color:#5a6680">' + t[1] + '</span></td><td>' + (r ? '<b>' + esc(r.score) + ' / ' + esc(r.max) + '</b>' : '—') + '</td><td>' + (r ? L[0] + ' <span class="ar">' + L[1] + '</span>' : 'Not done · لم يُنجز') + '</td><td>' + (r ? fmtDate(r.ts) : '') + '</td></tr>';
+      if (r) remLines(r.answers).forEach(function (q) {
+        if (q.ok && !all) return;
+        mistakes += '<tr><td>' + esc(t[0].replace('Exam-style practice (mixed)', 'Exam practice').replace('Prepositional phrases', 'Prep. phrases').split(':')[0]) + ' Q' + q.n + '</td><td>' + esc(q.q) + '</td><td' + (q.ok ? '' : ' style="color:#b42318;text-decoration:line-through"') + '>' + esc(q.you) + '</td><td style="color:' + (q.ok ? '#0b7a48' : '#d0021b') + ';font-weight:700">' + (q.ok ? '✓' : esc(q.key)) + '</td></tr>';
+      });
+    });
+    tot += ps; mx += pm;
+    return '<h3>' + (pg === 'Grammar' ? 'Grammar · القواعد' : 'Vocabulary · المفردات') + ' <small>' + ps + ' / ' + (pm || '—') + '</small></h3>' +
+      '<table class="st"><thead><tr><th>Topic · الموضوع</th><th>Mark</th><th>Result · النتيجة</th><th>Date</th></tr></thead><tbody>' + body + '</tbody></table>' +
+      (mistakes ? '<p class="sub" style="margin:6px 0 2px"><b>' + (all ? 'Every question · كل الأسئلة' : 'Answers to correct · إجابات للتصحيح') + '</b></p><table class="st" style="table-layout:fixed"><thead><tr><th style="width:17%">Item</th><th style="width:43%">Question · السؤال</th><th style="width:15%">Student · الطالب</th><th style="width:25%">Correct · الصحيح</th></tr></thead><tbody>' + mistakes + '</tbody></table>' : '');
+  }).join('');
+  var p = mx ? Math.round(100 * tot / mx) : null, L = remLevel(p), name = longestName(R), cls = R[R.length - 1].cls || '';
+  var html = '<img src="remedial-header.jpg" alt="" style="width:100%;display:block;margin-bottom:4px">' + repHead('Remedial Plan Report · تقرير الخطة العلاجية') +
+    '<p class="sub ar" style="text-align:center;margin:6px 0 2px;font-weight:700">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p>' +
+    infoTable(R, 'Student', 'الطالب', 'Class · الصف') +
+    kpiBox([[tot + ' / ' + (mx || '—'), 'Total mark', 'الدرجة الكلية'], [p == null ? '—' : p + '%', L[0], L[1]], [done + ' / 14', 'Topics done', 'الموضوعات المنجزة'], [done === 14 ? fmtDate(last) : 'In progress', 'Finished on', 'تاريخ الإنجاز']]) +
+    pages +
+    '<p class="sub" style="margin-top:10px"><b>Topics to revise · موضوعات تحتاج إلى مراجعة:</b> ' + (weak.length ? weak.map(esc).join(' · ') : 'None — all topics 70% or more. · لا يوجد.') + '</p>' +
+    closing(['Teacher · المعلم', 'Student · الطالب', 'Parent · ولي الأمر', 'Head of department · رئيس القسم'], 'Mark = answers right at the first check on the remedial revision pages.');
+  show(html, ['Remedial plan report', name, cls].filter(Boolean).join(' - ').replace(/[\\/:*?"<>|]+/g, '-'));
+}
 /* ======================= shared pieces for the exam, IELTS and workshop reports ======================= */
 function pctOf(r) {
   var sc = r.score == null ? null : +r.score, mx = r.max == null ? null : +r.max;
