@@ -321,6 +321,19 @@ body.gated{overflow:hidden}
 .bt .vt,.bt .wft{margin:0}
 @media(max-width:600px){.tl li{flex-direction:column;align-items:flex-end;gap:3px;padding-bottom:6px;border-bottom:1px dashed color-mix(in srgb,var(--gold) 45%,transparent)}.tl li:last-child{border-bottom:0}.tc{order:1;flex:none;width:100%}.tg{order:2;max-width:100%;flex:none}.tarr{display:inline-block;transform:rotate(-90deg)}.ta{font-size:13.5px}}
 .pvbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:#FFF5DF;color:#14244A;border-bottom:2px solid #E8A317;padding:10px max(5vw,16px);font-size:15px}.pvbar .hbtn{min-height:40px}
+.secchk{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:4px 0 14px;padding:14px 16px;border-radius:14px;background:var(--soft);border:1.5px dashed var(--blue)}
+.secchk[hidden]{display:none}
+.btn.big{min-height:52px;font-size:17px;padding:0 24px}
+.btn.big.corr{background:var(--gold);color:#14244A}
+.cmsg{margin:0;font-weight:600;font-size:15px}
+.item.need{border-color:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 35%,transparent)}
+.item.fixed{border-color:var(--gold)}.item.fixed .n{background:var(--gold);color:#14244A}.item.fixed .fb{background:var(--shbg)}
+.opt.sel{border-color:var(--blue);background:var(--soft);box-shadow:inset 0 0 0 1.5px var(--blue)}.opt.sel b{background:var(--blue);color:#fff}
+.opt:disabled{cursor:default}
+.opt.right.sel{box-shadow:none}
+.fb .yx{color:var(--red);font-weight:700;text-decoration:line-through}
+.fb .todo{font-weight:600;color:var(--ink);background:var(--card);border-radius:8px;padding:6px 10px;margin-top:6px}
+.inp[readonly]{background:transparent;border-color:transparent;border-bottom-color:var(--green)}
 .wbld{color:#fff;text-align:center;padding:clamp(10px,2vw,22px) 4px}
 .wrow{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px}
 .tile{display:inline-block;padding:14px 18px;border-radius:14px;font-size:clamp(20px,3vw,28px);font-weight:700;transition:opacity .35s,transform .35s}
@@ -409,7 +422,7 @@ strategies:{
  all:{title:'How to use this page',visual:[
   {ic:'read',en:'Read',sub:'the word card',ar:'اقرأ البطاقة'},
   {ic:'write',en:'Answer',sub:'Word box? Tap a word.',ar:'أجب عن الأسئلة'},
-  {ic:'check',en:'Check',sub:'<i class="dot g"></i>right <i class="dot r"></i>try again',ar:'اضغط Check'},
+  {ic:'check',en:'Check the section',sub:'then fix the <i class="dot r"></i>red answers',ar:'صحّح القسم ثم صحّح الأخطاء'},
   {ic:'plan',en:'My plan',sub:'see what to revise',ar:'خطتي العلاجية',href:'#plan'}]},
  form:{title:'Word form questions (correct form of the word in brackets)',steps:['Look at the word <b>before</b> the gap: <b>a / an / the / my</b> → you need a <b>noun</b> (-ment, -ion, -ation).','Before a noun, or after <b>is / was / very</b> → you need an <b>adjective</b> (-al, -ive, -y).','Watch the spelling: imagine → imagin<b>ation</b>, benefit → bene<b>ficial</b>, cancel → cancel<b>lation</b>.'],ar:'قبل الفراغ أداة (a / the) ← اسم. قبل اسم أو بعد is ← صفة. انتبه للإملاء.'},
  box:{title:'Word box questions (fill in the gaps)',steps:['Read all the sentences first.','Use the preposition after the gap as a clue: effect <b>on</b>, need <b>for</b>, decrease <b>in</b>, advantage <b>of</b>.','Do the easy ones first. Used words are crossed out for you.','The box may have an extra word you do not need.'],ar:'حرف الجر بعد الفراغ هو مفتاحك، وقد توجد كلمة زائدة في الصندوق.'},
@@ -567,8 +580,8 @@ const blank='<span class="blank" aria-label="gap">____</span>';
 function itemHTML(it,n){
   let b;
   if(it.t==='mcq')b=`<p class="q">${it.q.replace('___',blank)}</p><div class="opts">${it.o.map((o,k)=>`<button class="opt" data-k="${k}"><b>${LET[k]}</b><span>${o}</span></button>`).join('')}</div>`;
-  else if(it.t==='rewrite')b=`<p class="q">${it.q} <span class="kwd">${it.kw}</span></p><div class="row"><input class="inp wide" aria-label="Rewrite sentence ${n}" placeholder="${it.start?it.start+' …':'Write the full sentence…'}" autocomplete="off" autocapitalize="sentences" spellcheck="false"><button class="btn chk">Check</button></div>`;
-  else b=`<p class="q">${it.q.replace('___',`<input class="inp" aria-label="Answer for question ${n}" autocomplete="off" autocapitalize="off" spellcheck="false">`)}</p><div class="row"><button class="btn sm chk">Check</button></div>`;
+  else if(it.t==='rewrite')b=`<p class="q">${it.q} <span class="kwd">${it.kw}</span></p><div class="row"><input class="inp wide" aria-label="Rewrite sentence ${n}" placeholder="${it.start?it.start+' …':'Write the full sentence…'}" autocomplete="off" autocapitalize="sentences" spellcheck="false"></div>`;
+  else b=`<p class="q">${it.q.replace('___',`<input class="inp" aria-label="Answer for question ${n}" autocomplete="off" autocapitalize="off" spellcheck="false">`)}</p>`;
   return `<li class="item" data-id="${it.id}" data-t="${it.t}"><span class="n">${n}</span><div>${b}<div class="fb" aria-live="polite"></div></div></li>`;
 }
 const QT={verb:'Verb form',rewrite:'Rewrite',mcq:'Choose the best answer',box:'Word box',form:'Word form'};
@@ -581,7 +594,7 @@ function secHTML(sec,si){
   }).join('');
   const bar=sec.bar?`<div class="rbar"><div class="bc"><p class="bh">The rule</p>${sec.bar.rule}</div><div class="bc"><p class="bh">Examples <span class="lg">${(sec.bar.lg||[["hk","keyword"],["hv","verb form"],["h2","V2"],["hn","noun"]]).map(x=>`<i class="${x[0]}">${x[1]}</i>`).join(" ")}</span></p>${sec.bar.ex.map(x=>`<p class="bx">${x}</p>`).join('')}</div>${sec.bar.table?`<div class="bc bt">${sec.bar.table}</div>`:""}<div class="bc ar" dir="rtl"><p class="bh">Helping tips – إرشادات مساعدة</p><ul class="tl">${sec.bar.ar.map(x=>`<li><span class="tg"><span class="ta">${x[0]}</span><span class="tarr">→</span></span><span class="tc" dir="rtl">${x[1]} <span class="tdots">......</span></span></li>`).join('')}</ul></div></div>`:'';
   const learn=bar||(sec.rule?`<div class="learn${sec.wide?' full':''}"><div class="rule"><h3>${sec.ruleTitle||'The rule'}</h3>${sec.rule}</div><div class="tip"><h3>Smart tip</h3>${sec.tip}</div></div>`:(sec.intro||''));
-  return `<section class="band topic" id="${sec.id}"><div class="wrap"><header class="th"><span class="num">${sec.num}</span><div><h2>${sec.title}</h2>${sec.ar?`<div class="ar" dir="rtl">${sec.ar}</div>`:''}</div>${sec.ref?`<span class="ref">${sec.ref}</span>`:'<span></span>'}<div class="meter"><i></i></div><span class="sc"></span></header>${learn}${groups}<div class="result" id="r-${sec.id}"></div></div></section>`;
+  return `<section class="band topic" id="${sec.id}"><div class="wrap"><header class="th"><span class="num">${sec.num}</span><div><h2>${sec.title}</h2>${sec.ar?`<div class="ar" dir="rtl">${sec.ar}</div>`:''}</div>${sec.ref?`<span class="ref">${sec.ref}</span>`:'<span></span>'}<div class="meter"><i></i></div><span class="sc"></span></header>${learn}${groups}<div class="secchk" id="c-${sec.id}"><button class="btn big" type="button" data-check="${sec.id}">Check my answers · صحّح إجاباتي</button><p class="cmsg" aria-live="polite"></p></div><div class="result" id="r-${sec.id}"></div></div></section>`;
 }
 $('#topics').innerHTML=D.sections.map(secHTML).join('');
 $('#navrow').innerHTML=D.sections.map(s=>`<a href="#${s.id}" data-s="${s.id}">${s.short} <small></small></a>`).join('')+'<a href="#plan">My plan</a>';
@@ -589,14 +602,16 @@ $('#navrow').innerHTML=D.sections.map(s=>`<a href="#${s.id}" data-s="${s.id}">${
 /* ---------- paint ---------- */
 function paint(id){
   const it=IT[id],li=$(`.item[data-id="${id}"]`),st=S[id]||{},fb=$('.fb',li);
-  li.classList.toggle('ok',st.r==='ok');li.classList.toggle('no',st.r==='no');li.classList.toggle('shown',st.r==='shown');
-  const inp=$('.inp',li);if(inp&&st.v!=null&&inp.value!==st.v)inp.value=st.v;
-  if(it.t==='mcq')$$('.opt',li).forEach((b,k)=>{b.classList.toggle('right',(st.r==='ok'&&st.v===k)||(st.r==='shown'&&k===it.a));b.classList.toggle('wrong',st.r==='no'&&st.v===k)});
+  li.classList.toggle('ok',st.r==='ok');li.classList.toggle('no',st.r==='no');li.classList.toggle('fixed',st.r==='fixed');li.classList.remove('need');
+  const inp=$('.inp',li);if(inp){if(st.v!=null&&inp.value!==st.v)inp.value=st.v;inp.readOnly=st.r==='ok'||st.r==='fixed'}
+  if(it.t==='mcq')$$('.opt',li).forEach((b,k)=>{b.classList.toggle('sel',!st.r&&st.v===k||st.r==='no'&&st.v===k&&st.v!==st.first);
+    b.classList.toggle('right',(st.r==='ok'||st.r==='fixed')&&k===it.a||st.r==='no'&&k===it.a);
+    b.classList.toggle('wrong',st.r==='no'&&k===st.first&&k!==it.a);b.disabled=st.r==='ok'||st.r==='fixed'});
   if(!st.r){fb.innerHTML='';return}
-  if(st.r==='ok')fb.innerHTML=`<p><b>${GOOD[ORDER.indexOf(id)%GOOD.length]}</b> ${it.why}</p>`;
-  else if(st.r==='shown')fb.innerHTML=`<p class="model">Answer: ${esc(ansText(it))}</p><p>${it.why}</p>`;
-  else if(it.t==='rewrite')fb.innerHTML=`<p><b>Not quite.</b> Compare with the model answer:</p><p class="model">${esc(it.a[0])}</p><p>${it.why}</p><div class="acts"><button class="btn sm" data-act="self">My answer means the same</button><button class="btn sm alt" data-act="retry">Try again</button></div>`;
-  else fb.innerHTML=`<p><b>Not yet — try again.</b> Hint: ${it.h||SEC[it.topic].hint}</p><div class="acts"><button class="btn sm alt" data-act="show">Show the answer</button></div>`;
+  const yours=it.t==='mcq'?LET[st.first]+'. '+it.o[st.first]:st.first;
+  if(st.r==='ok')fb.innerHTML=`<p><b>✓ ${GOOD[ORDER.indexOf(id)%GOOD.length]}</b> ${it.why}</p>`;
+  else if(st.r==='fixed')fb.innerHTML=`<p><b>✓ Corrected · تم التصحيح.</b> ${it.why}</p>`;
+  else fb.innerHTML=`<p><b>✗ Not correct.</b> Your answer: <span class="yx">${esc(yours||'')}</span></p><p class="model">Correct answer: ${esc(ansText(it))}</p><p>${it.why}</p><p class="todo">${it.t==='mcq'?'✏️ Now choose the correct answer, then press <b>Check my corrections</b>. · اختر الإجابة الصحيحة ثم اضغط «صحّح تصحيحاتي».':'✏️ Now write the correct answer in the box, then press <b>Check my corrections</b>. · اكتب الإجابة الصحيحة ثم اضغط «صحّح تصحيحاتي».'}</p>`;
 }
 function setState(id,patch){S[id]={...(S[id]||{}),...patch};save();paint(id);
   if(!M.start)M.start=Date.now();
@@ -604,26 +619,40 @@ function setState(id,patch){S[id]={...(S[id]||{}),...patch};save();paint(id);
   if(all&&!M.done)M.done=Date.now();if(!all)M.done=null;saveM();score()}
 
 /* ---------- checking ---------- */
-function check(li){
-  const id=li.dataset.id,it=IT[id],inp=$('.inp',li),v=inp.value.trim();
-  if(!v){inp.focus();inp.placeholder=it.t==='rewrite'?'Write your sentence first…':'type here';return}
-  const ok=it.a.some(a=>norm(a)===norm(v));
-  const st=S[id]||{};
-  setState(id,Object.assign(ok?{r:'ok',v}:{r:'no',v,miss:true,tries:(st.tries||0)+1},st.first==null?{first:v}:{}));
+const valOf=id=>{const it=IT[id],li=$(`.item[data-id="${id}"]`);if(it.t==='mcq'){const v=(S[id]||{}).v;return v==null?'':v}return $('.inp',li).value.trim()};
+const isOk=(it,v)=>it.t==='mcq'?v===it.a:it.a.some(a=>norm(a)===norm(String(v)));
+function checkSec(sid){
+  const ids=ORDER.filter(i=>IT[i].sec===sid&&!$(`.item[data-id="${i}"]`).hidden),box=document.getElementById('c-'+sid),msg=$('.cmsg',box);
+  const first=ids.filter(i=>!(S[i]||{}).r);
+  if(first.length){ /* first check: every question must be answered */
+    const empty=first.filter(i=>valOf(i)==='');
+    if(empty.length){empty.forEach(i=>$(`.item[data-id="${i}"]`).classList.add('need'));
+      msg.textContent=`Answer all the questions first (${empty.length} left). · أجب عن كل الأسئلة أولًا (بقي ${empty.length}).`;
+      $(`.item[data-id="${empty[0]}"]`).scrollIntoView({block:'center'});return}
+    first.forEach(i=>{const v=valOf(i),ok=isOk(IT[i],v);S[i]={...(S[i]||{}),v,first:v,r:ok?'ok':'no',miss:!ok}});
+  }else{ /* correction round */
+    ids.filter(i=>S[i].r==='no').forEach(i=>{const v=valOf(i);S[i].v=v;if(v!==''&&v!==S[i].first&&isOk(IT[i],v))S[i].r='fixed'});
+  }
+  save();if(!M.start)M.start=Date.now();const all=ORDER.every(i=>(S[i]||{}).r);if(all&&!M.done)M.done=Date.now();saveM();
+  ids.forEach(paint);score();
+  const left=ids.filter(i=>S[i].r==='no').length;
+  msg.textContent=left?`${left} answer${left>1?'s':''} to correct. · ${left} للتصحيح.`:'All correct now. Well done! · كل الإجابات صحيحة الآن. أحسنت!';
+  const w=ids.find(i=>S[i].r==='no');if(w)$(`.item[data-id="${w}"]`).scrollIntoView({block:'center',behavior:'smooth'});
 }
+function secBtn(sid){const box=document.getElementById('c-'+sid);if(!box)return;const ids=ORDER.filter(i=>IT[i].sec===sid),b=$('button',box);
+  const checked=ids.some(i=>(S[i]||{}).r),left=ids.filter(i=>(S[i]||{}).r==='no').length;
+  box.hidden=checked&&!left&&ids.every(i=>(S[i]||{}).r);
+  b.textContent=checked?'Check my corrections · صحّح تصحيحاتي':'Check my answers · صحّح إجاباتي';b.classList.toggle('corr',checked)}
 document.addEventListener('click',e=>{
   const b=e.target.closest('button');if(!b)return;
   const li=b.closest('.item');
   if(li&&!ready()){if(!SITE)showGate();return}
-  if(b.classList.contains('chk'))return check(li);
+  if(b.dataset.check){if(!ready()){if(!SITE)showGate();return}return checkSec(b.dataset.check)}
   if(b.classList.contains('opt')){
-    const id=li.dataset.id,it=IT[id],k=+b.dataset.k,st=S[id]||{};
-    if(st.r==='ok'||st.r==='shown')return;
-    return setState(id,Object.assign(k===it.a?{r:'ok',v:k}:{r:'no',v:k,miss:true},st.first==null?{first:k}:{}));
+    const id=li.dataset.id,st=S[id]||{};
+    if(st.r==='ok'||st.r==='fixed')return;
+    S[id]={...st,v:+b.dataset.k};save();li.classList.remove('need');return paint(id);
   }
-  if(b.dataset.act==='show')return setState(li.dataset.id,{r:'shown'});
-  if(b.dataset.act==='self')return setState(li.dataset.id,{r:'ok',miss:((S[li.dataset.id]||{}).tries||0)>1});
-  if(b.dataset.act==='retry'){const i=$('.inp',li);i.value='';setState(li.dataset.id,{r:null,v:''});return i.focus()}
   if(b.classList.contains('wb')){
     const g=b.closest('.grp');let t=g._last;
     if(!t||!g.contains(t))t=$$('.inp',g).find(i=>!i.value.trim());
@@ -641,9 +670,9 @@ document.addEventListener('click',e=>{
     S={};save();M.start=null;M.done=null;M.sent={};saveM();$$('.inp').forEach(i=>i.value='');ORDER.forEach(paint);score();b.dataset.arm='';b.textContent='Start again (clear my answers)';window.scrollTo(0,0);
   }
 });
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('inp')){e.preventDefault();check(e.target.closest('.item'))}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('inp')){e.preventDefault();const all=$$('.inp').filter(x=>!x.readOnly&&x.offsetParent);const n=all[all.indexOf(e.target)+1];if(n)n.focus()}});
 document.addEventListener('focusin',e=>{if(e.target.classList.contains('inp')){const g=e.target.closest('.grp');if(g)g._last=e.target}});
-document.addEventListener('input',e=>{if(e.target.classList.contains('inp')){const g=e.target.closest('.grp');if(g)bankUse(g)}});
+document.addEventListener('input',e=>{if(e.target.classList.contains('inp')){const li=e.target.closest('.item'),id=li.dataset.id;S[id]={...(S[id]||{}),v:e.target.value};save();li.classList.remove('need');const g=e.target.closest('.grp');if(g)bankUse(g)}});
 function bankUse(g){const vals=$$('.inp',g).map(i=>norm(i.value));$$('.wb',g).forEach(w=>w.classList.toggle('used',vals.includes(norm(w.dataset.w))))}
 
 /* ---------- filter by question type ---------- */
@@ -665,7 +694,7 @@ function resultHTML(sec){
   const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length;
   const st=i=>S[i]||{},answered=ids.filter(i=>st(i).r),left=N-answered.length;
   const mark=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
-  if(left)return `<div class="mini"><span class="mk">Mark: <b>?/${N}</b></span><span class="sc">${left} left · <span class="ar" dir="rtl">الدرجة</span></span></div>`;
+  if(left)return `<div class="mini"><span class="mk">Mark: <b>?/${N}</b></span><span class="sc">Answer all ${N}, then press Check · <span class="ar" dir="rtl">أجب عن الكل ثم اضغط «صحّح»</span></span></div>`;
   let head;
   if(left){head=`<div class="rbig wait">?<small>/${N}</small></div><div><b>Keep going!</b><p>Answer ${left} more question${left>1?'s':''} to get your mark.</p><p class="ar" dir="rtl">أجب عن ${left} ${left>1?'أسئلة':'سؤال'} لتحصل على درجتك.</p></div>`}
   else{
@@ -679,12 +708,11 @@ function resultHTML(sec){
   const key=sec.groups.map((g,gi)=>`<div class="kg"><p class="kt">${g.title}</p><ol class="akey">${g.items.map((it,ii)=>{
     const s=st(it.id);let cls='na',you='';
     if(s.r==='ok'&&!s.miss){cls='ok';you='✓ Right first time'}
-    else if(s.r==='ok'){cls='mid';you='✓ Right after a retry'}
-    else if(s.r==='no'){cls='no';you='✗ Your answer: '+esc(it.t==='mcq'?it.o[s.v]:s.v||'')}
-    else if(s.r==='shown'){cls='no';you='✗ You showed the answer'}
+    else if(s.r==='fixed'){cls='mid';you='✓ Corrected · first answer: '+esc(it.t==='mcq'?it.o[s.first]:s.first||'')}
+    else if(s.r==='no'){cls='no';you='✗ Your answer: '+esc(it.t==='mcq'?it.o[s.first]:s.first||'')+' — correct it above'}
     return `<li class="${cls}"><span class="kn">${ii+1}</span><span class="ka">${s.r?esc(ansText(it)):'<i>Answer first</i>'}</span><span class="ky">${you}</span></li>`}).join('')}</ol></div>`).join('');
   const wrong=ids.some(i=>st(i).r&&(st(i).r!=='ok'||st(i).miss));
-  return `<h3>Your result <span class="ar" dir="rtl">نتيجتك</span></h3><div class="rhead">${head}</div><p class="sc">Mark = answers right the first time. Correct answers:</p>${key}${wrong?`<button class="btn alt sm" data-retry="${sec.id}" data-sec="1">Try the wrong ones again</button>`:''}`;
+  return `<h3>Your result <span class="ar" dir="rtl">نتيجتك</span></h3><div class="rhead">${head}</div><p class="sc">Mark = answers right at the first check. Correct answers:</p>${key}`;
 }
 
 /* ---------- score + plan ---------- */
@@ -697,12 +725,12 @@ function score(){
     const el=document.getElementById(sec.id);$('.meter i',el).style.width=(k/ids.length*100)+'%';
     $('.th .sc',el).textContent=`${k} of ${ids.length} correct`;
     {const r=document.getElementById('r-'+sec.id);r.innerHTML=resultHTML(sec);r.classList.toggle('small',!!r.querySelector('.mini'))}
-    if(SITE)sendSec(sec,ids);
+    secBtn(sec.id);if(SITE)sendSec(sec,ids);
     const a=$(`#navrow a[data-s="${sec.id}"]`);$('small',a).textContent=k+'/'+ids.length;a.classList.toggle('done',k===ids.length);
   });
   const rows=D.sections.filter(s=>!s.exam).map(sec=>{
-    const ids=ORDER.filter(i=>IT[i].topic===sec.id),done=ids.filter(i=>['ok','shown'].includes((S[i]||{}).r)).length;
-    const miss=ids.filter(i=>(S[i]||{}).miss||(S[i]||{}).r==='shown').length;
+    const ids=ORDER.filter(i=>IT[i].topic===sec.id),done=ids.filter(i=>(S[i]||{}).r).length;
+    const miss=ids.filter(i=>(S[i]||{}).miss).length;
     let lv,c;
     if(done<ids.length&&!miss){lv='Not finished';c='u'}
     else if(!miss){lv='Ready';c='g'}
@@ -710,7 +738,7 @@ function score(){
     else{lv='Revise again';c='r'}
     return {sec,ids,done,miss,lv,c,rank:{r:0,a:1,u:2,g:3}[c]};
   }).sort((a,b)=>a.rank-b.rank||b.miss-a.miss);
-  $('#plist').innerHTML=rows.map(r=>`<li><div><b>${r.sec.title}</b><div style="font-size:14px;color:#cfd8ea">${r.done} of ${r.ids.length} answered${r.miss?` · ${r.miss} mistake${r.miss>1?'s':''}`:''}</div></div><span class="lv ${r.c}">${r.lv}</span>${r.miss?`<div class="acts"><a href="#${r.sec.id}">Read the rule again</a><button data-retry="${r.sec.id}">Redo these questions</button></div>`:''}</li>`).join('');
+  $('#plist').innerHTML=rows.map(r=>`<li><div><b>${r.sec.title}</b><div style="font-size:14px;color:#cfd8ea">${r.done} of ${r.ids.length} answered${r.miss?` · ${r.miss} mistake${r.miss>1?'s':''}`:''}</div></div><span class="lv ${r.c}">${r.lv}</span>${r.miss?`<div class="acts"><a href="#${r.sec.id}">Read the rule again</a></div>`:''}</li>`).join('');
 }
 
 
@@ -720,15 +748,15 @@ function sendSec(sec,ids){
   M.sent=M.sent||{};if(M.sent[sec.id]||typeof window.sshSend!=='function')return;
   const st=i=>S[i]||{};if(!ids.every(i=>st(i).r))return;
   M.sent[sec.id]=Date.now();saveM();
-  const N=ids.length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length,retry=ids.filter(i=>st(i).r==='ok'&&st(i).miss).length,shown=ids.filter(i=>st(i).r==='shown').length;
+  const N=ids.length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
   const lines=[];let n=0;sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{n++;const s=st(it.id);
     const first=s.first!=null?(it.t==='mcq'?it.o[s.first]:s.first):(it.t==='mcq'?it.o[s.v]:s.v);
-    lines.push('Q'+n+': '+strip(it.q).replace(/___/g,'____')+' | first answer: '+(first==null||first===''?'-':first)+(s.r==='ok'&&!s.miss?' ✓':' ✗ (key '+ansText(it)+')')+(s.r==='shown'?' [answer shown]':s.miss&&s.r==='ok'?' [right after retry]':''))}));
+    lines.push('Q'+n+': '+strip(it.q).replace(/___/g,'____')+' | first answer: '+(first==null||first===''?'-':first)+(s.r==='ok'&&!s.miss?' ✓':' ✗ (key '+ansText(it)+')'))}));
   const w=who();
   let box=document.getElementById('send-'+sec.id);
   if(!box){box=document.createElement('div');box.id='send-'+sec.id;box.className='sendbox';document.getElementById('r-'+sec.id).after(box)}
   window.sshSend(box,{test:'G11 S1 Remedial Revision – '+D.name+': '+sec.num+' '+sec.title,name:w.name.trim(),cls:w.cls.trim(),score:m,max:N,percent:Math.round(m/N*100),
-    breakdown:'Right first time '+m+'/'+N+'; right after a retry '+retry+'; answer shown '+shown+'. Remedial revision worksheet (Units 3–5).',
+    breakdown:'Right at the first check '+m+'/'+N+'; wrong '+(N-m)+' (the student then corrects them on the page). Remedial revision worksheet (Units 3–5).',
     topic:'Remedial plan – '+D.name+' revision',essay:'',answers:lines.join('\n')});
 }
 
@@ -743,7 +771,7 @@ function planDoc(){
     totM+=m;totN+=N;const L=lvl(m/N);
     return `<tr><td>${esc(sec.title)}<div class="a">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b>${ans<N?`<div class="s">${N-ans} not answered</div>`:''}</td><td class="c" ><b>${ans<N?'—':L[0]}</b><div class="a">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and redo the wrong questions'}</td></tr>`}).join('');
   const wrong=ORDER.filter(i=>{const s=st(i);return s.r&&(s.r!=='ok'||s.miss)});
-  const wl=wrong.map((i,k)=>{const it=IT[i],s=st(i);const you=s.r==='shown'?'(answer shown)':s.r==='ok'?'right after a retry':esc(it.t==='mcq'?it.o[s.v]:(s.v||''));
+  const wl=wrong.map((i,k)=>{const it=IT[i],s=st(i);const you=esc(it.t==='mcq'?it.o[s.first]:(s.first||''))+(s.r==='fixed'?' <small>(corrected)</small>':'');
     return `<tr><td class="c">${k+1}</td><td>${esc(SEC[it.sec].short)}</td><td>${esc(strip(it.q).replace(/___/g,'______'))}${it.kw?` (${esc(it.kw)})`:''}</td><td class="x">${you}</td><td class="o">${esc(ansText(it))}</td></tr>`}).join('');
   const today=new Date().toLocaleDateString('en-GB');
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remedial plan – ${esc(D.name)}</title>
