@@ -556,7 +556,8 @@ const MK=KEY+'-meta';let M={};try{M=JSON.parse(localStorage.getItem(MK)||'{}')||
 const saveM=()=>{try{localStorage.setItem(MK,JSON.stringify(M))}catch(e){}};
 const fmtD=t=>new Date(t).toLocaleDateString('en-GB');
 const regI=()=>{try{return JSON.parse(localStorage.getItem('ssh_reg')||'{}')||{}}catch(e){return {}}};
-const who=()=>SITE?{name:(document.getElementById('sshName')||{}).value||regI().name||'',cls:(document.getElementById('sshClass')||{}).value||regI().cls||''}:{name:M.name||'',cls:M.cls||''};
+let WHO_O=null;
+const who=()=>WHO_O?WHO_O:SITE?{name:(document.getElementById('sshName')||{}).value||regI().name||'',cls:(document.getElementById('sshClass')||{}).value||regI().cls||''}:{name:M.name||'',cls:M.cls||''};
 const ready=()=>SITE?(typeof window.sshValidate!=='function'||window.sshValidate('sshName','sshClass')):!!M.name;
 const IT={},ORDER=[];
 D.sections.forEach(sec=>sec.groups.forEach((g,gi)=>g.items.forEach((it,ii)=>{
@@ -776,8 +777,10 @@ function keepOnline(sec,ids){
     body:JSON.stringify({p:{ref,test:b.test,name:b.name,cls:b.cls,email:c.email,phone:c.phone,score:b.score,max:b.max,percent:b.percent,cert_kind:'',topic:b.topic,essay:'',answers:b.answers,breakdown:b.breakdown}})})
    .then(r=>r.json()).then(d=>{if(d&&d.ok){M.sb[sec.id]=ref;saveM()}}).catch(()=>{});
 }
-if(SITE)window.addEventListener('load',()=>setTimeout(()=>D.sections.forEach(sec=>sendSec(sec,ORDER.filter(i=>IT[i].sec===sec.id))),2500));
+const PLAN_ONLY=/[?&]plan=1\b/.test(location.search);
+if(SITE&&!PLAN_ONLY)window.addEventListener('load',()=>setTimeout(()=>D.sections.forEach(sec=>sendSec(sec,ORDER.filter(i=>IT[i].sec===sec.id))),2500));
 function sendSec(sec,ids){
+  if(PLAN_ONLY)return;
   const st=i=>S[i]||{};if(!ids.every(i=>st(i).r))return;
   keepOnline(sec,ids);
   M.sent=M.sent||{};if(M.sent[sec.id]||typeof window.sshSend!=='function')return;
@@ -787,6 +790,23 @@ function sendSec(sec,ids){
   window.sshSend(box,secPayload(sec,ids));
 }
 
+
+/* ---------- teacher tool: rebuild a student's printed plan from the saved results ----------
+   rows: [{test, answers, ts}] for this page ("Q1: … | first answer: … ✓ / ✗ (key …)" lines).
+   Returns the same document the student prints (whole worksheet marked in red + feedback). */
+window.SSH_REM_PLAN=function(rows,name,cls){
+  const S0=S,M0=M,first={},norm=t=>strip(String(t||'')).toLowerCase().replace(/\s+/g,' ').trim();
+  [...rows].sort((a,b)=>new Date(a.ts)-new Date(b.ts)).forEach(r=>{const m=String(r.test||'').match(/:\s*(\d+)\s/);if(!m)return;const sec=D.sections.find(x=>+x.num===+m[1]);if(sec&&!first[sec.id])first[sec.id]=r});
+  const S2={};let last=null,done=0;
+  D.sections.forEach(sec=>{const r=first[sec.id];if(!r)return;done++;if(!last||new Date(r.ts)>last)last=new Date(r.ts);
+    const L={};String(r.answers||'').split('\n').forEach(l=>{const m=l.match(/^Q(\d+):.*\|\s*first answer:\s*(.*?)\s*(✓|✗)(?:\s*\(key.*\))?\s*$/);if(m)L[+m[1]]={a:m[2],ok:m[3]==='✓'}});
+    let n=0;sec.groups.forEach(g=>g.items.forEach(it=>{n++;const x=L[n];if(!x)return;
+      let v=x.a==='-'?'':x.a;if(it.t==='mcq'){const k=it.o.findIndex(o=>norm(o)===norm(v));v=k>=0?k:null}
+      S2[it.id]={first:v,v:v,r:x.ok?'ok':'fixed',miss:x.ok?0:1}}));
+  });
+  S=S2;M={done:done===D.sections.length&&last?+last:null};WHO_O={name:name||'',cls:cls||''};
+  try{return planDoc()}finally{S=S0;M=M0;WHO_O=null}
+};
 /* ---------- printable plan (download) ---------- */
 const strip=h=>{const t=document.createElement('div');t.innerHTML=h;return t.textContent.replace(/\s+/g,' ').trim()};
 const lvl=p=>p>=.9?['Excellent','ممتاز','#178a5a']:p>=.7?['Very good','جيد جدًا','#178a5a']:p>=.5?['Good','جيد','#b07a00']:['Needs more practice','يحتاج إلى تدريب','#c4362b'];
