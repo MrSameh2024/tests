@@ -768,49 +768,92 @@ const strip=h=>{const t=document.createElement('div');t.innerHTML=h;return t.tex
 const lvl=p=>p>=.9?['Excellent','ممتاز','#178a5a']:p>=.7?['Very good','جيد جدًا','#178a5a']:p>=.5?['Good','جيد','#b07a00']:['Needs more practice','يحتاج إلى تدريب','#c4362b'];
 function planDoc(){
   const st=i=>S[i]||{};
+  const ansOf=(it,v)=>v==null||v===''?'':(it.t==='mcq'?LET[v]+'. '+it.o[v]:String(v));
   let totM=0,totN=0;
+  const RED='<span class="pen">';
+  /* 1. the whole worksheet with the student's answers, marked in red */
+  const sheets=D.sections.map(sec=>{
+    const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;totM+=m;totN+=N;
+    const groups=sec.groups.map(g=>`<p class="gt">${g.title}${g.bank?` <span class="bank">Word box: ${g.bank.map(esc).join(' · ')}</span>`:''}</p><ol class="qs">${g.items.map(it=>{
+      const s=st(it.id),v=s.first!=null?s.first:s.v,ok=s.r==='ok'&&!s.miss,done=!!s.r,given=ansOf(it,v);
+      const mark=done?(ok?`${RED}✓</span>`:`${RED}✗</span>`):'<span class="nd">not checked</span>';
+      const fix=ok?'':`${RED}${esc(ansText(it))}</span>`;
+      const wrongTxt=given?`<s>${esc(given)}</s>`:'<s>(no answer)</s>';
+      let body;
+      if(it.t==='mcq'){
+        body=`${it.q.replace('___','<span class="gap">'+(ok?esc(it.o[v]):'______')+'</span>')}<div class="opts">${it.o.map((o,k)=>{
+          const cls=k===v?(ok?'pick ok':'pick no'):(!ok&&k===it.a?'key':'');return `<span class="${cls}"><b>${LET[k]}</b> ${o}</span>`}).join('')}</div>`;
+      }else if(it.t==='rewrite'){
+        body=`${it.q} <span class="kw">(${it.kw})</span><div class="rw">${ok?esc(given):wrongTxt}${ok?'':`<div>${fix}</div>`}</div>`;
+      }else{
+        body=it.q.replace('___',`<span class="gap">${ok?esc(given):wrongTxt+' '+fix}</span>`);
+      }
+      return `<li><span class="mk">${mark}</span><div>${body}</div></li>`}).join('')}</ol>`).join('');
+    return `<section class="ws"><h2><span>${sec.num}. ${sec.title} <span class="a">${sec.ar||''}</span></span><span class="sc">${RED}${m} / ${N}</span></span></h2>${groups}</section>`;
+  }).join('');
+  /* 2. feedback at the end */
   const rows=D.sections.map(sec=>{
-    const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length,ans=ids.filter(i=>st(i).r).length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;
-    totM+=m;totN+=N;const L=lvl(m/N);
-    return `<tr><td>${esc(sec.title)}<div class="a">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b>${ans<N?`<div class="s">${N-ans} not answered</div>`:''}</td><td class="c" ><b>${ans<N?'—':L[0]}</b><div class="a">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and redo the wrong questions'}</td></tr>`}).join('');
-  const wrong=ORDER.filter(i=>{const s=st(i);return s.r&&(s.r!=='ok'||s.miss)});
-  const wl=wrong.map((i,k)=>{const it=IT[i],s=st(i);const you=esc(it.t==='mcq'?it.o[s.first]:(s.first||''))+(s.r==='fixed'?' <small>(corrected)</small>':'');
-    return `<tr><td class="c">${k+1}</td><td>${esc(SEC[it.sec].short)}</td><td>${esc(strip(it.q).replace(/___/g,'______'))}${it.kw?` (${esc(it.kw)})`:''}</td><td class="x">${you}</td><td class="o">${esc(ansText(it))}</td></tr>`}).join('');
-  const today=new Date().toLocaleDateString('en-GB');
-  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Remedial plan – ${esc(D.name)}</title>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Cairo:wght@500;700&display=swap" rel="stylesheet"><style>
-@page{size:A4;margin:12mm}*{box-sizing:border-box}
-body{font:12.5px/1.5 Lexend,Arial,sans-serif;color:#14244A;background:#fff;margin:0 auto;max-width:186mm}
-.hdr{width:100%;display:block;margin-bottom:4px}
-h1{font-size:19px;margin:6px 0 0;text-align:center;font-weight:700}
-.a{font-family:Cairo,Arial,sans-serif;direction:rtl;font-weight:600}
-td .a,th .a{display:block;font-size:11px;color:#46536E;font-weight:500}
-.sub{text-align:center;margin:2px 0;color:#46536E;font-size:12px}
-.sub.a{font-size:14px;color:#14244A}
-.s{font-size:10.5px;color:#46536E}
-.info{display:flex;gap:18px;margin:14px 0 10px}.info div{flex:1;border-bottom:1px solid #14244A;padding:12px 0 3px}
-table{width:100%;border-collapse:collapse;margin:4px 0 12px}
-th,td{border-bottom:1px solid #c9d2e0;padding:5px 6px;vertical-align:top;text-align:left}
-th{font-size:11px;color:#46536E;font-weight:600;border-bottom:1.5px solid #14244A}
-td.c{text-align:center}td.x{color:#b42318;text-decoration:line-through}td.o{color:#0b7a48;font-weight:700}
-.tot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #14244A;border-bottom:1.5px solid #14244A;padding:6px 2px;margin:8px 0}
-.tot b{font-size:20px}
-h2{font-size:13.5px;margin:14px 0 2px;font-weight:700}
-.sig{display:flex;gap:26px;margin-top:26px}.sig div{flex:1;border-top:1px solid #14244A;padding-top:4px;text-align:center;font-size:11.5px}
+    const ids=ORDER.filter(i=>IT[i].sec===sec.id),N=ids.length,ans=ids.filter(i=>st(i).r).length,m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length,L=lvl(m/N);
+    return `<tr><td>${esc(sec.title)}<div class="a s">${sec.ar||''}</div></td><td class="c"><b>${m} / ${N}</b></td><td class="c"><b>${ans<N?'—':L[0]}</b><div class="a s">${ans<N?'':L[1]}</div></td><td>${ans<N?'Finish this section':m===N?'Ready ✓':'Read the rule again and learn the red corrections'}</td></tr>`}).join('');
+  const weak=D.sections.filter(sec=>{const ids=ORDER.filter(i=>IT[i].sec===sec.id),m=ids.filter(i=>st(i).r==='ok'&&!st(i).miss).length;return m/ids.length<.7});
+  const L=lvl(totN?totM/totN:0),today=new Date().toLocaleDateString('en-GB');
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>${esc(D.name)} revision – ${esc(who().name)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&family=Cairo:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet"><style>
+@page{size:A4;margin:11mm}*{box-sizing:border-box}
+body{font:11.5px/1.5 Lexend,Arial,sans-serif;color:#14244A;background:#fff;margin:0 auto;max-width:188mm}
+.hdr{width:100%;display:block;margin-bottom:2px}
+h1{font-size:18px;margin:4px 0 0;text-align:center}
+.a{font-family:Cairo,Arial,sans-serif;direction:rtl;font-weight:600;unicode-bidi:isolate}
+.s{display:block;font-size:10px;color:#46536E;font-weight:500}
+.sub{text-align:center;margin:1px 0;color:#46536E;font-size:11px}.sub.a{font-size:13px;color:#14244A}
+.info{display:flex;gap:16px;margin:10px 0 6px}.info div{flex:1;border-bottom:1px solid #14244A;padding:8px 0 2px}
+.tot{display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid #14244A;border-bottom:1.5px solid #14244A;padding:5px 2px;margin:6px 0 4px}
+.tot b{font-size:18px}
+.pen{color:#d0021b;font-family:'Patrick Hand',Lexend,cursive;font-size:1.25em;font-weight:400}
+.key-note{font-size:10.5px;color:#46536E;margin:0 0 8px}
+.ws{margin:10px 0 4px}
+.ws h2{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13.5px;margin:0 0 4px;padding-bottom:3px;border-bottom:1.5px solid #14244A;break-after:avoid}
+.ws h2 .a{font-size:12px;color:#1E6FD9;margin-left:6px}
+.ws h2 .sc .pen{font-size:20px}
+.gt{font-weight:600;margin:6px 0 2px;font-size:11px;color:#46536E;break-after:avoid}
+.bank{font-weight:500;color:#14244A;border:1px solid #c9d2e0;border-radius:4px;padding:0 5px;margin-left:4px}
+ol.qs{list-style:none;margin:0;padding:0}
+ol.qs li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:4px;padding:4px 0;border-bottom:1px solid #e3e8f1;break-inside:avoid}
+.mk{text-align:center}.mk .pen{font-size:17px;line-height:1}
+.nd{font-size:9px;color:#9aa6bd}
+.gap{border-bottom:1px solid #14244A;padding:0 4px}
+s{color:#46536E;text-decoration-color:#d0021b;text-decoration-thickness:1.5px}
+.opts{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:2px;font-size:11px}
+.opts span{padding:0 5px;border-radius:10px}
+.opts .pick{border:1.5px solid #14244A}.opts .pick.no{text-decoration:line-through;text-decoration-color:#d0021b}
+.opts .key{border:2px solid #d0021b;color:#d0021b;font-weight:700}
+.kw{font-weight:700}.rw{margin-top:2px;padding-left:8px;border-left:2px solid #c9d2e0}
+h3{font-size:14px;margin:14px 0 4px;padding-top:6px;border-top:2px solid #14244A}
+.fb{break-before:page}
+table{width:100%;border-collapse:collapse;margin:4px 0 10px}
+th,td{border-bottom:1px solid #c9d2e0;padding:4px 6px;vertical-align:top;text-align:left}
+th{font-size:10.5px;color:#46536E;font-weight:600;border-bottom:1.5px solid #14244A}td.c{text-align:center}
+.lines{border-bottom:1px solid #9aa6bd;height:20px}
+.sig{display:flex;gap:24px;margin-top:26px}.sig div{flex:1;border-top:1px solid #14244A;padding-top:3px;text-align:center;font-size:11px}
 .pb{display:block;margin:12px auto;padding:9px 22px;font:600 14px Lexend,sans-serif;background:#1E6FD9;color:#fff;border:0;border-radius:8px;cursor:pointer}
-@media print{.pb{display:none}}</style></head><body>
+@media print{.pb{display:none}}
+</style></head><body>
 <img class="hdr" src="${window.HDR||''}" alt="">
-<h1>Remedial Plan – ${esc(D.name)} · <span class="a">الخطة العلاجية</span></h1>
-<p class="sub a">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p><p class="sub">Grade 11 English · End of Semester 1 · Smart Students Hub</p>
-<div class="info"><div>Student name / اسم الطالب: <b><bdi>${esc(who().name)}</bdi></b></div><div>Class / الصف: <b><bdi dir="ltr">${esc(who().cls)}</bdi></b></div><div>${M.done?`Finished on / تاريخ الإنجاز: <b>${fmtD(M.done)}</b>`:`Not finished yet / لم يكتمل بعد<br><small>Started: ${M.start?fmtD(M.start):"—"} · Printed: ${today}</small>`}</div></div>
-<div class="tot"><span>Total mark (right the first time) / الدرجة الكلية</span><b>${totM} / ${totN}</b></div>
-<h2>1. Result by topic / النتيجة حسب الموضوع</h2>
+<h1>${esc(D.name)} Revision Worksheet · <span class="a">${D.id==='grammar'?'ورقة مراجعة القواعد':'ورقة مراجعة المفردات'}</span></h1>
+<p class="sub a">أوراق عمل لمراجعة الوحدات 3 و4 و5 تنفيذًا للخطة العلاجية لتحسين الأداء الأكاديمي</p>
+<p class="sub">Grade 11 English · End of Semester 1 · Remedial plan</p>
+<div class="info"><div>Student / الطالب: <b><bdi>${esc(who().name)}</bdi></b></div><div>Class / الصف: <b><bdi dir="ltr">${esc(who().cls)}</bdi></b></div><div>${M.done?`Finished on / تاريخ الإنجاز: <b>${fmtD(M.done)}</b>`:`Not finished yet / لم يكتمل · printed ${today}`}</div></div>
+<div class="tot"><span>Total mark (first check) / الدرجة الكلية — <b>${L[0]}</b> <span class="a">${L[1]}</span></span><b>${RED}${totM} / ${totN}</span></b></div>
+<p class="key-note">Marked by the website: <span class="pen">✓</span> correct · <span class="pen">✗</span> wrong · <s>crossed out</s> = your answer · <span class="pen">red</span> = the correct answer.<br><span class="a">التصحيح بالأحمر: الإجابة المشطوبة إجابتك، والإجابة الحمراء هي الصحيحة.</span></p>
+${sheets}
+<section class="fb"><h3>Feedback · <span class="a">التغذية الراجعة</span></h3>
 <table><tr><th>Topic</th><th>Mark</th><th>Result</th><th>What to do next</th></tr>${rows}</table>
-<h2>2. Questions to revise / أسئلة للمراجعة</h2>
-${wl?`<table><tr><th>#</th><th>Topic</th><th>Question</th><th>Your answer</th><th>Correct answer</th></tr>${wl}</table>`:'<p>No mistakes so far. Well done! / لا توجد أخطاء. أحسنت!</p>'}
-<div class="sig"><div>Student / الطالب</div><div>Teacher / المعلم</div><div>Parent / ولي الأمر</div></div>
+<p><b>Topics to revise · موضوعات تحتاج إلى مراجعة:</b> ${weak.length?weak.map(x=>esc(x.title)).join(' · '):'None — well done! · لا يوجد، أحسنت!'}</p>
+<p><b>Advice · نصيحة:</b> ${totN&&totM/totN>=.9?'Excellent work. Keep practising with the exam-style questions.<br><span class="a">عمل ممتاز، استمر في التدريب على أسئلة الاختبار.</span>':'Study the red corrections, read the rule of each weak topic again, then redo those questions on the website.<br><span class="a">ادرس التصحيحات الحمراء، واقرأ قاعدة كل موضوع ضعيف، ثم أعد حل أسئلته على الموقع.</span>'}</p>
+<p style="margin-top:10px"><b>Teacher's comment · ملاحظة المعلم:</b></p><div class="lines"></div><div class="lines"></div>
+<div class="sig"><div>Student / الطالب</div><div>Teacher / المعلم</div><div>Parent / ولي الأمر</div></div></section>
 <button class="pb" onclick="window.print()">Print / طباعة</button>
-<script>window.onload=()=>setTimeout(()=>window.print(),400)<\/script></body></html>`;
+<script>window.onload=()=>setTimeout(()=>window.print(),500)<\/script></body></html>`;
 }
 (async()=>{
   const btn=$('#dlplan'),msg=$('#dlmsg');if(!btn)return;
