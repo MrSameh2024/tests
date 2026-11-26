@@ -457,6 +457,29 @@
         useful: b.useful || '', suggest: b.suggest || '', started: b.started || '', finished: b.finished || '', essays: String(b.essays || '').slice(0, 12000) } });
   }
 
+
+  /* When the teacher's sheet does not answer (slow or filtered school network, Google busy), the result is kept in the
+     online store straight away and the certificate is issued from there, so it no longer depends on the sheet reply.
+     One reference per result: retries of the same result reuse it (the store keeps it once). */
+  function resultKey(b) { return 'ssh_cert_fb|' + (b.sid || [b.test, b.name, b.score, b.max].join('|')); }
+  function onlineRef(b) { try { var v = JSON.parse(localStorage.getItem(resultKey(b)) || 'null'); return v && Date.now() - v.t < 864e5 ? v : null; } catch (e) { return null; } }
+  function fallback(b) {
+    if (!LIVE || !of || onlineRef(b) || /^G11 S1 Remedial Revision/.test(b.test || '')) return; /* revision pages keep their own copy */
+    var day = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Qatar' }).replace(/-/g, '').slice(2);
+    var ref = 'SSH-' + day + '-' + String(1000 + Math.floor(Math.random() * 9000));
+    var em = String(b.email || '').trim(), ph = String(b.phone || '').replace(/[^0-9+]/g, '');
+    if (!em && !ph) { var r = regInfo(); em = r.email || ''; ph = String(r.phone || '').replace(/[^0-9+]/g, ''); }
+    of.call(window, SB_URL + 'record_result', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: SB_KEY },
+      body: JSON.stringify({ p: { ref: ref, test: b.test, name: b.name, cls: b.cls, email: em, phone: ph, score: b.score, max: b.max, percent: b.percent,
+        cert_kind: b.cert_kind || '', topic: b.topic || '', essay: b.essay || '', answers: b.answers || '', breakdown: b.breakdown || '' } }) })
+      .then(function (x) { return x.json(); })
+      .then(function (d) {
+        if (!d || !d.ok || onlineRef(b)) return;
+        try { localStorage.setItem(resultKey(b), JSON.stringify({ ref: ref, t: Date.now() })); } catch (e) {}
+        issue(b, ref);
+      }).catch(function () {});
+  }
+
   /* ---------- listen for recorded results ---------- */
   var of = window.fetch;
   if (of) {
@@ -476,9 +499,9 @@
             if (!d || !d.ok) return;
             if (body.type === 'placement') { issueRec(fromPlacement(body)); keepPlacement(body); }
             else if (body.type === 'course') { var wc = issueRec(fromCourse(body)); keepWorkshop(body, wc); }
-            else { issue(body, d.ref || ''); keepOnline(body, d.ref); }
+            else if (!onlineRef(body)) { issue(body, d.ref || ''); keepOnline(body, d.ref); }
           })
-          .catch(function () {});
+          .catch(function () { if (body.type === 'submission') fallback(body); });
       }
       return p;
     };
